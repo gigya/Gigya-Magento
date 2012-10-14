@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Gigya_Social>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Gigya_Social>
+    </modules>
+</config>

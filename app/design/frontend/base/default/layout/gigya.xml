@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+  <customer_account_login>
+    <reference name="customer_form_login">
+      <block type="core/text_list" name="form.gigya">
+        <block type="Gigya_Social/login" name="Gigya_Social">
+          <reference name="head">
+            <action method="addJs"><file>gigya/gigya.js</file></action>
+          </reference>
+        </block>
+      </block>
+      <reference name="customer_form_login">
+        <action method="setTemplate"><template>gigya/form/login.phtml</template></action>
+        <block name="gigya.login" type="Gigya_Social/login" template="gigya/login/social_login.phtml"/>
+        <!--</block>-->
+      </reference>
+    </reference>
+  </customer_account_login>
+</layout>
