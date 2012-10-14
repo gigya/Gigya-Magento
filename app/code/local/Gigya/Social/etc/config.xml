@@ -5,6 +5,15 @@
     </Gigya_Social>
   </modules>
   <frontend>
+    <routers>
+      <gigyalogin>
+        <use>standart</use>
+        <args>
+          <module>Gigya_Social</module>
+          <frontName>gigyalogin</frontName>
+        </args>
+      </gigyalogin>
+    </routers>
     <layout>
       <updates>
         <Gigya_Social>
