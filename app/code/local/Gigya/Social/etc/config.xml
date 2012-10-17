@@ -7,7 +7,7 @@
   <frontend>
     <routers>
       <gigyalogin>
-        <use>standart</use>
+        <use>standard</use>
         <args>
           <module>Gigya_Social</module>
           <frontName>gigyalogin</frontName>
@@ -39,41 +39,43 @@
       </page>
     </blocks>
   </global>
-  <admin>
-    <routers>
-      <gigya>
-        <use>admin</use>
-        <args>
-          <module>Gigya_Social</module>
-          <frontName>Gigya_Social</frontName>
-        </args>
-      </gigya>
-    </routers>
-  </admin>
-  <adminhtml>
-    <acl>
-      <resources>
-        <admin>
-          <children>
-            <system>
-              <children>
-                <config>
-                  <children>
-                    <gigya_global>
-                      <title>Gigya global config</title>
-                    </gigya_global>
-                    <gigya_login>
-                      <title>Gigya Social login</title>
-                    </gigya_login>
-                  </children>
-                </config>
-              </children>
-            </system>
-          </children>
-        </admin>
-      </resources>
-    </acl>
-  </adminhtml>
+  <!--
+     -<admin>
+     -  <routers>
+     -    <gigya>
+     -      <use>admin</use>
+     -      <args>
+     -        <module>Gigya_Social</module>
+     -        <frontName>Gigya_Social</frontName>
+     -      </args>
+     -    </gigya>
+     -  </routers>
+     -</admin>
+     -<adminhtml>
+     -  <acl>
+     -    <resources>
+     -      <admin>
+     -        <children>
+     -          <system>
+     -            <children>
+     -              <config>
+     -                <children>
+     -                  <gigya_global>
+     -                    <title>Gigya global config</title>
+     -                  </gigya_global>
+     -                  <gigya_login>
+     -                    <title>Gigya Social login</title>
+     -                  </gigya_login>
+     -                </children>
+     -              </config>
+     -            </children>
+     -          </system>
+     -        </children>
+     -      </admin>
+     -    </resources>
+     -  </acl>
+     -</adminhtml>
+     -->
   <!--default values from admin sections-->
   <default>
     <gigya_global>
