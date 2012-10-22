@@ -67,7 +67,7 @@
         <laguages translate="label">
             <label>Interface language</label>
             <frontend_type>select</frontend_type>
-            <source_model>Gigya_Social_Module_config_source_languages</source_model>
+            <source_model>Gigya_Social_Model_config_source_languages</source_model>
             <sort_order>62</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
@@ -115,7 +115,7 @@
             <buttonStyle translate="label">
                 <label>Button style</label>
                 <frontend_type>select</frontend_type>
-                <source_model>Gigya_Social_Module_config_source_buttons</source_model>
+                <source_model>Gigya_Social_Model_config_source_buttons</source_model>
                 <sort_order>2</sort_order>
                 <show_in_default>1</show_in_default>
                 <show_in_website>1</show_in_website>
@@ -133,7 +133,7 @@
             <loginBehavior translate="label">
                 <label>Login behavior</label>
                 <frontend_type>select</frontend_type>
-                <source_model>Gigya_Social_Module_config_source_loginb</source_model>
+                <source_model>Gigya_Social_Model_config_source_loginb</source_model>
                 <sort_order>10</sort_order>
                 <show_in_default>1</show_in_default>
                 <show_in_website>1</show_in_website>

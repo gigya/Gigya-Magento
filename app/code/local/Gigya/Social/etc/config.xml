@@ -5,6 +5,34 @@
     </Gigya_Social>
   </modules>
   <frontend>
+    <events>
+      <customer_register_success>
+        <observers>
+          <gigya_registration_observer>
+            <type>singleton</type>
+            <class>Gigya_Social_Model_Customer_Observer</class>
+            <method>notify_registration</method>
+          </gigya_registration_observer>
+        </observers>
+      </customer_register_success>
+      <customer_delete_after>
+        <observers>
+          <gigya_customer_delete>
+            <class>Gigya_Social_Model_Customer_Observer</class>
+            <method>notify_delete</method>
+          </gigya_customer_delete>
+        </observers>
+      </customer_delete_after>
+      <customer_login>
+        <observers>
+          <gigya_login>
+            <type>singleton</type>
+            <class>Gigya_Social_Model_Customer_Observer</class>
+            <method>notify_login</method>
+          </gigya_login>
+        </observers>
+      </customer_login>
+    </events>
     <routers>
       <gigyalogin>
         <use>standard</use>
@@ -40,42 +68,52 @@
     </blocks>
   </global>
   <!--
-     -<admin>
-     -  <routers>
-     -    <gigya>
-     -      <use>admin</use>
-     -      <args>
-     -        <module>Gigya_Social</module>
-     -        <frontName>Gigya_Social</frontName>
-     -      </args>
-     -    </gigya>
-     -  </routers>
-     -</admin>
-     -<adminhtml>
-     -  <acl>
-     -    <resources>
-     -      <admin>
-     -        <children>
-     -          <system>
-     -            <children>
-     -              <config>
-     -                <children>
-     -                  <gigya_global>
-     -                    <title>Gigya global config</title>
-     -                  </gigya_global>
-     -                  <gigya_login>
-     -                    <title>Gigya Social login</title>
-     -                  </gigya_login>
-     -                </children>
-     -              </config>
-     -            </children>
-     -          </system>
-     -        </children>
-     -      </admin>
-     -    </resources>
-     -  </acl>
-     -</adminhtml>
-     -->
+    -<admin>
+    -  <routers>
+    -    <gigya>
+    -      <use>admin</use>
+    -      <args>
+    -        <module>Gigya_Social</module>
+    -        <frontName>Gigya_Social</frontName>
+    -      </args>
+    -    </gigya>
+    -  </routers>
+    -</admin>
+  -->
+  <adminhtml>
+    <events>
+      <customer_delete_after>
+        <observers>
+          <gigya_customer_delete>
+            <class>Gigya_Social_Model_Customer_Observer</class>
+            <method>notify_delete</method>
+          </gigya_customer_delete>
+        </observers>
+      </customer_delete_after>
+    </events>
+    <acl>
+      <resources>
+        <admin>
+          <children>
+            <system>
+              <children>
+                <config>
+                  <children>
+                    <gigya_global>
+                      <title>Gigya global config</title>
+                    </gigya_global>
+                    <gigya_login>
+                      <title>Gigya Social login</title>
+                    </gigya_login>
+                  </children>
+                </config>
+              </children>
+            </system>
+          </children>
+        </admin>
+      </resources>
+    </acl>
+  </adminhtml>
   <!--default values from admin sections-->
   <default>
     <gigya_global>

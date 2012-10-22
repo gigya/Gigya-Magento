@@ -1,5 +1,5 @@
 <?php
-class Gigya_Social_Module_Config_Source_Languages
+class Gigya_Social_Model_Config_Source_Languages
 {
   /**
    * Options getter
