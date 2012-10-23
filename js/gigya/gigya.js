@@ -8,7 +8,6 @@ gigyaFunctions.login = function (response) {
   new Ajax.Request('/gigyalogin/login/login', {
       parameters: {json:JSON.stringify(response)},
       onSuccess: function (trans) {
-        console.log(trans.responseJSON);
         if (typeof trans.responseJSON.result !== 'undefined') {
           switch (trans.responseJSON.result)
           {

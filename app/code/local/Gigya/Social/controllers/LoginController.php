@@ -75,7 +75,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                   'result' => 'emailExsists',
                   'redirect' => $url
                 );
-    Mage::log($post);
                 Mage::getSingleton('core/session')->addNotice('This email all ready existes on the system please login and the link accounts');
                 Mage::getSingleton('customer/session')->setData('gigyaAction', 'linkAccount');
                 Mage::getSingleton('customer/session')->setData('gigyaUid', $post['UID']);

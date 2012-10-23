@@ -21,4 +21,9 @@
       <block type="core/template" name="gigya.create.account" after="-" template="gigya/login/social_login.phtml"/>
     </reference>
   </customer_account_create>
+  <catalog_product_view>
+    <reference name="product.info.additional">
+      <block type="core/template" name="gigya.create.account" after="-" template="gigya/login/social_login.phtml"/>
+    </reference>
+  </catalog_product_view>
 </layout>
