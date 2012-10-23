@@ -28,6 +28,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
       Mage::logException($e);
     }
   }
+
   public function notifyLogin($siteUid)
   {
     $params = array(
@@ -35,6 +36,21 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     );
     try {
       $this->_gigya_api('notifyLogin', $params);
+    }
+    catch (Exception $e) {
+      $code = $e->getCode();
+      $message = $e->getMessage();
+      Mage::logException($e);
+    }
+  }
+
+  public function notifyLogout($siteUid)
+  {
+    $params = array(
+      'siteUID' => $siteUid,
+    );
+    try {
+      $this->_gigya_api('logout', $params);
     }
     catch (Exception $e) {
       $code = $e->getCode();

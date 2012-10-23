@@ -32,6 +32,15 @@
           </gigya_login>
         </observers>
       </customer_login>
+      <customer_logout>
+        <observers>
+          <gigya_logout>
+            <type>singleton</type>
+            <class>Gigya_Social_Model_Customer_Observer</class>
+            <method>notify_logout</method>
+          </gigya_logout>
+        </observers>
+      </customer_logout>
     </events>
     <routers>
       <gigyalogin>

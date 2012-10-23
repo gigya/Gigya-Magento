@@ -31,6 +31,14 @@ class Gigya_Social_Model_Customer_Observer
     }
   }
 
+  public function notify_logout($observer)
+  {
+    Mage::log('logout');
+    $id = $observer->getEvent()->getCustomer()->getId();
+    Mage::helper('Gigya_Social')->notifyLogout($id);
+  }
+
+
 
 
 

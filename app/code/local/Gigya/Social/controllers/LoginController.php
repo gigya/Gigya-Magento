@@ -33,7 +33,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
           //Mage::log($cust_session);
           $cust_session->loginById($post['user']['UID']);
           $this->getResponse()->setHeader('Content-type', 'application/json');
-          $url = Mage::getUrl('customer/account');
+          //$url = Mage::getUrl('customer/account');
+          $url = Mage::getUrl('*/*/*', array('_current' => true));
           $res = array(
             'result' => 'login',
             'redirect' => $url
@@ -69,11 +70,12 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             else {
               //email exsites
               try {
-                $url = Mage::getUrl('customer/account');
+                $url = Mage::getUrl('customer/account/login');
                 $res = array(
                   'result' => 'emailExsists',
                   'redirect' => $url
                 );
+                Mage::getSingleton('core/session')->addNotice('This email all ready existes on the system please login and the link accounts');
                 $this->getResponse()->setHeader('Content-type', 'application/json');
                 $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
               }

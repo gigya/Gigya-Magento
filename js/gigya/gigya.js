@@ -4,7 +4,6 @@
 var gigyaFunctions = gigyaFunctions || {};
 var gigyaCache = {};
 gigyaFunctions.login = function (response) {
-  var toPost = {signature:response.UIDSignature, timestamp:response.signatureTimestamp, UID:response.UID, email: response.user.email , firstName: response.user.firstName, lastName: response.user.lastName};
   gigyaCache.uInfo = response;
   new Ajax.Request('/gigyalogin/login/login', {
       parameters: {json:JSON.stringify(response)},
@@ -13,7 +12,7 @@ gigyaFunctions.login = function (response) {
           switch (trans.responseJSON.result)
           {
           case 'login':
-            window.location = trans.responseJSON.redirect;
+            window.location.reload();
             break;
           case 'noEmail':
             $(trans.responseJSON.id).update(trans.responseJSON.html);
