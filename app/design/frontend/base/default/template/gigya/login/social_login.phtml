@@ -1,6 +1,6 @@
 <script type="text/javascript">//<![CDATA[
   var gigyaSettings = gigyaSettings || {};
-  gigyaSettings.login = <?php echo $this->_getLoginConfig()  ?>
+  gigyaSettings.login = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_login_conf')  ?>
   //]]>
 </script>
-<div id="<?php echo $this->_getContainerId() ?>" class="gigya-login"></div>
+<div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf') ?>" class="gigya-login"></div>

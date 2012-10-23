@@ -109,6 +109,21 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     return $response;
   }
 
+  public function getPluginConfig($pluginName, $format = 'json')
+  {
+    $config = Mage::getStoreConfig($pluginName);
+    //Mage::log($config);
+    if ($format === 'php') {
+      return $config;
+    }
+    return Mage::helper('core')->jsonEncode($config);
+  }
+
+  public function getPluginContainerID($pluginName)
+  {
+    return Mage::getStoreConfig($pluginName . '/containerID');
+  }
+
 
 
 }

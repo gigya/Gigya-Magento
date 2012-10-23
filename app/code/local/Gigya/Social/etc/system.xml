@@ -63,112 +63,157 @@
         <show_in_default>1</show_in_default>
         <show_in_website>1</show_in_website>
         <show_in_store>0</show_in_store>
-        </providers>
-        <laguages translate="label">
-            <label>Interface language</label>
-            <frontend_type>select</frontend_type>
-            <source_model>Gigya_Social_Model_config_source_languages</source_model>
-            <sort_order>62</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>1</show_in_store>
-        </laguages>
-        <google_sa translate="label">
-            <label>Enable Google Social Analytics</label>
-            <frontend_type>select</frontend_type>
-            <source_model>adminhtml/system_config_source_yesno</source_model>
-            <sort_order>63</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>1</show_in_store>
-        </google_sa>
-      </fields>
-    </gigya_global_conf>
-  </groups>
+      </providers>
+      <laguages translate="label">
+        <label>Interface language</label>
+        <frontend_type>select</frontend_type>
+        <source_model>Gigya_Social_Model_config_source_languages</source_model>
+        <sort_order>62</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </laguages>
+      <google_sa translate="label">
+        <label>Enable Google Social Analytics</label>
+        <frontend_type>select</frontend_type>
+        <source_model>adminhtml/system_config_source_yesno</source_model>
+        <sort_order>63</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </google_sa>
+    </fields>
+  </gigya_global_conf>
+</groups>
 </gigya_global>
 <gigya_login translate="label" module="Gigya_Social">
-      <label>Gigya Social login</label>
-      <tab>gigya</tab>
+  <label>Gigya Social login</label>
+  <tab>gigya</tab>
+  <frontend_type>text</frontend_type>
+  <sort_order>100</sort_order>
+  <show_in_default>1</show_in_default>
+  <show_in_website>1</show_in_website>
+  <show_in_store>1</show_in_store>
+  <groups>
+    <gigya_login_conf translate="label">
+      <label>Gigya Social login configuration</label>
       <frontend_type>text</frontend_type>
       <sort_order>100</sort_order>
       <show_in_default>1</show_in_default>
       <show_in_website>1</show_in_website>
-      <show_in_store>1</show_in_store>
-      <groups>
-        <gigya_login_conf translate="label">
-          <label>Gigya Social login configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>100</sort_order>
+      <show_in_store>0</show_in_store>
+      <fields>
+        <enable translate="label">
+          <label>Enable Gigya Social login</label>
+          <frontend_type>select</frontend_type>
+          <source_model>adminhtml/system_config_source_yesno</source_model>
+          <sort_order>1</sort_order>
           <show_in_default>1</show_in_default>
           <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-                <label>Enable Gigya Social login</label>
-                <frontend_type>select</frontend_type>
-                <source_model>adminhtml/system_config_source_yesno</source_model>
-                <sort_order>1</sort_order>
-                <show_in_default>1</show_in_default>
-                <show_in_website>1</show_in_website>
-                <show_in_store>1</show_in_store>
-            </enable>
-            <buttonStyle translate="label">
-                <label>Button style</label>
-                <frontend_type>select</frontend_type>
-                <source_model>Gigya_Social_Model_config_source_buttons</source_model>
-                <sort_order>2</sort_order>
-                <show_in_default>1</show_in_default>
-                <show_in_website>1</show_in_website>
-                <show_in_store>1</show_in_store>
-            </buttonStyle>
-            <showTerms translate="label">
-                <label>Show terms link</label>
-                <frontend_type>select</frontend_type>
-                <source_model>adminhtml/system_config_source_yesno</source_model>
-                <sort_order>3</sort_order>
-                <show_in_default>1</show_in_default>
-                <show_in_website>1</show_in_website>
-                <show_in_store>1</show_in_store>
-            </showTerms>
-            <loginBehavior translate="label">
-                <label>Login behavior</label>
-                <frontend_type>select</frontend_type>
-                <source_model>Gigya_Social_Model_config_source_loginb</source_model>
-                <sort_order>10</sort_order>
-                <show_in_default>1</show_in_default>
-                <show_in_website>1</show_in_website>
-                <show_in_store>1</show_in_store>
-            </loginBehavior>
-            <loginContainerId translate="label">
-              <label>Gigya login continor id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[div ID for loginUI]]>
-            </comment>
-            <sort_order>60</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
-            </loginContainerId>
-            <loginWidth translate="label">
-              <label>Width</label>
-              <frontend_type>text</frontend_type>
-            <sort_order>60</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
-            </loginWidth>
-            <loginHeight translate="label">
-              <label>Height</label>
-              <frontend_type>text</frontend_type>
-            <sort_order>60</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
-            </loginHeight>
-          </fields>
-        </gigya_login_conf>
+          <show_in_store>1</show_in_store>
+        </enable>
+        <buttonStyle translate="label">
+          <label>Button style</label>
+          <frontend_type>select</frontend_type>
+          <source_model>Gigya_Social_Model_config_source_buttons</source_model>
+          <sort_order>2</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </buttonStyle>
+        <showTermsLink translate="label">
+          <label>Show terms link</label>
+          <frontend_type>select</frontend_type>
+          <source_model>adminhtml/system_config_source_yesno</source_model>
+          <sort_order>3</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </showTermsLink>
+        <loginBehavior translate="label">
+          <label>Login behavior</label>
+          <frontend_type>select</frontend_type>
+          <source_model>Gigya_Social_Model_config_source_loginb</source_model>
+          <sort_order>10</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>1</show_in_store>
+        </loginBehavior>
+        <containerID translate="label">
+          <label>Gigya login continor id</label>
+          <frontend_type>text</frontend_type>
+          <comment><![CDATA[div ID for loginUI]]>
+        </comment>
+        <sort_order>60</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>0</show_in_store>
+      </containerID>
+      <width translate="label">
+        <label>Width</label>
+        <frontend_type>text</frontend_type>
+        <sort_order>60</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>0</show_in_store>
+      </width>
+      <height translate="label">
+        <label>Height</label>
+        <frontend_type>text</frontend_type>
+        <sort_order>60</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>0</show_in_store>
+      </height>
+    </fields>
+  </gigya_login_conf>
+  <gigya_link_accounts translate="lable">
+    <label>Gigya Social link accounts configuration</label>
+    <frontend_type>text</frontend_type>
+    <sort_order>101</sort_order>
+    <show_in_default>1</show_in_default>
+    <show_in_website>1</show_in_website>
+    <show_in_store>0</show_in_store>
+    <fields>
+      <enable translate="label">
+        <label>Enable Gigya link accounts</label>
+        <frontend_type>select</frontend_type>
+        <source_model>adminhtml/system_config_source_yesno</source_model>
+        <sort_order>10</sort_order>
+        <show_in_default>1</show_in_default>
+        <show_in_website>1</show_in_website>
+        <show_in_store>1</show_in_store>
+      </enable>
+      <containerID translate="label">
+        <label>Gigya link accounts continor id</label>
+        <frontend_type>text</frontend_type>
+        <comment><![CDATA[div ID for link accounts]]>
+      </comment>
+      <sort_order>60</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>0</show_in_store>
+    </containerID>
+    <width translate="label">
+      <label>Width</label>
+      <frontend_type>text</frontend_type>
+      <sort_order>60</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>0</show_in_store>
+    </width>
+    <height translate="label">
+      <label>Height</label>
+      <frontend_type>text</frontend_type>
+      <sort_order>60</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>0</show_in_store>
+    </height>
+  </fields>
+</gigya_link_accounts>
         </groups>
-</gigya_login>
+      </gigya_login>
 
-</sections>
-</config>
+    </sections>
+  </config>

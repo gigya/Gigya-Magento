@@ -8,9 +8,11 @@ gigyaFunctions.login = function (response) {
   new Ajax.Request('/gigyalogin/login/login', {
       parameters: {json:JSON.stringify(response)},
       onSuccess: function (trans) {
+        console.log(trans.responseJSON);
         if (typeof trans.responseJSON.result !== 'undefined') {
           switch (trans.responseJSON.result)
           {
+          case 'newUser':
           case 'login':
             window.location.reload();
             break;
@@ -58,6 +60,16 @@ gigyaFunctions.login = function (response) {
 
     document.observe("dom:loaded", function() {
       if (typeof gigyaSettings !== 'undefined'){
-        gigya.socialize.showLoginUI(gigyaSettings.login);
+        $H(gigyaSettings).each( function (plugin) {
+          switch (plugin.key)
+          {
+            case 'login':
+              gigya.socialize.showLoginUI(plugin.value);
+            break;
+            case 'linkAccount':
+              gigya.socialize.showAddConnectionsUI(plugin.value);
+            break;
+            }
+        });
       }
     });

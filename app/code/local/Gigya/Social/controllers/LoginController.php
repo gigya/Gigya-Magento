@@ -55,7 +55,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             $res = array(
               'result' => 'noEmail',
               'html' => $form,
-              'id' => Mage::getStoreConfig('gigya_login/gigya_login_conf/loginContainerId'),
+              'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
             );
             $this->getResponse()->setHeader('Content-type', 'application/json');
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
@@ -75,7 +75,11 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                   'result' => 'emailExsists',
                   'redirect' => $url
                 );
+    Mage::log($post);
                 Mage::getSingleton('core/session')->addNotice('This email all ready existes on the system please login and the link accounts');
+                Mage::getSingleton('customer/session')->setData('gigyaAction', 'linkAccount');
+                Mage::getSingleton('customer/session')->setData('gigyaUid', $post['UID']);
+
                 $this->getResponse()->setHeader('Content-type', 'application/json');
                 $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
               }

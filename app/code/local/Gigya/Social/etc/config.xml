@@ -137,12 +137,18 @@
       <gigya_login_conf>
         <enable>0</enable>
         <buttonStyle>standart</buttonStyle>
-        <showTerms>0</showTerms>
+        <showTermsLink>0</showTermsLink>
         <loginBehavior>loginExistingUser</loginBehavior>
-        <loginContainerId>gigyaLogin</loginContainerId>
-        <loginWidth>210</loginWidth>
-        <loginHeight>110</loginHeight>
+        <containerID>gigyaLogin</containerID>
+        <width>210</width>
+        <height>110</height>
       </gigya_login_conf>
+    <gigya_link_accounts>
+        <enable>0</enable>
+        <containerID>gigyaLinkAccount</containerID>
+        <width>210</width>
+        <height>110</height>
+    </gigya_link_accounts>
     </gigya_login>
   </default>
 </config>
