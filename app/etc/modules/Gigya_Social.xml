@@ -2,7 +2,7 @@
     <modules>
         <Gigya_Social>
             <active>true</active>
-            <codePool>local</codePool>
+            <codePool>community</codePool>
         </Gigya_Social>
     </modules>
 </config>
