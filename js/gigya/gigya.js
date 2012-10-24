@@ -25,50 +25,90 @@ gigyaFunctions.login = function (response) {
         }
       }
   });
-  };
+};
 
-  gigyaFunctions.emailSubmit = function () {
-    var email = $$('#gigyaEmail')[0].value;
-    var emailRegEx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    if (email.match(emailRegEx)) {
-      var toPost = gigyaCache.uInfo;
-      toPost.user.email = email;
+gigyaFunctions.emailSubmit = function () {
+  var email = $$('#gigyaEmail')[0].value;
+  var emailRegEx = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  if (email.match(emailRegEx)) {
+    var toPost = gigyaCache.uInfo;
+    toPost.user.email = email;
 
-      new Ajax.Request('/gigyalogin/login/login', {
-          parameters: {json:JSON.stringify(toPost)},
-          onSuccess: function (trans) {
-            if (typeof trans.responseJSON.redirect !== 'undefined') {
-              window.location = trans.responseJSON.redirect;
-            }
+    new Ajax.Request('/gigyalogin/login/login', {
+        parameters: {json:JSON.stringify(toPost)},
+        onSuccess: function (trans) {
+          if (typeof trans.responseJSON.redirect !== 'undefined') {
+            window.location = trans.responseJSON.redirect;
           }
-      }
-      );
+        }
+    }
+    );
+  }
+  else {
+    alert ('please enter a valid email');
+  }
+};
+
+gigyaFunctions.shareBar = function (settings) {
+  console.log(settings);
+  var mediaObj = {type: 'image', href: settings.ua.linkBack};
+  switch (settings.imageBehavior)
+  {
+  case 'defualt':
+    if ($$('meta[property=og:image]').size() > 0) {
+      mediaObj.src = $$('meta[property=og:image]').readAttribute('content');
     }
     else {
-      alert ('please enter a valid email');
+      mediaObj.src = $$('div.main-container img')[0].readAttribute('src');
     }
-    };
-
-    /*
-     * register events
-     */
-    if (typeof gigya !== 'undefined') {
-      gigya.services.socialize.addEventHandlers({onLogin:gigyaFunctions.login});
+    break;
+  case 'first':
+    mediaObj.src = $$('div.main-container img')[0].readAttribute('src');
+    break;
+  case 'url':
+    if (typeof settings.imageUrl !== 'undefined') {
+      mediaObj.src = settings.imageUrl;
     }
+    break;
+  }
+  var ua = new gigya.services.socialize.UserAction();
+  ua.setLinkBack(settings.ua.linkBack);
+  ua.setTitle(settings.ua.title);
+  ua.addActionLink(settings.ua.title, settings.ua.linkBack);
+  ua.setDescription(settings.description);
+  ua.addMediaItem(mediaObj);
+  delete settings.ua;
+  delete settings.imageBehavior;
+  if (typeof settings.imageUrl !== 'undefined') {
+    delete settings.imageUrl;
+  }
+  settings.userAction = ua;
+  gigya.services.socialize.showShareBarUI(settings);
+}
+
+/*
+ * register events
+ */
+if (typeof gigya !== 'undefined') {
+  gigya.services.socialize.addEventHandlers({onLogin:gigyaFunctions.login});
+}
 
 
-    document.observe("dom:loaded", function() {
-      if (typeof gigyaSettings !== 'undefined'){
-        $H(gigyaSettings).each( function (plugin) {
-          switch (plugin.key)
-          {
-            case 'login':
-              gigya.socialize.showLoginUI(plugin.value);
-            break;
-            case 'linkAccount':
-              gigya.socialize.showAddConnectionsUI(plugin.value);
-            break;
-            }
-        });
-      }
-    });
+document.observe("dom:loaded", function() {
+if (typeof gigyaSettings !== 'undefined'){
+$H(gigyaSettings).each( function (plugin) {
+switch (plugin.key)
+{
+case 'login':
+  gigya.socialize.showLoginUI(plugin.value);
+  break;
+case 'linkAccount':
+  gigya.socialize.showAddConnectionsUI(plugin.value);
+  break;
+case 'sharebar':
+  gigyaFunctions.shareBar(plugin.value);
+  break;
+}
+});
+}
+});

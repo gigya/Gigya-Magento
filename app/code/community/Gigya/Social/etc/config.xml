@@ -160,6 +160,7 @@
         <shareButtons>share, email, pinterest, twitter-tweet, google-plusone, facebook-like</shareButtons>
         <layout>horizontal</layout>
         <showCounts>right</showCounts>
+        <imageBehavior>defualt</imageBehavior>
       </gigya_sharebar>
     </gigya_share>
   </default>
