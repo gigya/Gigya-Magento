@@ -1,0 +1,16 @@
+<?php
+$product = $this->getProduct();
+$ua = Mage::helper('core')->jsonEncode(array(
+  'title'       => $product->getName(),
+  'description' => $product->getShortDescription(),
+  'linkBack'    => $product->getProductUrl(),
+  'imageUrl'    => $product->getImageUrl()
+));
+?>
+<script type="text/javascript">//<![CDATA[
+  var gigyaSettings = gigyaSettings || {};
+  gigyaSettings.sharebar = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_share/gigya_sharebar')  ?>;
+  gigyaSettings.sharebar.ua = <?php echo $ua ?>
+  //]]>
+</script>
+<div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_share/gigya_sharebar') ?>" class="gigya-sharebar"></div>
