@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <config>
   <modules>
     <Gigya_Social>
@@ -41,6 +42,14 @@
           </gigya_logout>
         </observers>
       </customer_logout>
+      <controller_action_postdispatch>
+        <observers>
+          <gigya_share_action>
+            <class>Gigya_Social_Model_Cart_Observer</class>
+            <method>addShareUi</method>
+          </gigya_share_action>
+        </observers>
+      </controller_action_postdispatch>
     </events>
     <routers>
       <gigyalogin>
@@ -71,10 +80,12 @@
       </Gigya_Social>
       <page>
         <rewrite>
-           <html_head>Gigya_Social_Block_Html_Head</html_head>
+          &#xA0;<html_head>Gigya_Social_Block_Html_Head</html_head>
         </rewrite>
       </page>
     </blocks>
+    <events>
+    </events>
   </global>
   <!--
     -<admin>
@@ -146,12 +157,12 @@
         <width>210</width>
         <height>110</height>
       </gigya_login_conf>
-    <gigya_link_accounts>
+      <gigya_link_accounts>
         <enable>0</enable>
         <containerID>gigyaLinkAccount</containerID>
         <width>210</width>
         <height>110</height>
-    </gigya_link_accounts>
+      </gigya_link_accounts>
     </gigya_login>
     <gigya_share>
       <gigya_sharebar>
@@ -162,6 +173,11 @@
         <showCounts>right</showCounts>
         <imageBehavior>defualt</imageBehavior>
       </gigya_sharebar>
+      <gigya_share_action>
+        <enable>0</enable>
+        <showAlwaysShare>hide</showAlwaysShare>
+        <showNeverShare>1</showNeverShare>
+      </gigya_share_action>
     </gigya_share>
   </default>
 </config>

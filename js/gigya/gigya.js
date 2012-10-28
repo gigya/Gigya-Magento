@@ -50,7 +50,6 @@ gigyaFunctions.emailSubmit = function () {
 };
 
 gigyaFunctions.shareBar = function (settings) {
-  console.log(settings);
   var mediaObj = {type: 'image', href: settings.ua.linkBack};
   switch (settings.imageBehavior)
   {
@@ -84,7 +83,7 @@ gigyaFunctions.shareBar = function (settings) {
   }
   settings.userAction = ua;
   gigya.services.socialize.showShareBarUI(settings);
-}
+};
 
 /*
  * register events
@@ -95,20 +94,20 @@ if (typeof gigya !== 'undefined') {
 
 
 document.observe("dom:loaded", function() {
-if (typeof gigyaSettings !== 'undefined'){
-$H(gigyaSettings).each( function (plugin) {
-switch (plugin.key)
-{
-case 'login':
-  gigya.socialize.showLoginUI(plugin.value);
-  break;
-case 'linkAccount':
-  gigya.socialize.showAddConnectionsUI(plugin.value);
-  break;
-case 'sharebar':
-  gigyaFunctions.shareBar(plugin.value);
-  break;
-}
-});
-}
+  if (typeof gigyaSettings !== 'undefined'){
+    $H(gigyaSettings).each( function (plugin) {
+      switch (plugin.key)
+      {
+      case 'login':
+        gigya.socialize.showLoginUI(plugin.value);
+        break;
+      case 'linkAccount':
+        gigya.socialize.showAddConnectionsUI(plugin.value);
+        break;
+      case 'sharebar':
+        gigyaFunctions.shareBar(plugin.value);
+        break;
+      }
+    });
+  }
 });
