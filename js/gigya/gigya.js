@@ -85,6 +85,21 @@ gigyaFunctions.shareBar = function (settings) {
   gigya.services.socialize.showShareBarUI(settings);
 };
 
+gigyaFunctions.shareAction = function (settings) {
+  var mediaObj = {type: 'image', href: settings.ua.linkBack};
+  mediaObj.src = settings.ua.imageUrl;
+  var ua = new gigya.services.socialize.UserAction();
+  ua.setLinkBack(settings.ua.linkBack);
+  ua.setTitle(settings.ua.title);
+  ua.addActionLink(settings.ua.title, settings.ua.linkBack);
+  ua.setDescription(settings.description);
+  ua.addMediaItem(mediaObj);
+  delete settings.ua;
+  delete settings.enable;
+  settings.userAction = ua;
+  gigya.socialize.showShareUI(settings);
+}
+
 /*
  * register events
  */
@@ -106,6 +121,9 @@ document.observe("dom:loaded", function() {
         break;
       case 'sharebar':
         gigyaFunctions.shareBar(plugin.value);
+        break;
+      case 'shareAction':
+        gigyaFunctions.shareAction(plugin.value);
         break;
       }
     });

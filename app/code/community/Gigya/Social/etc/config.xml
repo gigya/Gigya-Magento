@@ -42,14 +42,14 @@
           </gigya_logout>
         </observers>
       </customer_logout>
-      <controller_action_postdispatch>
+      <checkout_cart_product_add_after>
         <observers>
           <gigya_share_action>
             <class>Gigya_Social_Model_Cart_Observer</class>
             <method>addShareUi</method>
           </gigya_share_action>
         </observers>
-      </controller_action_postdispatch>
+      </checkout_cart_product_add_after>
     </events>
     <routers>
       <gigyalogin>
@@ -80,7 +80,7 @@
       </Gigya_Social>
       <page>
         <rewrite>
-          &#xA0;<html_head>Gigya_Social_Block_Html_Head</html_head>
+          <html_head>Gigya_Social_Block_Html_Head</html_head>
         </rewrite>
       </page>
     </blocks>
@@ -128,6 +128,9 @@
                     <gigya_share>
                       <title>Gigya Share configuration</title>
                     </gigya_share>
+                    <gigya_reactions>
+                      <title>Gigya Reactions configuration</title>
+                    </gigya_reactions>
                   </children>
                 </config>
               </children>
