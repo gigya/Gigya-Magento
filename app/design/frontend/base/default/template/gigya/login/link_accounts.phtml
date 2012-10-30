@@ -1,0 +1,8 @@
+<?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_share/gigya_link_accounts')) : ?>
+<script type="text/javascript">//<![CDATA[
+  var gigyaSettings = gigyaSettings || {};
+  gigyaSettings.linkAccount = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_link_accounts')  ?>
+  //]]>
+</script>
+<div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_link_accounts') ?>" class="gigya-link-account"></div>
+<?php endif ?>

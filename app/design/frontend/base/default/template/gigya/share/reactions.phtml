@@ -1,0 +1,23 @@
+<?php
+//TODO: add comments
+ ?>
+ <?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_reactions/gigya_reactions_conf')) : ?>
+ <?php
+Mage::log('12345');
+  $product = $this->getProduct();
+  $ua = Mage::helper('core')->jsonEncode(array(
+    'title'       => $product->getName(),
+    'description' => $product->getShortDescription(),
+    'linkBack'    => $product->getProductUrl(),
+    'imageUrl'    => $product->getImageUrl()
+  ));
+  ?>
+  <script type="text/javascript">//<![CDATA[
+    var gigyaSettings = gigyaSettings || {};
+    gigyaSettings.reactions = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_reactions/gigya_reactions_conf')  ?>;
+    gigyaSettings.reactions.ua = <?php echo $ua ?>
+    //]]>
+  </script>
+  <div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_reactions/gigya_reactions_conf') ?>" class="gigya-reactions"></div>
+  <?php endif ?>
+

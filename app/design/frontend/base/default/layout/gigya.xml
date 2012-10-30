@@ -28,5 +28,8 @@
     <reference name="product.info.extrahint">
       <block type="catalog/product_view" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml" />
     </reference>
+    <reference name="product.info.extrahint">
+      <block type="catalog/product_view" name="gigya.reactions" after="-" template="gigya/share/reactions.phtml" />
+    </reference>
   </catalog_product_view>
 </layout>

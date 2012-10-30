@@ -182,5 +182,15 @@
         <showNeverShare>1</showNeverShare>
       </gigya_share_action>
     </gigya_share>
+    <gigya_reactions>
+      <gigya_reactions_conf>
+        <enable>0</enable>
+        <containerID>gigyaReactions</containerID>
+        <barID>reactions-bar</barID>
+        <layout>horizontal</layout>
+        <showCounts>right</showCounts>
+        <imageBehavior>defualt</imageBehavior>
+      </gigya_reactions_conf>
+    </gigya_reactions>
   </default>
 </config>
