@@ -167,6 +167,12 @@ document.observe("dom:loaded", function() {
       case 'reactions':
         gigyaFunctions.reactions(plugin.value);
         break;
+      case 'comments':
+        gigya.socialize.showCommentsUI(plugin.value);
+        break;
+      case 'activityFeed':
+        gigya.socialize.showFeedUI(plugin.value);
+        break;
       }
     });
   }

@@ -1,0 +1,8 @@
+<?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_activityfeed/gigya_activityfeed_conf')) : ?>
+<script type="text/javascript">//<![CDATA[
+  var gigyaSettings = gigyaSettings || {};
+  gigyaSettings.activityFeed = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_activityfeed/gigya_activityfeed_conf')  ?>
+  //]]>
+</script>
+<div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_activityfeed/gigya_activityfeed_conf') ?>" class="gigya-activity-feed"></div>
+<?php endif ?>

@@ -109,9 +109,12 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     return $response;
   }
 
-  public function getPluginConfig($pluginName, $format = 'json')
+  public function getPluginConfig($pluginName, $format = 'json', $feed = FALSE)
   {
     $config = Mage::getStoreConfig($pluginName);
+    if ($feed === TRUE) {
+      $config['privacy'] = Mage::getStoreConfig('gigya_activityfeed/gigya_activityfeed_conf/privacy');
+    }
     if ($format === 'php') {
       return $config;
     }

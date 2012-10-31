@@ -1,0 +1,18 @@
+<?php
+//TODO: add comments
+?>
+<?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_comments/gigya_comments_conf')) : ?>
+<?php
+$product = $this->getProduct();
+$conf = Mage::helper('Gigya_Social')->getPluginConfig('gigya_comments/gigya_comments_conf', 'php', TRUE);
+$conf['streamID'] = $product->getSku();
+$parms = Mage::helper('core')->jsonEncode($conf);
+?>
+<script type="text/javascript">//<![CDATA[
+  var gigyaSettings = gigyaSettings || {};
+  gigyaSettings.comments = <?php echo $parms  ?>;
+  //]]>
+</script>
+<div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_comments/gigya_comments_conf') ?>" class="gigya-comments"></div>
+<?php endif ?>
+

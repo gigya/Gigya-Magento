@@ -1,35 +1,42 @@
 <?xml version="1.0"?>
-
 <layout version="0.1.0">
   <default>
     <reference name="head">
-      <action method="addJs"><file>gigya/gigya.js</file></action>
+      <action method="addJs">
+        <file>gigya/gigya.js</file>
+      </action>
     </reference>
     <reference name="before_body_end">
-      <block type="Gigya_Social_Block_share" name="gigya.share.action" />
+      <block type="Gigya_Social_Block_share" name="gigya.share.action"/>
+    </reference>
+    <reference name="right">
+      <block name="gigya.activity.feed" type="core/template" after="-" template="gigya/activityfeed.phtml"/>
     </reference>
   </default>
   <customer_account_login>
-      <reference name="form.additional.info">
-        <block name="gigya.login" type="core/template" after="-" template="gigya/login/social_login.phtml" />
+    <reference name="form.additional.info">
+      <block name="gigya.login" type="core/template" after="-" template="gigya/login/social_login.phtml"/>
     </reference>
   </customer_account_login>
   <customer_account_index>
     <reference name="content">
-      <block type="core/template" name="gigya.link.accounts" after="-" template="gigya/login/link_accounts.phtml" />
+      <block type="core/template" name="gigya.link.accounts" after="-" template="gigya/login/link_accounts.phtml"/>
     </reference>
   </customer_account_index>
   <customer_account_create>
     <reference name="form.additional.info">
-      <block type="core/template" name="gigya.create.account" after="-" template="gigya/login/social_login.phtml" />
+      <block type="core/template" name="gigya.create.account" after="-" template="gigya/login/social_login.phtml"/>
     </reference>
   </customer_account_create>
   <catalog_product_view>
     <reference name="product.info.extrahint">
-      <block type="catalog/product_view" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml" />
+      <block type="catalog/product_view" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>
     </reference>
     <reference name="product.info.extrahint">
-      <block type="catalog/product_view" name="gigya.reactions" after="-" template="gigya/share/reactions.phtml" />
+      <block type="catalog/product_view" name="gigya.reactions" after="-" template="gigya/share/reactions.phtml"/>
+    </reference>
+    <reference name="content">
+      <block type="catalog/product_view" name="gigya.comments" after="-" template="gigya/comments.phtml"/>
     </reference>
   </catalog_product_view>
 </layout>

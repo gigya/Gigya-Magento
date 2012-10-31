@@ -131,6 +131,12 @@
                     <gigya_reactions>
                       <title>Gigya Reactions configuration</title>
                     </gigya_reactions>
+                    <gigya_comments>
+                      <title>Gigya Comments configuration</title>
+                    </gigya_comments>
+                    <gigya_activityfeed>
+                      <title>Gigya Comments configuration</title>
+                    </gigya_activityfeed>
                   </children>
                 </config>
               </children>
@@ -180,6 +186,7 @@
         <enable>0</enable>
         <showAlwaysShare>hide</showAlwaysShare>
         <showNeverShare>1</showNeverShare>
+        <scope>external</scope>
       </gigya_share_action>
     </gigya_share>
     <gigya_reactions>
@@ -192,5 +199,23 @@
         <imageBehavior>defualt</imageBehavior>
       </gigya_reactions_conf>
     </gigya_reactions>
+    <gigya_coments>
+      <gigya_comments_conf>
+        <enable>0</enable>
+        <containerID>gigyaComments</containerID>
+        <scope>external</scope>
+      </gigya_comments_conf>
+    </gigya_coments>
+    <gigya_activityfeed>
+      <gigya_activityfeed_conf>
+        <enable>0</enable>
+        <containerID>gigyaActivityfeed</containerID>
+        <tabOrder>everyone,friends,me</tabOrder>
+        <privacy>private</privacy>
+        <siteName>My Store</siteName>
+        <width>195</width>
+        <height>250</height>
+      </gigya_activityfeed_conf>
+    </gigya_activityfeed>
   </default>
 </config>
