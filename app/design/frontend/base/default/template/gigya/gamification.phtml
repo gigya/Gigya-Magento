@@ -1,0 +1,9 @@
+<?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_gamification/gigya_gamification_conf')) : ?>
+<script type="text/javascript">//<![CDATA[
+  var gigyaSettings = gigyaSettings || {};
+  gigyaSettings.gm = gigyaSettings.gm || {};
+  gigyaSettings.gm.plugins = <?php echo $this->getJs()  ?>
+  //]]>
+</script>
+<?php echo $this->getHtml() ?>
+<?php endif ?>

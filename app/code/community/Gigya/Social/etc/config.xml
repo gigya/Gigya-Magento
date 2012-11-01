@@ -137,6 +137,9 @@
                     <gigya_activityfeed>
                       <title>Gigya Comments configuration</title>
                     </gigya_activityfeed>
+                    <gigya_gamification>
+                      <title>Gigya Comments configuration</title>
+                    </gigya_gamification>
                   </children>
                 </config>
               </children>
@@ -217,5 +220,13 @@
         <height>250</height>
       </gigya_activityfeed_conf>
     </gigya_activityfeed>
+    <gigya_gamification>
+      <gigya_gamification_conf>
+        <enable>0</enable>
+        <notifications>0</notifications>
+        <period>7days</period>
+        <totalCount>12</totalCount>
+      </gigya_gamification_conf>
+    </gigya_gamification>
   </default>
 </config>

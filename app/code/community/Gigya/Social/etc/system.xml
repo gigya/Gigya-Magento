@@ -534,12 +534,11 @@
             <siteName translate="label">
               <label>Site name</label>
               <frontend_type>text</frontend_type>
-              <comment><![CDATA[Your site name. This string will be planted into various headers of the plugin (for more information read the <a title="020 Developer Guide/65 The Newsfeed Widget" rel="internal" href="http://developers.gigya.com/010_Developer_Guide/18_Plugins/060_Activity_Feed_Plugin" target="_blank">Activity <span>Feed </span>Plugin</a><span> documentation</span>).]]>
-            </comment>
-            <sort_order>12</sort_order>
-            <show_in_default>1</show_in_default>
-            <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
+              <comment><![CDATA[Your site name. This string will be planted into various headers of the plugin (for more information read the <a title="020 Developer Guide/65 The Newsfeed Widget" rel="internal" href="http://developers.gigya.com/010_Developer_Guide/18_Plugins/060_Activity_Feed_Plugin" target="_blank">Activity <span>Feed </span>Plugin</a><span> documentation</span>).]]></comment>
+              <sort_order>12</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
             </siteName>
             <tabOrder translate="label">
               <label>Tabs and order</label>
@@ -579,5 +578,62 @@
         </gigya_activityfeed_conf>
       </groups>
     </gigya_activityfeed>
+    <gigya_gamification translate="label" module="Gigya_Social">
+      <label>Gigya Gamification</label>
+      <tab>gigya</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>102</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>0</show_in_store>
+      <groups>
+        <gigya_gamification_conf translate="label">
+          <label>Gigya Gamification configuration</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>102</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>0</show_in_store>
+          <fields>
+            <enable translate="label">
+              <label>Enable Gigya Gamification</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>10</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </enable>
+            <notifications translate="label">
+              <label>Enable Gamification notifications</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>11</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </notifications>
+            <period translate="label">
+              <label>Leaderboard Time Period</label>
+              <frontend_type>select</frontend_type>
+              <source_model>Gigya_Social_Model_config_source_leaderboard</source_model>
+              <sort_order>12</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </period>
+            <totalCount translate="label">
+              <label>Leaderboard User Count</label>
+              <frontend_type>text</frontend_type>
+              <comment><![CDATA[The total number of users to display in the Leaderboard plugin. values between 1 - 36]]></comment>
+              <sort_order>13</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+            </totalCount>
+          </fields>
+        </gigya_gamification_conf>
+      </groups>
+    </gigya_gamification>
   </sections>
 </config>

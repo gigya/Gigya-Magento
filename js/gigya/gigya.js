@@ -139,6 +139,33 @@ gigyaFunctions.reactions = function (settings) {
   gigya.socialize.showReactionsBarUI(settings);
 };
 
+gigyaFunctions.gm = function (settings) {
+  if (typeof settings.notifications !== 'undefined') {
+    gigya.gm.showNotifications();
+  }
+  if (typeof settings.plugins !== 'undefined') {
+    $H(settings.plugins).each ( function (gmPlugin) {
+      var parms = {containerID: gmPlugin.value};
+      switch (gmPlugin.key)
+      {
+        case 'Achievements':
+          gigya.gm.showAchievementsUI(parms);
+        break;
+        case 'ChallengeStatus':
+          gigya.gm.showChallengeStatusUI(parms);
+        break;
+        case 'UserStatus':
+          gigya.gm.showUserStatusUI(parms);
+        break;
+        case 'Leaderboard':
+          gigya.gm.showLeaderboardUI(parms);
+        break;
+        }
+    })
+
+  }
+}
+
 /*
  * register events
  */
@@ -172,6 +199,9 @@ document.observe("dom:loaded", function() {
         break;
       case 'activityFeed':
         gigya.socialize.showFeedUI(plugin.value);
+        break;
+      case 'gm':
+        gigyaFunctions.gm(plugin.value);
         break;
       }
     });

@@ -7,10 +7,22 @@
       </action>
     </reference>
     <reference name="before_body_end">
+      <block type="Gigya_Social_Block_Gamification_notifications" name="gigya.gm.notifications"/>
       <block type="Gigya_Social_Block_share" name="gigya.share.action"/>
     </reference>
     <reference name="right">
       <block name="gigya.activity.feed" type="core/template" after="-" template="gigya/activityfeed.phtml"/>
+      <block type="Gigya_Social_Block_Gamification_plugins" after="-" name="left.gigya.gm.blocks" template="gigya/gamification.phtml">
+        <action method="setData">
+          <name>layout</name>
+          <value>
+            <Achievements>divAchievements</Achievements>
+            <ChallengeStatus>divChallenge</ChallengeStatus>
+            <UserStatus>divUserStatus</UserStatus>
+            <Leaderboard>divLeaderboard</Leaderboard>
+          </value>
+        </action>
+      </block>
     </reference>
   </default>
   <customer_account_login>
