@@ -42,13 +42,17 @@
   </customer_account_create>
   <catalog_product_view>
     <reference name="product.info.extrahint">
+      <block type="Gigya_Social_Block_ratings"  name="gigya.ratings" after="-"/>
       <block type="catalog/product_view" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>
-    </reference>
-    <reference name="product.info.extrahint">
       <block type="catalog/product_view" name="gigya.reactions" after="-" template="gigya/share/reactions.phtml"/>
     </reference>
     <reference name="content">
       <block type="catalog/product_view" name="gigya.comments" after="-" template="gigya/comments.phtml"/>
     </reference>
   </catalog_product_view>
+  <review_product_list>
+    <reference name="content">
+      <block type="Gigya_Social_Block_reviews"  name="gigya.ratings" after="-"/>
+    </reference>
+  </review_product_list>
 </layout>

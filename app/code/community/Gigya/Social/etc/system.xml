@@ -635,5 +635,52 @@
         </gigya_gamification_conf>
       </groups>
     </gigya_gamification>
+    <gigya_r_and_r translate="label" module="Gigya_Social">
+      <label>Gigya Rating &amp; Reviews</label>
+      <tab>gigya</tab>
+      <frontend_type>text</frontend_type>
+      <sort_order>106</sort_order>
+      <show_in_default>1</show_in_default>
+      <show_in_website>1</show_in_website>
+      <show_in_store>0</show_in_store>
+      <groups>
+        <gigya_r_and_r_conf translate="label">
+          <label>Gigya Rating &amp; Reviews configuration</label>
+          <frontend_type>text</frontend_type>
+          <sort_order>102</sort_order>
+          <show_in_default>1</show_in_default>
+          <show_in_website>1</show_in_website>
+          <show_in_store>0</show_in_store>
+          <fields>
+            <enable translate="label">
+              <label>Enable Gigya Rating &amp; Reviews</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>10</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </enable>
+            <containerID translate="label">
+              <label>Div ID</label>
+              <frontend_type>text</frontend_type>
+              <comment><![CDATA[The ratings continer div ID]]></comment>
+              <sort_order>11</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+            </containerID>
+            <categoryID translate="label">
+              <label>The identifier of the Comments Category.</label>
+              <frontend_type>text</frontend_type>
+              <sort_order>12</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+            </categoryID>
+          </fields>
+        </gigya_r_and_r_conf>
+      </groups>
+    </gigya_r_and_r>
   </sections>
 </config>

@@ -50,6 +50,15 @@
           </gigya_share_action>
         </observers>
       </checkout_cart_product_add_after>
+      <sales_order_save_commit_after>
+        <observers>
+          <gigya_share_action>
+            <type>singleton</type>
+            <class>Gigya_Social_Model_Cart_Observer</class>
+            <method>addOrderShareUi</method>
+          </gigya_share_action>
+        </observers>
+      </sales_order_save_commit_after>
     </events>
     <routers>
       <gigyalogin>
@@ -87,19 +96,6 @@
     <events>
     </events>
   </global>
-  <!--
-    -<admin>
-    -  <routers>
-    -    <gigya>
-    -      <use>admin</use>
-    -      <args>
-    -        <module>Gigya_Social</module>
-    -        <frontName>Gigya_Social</frontName>
-    -      </args>
-    -    </gigya>
-    -  </routers>
-    -</admin>
-  -->
   <adminhtml>
     <events>
       <customer_delete_after>
@@ -140,6 +136,9 @@
                     <gigya_gamification>
                       <title>Gigya Comments configuration</title>
                     </gigya_gamification>
+                    <gigya_r_and_r>
+                      <title>Gigya Rating &amp; Reviews configuration</title>
+                    </gigya_r_and_r>
                   </children>
                 </config>
               </children>
@@ -228,5 +227,11 @@
         <totalCount>12</totalCount>
       </gigya_gamification_conf>
     </gigya_gamification>
+    <gigya_r_and_r>
+      <gigya_r_and_r_conf>
+        <enable>0</enable>
+        <containerID>gigyaRatings</containerID>
+      </gigya_r_and_r_conf>
+    </gigya_r_and_r>
   </default>
 </config>

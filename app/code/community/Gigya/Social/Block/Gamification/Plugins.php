@@ -10,7 +10,6 @@ class Gigya_Social_Block_Gamification_Plugins extends Mage_Core_Block_Template
   {
     $validPlugins = array('Achievements', 'ChallengeStatus', 'UserStatus', 'Leaderboard');
     $layout = $this->getData('layout');
-    Mage::log($layout);
     $html = '';
     foreach ($layout as $plugin => $divId) {
       if (in_array($plugin, $validPlugins)) {

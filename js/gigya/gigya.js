@@ -164,19 +164,52 @@ gigyaFunctions.gm = function (settings) {
     })
 
   }
+};
+
+gigyaFunctions.ratings = function (settings) {
+  $$('div.ratings')[0].writeAttribute('id', settings.containerID);
+  settings.onAddReviewClicked = gigyaFunctions.goToReviews;
+  settings.onReadReviewsClicked = gigyaFunctions.goToReviews;
+  gigya.socialize.showRatingUI(settings);
+};
+
+gigyaFunctions.goToReviews = function (eventObj) {
+  if (typeof eventObj.context.reviewUrl !== 'undefined') {
+    document.location = eventObj.context.reviewUrl;
+  }
+};
+
+gigyaFunctions.RnR = function (settings) {
+  $$('table.ratings-table')[0].writeAttribute('id', settings.containerID);
+  settings.linkedCommentsUI = 'customer-reviews';
+  var reviews = {
+    containerID: 'customer-reviews',
+    categoryID: settings.categoryID,
+    streamID: settings.streamID
+  };
+  gigya.socialize.showRatingUI(settings);
+  gigya.socialize.showCommentsUI(reviews);
+
+
 }
 
 /*
  * register events
  */
-if (typeof gigya !== 'undefined') {
-  gigya.socialize.addEventHandlers({onLogin:gigyaFunctions.login});
+function gigyaRegister() {
+  if (typeof gigya !== 'undefined') {
+    gigya.socialize.addEventHandlers({
+        onLogin: gigyaFunctions.login,
+    });
+  }
 }
 
+gigyaRegister();
 
 document.observe("dom:loaded", function() {
   if (typeof gigyaSettings !== 'undefined'){
     $H(gigyaSettings).each( function (plugin) {
+      delete plugin.value.enable;
       switch (plugin.key)
       {
       case 'login':
@@ -202,6 +235,12 @@ document.observe("dom:loaded", function() {
         break;
       case 'gm':
         gigyaFunctions.gm(plugin.value);
+        break;
+      case 'ratings':
+        gigyaFunctions.ratings(plugin.value);
+        break;
+      case 'RnR':
+        gigyaFunctions.RnR(plugin.value);
         break;
       }
     });
