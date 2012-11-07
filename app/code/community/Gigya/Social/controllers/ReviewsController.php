@@ -7,12 +7,6 @@ require_once ('Mage/Review/controllers/ProductController.php');
 class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
 {
 
-  /*
-   *public function preDispatch()
-   *{
-   *  return $this;
-   *}
-   */
   public function indexAction()
   {
     $this->loadLayout();
