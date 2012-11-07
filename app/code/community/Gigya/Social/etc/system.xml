@@ -28,7 +28,7 @@
               <label>Enable</label>
               <frontend_type>select</frontend_type>
               <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>51</sort_order>
+              <sort_order>10</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
@@ -37,7 +37,7 @@
               <label>Gigya API key</label>
               <frontend_type>text</frontend_type>
               <comment><![CDATA[Specify the Gigya API key for this domain]]></comment>
-              <sort_order>60</sort_order>
+              <sort_order>11</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
@@ -46,7 +46,7 @@
               <label>Gigya Secret key</label>
               <frontend_type>text</frontend_type>
               <comment><![CDATA[Specify the Gigya Secret (Base64 encoded) key for this domain]]></comment>
-              <sort_order>61</sort_order>
+              <sort_order>12</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
@@ -56,7 +56,7 @@
               <frontend_type>text</frontend_type>
               <comment><![CDATA[Comma separated list of networks that would be included. For example: "Facebook, Twitter, Yahoo".
           * means all networks. See list of available <a href="http://developers.gigya.com/020_Client_API/020_Methods/Socialize.showLoginUI" target="_blank">providers.</a>]]></comment>
-              <sort_order>62</sort_order>
+              <sort_order>13</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
@@ -65,7 +65,7 @@
               <label>Interface language</label>
               <frontend_type>select</frontend_type>
               <source_model>Gigya_Social_Model_config_source_languages</source_model>
-              <sort_order>62</sort_order>
+              <sort_order>14</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
@@ -74,11 +74,20 @@
               <label>Enable Google Social Analytics</label>
               <frontend_type>select</frontend_type>
               <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>63</sort_order>
+              <sort_order>15</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </google_sa>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_global_conf>
       </groups>
@@ -104,7 +113,7 @@
               <label>Enable Gigya Social login</label>
               <frontend_type>select</frontend_type>
               <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>1</sort_order>
+              <sort_order>10</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
@@ -113,7 +122,7 @@
               <label>Button style</label>
               <frontend_type>select</frontend_type>
               <source_model>Gigya_Social_Model_config_source_buttons</source_model>
-              <sort_order>2</sort_order>
+              <sort_order>11</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
@@ -122,7 +131,7 @@
               <label>Show terms link</label>
               <frontend_type>select</frontend_type>
               <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>3</sort_order>
+              <sort_order>12</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
@@ -131,7 +140,7 @@
               <label>Login behavior</label>
               <frontend_type>select</frontend_type>
               <source_model>Gigya_Social_Model_config_source_loginb</source_model>
-              <sort_order>10</sort_order>
+              <sort_order>13</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
@@ -140,7 +149,7 @@
               <label>Gigya login container id</label>
               <frontend_type>text</frontend_type>
               <comment><![CDATA[div ID for loginUI]]></comment>
-              <sort_order>60</sort_order>
+              <sort_order>14</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
@@ -148,7 +157,7 @@
             <width translate="label">
               <label>Width</label>
               <frontend_type>text</frontend_type>
-              <sort_order>60</sort_order>
+              <sort_order>15</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
@@ -156,11 +165,20 @@
             <height translate="label">
               <label>Height</label>
               <frontend_type>text</frontend_type>
-              <sort_order>60</sort_order>
+              <sort_order>16</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
             </height>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_login_conf>
         <gigya_link_accounts translate="lable">
@@ -184,7 +202,7 @@
               <label>Gigya link accounts container id</label>
               <frontend_type>text</frontend_type>
               <comment><![CDATA[div ID for link accounts]]></comment>
-              <sort_order>60</sort_order>
+              <sort_order>11</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
@@ -192,7 +210,7 @@
             <width translate="label">
               <label>Width</label>
               <frontend_type>text</frontend_type>
-              <sort_order>60</sort_order>
+              <sort_order>12</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
@@ -200,11 +218,20 @@
             <height translate="label">
               <label>Height</label>
               <frontend_type>text</frontend_type>
-              <sort_order>60</sort_order>
+              <sort_order>13</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
             </height>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_link_accounts>
       </groups>
@@ -213,7 +240,7 @@
       <label>Gigya Share</label>
       <tab>gigya</tab>
       <frontend_type>text</frontend_type>
-      <sort_order>100</sort_order>
+      <sort_order>101</sort_order>
       <show_in_default>1</show_in_default>
       <show_in_website>1</show_in_website>
       <show_in_store>1</show_in_store>
@@ -292,6 +319,15 @@
                 <imageBehavior>url</imageBehavior>
               </depends>
             </imageUrl>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_sharebar>
         <gigya_share_action translate="label">
@@ -339,6 +375,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </scope>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_share_action>
       </groups>
@@ -434,6 +479,15 @@
                 <imageBehavior>url</imageBehavior>
               </depends>
             </imageUrl>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_reactions_conf>
       </groups>
@@ -492,6 +546,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </scope>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_comments_conf>
       </groups>
@@ -574,6 +637,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
             </height>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_activityfeed_conf>
       </groups>
@@ -631,6 +703,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
             </totalCount>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>17</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_gamification_conf>
       </groups>
@@ -678,6 +759,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
             </categoryID>
+            <advancedConfig translate="label">
+              <label>Advanced configuration</label>
+              <frontend_type>Textarea</frontend_type>
+              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+              <sort_order>13</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </advancedConfig>
           </fields>
         </gigya_r_and_r_conf>
       </groups>

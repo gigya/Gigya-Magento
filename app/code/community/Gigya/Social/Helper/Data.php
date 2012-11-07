@@ -112,6 +112,11 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
   public function getPluginConfig($pluginName, $format = 'json', $feed = FALSE)
   {
     $config = Mage::getStoreConfig($pluginName);
+    if (!empty($config['advancedConfig'])) {
+      $advConfig = $this->_confStringToArry($config['advancedConfig']);
+      $config = $config + $advConfig;
+    }
+    unset($config['advancedConfig']);
     if ($feed === TRUE) {
       $config['privacy'] = Mage::getStoreConfig('gigya_activityfeed/gigya_activityfeed_conf/privacy');
     }
@@ -131,5 +136,18 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     return Mage::getStoreConfig($pluginName . '/enable');
   }
 
+  public function _confStringToArry($str)
+  {
+    $lines = array();
+    $values =  explode(PHP_EOL, $str);
+    //some clean up
+    $values = array_map('trim', $values);
+    $values = array_filter($values, 'strlen');
+    foreach ($values as  $value) {
+      preg_match('/(.*)\|(.*)/', $value, $matches);
+      $lines[$matches[1]] = $matches[2];
+    }
+    return $lines;
 
+  }
 }
