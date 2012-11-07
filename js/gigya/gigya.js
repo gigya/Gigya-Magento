@@ -179,19 +179,44 @@ gigyaFunctions.goToReviews = function (eventObj) {
   }
 };
 
+gigyaFunctions.postReview = function (eventObj) {
+  var ratings = [],
+  r = eventObj.ratings._overall;
+  for (var i=1; i <= 3; i++) {
+    ratings[i] = r;
+    r = r + 5;
+  };
+  var toPost = {
+    nickname:eventObj.user.firstName,
+    title:eventObj.commentTitle,
+    detail:eventObj.commentText,
+    ratings:ratings
+  };
+  new Ajax.Request('/gigyareviews/reviews/post/id/' + eventObj.context.id + '/', {
+      parameters: {json:JSON.stringify(toPost)},
+      onSuccess: function (trans) {
+        //TODO: add success/error handeling
+      }
+  }
+  );
+
+
+};
 gigyaFunctions.RnR = function (settings) {
   $$('table.ratings-table')[0].writeAttribute('id', settings.containerID);
   settings.linkedCommentsUI = 'customer-reviews';
+  var context = {id:settings.pid};
+  delete settings.pid;
   var reviews = {
     containerID: 'customer-reviews',
     categoryID: settings.categoryID,
-    streamID: settings.streamID
+    streamID: settings.streamID,
+    onCommentSubmitted: gigyaFunctions.postReview,
+    context:context
   };
   gigya.socialize.showRatingUI(settings);
   gigya.socialize.showCommentsUI(reviews);
-
-
-}
+};
 
 /*
  * register events

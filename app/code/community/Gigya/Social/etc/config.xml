@@ -68,6 +68,13 @@
           <frontName>gigyalogin</frontName>
         </args>
       </gigyalogin>
+      <reviews>
+        <use>standard</use>
+        <args>
+          <module>Gigya_Social</module>
+          <frontName>gigyareviews</frontName>
+        </args>
+      </reviews>
     </routers>
     <layout>
       <updates>
