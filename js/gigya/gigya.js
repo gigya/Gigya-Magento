@@ -192,7 +192,16 @@ gigyaFunctions.postReview = function (eventObj) {
     detail:eventObj.commentText,
     ratings:ratings
   };
-  new Ajax.Request('/gigyareviews/reviews/post/id/' + eventObj.context.id + '/', {
+  var reviewsUrl = '/gigyareviews/reviews/post',
+  id = '',
+  category = '';
+  if (id = gigyaFunctions.getUrlParam('id')) {
+    reviewsUrl += '/id/' + id;
+  }
+  if (category = gigyaFunctions.getUrlParam('category')) {
+    reviewsUrl += '/category/' + category;
+  }
+  new Ajax.Request(reviewsUrl, {
       parameters: {json:JSON.stringify(toPost)},
       onSuccess: function (trans) {
         //TODO: add success/error handeling
@@ -205,18 +214,24 @@ gigyaFunctions.postReview = function (eventObj) {
 gigyaFunctions.RnR = function (settings) {
   $$('table.ratings-table')[0].writeAttribute('id', settings.containerID);
   settings.linkedCommentsUI = 'customer-reviews';
-  var context = {id:settings.pid};
-  delete settings.pid;
   var reviews = {
     containerID: 'customer-reviews',
     categoryID: settings.categoryID,
     streamID: settings.streamID,
     onCommentSubmitted: gigyaFunctions.postReview,
-    context:context
   };
   gigya.socialize.showRatingUI(settings);
   gigya.socialize.showCommentsUI(reviews);
 };
+
+gigyaFunctions.getUrlParam = function (param) {
+  var urlArray = document.location.href.split('/'),
+  idx = urlArray.indexOf(param);
+  if (idx !== -1) {
+    return urlArray[idx + 1];
+  }
+  return false;
+}
 
 /*
  * register events
