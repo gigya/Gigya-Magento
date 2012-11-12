@@ -1,0 +1,32 @@
+<?php
+  $product = $this->getProduct();
+  $parms = Mage::helper('Gigya_Social')->getPluginConfig('gigya_r_and_r/gigya_r_and_r_conf', 'php');
+   unset($parms['enable']);
+   $parms['streamID'] = $product->getSku();
+   $parms['context']['reviewUrl'] = $this->getReviewsUrl();
+?>
+<?php if ($this->getReviewsCount()): ?>
+<?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_r_and_r/gigya_r_and_r_conf')) : ?>
+      <script type="text/javascript">//<![CDATA[
+        var gigyaSettings = gigyaSettings || {};
+        gigyaSettings.ratings = gigyaSettings.ratings || [];
+        gigyaSettings.ratings.push(<?php echo Mage::helper('core')->jsonEncode($parms) ?>);
+        console.log(gigyaSettings.ratings);
+        //]]>
+      </script>
+      <?php endif ?>
+      <div id="<?php echo $parms['containerID'] ?>" class="ratings">
+        <?php if ($this->getRatingSummary()):?>
+            <div class="rating-box">
+                <div class="rating" style="width:<?php echo $this->getRatingSummary() ?>%"></div>
+            </div>
+        <?php endif;?>
+        <p class="rating-links">
+            <a href="<?php echo $this->getReviewsUrl() ?>"><?php echo $this->__('%d Review(s)', $this->getReviewsCount()) ?></a>
+            <span class="separator">|</span>
+            <a href="<?php echo $this->getReviewsUrl() ?>#review-form"><?php echo $this->__('Add Your Review') ?></a>
+        </p>
+    </div>
+<?php elseif ($this->getDisplayIfEmpty()): ?>
+    <p class="no-rating"><a href="<?php echo $this->getReviewsUrl() ?>#review-form"><?php echo $this->__('Be the first to review this product') ?></a></p>
+<?php endif; ?>

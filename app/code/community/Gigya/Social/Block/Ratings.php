@@ -15,7 +15,8 @@ class Gigya_Social_Block_Ratings extends Mage_Catalog_Block_Product_View
       $parms['context']['reviewUrl'] = $this->getReviewsUrl();
       $js = '<script type="text/javascript">//<![CDATA[
         var gigyaSettings = gigyaSettings || {};
-      gigyaSettings.ratings = ' . Mage::helper('core')->jsonEncode($parms) . '
+      gigyaSettings.ratings = gigyaSettings.ratings || [];
+      gigyaSettings.ratings.push(' . Mage::helper('core')->jsonEncode($parms) . ');
         //]]>
       </script>';
 return $js;

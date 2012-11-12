@@ -167,10 +167,11 @@ gigyaFunctions.gm = function (settings) {
 };
 
 gigyaFunctions.ratings = function (settings) {
-  $$('div.ratings')[0].writeAttribute('id', settings.containerID);
-  settings.onAddReviewClicked = gigyaFunctions.goToReviews;
-  settings.onReadReviewsClicked = gigyaFunctions.goToReviews;
-  gigya.socialize.showRatingUI(settings);
+  settings.each( function (ins) {
+    ins.onAddReviewClicked = gigyaFunctions.goToReviews;
+    ins.onReadReviewsClicked = gigyaFunctions.goToReviews;
+    gigya.socialize.showRatingUI(ins);
+  });
 };
 
 gigyaFunctions.goToReviews = function (eventObj) {
@@ -182,7 +183,8 @@ gigyaFunctions.goToReviews = function (eventObj) {
 gigyaFunctions.postReview = function (eventObj) {
   var ratings = [],
   r = eventObj.ratings._overall;
-  for (var i=1; i <= 3; i++) {
+  var i = 1;
+  for (i; i <= 3; i++) {
     ratings[i] = r;
     r = r + 5;
   };
