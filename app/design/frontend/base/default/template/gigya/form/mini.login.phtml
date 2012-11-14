@@ -1,0 +1,13 @@
+<div class="block block-login">
+    <div class="block-title">
+      <strong><span><?php echo $this->__('Link Accounts') ?></span></strong>
+      <span><?php echo $this->__('Your email address already exists in our system. Please login with your site credentials in order to link accounts') ?></span>
+    </div>
+        <div class="block-content">
+            <label for="mini-login"><?php echo $this->__('Email:') ?></label><input type="text" name="login[username]" id="gigya-mini-login" class="input-text" />
+            <label for="mini-password"><?php echo $this->__('Password:') ?></label><input type="password" name="login[password]" id="gigya-mini-password" class="input-text" />
+            <div class="actions">
+              <button type="button" class="button" onClick="gigyaFunctions.linkAccounts()"><span><span><?php echo $this->__('Link Accounts') ?></span></span></button>
+            </div>
+        </div>
+</div>

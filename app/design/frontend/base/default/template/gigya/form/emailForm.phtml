@@ -4,7 +4,8 @@
 ?>
 
 <div id="gigyaEmailForm">
-  <div class="desc">some test explaining way we need this</div>
+  <div class="desc"><?php echo $this->__('Please fill-in missing required info:')?></div>
+  <br/>
   <label>Email: </label>
   <input type="email" name="email" id="gigyaEmail"/>
   <input class="button" id="gigyaEmailSubmit" type="button" value="Send" onClick="gigyaFunctions.emailSubmit()"/>

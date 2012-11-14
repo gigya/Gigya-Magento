@@ -16,15 +16,66 @@ gigyaFunctions.login = function (response) {
             window.location.reload();
             break;
           case 'noEmail':
+            gigyaFunctions.hideLogin(trans.responseJSON.id);
+            gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline)
             $(trans.responseJSON.id).update(trans.responseJSON.html);
             break;
           case 'emailExsists':
-            window.location = trans.responseJSON.redirect;
+            gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline)
+            gigyaFunctions.hideLogin(trans.responseJSON.id);
+            $(trans.responseJSON.id).update(trans.responseJSON.html);
+            Form.Element.setValue('gigya-mini-login', gigyaCache.uInfo.user.email);
             break;
           }
         }
       }
   });
+};
+
+gigyaFunctions.hideLogin = function (id) {
+  var form = $(id).adjacent('li');
+  if (form !== 'undefined') {
+    form.each(function (e) {
+      if ((e.firstDescendant().readAttribute('for') == 'email') || (e.firstDescendant().readAttribute('for') == 'pass')){
+        e.hide();
+      }
+    });
+  }
+};
+
+gigyaFunctions.updateHeadline = function (id, text) {
+  var headline = $(id).up(0).previous('h2');
+  if (typeof headline !== 'undefined') {
+    headline.next('p').remove();
+    headline.update(text);
+  }
+
+};
+
+
+gigyaFunctions.linkAccounts = function () {
+  var email = $$('#gigya-mini-login')[0].value,
+  password = $$('#gigya-mini-password')[0].value;
+  if (email.empty()){
+    alert('Please enter a email');
+  }
+  else if (password.empty()){
+    alert('Please enter your password');
+  }
+  else {
+  var toPost = {username:email, password:password};
+  new Ajax.Request('/gigyalogin/login/loginPost', {
+      parameters: {login:JSON.stringify(toPost)},
+      onSuccess: function (trans) {
+        if (trans.responseJSON.result === 'success') {
+          document.location.reload(true);
+        }
+        if (trans.responseJSON.result === 'error') {
+          alert(trans.responseJSON.message);
+        }
+      }
+  });
+  }
 };
 
 gigyaFunctions.emailSubmit = function () {
@@ -39,6 +90,12 @@ gigyaFunctions.emailSubmit = function () {
         onSuccess: function (trans) {
           if (typeof trans.responseJSON.redirect !== 'undefined') {
             window.location = trans.responseJSON.redirect;
+          }
+          if (trans.responseJSON.result === 'emailExsists') {
+            gigyaFunctions.hideLogin(trans.responseJSON.id);
+            gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline)
+            $(trans.responseJSON.id).update(trans.responseJSON.html);
+            Form.Element.setValue('gigya-mini-login', gigyaCache.uInfo.user.email);
           }
         }
     }
@@ -241,7 +298,7 @@ gigyaFunctions.getUrlParam = function (param) {
 function gigyaRegister() {
   if (typeof gigya !== 'undefined') {
     gigya.socialize.addEventHandlers({
-        onLogin: gigyaFunctions.login,
+        onLogin: gigyaFunctions.login
     });
   }
 }
@@ -255,6 +312,7 @@ document.observe("dom:loaded", function() {
       switch (plugin.key)
       {
       case 'login':
+        plugin.value.onLoad = gigyaFunctions.loginLoad;
         gigya.socialize.showLoginUI(plugin.value);
         break;
       case 'linkAccount':

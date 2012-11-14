@@ -13,6 +13,35 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     $this->loadLayout();
     $this->renderLayout();
   }
+    /**
+     * Action predispatch
+     *
+     * Check customer authentication for some actions
+     */
+    public function preDispatch()
+    {
+        // a brute-force protection here would be nice
+
+
+        if (!$this->getRequest()->isDispatched()) {
+            return;
+        }
+
+        $action = $this->getRequest()->getActionName();
+        Mage::log($action);
+        $openActions = array(
+            'login',
+            'loginPost',
+            'createPost',
+        );
+        if (!in_array($action, $openActions)) {
+            if (!$this->_getSession()->authenticate($this)) {
+                $this->setFlag('', 'no-dispatch', true);
+            }
+        } else {
+            $this->_getSession()->setNoReferer(true);
+        }
+    }
 
   public function loginAction()
   {
@@ -56,6 +85,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
               'result' => 'noEmail',
               'html' => $form,
               'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
+              'headline' => $this->__('Fill-in missing required info'),
             );
             $this->getResponse()->setHeader('Content-type', 'application/json');
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
@@ -70,12 +100,19 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             else {
               //email exsites
               try {
-                $url = Mage::getUrl('customer/account/login');
+                //return login form
+                $block = $this->getLayout()->createBlock(
+                  'Mage_Core_Block_Template',
+                  'Loginform',
+                  array('template' => 'gigya/form/mini.login.phtml')
+                );
+                $form = $block->renderView();
                 $res = array(
                   'result' => 'emailExsists',
-                  'redirect' => $url
+                  'html' => $form,
+                  'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
+                  'headline' => $this->__('Link Accounts'),
                 );
-                Mage::getSingleton('core/session')->addNotice('This email all ready existes on the system please login and the link accounts');
                 Mage::getSingleton('customer/session')->setData('gigyaAction', 'linkAccount');
                 Mage::getSingleton('customer/session')->setData('gigyaUid', $post['UID']);
 
@@ -84,7 +121,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
               }
               catch (Exception $e) {
                 //TODO:add error handeling
-                Mage::log('ffffff');
                 Mage::log($e);
               }
             }
@@ -93,7 +129,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
       }
       else {
         //not valid
-        Mage::log('eeee');
+        Mage::log('Not Valid');
       }
     }
 
@@ -224,7 +260,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
               Mage::app()->getStore()->getId()
             );
             $session->addSuccess($this->__('Account confirmation is required. Please, check your email for the confirmation link. To resend the confirmation email please <a href="%s">click here</a>.', Mage::helper('customer')->getEmailConfirmationUrl($customer->getEmail())));
-            //$this->_redirectSuccess(Mage::getUrl('*/*/index', array('_secure'=>true)));
             return;
           } else {
             $session->setCustomerAsLoggedIn($customer);
@@ -267,6 +302,57 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     Mage::log('error');
     //$this->_redirectError(Mage::getUrl('*/*/create', array('_secure' => true)));
   }
+
+    /**
+     * Login post action
+     */
+    public function loginPostAction()
+    {
+        if ($this->_getSession()->isLoggedIn()) {
+            $this->_redirect('*/*/');
+            return;
+        }
+        $session = $this->_getSession();
+
+        if ($this->getRequest()->isPost()) {
+            $login = Mage::helper('core')->jsonDecode($this->getRequest()->getPost('login'));
+            Mage::log($login);
+            if (!empty($login['username']) && !empty($login['password'])) {
+              $res = array();
+                try {
+                    $session->login($login['username'], $login['password']);
+                    if ($session->getCustomer()->getIsJustConfirmed()) {
+                        $this->_welcomeCustomer($session->getCustomer(), true);
+                    }
+                } catch (Mage_Core_Exception $e) {
+                    switch ($e->getCode()) {
+                        case Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED:
+                            $value = Mage::helper('customer')->getEmailConfirmationUrl($login['username']);
+                            $message = Mage::helper('customer')->__('This account is not confirmed. <a href="%s">Click here</a> to resend confirmation email.', $value);
+                            break;
+                        case Mage_Customer_Model_Customer::EXCEPTION_INVALID_EMAIL_OR_PASSWORD:
+                            $message = $e->getMessage();
+                            break;
+                        default:
+                            $message = $e->getMessage();
+                    }
+                    $res['result'] = 'error';
+                    $res['message'] = $message;
+                    $session->setUsername($login['username']);
+                } catch (Exception $e) {
+                    // Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
+                }
+            } else {
+                $res['result'] = 'error';
+                $res['message'] = $this->__('Login and password are required.');
+                $this->getResponse()->setHeader('Content-type', 'application/json');
+                $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
+            }
+        }
+        $res['result'] = 'success';
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
+    }
 
 }
 

@@ -11,6 +11,9 @@ class Gigya_Social_Model_Customer_Observer
     if (!empty($customer_data['gigyaUser'])) {
       Mage::helper('Gigya_Social')->notifyRegistration($customer_data['gigyaUser']['UID'], $customer_data['entity_id']);
     }
+    else {
+      Mage::helper('Gigya_Social')->notifyLogin($id, 'true');
+    }
   }
 
   public function notify_delete($observer)
@@ -32,6 +35,9 @@ class Gigya_Social_Model_Customer_Observer
         Mage::helper('Gigya_Social')->notifyRegistration($gigya_uid, $id);
       }
     }
+    else {
+      Mage::helper('Gigya_Social')->notifyLogin($id);
+    }
   }
 
   public function notify_logout($observer)
@@ -39,11 +45,5 @@ class Gigya_Social_Model_Customer_Observer
     $id = $observer->getEvent()->getCustomer()->getId();
     Mage::helper('Gigya_Social')->notifyLogout($id);
   }
-
-
-
-
-
-
 }
 
