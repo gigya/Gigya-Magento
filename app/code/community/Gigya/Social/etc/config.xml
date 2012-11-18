@@ -186,7 +186,7 @@
       <gigya_sharebar>
         <enable>0</enable>
         <containerID>gigyaSharebar</containerID>
-        <shareButtons>share, email, pinterest, twitter-tweet, google-plusone, facebook-like</shareButtons>
+        <shareButtons>share,facebook-like,twitter-tweet</shareButtons>
         <layout>horizontal</layout>
         <showCounts>right</showCounts>
         <imageBehavior>defualt</imageBehavior>

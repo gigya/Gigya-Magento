@@ -22,19 +22,28 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     {
         // a brute-force protection here would be nice
 
+        parent::preDispatch();
 
         if (!$this->getRequest()->isDispatched()) {
             return;
         }
 
         $action = $this->getRequest()->getActionName();
-        Mage::log($action);
         $openActions = array(
+            'create',
             'login',
             'loginPost',
-            'createPost',
+            'logoutsuccess',
+            'forgotpassword',
+            'forgotpasswordpost',
+            'resetpassword',
+            'resetpasswordpost',
+            'confirm',
+            'confirmation'
         );
-        if (!in_array($action, $openActions)) {
+        $pattern = '/^(' . implode('|', $openActions) . ')/i';
+
+        if (!preg_match($pattern, $action)) {
             if (!$this->_getSession()->authenticate($this)) {
                 $this->setFlag('', 'no-dispatch', true);
             }
@@ -59,8 +68,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         if ($post['isSiteUID'] && is_numeric($post['UID'])) {
           $cust_session = Mage::getSingleton('customer/session');
           $cust_session->setData('gigyaAction', 'login');
-          //Mage::log($cust_session);
           $cust_session->loginById($post['user']['UID']);
+          Mage::log($cust_session);
           $this->getResponse()->setHeader('Content-type', 'application/json');
           //$url = Mage::getUrl('customer/account');
           $url = Mage::getUrl('*/*/*', array('_current' => true));
@@ -115,7 +124,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                 );
                 Mage::getSingleton('customer/session')->setData('gigyaAction', 'linkAccount');
                 Mage::getSingleton('customer/session')->setData('gigyaUid', $post['UID']);
-
                 $this->getResponse()->setHeader('Content-type', 'application/json');
                 $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
               }
@@ -246,6 +254,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
 
         $validationResult = count($errors) == 0;
+        Mage::log($errors);
 
         if (true === $validationResult) {
           $customer->save();
@@ -263,8 +272,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             return;
           } else {
             $session->setCustomerAsLoggedIn($customer);
-            //$url = $this->_welcomeCustomer($customer);
-            $url = Mage::getUrl('customer/account');
+            $url = $this->_welcomeCustomer($customer);
+            //$url = Mage::getUrl('customer/account');
             //$this->_redirectSuccess($url);
             $res = array(
               'result' => 'newUser',
@@ -279,23 +288,34 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             foreach ($errors as $errorMessage) {
               $session->addError($errorMessage);
             }
+            $res['result'] = 'error';
+            $res['message'] = $error;
           } else {
-            $session->addError($this->__('Invalid customer data'));
+            $res['result'] = 'error';
+            $res['message'] = $this->__('Invalid customer data');
           }
         }
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
       } catch (Mage_Core_Exception $e) {
         $session->setCustomerFormData($this->getRequest()->getPost());
         if ($e->getCode() === Mage_Customer_Model_Customer::EXCEPTION_EMAIL_EXISTS) {
-          $url = Mage::getUrl('customer/account/forgotpassword');
-          $message = $this->__('There is already an account with this email address. If you are sure that it is your email address, <a href="%s">click here</a> to get your password and access your account.', $url);
-          $session->setEscapeMessages(false);
+          $message = $this->__('There is already an account with this email address.');
         } else {
           $message = $e->getMessage();
         }
-        $session->addError($message);
+        $res['result'] = 'error';
+        $res['message'] = $message;
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
       } catch (Exception $e) {
         $session->setCustomerFormData($this->getRequest()->getPost())
           ->addException($e, $this->__('Cannot save the customer.'));
+        $message = $this->__('Cannot save the customer.');
+        $res['result'] = 'error';
+        $res['message'] = $message;
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
       }
     }
 
@@ -309,20 +329,24 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     public function loginPostAction()
     {
         if ($this->_getSession()->isLoggedIn()) {
-            $this->_redirect('*/*/');
-            return;
+            $res['result'] = 'error';
+            $res['message'] = $this->__('User is logged in.');
+            $this->getResponse()->setHeader('Content-type', 'application/json');
+            $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
         }
         $session = $this->_getSession();
 
         if ($this->getRequest()->isPost()) {
             $login = Mage::helper('core')->jsonDecode($this->getRequest()->getPost('login'));
-            Mage::log($login);
             if (!empty($login['username']) && !empty($login['password'])) {
               $res = array();
                 try {
                     $session->login($login['username'], $login['password']);
                     if ($session->getCustomer()->getIsJustConfirmed()) {
                         $this->_welcomeCustomer($session->getCustomer(), true);
+                        $res['result'] = 'success';
+                        $this->getResponse()->setHeader('Content-type', 'application/json');
+                        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
                     }
                 } catch (Mage_Core_Exception $e) {
                     switch ($e->getCode()) {
@@ -338,7 +362,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                     }
                     $res['result'] = 'error';
                     $res['message'] = $message;
-                    $session->setUsername($login['username']);
+                    $this->getResponse()->setHeader('Content-type', 'application/json');
+                    $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
                 } catch (Exception $e) {
                     // Mage::logException($e); // PA DSS violation: this exception log can disclose customer password
                 }
@@ -349,9 +374,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                 $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
             }
         }
-        $res['result'] = 'success';
-        $this->getResponse()->setHeader('Content-type', 'application/json');
-        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
     }
 
 }

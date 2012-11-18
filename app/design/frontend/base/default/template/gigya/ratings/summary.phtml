@@ -5,13 +5,11 @@
    $parms['streamID'] = $product->getSku();
    $parms['context']['reviewUrl'] = $this->getReviewsUrl();
 ?>
-<?php if ($this->getReviewsCount()): ?>
 <?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_r_and_r/gigya_r_and_r_conf')) : ?>
       <script type="text/javascript">//<![CDATA[
         var gigyaSettings = gigyaSettings || {};
         gigyaSettings.ratings = gigyaSettings.ratings || [];
         gigyaSettings.ratings.push(<?php echo Mage::helper('core')->jsonEncode($parms) ?>);
-        console.log(gigyaSettings.ratings);
         //]]>
       </script>
       <?php endif ?>
@@ -27,6 +25,3 @@
             <a href="<?php echo $this->getReviewsUrl() ?>#review-form"><?php echo $this->__('Add Your Review') ?></a>
         </p>
     </div>
-<?php elseif ($this->getDisplayIfEmpty()): ?>
-    <p class="no-rating"><a href="<?php echo $this->getReviewsUrl() ?>#review-form"><?php echo $this->__('Be the first to review this product') ?></a></p>
-<?php endif; ?>

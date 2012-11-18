@@ -54,7 +54,7 @@
             <providers translate="label">
               <label>Providers</label>
               <frontend_type>text</frontend_type>
-              <comment><![CDATA[Comma separated list of networks that would be included. For example: "Facebook, Twitter, Yahoo".
+              <comment><![CDATA[Comma separated list of networks that would be included. For example: "Facebook, Twitter, Yahoo". <br/>
           * means all networks. See list of available <a href="http://developers.gigya.com/020_Client_API/020_Methods/Socialize.showLoginUI" target="_blank">providers.</a>]]></comment>
               <sort_order>13</sort_order>
               <show_in_default>1</show_in_default>
@@ -435,6 +435,7 @@
             <reactions translate="label">
               <label>Reactions</label>
               <frontend_type>textarea</frontend_type>
+              <cols>20</cols>
               <sort_order>12</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>

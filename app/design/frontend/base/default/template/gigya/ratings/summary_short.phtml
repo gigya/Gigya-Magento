@@ -6,12 +6,10 @@
    $parms['context']['reviewUrl'] = $this->getReviewsUrl();
    $parms['containerID'] = $parms['containerID'] . '-' . $product->getId();
 ?>
-<?php if ($this->getReviewsCount()): ?>
       <script type="text/javascript">//<![CDATA[
         var gigyaSettings = gigyaSettings || {};
         gigyaSettings.ratings = gigyaSettings.ratings || [];
         gigyaSettings.ratings.push(<?php echo Mage::helper('core')->jsonEncode($parms) ?>);
-        console.log(gigyaSettings.ratings);
         //]]>
       </script>
     <div id="<?php echo $parms['containerID'] ?>" class="ratings">
@@ -22,6 +20,3 @@
         <?php endif;?>
         <span class="amount"><a href="#" onclick="var t = opener ? opener.window : window; t.location.href='<?php echo $this->getReviewsUrl() ?>'; return false;"><?php echo $this->__('%d Review(s)', $this->getReviewsCount()) ?></a></span>
     </div>
-<?php elseif ($this->getDisplayIfEmpty()): ?>
-    <p class="no-rating"><a href="<?php echo $this->getReviewsUrl() ?>#review-form"><?php echo $this->__('Be the first to review this product') ?></a></p>
-<?php endif; ?>

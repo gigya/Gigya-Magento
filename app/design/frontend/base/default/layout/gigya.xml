@@ -16,9 +16,9 @@
         <action method="setData">
           <name>layout</name>
           <value>
-            <Achievements>divAchievements</Achievements>
-            <ChallengeStatus>divChallenge</ChallengeStatus>
             <UserStatus>divUserStatus</UserStatus>
+            <ChallengeStatus>divChallenge</ChallengeStatus>
+            <Achievements>divAchievements</Achievements>
             <Leaderboard>divLeaderboard</Leaderboard>
           </value>
         </action>

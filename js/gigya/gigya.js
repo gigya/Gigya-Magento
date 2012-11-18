@@ -312,7 +312,6 @@ document.observe("dom:loaded", function() {
       switch (plugin.key)
       {
       case 'login':
-        plugin.value.onLoad = gigyaFunctions.loginLoad;
         gigya.socialize.showLoginUI(plugin.value);
         break;
       case 'linkAccount':
