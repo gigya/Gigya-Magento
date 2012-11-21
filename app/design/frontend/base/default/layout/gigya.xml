@@ -25,9 +25,14 @@
       </block>
     </reference>
   </default>
+  <cms_index_index>
+    <reference name="right">
+      <block type="core/template" name="gigya.create.account" before="-" template="gigya/login/social_login.phtml"/>
+    </reference>
+  </cms_index_index>
   <customer_account_login>
-    <reference name="form.additional.info">
-      <block name="gigya.login" type="core/template" after="-" template="gigya/login/social_login.phtml"/>
+    <reference name="content">
+      <block name="gigya.login" type="core/template" after="-" template="gigya/login/social_login_login_page.phtml"/>
     </reference>
   </customer_account_login>
   <customer_account_index>

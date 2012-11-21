@@ -1,0 +1,15 @@
+<?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_login/gigya_login_conf')) : ?>
+<script type="text/javascript">//<![CDATA[
+  var gigyaSettings = gigyaSettings || {};
+  gigyaSettings.login = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_login_conf')  ?>
+  //]]>
+</script>
+<div class="col-1 account-login">
+<div class="content">
+  <h2><?php echo $this->__('Use social network') ?></h2>
+  <p><?php echo $this->__('Use your social network credentials to login or creat a new user.')?></p>
+  <div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf') ?>" class="gigya-login"></div>
+</div>
+  <div class="buttons-set"></div>
+</div>
+<?php endif ?>
