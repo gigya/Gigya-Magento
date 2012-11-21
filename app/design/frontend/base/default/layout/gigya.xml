@@ -40,6 +40,11 @@
       <block type="core/template" name="gigya.create.account" after="-" template="gigya/login/social_login.phtml"/>
     </reference>
   </customer_account_create>
+  <checkout_onepage_index>
+    <reference name="checkout.onepage.login">
+        <block name="gigya.login" type="core/template" as="form.additional.info" after="-" template="gigya/login/social_login.phtml"/>
+  </reference>
+  </checkout_onepage_index>
   <catalog_product_view>
     <reference name="product.info.extrahint">
       <block type="catalog/product_view" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>

@@ -50,7 +50,7 @@
           </gigya_share_action>
         </observers>
       </checkout_cart_product_add_after>
-      <sales_order_save_commit_after>
+      <checkout_onepage_controller_success_action>
         <observers>
           <gigya_share_action>
             <type>singleton</type>
@@ -58,7 +58,7 @@
             <method>addOrderShareUi</method>
           </gigya_share_action>
         </observers>
-      </sales_order_save_commit_after>
+      </checkout_onepage_controller_success_action>
     </events>
     <routers>
       <gigyalogin>
@@ -159,7 +159,7 @@
   <default>
     <gigya_global>
       <gigya_global_conf>
-        <enable>0</enable>
+        <enable>1</enable>
         <providers>*</providers>
         <laguages>en</laguages>
         <google_sa>0</google_sa>
@@ -167,7 +167,7 @@
     </gigya_global>
     <gigya_login>
       <gigya_login_conf>
-        <enable>0</enable>
+        <enable>1</enable>
         <buttonStyle>standart</buttonStyle>
         <showTermsLink>0</showTermsLink>
         <loginBehavior>loginExistingUser</loginBehavior>
@@ -184,7 +184,7 @@
     </gigya_login>
     <gigya_share>
       <gigya_sharebar>
-        <enable>0</enable>
+        <enable>1</enable>
         <containerID>gigyaSharebar</containerID>
         <shareButtons>share,facebook-like,twitter-tweet</shareButtons>
         <layout>horizontal</layout>
@@ -192,7 +192,7 @@
         <imageBehavior>defualt</imageBehavior>
       </gigya_sharebar>
       <gigya_share_action>
-        <enable>0</enable>
+        <enable>1</enable>
         <showAlwaysShare>hide</showAlwaysShare>
         <showNeverShare>1</showNeverShare>
         <scope>external</scope>
@@ -200,7 +200,7 @@
     </gigya_share>
     <gigya_reactions>
       <gigya_reactions_conf>
-        <enable>0</enable>
+        <enable>1</enable>
         <containerID>gigyaReactions</containerID>
         <barID>reactions-bar</barID>
         <layout>horizontal</layout>
@@ -217,7 +217,7 @@
     </gigya_coments>
     <gigya_activityfeed>
       <gigya_activityfeed_conf>
-        <enable>0</enable>
+        <enable>1</enable>
         <containerID>gigyaActivityfeed</containerID>
         <tabOrder>everyone,friends,me</tabOrder>
         <privacy>private</privacy>
@@ -228,7 +228,7 @@
     </gigya_activityfeed>
     <gigya_gamification>
       <gigya_gamification_conf>
-        <enable>0</enable>
+        <enable>1</enable>
         <notifications>0</notifications>
         <period>7days</period>
         <totalCount>12</totalCount>
@@ -236,7 +236,7 @@
     </gigya_gamification>
     <gigya_r_and_r>
       <gigya_r_and_r_conf>
-        <enable>0</enable>
+        <enable>1</enable>
         <containerID>gigyaRatings</containerID>
       </gigya_r_and_r_conf>
     </gigya_r_and_r>

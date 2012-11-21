@@ -110,16 +110,16 @@ gigyaFunctions.shareBar = function (settings) {
   var mediaObj = {type: 'image', href: settings.ua.linkBack};
   switch (settings.imageBehavior)
   {
-  case 'defualt':
+  case 'default':
     if ($$('meta[property=og:image]').size() > 0) {
       mediaObj.src = $$('meta[property=og:image]').readAttribute('content');
     }
     else {
-      mediaObj.src = $$('div.main-container img')[0].readAttribute('src');
+      mediaObj.src = settings.ua.imageUrl;
     }
     break;
-  case 'first':
-    mediaObj.src = $$('div.main-container img')[0].readAttribute('src');
+  case 'product':
+    mediaObj.src = settings.ua.imageUrl;
     break;
   case 'url':
     if (typeof settings.imageUrl !== 'undefined') {
@@ -149,7 +149,7 @@ gigyaFunctions.shareAction = function (settings) {
   ua.setLinkBack(settings.ua.linkBack);
   ua.setTitle(settings.ua.title);
   ua.addActionLink(settings.ua.title, settings.ua.linkBack);
-  ua.setDescription(settings.description);
+  ua.setDescription(settings.ua.description);
   ua.addMediaItem(mediaObj);
   delete settings.ua;
   delete settings.enable;
@@ -162,16 +162,16 @@ gigyaFunctions.reactions = function (settings) {
   var mediaObj = {type: 'image', href: settings.ua.linkBack};
   switch (settings.imageBehavior)
   {
-  case 'defualt':
+  case 'default':
     if ($$('meta[property=og:image]').size() > 0) {
       mediaObj.src = $$('meta[property=og:image]').readAttribute('content');
     }
     else {
-      mediaObj.src = $$('div.main-container img')[0].readAttribute('src');
+      mediaObj.src = settings.ua.imageUrl;
     }
     break;
-  case 'first':
-    mediaObj.src = $$('div.main-container img')[0].readAttribute('src');
+  case 'product':
+    mediaObj.src = settings.ua.imageUrl;
     break;
   case 'url':
     if (typeof settings.imageUrl !== 'undefined') {
