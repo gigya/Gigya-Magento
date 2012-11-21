@@ -14,23 +14,15 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head
     $jsParams = array(
       'enabledProviders' => Mage::getStoreConfig('gigya_global/gigya_global_conf/providers'),
       'lang' => Mage::getStoreConfig('gigya_global/gigya_global_conf/laguages'),
+      'sessionExpiration' => (int)Mage::getStoreConfig('web/cookie/cookie_lifetime'),
     );
     $this->_data['items']['js/gigya'] = array(
       'type' => 'external_js',
       'name' => $name,
       'if' => '',
       'cond' => '',
-      'params' => json_encode($jsParams),
+      'params' => Mage::helper('core')->jsonEncode($jsParams),
     );
-    /*
-     *$this->_data['items']['js/jQuery'] = array(
-     *  'type' => 'external_js',
-     *  'name' => '//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js',
-     *  'if' => '',
-     *  'cond' => '',
-     *  'params' => '',
-     *);
-     */
   }
   protected function _separateOtherHtmlHeadElements(&$lines, $itemIf, $itemType, $itemParams, $itemName, $itemThe)
     {
