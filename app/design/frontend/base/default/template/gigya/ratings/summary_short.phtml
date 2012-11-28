@@ -12,7 +12,7 @@
         gigyaSettings.ratings.push(<?php echo Mage::helper('core')->jsonEncode($parms) ?>);
         //]]>
       </script>
-    <div id="<?php echo $parms['containerID'] ?>" class="ratings">
+    <div id="<?php echo $parms['containerID'] ?>" class="ratings-short">
         <?php if ($this->getRatingSummary()):?>
             <div class="rating-box">
                 <div class="rating" style="width:<?php echo $this->getRatingSummary() ?>%"></div>

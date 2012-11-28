@@ -24,6 +24,7 @@ gigyaFunctions.login = function (response) {
             gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline)
             gigyaFunctions.hideLogin(trans.responseJSON.id);
             $(trans.responseJSON.id).update(trans.responseJSON.html);
+            $(trans.responseJSON.id).style.height = '';
             Form.Element.setValue('gigya-mini-login', gigyaCache.uInfo.user.email);
             break;
           }
@@ -44,10 +45,9 @@ gigyaFunctions.hideLogin = function (id) {
 };
 
 gigyaFunctions.updateHeadline = function (id, text) {
-  var headline = $(id).up(0).previous('h2');
+  var headline = $(id).previous(0);
   if (typeof headline !== 'undefined') {
-    headline.next('p').remove();
-    headline.update(text);
+    headline.remove();
   }
 
 };

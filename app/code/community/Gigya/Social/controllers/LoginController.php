@@ -333,6 +333,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             $res['message'] = $this->__('User is logged in.');
             $this->getResponse()->setHeader('Content-type', 'application/json');
             $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
+            return;
         }
         $session = $this->_getSession();
 
@@ -344,10 +345,10 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                     $session->login($login['username'], $login['password']);
                     if ($session->getCustomer()->getIsJustConfirmed()) {
                         $this->_welcomeCustomer($session->getCustomer(), true);
-                        $res['result'] = 'success';
-                        $this->getResponse()->setHeader('Content-type', 'application/json');
-                        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
                     }
+                    $res['result'] = 'success';
+                    $this->getResponse()->setHeader('Content-type', 'application/json');
+                    $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
                 } catch (Mage_Core_Exception $e) {
                     switch ($e->getCode()) {
                         case Mage_Customer_Model_Customer::EXCEPTION_EMAIL_NOT_CONFIRMED:
@@ -374,6 +375,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                 $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
             }
         }
+          $this->getResponse()->setHeader('Content-type', 'application/json');
+          $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
     }
 
 }

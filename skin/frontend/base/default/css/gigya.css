@@ -1,0 +1,23 @@
+.ratings-short span.gig-rating-stars {
+  margin-right: 41px;
+  display: inline-block;
+}
+.ratings-short div.gig-rating-star {
+  width: 13px;
+}
+
+.gig-rating a:link.gig-rating-readReviewsLink,
+.ratings-full a:link.gig-rating-readReviewsLink {
+  margin-right: 0;
+}
+
+.gig-comments-container div.gig-comments-comment {
+  background-color: transparent;
+}
+div.ratings-short .gig-rating div.gig-rating-star-full {
+  background-image: url('../images/gigya/RateIcon_13_pressed.png');
+}
+div.ratings-short .gig-rating div.gig-rating-star-empty {
+  background-image: url('../images/gigya/RateIcon_13.png');
+}
+

@@ -223,6 +223,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
             </height>
+            <showTermsLink translate="label">
+              <label>Show terms link</label>
+              <frontend_type>select</frontend_type>
+              <source_model>adminhtml/system_config_source_yesno</source_model>
+              <sort_order>14</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>1</show_in_store>
+            </showTermsLink>
             <advancedConfig translate="label">
               <label>Advanced configuration</label>
               <frontend_type>Textarea</frontend_type>
@@ -614,7 +623,7 @@
               <show_in_store>0</show_in_store>
             </tabOrder>
             <privacy translate="label">
-              <label>label</label>
+              <label>Privacy</label>
               <frontend_type>select</frontend_type>
               <source_model>Gigya_Social_Model_config_source_privacy</source_model>
               <sort_order>14</sort_order>

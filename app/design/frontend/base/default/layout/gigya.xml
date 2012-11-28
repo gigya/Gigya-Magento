@@ -5,6 +5,9 @@
       <action method="addJs">
         <file>gigya/gigya.js</file>
       </action>
+      <action method="addCss">
+        <stylesheet>css/gigya.css</stylesheet>
+      </action>
     </reference>
     <reference name="before_body_end">
       <block type="Gigya_Social_Block_Gamification_notifications" name="gigya.gm.notifications"/>
@@ -25,14 +28,17 @@
       </block>
     </reference>
   </default>
+  <customer_logged_in>
+    <remove name="gigya.hp.login"/>
+  </customer_logged_in>
   <cms_index_index>
     <reference name="right">
-      <block type="core/template" name="gigya.create.account" before="-" template="gigya/login/social_login.phtml"/>
+      <block type="core/template" name="gigya.hp.login" before="-" template="gigya/login/social_login.phtml"/>
     </reference>
   </cms_index_index>
   <customer_account_login>
     <reference name="content">
-      <block name="gigya.login" type="core/template" after="-" template="gigya/login/social_login_login_page.phtml"/>
+      <block name="gigya.login" type="core/template" before="-" template="gigya/login/social_login_login_page.phtml"/>
     </reference>
   </customer_account_login>
   <customer_account_index>
@@ -47,9 +53,18 @@
   </customer_account_create>
   <checkout_onepage_index>
     <reference name="checkout.onepage.login">
-        <block name="gigya.login" type="core/template" as="form.additional.info" after="-" template="gigya/login/social_login.phtml"/>
-  </reference>
+      <block name="gigya.login" type="core/template" as="form.additional.info" after="-" template="gigya/login/social_login.phtml"/>
+    </reference>
   </checkout_onepage_index>
+  <review_product_list>
+    <reference name="product.info">
+      <block type="catalog/product_view" as="extrahint" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>
+      <block type="catalog/product_view" as="other"  name="gigya.reactions" after="-" template="gigya/share/reactions.phtml"/>
+    </reference>
+    <reference name="product.info.simple.extra">
+      <block type="catalog/product_view" as="product_type_data" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>
+    </reference>
+  </review_product_list>
   <catalog_product_view>
     <reference name="product.info.extrahint">
       <block type="catalog/product_view" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>
@@ -58,31 +73,56 @@
     <reference name="content">
       <block type="catalog/product_view" name="gigya.comments" after="-" template="gigya/comments.phtml"/>
       <reference name="product.info">
-        <action method="addReviewSummaryTemplate"><type>default</type><template>gigya/ratings/summary.phtml</template></action>
-        <action method="addReviewSummaryTemplate"><type>short</type><template>gigya/ratings/summary_short.phtml</template></action>
+        <action method="addReviewSummaryTemplate">
+          <type>default</type>
+          <template>gigya/ratings/summary.phtml</template>
+        </action>
+        <action method="addReviewSummaryTemplate">
+          <type>short</type>
+          <template>gigya/ratings/summary_short.phtml</template>
+        </action>
       </reference>
       <reference name="product.info.upsell">
-        <action method="addReviewSummaryTemplate"><type>default</type><template>gigya/ratings/summary_short.phtml</template></action>
+        <action method="addReviewSummaryTemplate">
+          <type>default</type>
+          <template>gigya/ratings/summary_short.phtml</template>
+        </action>
       </reference>
     </reference>
   </catalog_product_view>
-  <catalog_category_layered>
+  <catalog_category_default>
     <reference name="content">
-        <block name="product_list">
-        <action method="addReviewSummaryTemplate"><type>short</type><template>gigya/ratings/summary_short.phtml</template></action>
+      <block name="product_list">
+        <action method="addReviewSummaryTemplate">
+          <type>short</type>
+          <template>gigya/ratings/summary_short.phtml</template>
+        </action>
       </block>
     </reference>
-</catalog_category_layered>
+  </catalog_category_default>
+  <catalog_category_layered>
+    <reference name="content">
+      <block name="product_list">
+        <action method="addReviewSummaryTemplate">
+          <type>short</type>
+          <template>gigya/ratings/summary_short.phtml</template>
+        </action>
+      </block>
+    </reference>
+  </catalog_category_layered>
   <review_product_view>
     <reference name="content">
       <reference name="product.info">
-        <action method="addReviewSummaryTemplate"><type>default</type><template>gigya/ratings/summary.phtml</template></action>
+        <action method="addReviewSummaryTemplate">
+          <type>default</type>
+          <template>gigya/ratings/summary.phtml</template>
+        </action>
       </reference>
     </reference>
   </review_product_view>
   <review_product_list>
     <reference name="content">
-      <block type="Gigya_Social_Block_reviews"  name="gigya.ratings" after="-"/>
+      <block type="Gigya_Social_Block_reviews" name="gigya.ratings" after="-"/>
     </reference>
   </review_product_list>
 </layout>

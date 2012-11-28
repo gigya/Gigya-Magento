@@ -180,6 +180,7 @@
         <containerID>gigyaLinkAccount</containerID>
         <width>210</width>
         <height>110</height>
+        <showTermsLink>0</showTermsLink>
       </gigya_link_accounts>
     </gigya_login>
     <gigya_share>
