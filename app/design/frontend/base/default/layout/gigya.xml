@@ -46,11 +46,6 @@
       <block type="core/template" name="gigya.link.accounts" after="-" template="gigya/login/link_accounts.phtml"/>
     </reference>
   </customer_account_index>
-  <customer_account_create>
-    <reference name="form.additional.info">
-      <block type="core/template" name="gigya.create.account" after="-" template="gigya/login/social_login.phtml"/>
-    </reference>
-  </customer_account_create>
   <checkout_onepage_index>
     <reference name="checkout.onepage.login">
       <block name="gigya.login" type="core/template" as="form.additional.info" after="-" template="gigya/login/social_login.phtml"/>
