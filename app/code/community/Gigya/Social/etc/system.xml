@@ -378,7 +378,7 @@
               <label>Scope for publishing to Activity Feed</label>
               <frontend_type>select</frontend_type>
               <source_model>Gigya_Social_Model_config_source_scope</source_model>
-              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both".']]></comment>
+              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"']]></comment>
               <sort_order>13</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
@@ -493,7 +493,7 @@
               <label>Scope for publishing to Activity Feed</label>
               <frontend_type>select</frontend_type>
               <source_model>Gigya_Social_Model_config_source_scope</source_model>
-              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both".']]></comment>
+              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"']]></comment>
               <sort_order>17</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
@@ -560,7 +560,7 @@
               <label>Scope for publishing to Activity Feed</label>
               <frontend_type>select</frontend_type>
               <source_model>Gigya_Social_Model_config_source_scope</source_model>
-              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both".']]></comment>
+              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"']]></comment>
               <sort_order>13</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
@@ -783,7 +783,7 @@
               <label>Scope for publishing to Activity Feed</label>
               <frontend_type>select</frontend_type>
               <source_model>Gigya_Social_Model_config_source_scope</source_model>
-              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both".']]></comment>
+              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"']]></comment>
               <sort_order>13</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
