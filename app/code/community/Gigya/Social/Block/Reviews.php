@@ -9,7 +9,7 @@ class Gigya_Social_Block_Reviews extends Mage_Catalog_Block_Product_View
   {
     if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_r_and_r/gigya_r_and_r_conf')) {
       $product = $this->getProduct();
-      $parms = Mage::helper('Gigya_Social')->getPluginConfig('gigya_r_and_r/gigya_r_and_r_conf', 'php');
+      $parms = Mage::helper('Gigya_Social')->getPluginConfig('gigya_r_and_r/gigya_r_and_r_conf', 'php', TRUE);
       unset($parms['enable']);
       $parms['streamID'] = $product->getSku();
       $js = '<script type="text/javascript">//<![CDATA[

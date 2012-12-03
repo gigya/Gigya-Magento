@@ -271,12 +271,18 @@ gigyaFunctions.postReview = function (eventObj) {
 
 };
 gigyaFunctions.RnR = function (settings) {
-  $$('table.ratings-table')[0].writeAttribute('id', settings.containerID);
+  if ($$('table.ratings-table').length > 0) {
+  $$('table.ratings-table')[0].update().writeAttribute('id', settings.containerID);
+  }
+  else {
+    $$('p.no-rating')[0].update().writeAttribute('id', settings.containerID);
+  }
   settings.linkedCommentsUI = 'customer-reviews';
   var reviews = {
     containerID: 'customer-reviews',
     categoryID: settings.categoryID,
     streamID: settings.streamID,
+    scope: settings.scope,
     onCommentSubmitted: gigyaFunctions.postReview,
   };
   gigya.socialize.showRatingUI(settings);

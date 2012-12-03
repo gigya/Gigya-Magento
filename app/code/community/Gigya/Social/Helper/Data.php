@@ -29,16 +29,22 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     }
   }
 
-  public function notifyLogin($siteUid, $newUser = 'false')
+  public function notifyLogin($siteUid, $newUser = 'false', $userInfo = array())
   {
     $params = array(
       'siteUID' => $siteUid,
       'newUser' => $newUser,
     );
+    if (!empty($userInfo)) {
+      $params['userInfo'] = Mage::helper('core')->jsonEncode($userInfo);
+    }
     try {
       $res = $this->_gigya_api('notifyLogin', $params);
       if (is_object($res) && $res->getErrorCode() === 0) {
         setcookie($res->getString("cookieName"), $res->getString("cookieValue"), 0, $res->getString("cookiePath"), $res->getString("cookieDomain"));
+      }
+      else {
+        Mage::logException($res);
       }
     }
     catch (Exception $e) {
@@ -97,6 +103,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     $secretkey = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
     $request = new GSRequest($apiKey, $secretkey, 'socialize.' . $method);
     $params['format'] = 'json';
+    Mage::log($params);
     foreach ($params as $param => $val) {
       $request->setParam($param, $val);
     }

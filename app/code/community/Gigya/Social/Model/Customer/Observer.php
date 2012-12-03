@@ -36,7 +36,13 @@ class Gigya_Social_Model_Customer_Observer
       }
     }
     else {
-      Mage::helper('Gigya_Social')->notifyLogin($id);
+      $magInfo = $observer->getEvent()->getCustomer()->getData();
+      $userInfo = array(
+        'firstName' => $magInfo['firstname'],
+        'lastName' =>  $magInfo['lastname'],
+        'email' => $magInfo['email'],
+      );
+      Mage::helper('Gigya_Social')->notifyLogin($id, 'false', $userInfo);
     }
   }
 
