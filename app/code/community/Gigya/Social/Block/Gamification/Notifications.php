@@ -7,7 +7,7 @@ class Gigya_Social_Block_Gamification_notifications extends Mage_Core_Block_Text
 {
   protected function _toHtml()
   {
-    if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_gamification/gigya_gamification_conf')) {
+    if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_gamification/gigya_gamification_conf') && $this->helper('customer')->isLoggedIn()) {
       if (Mage::getStoreConfig('gigya_gamification/gigya_gamification_conf/notifications')) {
         $js = 'var gigyaSettings = gigyaSettings || {}; gigyaSettings.gm = gigyaSettings.gm || {}; gigyaSettings.gm.notifications = true;';
         $this->setContents($js);
