@@ -196,7 +196,7 @@
         <enable>1</enable>
         <showAlwaysShare>hide</showAlwaysShare>
         <showNeverShare>1</showNeverShare>
-        <scope>external</scope>
+        <scope>both</scope>
       </gigya_share_action>
     </gigya_share>
     <gigya_reactions>
@@ -207,14 +207,14 @@
         <layout>horizontal</layout>
         <showCounts>right</showCounts>
         <imageBehavior>defualt</imageBehavior>
-        <scope>external</scope>
+        <scope>both</scope>
       </gigya_reactions_conf>
     </gigya_reactions>
     <gigya_coments>
       <gigya_comments_conf>
         <enable>0</enable>
         <containerID>gigyaComments</containerID>
-        <scope>external</scope>
+        <scope>both</scope>
       </gigya_comments_conf>
     </gigya_coments>
     <gigya_activityfeed>
@@ -240,7 +240,7 @@
       <gigya_r_and_r_conf>
         <enable>1</enable>
         <containerID>gigyaRatings</containerID>
-        <scope>external</scope>
+        <scope>both</scope>
       </gigya_r_and_r_conf>
     </gigya_r_and_r>
   </default>

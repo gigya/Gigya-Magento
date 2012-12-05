@@ -272,18 +272,27 @@ gigyaFunctions.postReview = function (eventObj) {
 };
 gigyaFunctions.RnR = function (settings) {
   if ($$('table.ratings-table').length > 0) {
-  $$('table.ratings-table')[0].update().writeAttribute('id', settings.containerID);
+    $$('table.ratings-table')[0].update().writeAttribute('id', settings.containerID).next('a').update();
   }
   else {
     $$('p.no-rating')[0].update().writeAttribute('id', settings.containerID);
   }
   settings.linkedCommentsUI = 'customer-reviews';
+  var mediaObj = {type: 'image', href: settings.ua.linkBack, src: settings.ua.imageUrl},
+  ua = new gigya.socialize.UserAction();
+  ua.setLinkBack(settings.ua.linkBack);
+  ua.setTitle(settings.ua.title);
+  ua.addActionLink(settings.ua.title, settings.ua.linkBack);
+  ua.setDescription(settings.description);
+  ua.addMediaItem(mediaObj);
+  delete settings.ua;
   var reviews = {
     containerID: 'customer-reviews',
     categoryID: settings.categoryID,
     streamID: settings.streamID,
     scope: settings.scope,
     onCommentSubmitted: gigyaFunctions.postReview,
+    userAction: ua
   };
   gigya.socialize.showRatingUI(settings);
   gigya.socialize.showCommentsUI(reviews);

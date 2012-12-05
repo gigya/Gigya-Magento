@@ -6,7 +6,7 @@
   $product = $this->getProduct();
   $ua = Mage::helper('core')->jsonEncode(array(
     'title'       => $product->getName(),
-    'description' => $product->getShortDescription(),
+    'description' => $this->stripTags($product->getShortDescription()),
     'linkBack'    => $product->getProductUrl(),
     'imageUrl'    => $product->getImageUrl()
   ));

@@ -15,6 +15,16 @@
     </reference>
     <reference name="right">
       <block name="gigya.activity.feed" type="core/template" after="-" template="gigya/activityfeed.phtml"/>
+    </reference>
+  </default>
+  <customer_logged_in>
+    <remove name="gigya.hp.login"/>
+  </customer_logged_in>
+  <cms_index_index>
+    <reference name="right">
+      <block type="core/template" name="gigya.hp.login" before="-" template="gigya/login/social_login.phtml"/>
+    </reference>
+    <reference name="content">
       <block type="Gigya_Social_Block_Gamification_plugins" after="-" name="left.gigya.gm.blocks" template="gigya/gamification.phtml">
         <action method="setData">
           <name>layout</name>
@@ -26,14 +36,6 @@
           </value>
         </action>
       </block>
-    </reference>
-  </default>
-  <customer_logged_in>
-    <remove name="gigya.hp.login"/>
-  </customer_logged_in>
-  <cms_index_index>
-    <reference name="right">
-      <block type="core/template" name="gigya.hp.login" before="-" template="gigya/login/social_login.phtml"/>
     </reference>
   </cms_index_index>
   <customer_account_login>

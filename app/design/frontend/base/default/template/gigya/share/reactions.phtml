@@ -3,10 +3,12 @@
  ?>
  <?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_reactions/gigya_reactions_conf')) : ?>
  <?php
-  $product = $this->getProduct();
+ $product = $this->getProduct();
+ $desc = ($product->getShortDescription() !== NULL) ? $product->getShortDescription() : $product->getDescription();
+
   $ua = Mage::helper('core')->jsonEncode(array(
     'title'       => $product->getName(),
-    'description' => $product->getShortDescription(),
+    'description' => $this->stripTags($desc),
     'linkBack'    => $product->getProductUrl(),
     'imageUrl'    => $product->getImageUrl()
   ));
