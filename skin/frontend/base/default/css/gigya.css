@@ -27,3 +27,6 @@ div.ratings-short .gig-rating div.gig-rating-star-empty {
 .gigya-login .content {
   min-height: 50px;
 }
+.gigya-gm {
+  float: right;
+}
