@@ -432,15 +432,6 @@
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
             </containerID>
-            <barID translate="label">
-              <label>Gigya reactions Bar id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[ID for reaactions Bar]]></comment>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </barID>
             <reactions translate="label">
               <label>Reactions</label>
               <frontend_type>textarea</frontend_type>

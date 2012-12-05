@@ -203,7 +203,6 @@
       <gigya_reactions_conf>
         <enable>1</enable>
         <containerID>gigyaReactions</containerID>
-        <barID>reactions-bar</barID>
         <layout>horizontal</layout>
         <showCounts>right</showCounts>
         <imageBehavior>defualt</imageBehavior>
