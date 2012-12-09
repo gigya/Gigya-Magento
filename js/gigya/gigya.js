@@ -18,6 +18,7 @@ gigyaFunctions.login = function (response) {
           case 'noEmail':
             gigyaFunctions.hideLogin(trans.responseJSON.id);
             gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline)
+            $(trans.responseJSON.id).style.height = '';
             $(trans.responseJSON.id).update(trans.responseJSON.html);
             break;
           case 'emailExsists':
