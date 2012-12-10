@@ -14,7 +14,8 @@ class Gigya_Social_Block_Reviews extends Mage_Catalog_Block_Product_View
         'title'       => $product->getName(),
         'description' => $this->stripTags($desc),
         'linkBack'    => $product->getProductUrl(),
-        'imageUrl'    => $product->getImageUrl()
+        'imageUrl'    => $product->getImageUrl(),
+        'action'      => $this->__('Reviewed'),
       );
       $parms = Mage::helper('Gigya_Social')->getPluginConfig('gigya_r_and_r/gigya_r_and_r_conf', 'php', TRUE);
       unset($parms['enable']);

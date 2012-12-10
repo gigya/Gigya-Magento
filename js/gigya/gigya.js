@@ -107,7 +107,7 @@ gigyaFunctions.emailSubmit = function () {
   }
 };
 
-gigyaFunctions.shareBar = function (settings) {
+gigyaFunctions.createUserAction = function (settings) {
   var mediaObj = {type: 'image', href: settings.ua.linkBack};
   switch (settings.imageBehavior)
   {
@@ -128,64 +128,39 @@ gigyaFunctions.shareBar = function (settings) {
     }
     break;
   }
-  var ua = new gigya.socialize.UserAction();
-  ua.setLinkBack(settings.ua.linkBack);
-  ua.setTitle(settings.ua.title);
-  ua.addActionLink(settings.ua.title, settings.ua.linkBack);
-  ua.setDescription(settings.description);
-  ua.addMediaItem(mediaObj);
-  delete settings.ua;
-  delete settings.imageBehavior;
-  if (typeof settings.imageUrl !== 'undefined') {
-    delete settings.imageUrl;
-  }
-  settings.userAction = ua;
-  gigya.socialize.showShareBarUI(settings);
-};
-
-gigyaFunctions.shareAction = function (settings) {
-  var mediaObj = {type: 'image', href: settings.ua.linkBack};
-  mediaObj.src = settings.ua.imageUrl;
   var ua = new gigya.socialize.UserAction();
   ua.setLinkBack(settings.ua.linkBack);
   ua.setTitle(settings.ua.title);
   ua.addActionLink(settings.ua.title, settings.ua.linkBack);
   ua.setDescription(settings.ua.description);
   ua.addMediaItem(mediaObj);
+  if (typeof settings.ua.action !== 'undefined') {
+    ua.setActionName(settings.ua.action);
+  }
+  return ua;
+};
+
+gigyaFunctions.shareBar = function (settings) {
+  settings.userAction = gigyaFunctions.createUserAction(settings);
+  delete settings.ua;
+  delete settings.imageBehavior;
+  if (typeof settings.imageUrl !== 'undefined') {
+    delete settings.imageUrl;
+  }
+  gigya.socialize.showShareBarUI(settings);
+};
+
+gigyaFunctions.shareAction = function (settings) {
+  settings.imageBehavior = 'product';
+  settings.userAction = gigyaFunctions.createUserAction(settings);
   delete settings.ua;
   delete settings.enable;
-  settings.userAction = ua;
   gigya.socialize.showShareUI(settings);
 };
 
 
 gigyaFunctions.reactions = function (settings) {
-  var mediaObj = {type: 'image', href: settings.ua.linkBack};
-  switch (settings.imageBehavior)
-  {
-  case 'default':
-    if ($$('meta[property=og:image]').size() > 0) {
-      mediaObj.src = $$('meta[property=og:image]').readAttribute('content');
-    }
-    else {
-      mediaObj.src = settings.ua.imageUrl;
-    }
-    break;
-  case 'product':
-    mediaObj.src = settings.ua.imageUrl;
-    break;
-  case 'url':
-    if (typeof settings.imageUrl !== 'undefined') {
-      mediaObj.src = settings.imageUrl;
-    }
-    break;
-  }
-  var ua = new gigya.socialize.UserAction();
-  ua.setLinkBack(settings.ua.linkBack);
-  ua.setTitle(settings.ua.title);
-  ua.addActionLink(settings.ua.title, settings.ua.linkBack);
-  ua.setDescription(settings.description);
-  ua.addMediaItem(mediaObj);
+  settings.userAction = gigyaFunctions.createUserAction(settings);
   delete settings.ua;
   delete settings.imageBehavior;
   if (typeof settings.imageUrl !== 'undefined') {
@@ -193,7 +168,6 @@ gigyaFunctions.reactions = function (settings) {
   }
   eval('var reactions = [' + settings.reactions + ']');
   settings.reactions = reactions;
-  settings.userAction = ua;
   gigya.socialize.showReactionsBarUI(settings);
 };
 
@@ -284,7 +258,7 @@ gigyaFunctions.RnR = function (settings) {
   ua.setLinkBack(settings.ua.linkBack);
   ua.setTitle(settings.ua.title);
   ua.addActionLink(settings.ua.title, settings.ua.linkBack);
-  ua.setDescription(settings.description);
+  ua.setDescription(settings.ua.description);
   ua.addMediaItem(mediaObj);
   delete settings.ua;
   var reviews = {

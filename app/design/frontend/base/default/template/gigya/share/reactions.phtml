@@ -9,7 +9,7 @@
     'title'       => $product->getName(),
     'description' => $this->stripTags($desc),
     'linkBack'    => $product->getProductUrl(),
-    'imageUrl'    => $product->getImageUrl()
+    'imageUrl'    => $product->getImageUrl(),
   ));
   $settings = Mage::helper('Gigya_Social')->getPluginConfig('gigya_reactions/gigya_reactions_conf', 'php', TRUE);
   $settings['barID'] = $product->getSku();

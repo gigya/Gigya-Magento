@@ -16,7 +16,8 @@ class Gigya_Social_Block_Share extends Mage_Core_Block_Text_Tag_Js
           'title'       => $product->getName(),
           'description' => $this->stripTags($desc),
           'linkBack'    => $product->getProductUrl(),
-          'imageUrl'    => $product->getImageUrl()
+          'imageUrl'    => $product->getImageUrl(),
+          'action'      => $this->__('Shared')
         ));
 
         $js = '

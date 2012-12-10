@@ -4,9 +4,10 @@
  <?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_share/gigya_sharebar')) : ?>
  <?php
   $product = $this->getProduct();
+  $desc = ($product->getShortDescription() !== NULL) ? $product->getShortDescription() : $product->getDescription();
   $ua = Mage::helper('core')->jsonEncode(array(
     'title'       => $product->getName(),
-    'description' => $this->stripTags($product->getShortDescription()),
+    'description' => $this->stripTags($desc),
     'linkBack'    => $product->getProductUrl(),
     'imageUrl'    => $product->getImageUrl()
   ));
