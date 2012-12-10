@@ -9,7 +9,7 @@ class Gigya_Social_Block_Share extends Mage_Core_Block_Text_Tag_Js
   {
     if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_share/gigya_share_action')) {
       if ($pid = Mage::getSingleton('checkout/session')->getData('gigyaShare')) {
-        $config = Mage::helper('Gigya_Social')->getPluginConfig('gigya_share/gigya_share_action');
+        $config = Mage::helper('Gigya_Social')->getPluginConfig('gigya_share/gigya_share_action', 'json', TRUE);
         $product = Mage::getModel('catalog/product')->load($pid);
         $desc = ($product->getShortDescription() !== NULL) ? $product->getShortDescription() : $product->getDescription();
         $ua = Mage::helper('core')->jsonEncode(array(

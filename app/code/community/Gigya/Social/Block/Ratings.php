@@ -10,7 +10,6 @@ class Gigya_Social_Block_Ratings extends Mage_Catalog_Block_Product_View
     if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_r_and_r/gigya_r_and_r_conf')) {
       $product = $this->getProduct();
       $parms = Mage::helper('Gigya_Social')->getPluginConfig('gigya_r_and_r/gigya_r_and_r_conf', 'php');
-      Mage::log($parms);
       unset($parms['enable']);
       $parms['streamID'] = $product->getSku();
       $parms['context']['reviewUrl'] = $this->getReviewsUrl();

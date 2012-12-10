@@ -253,19 +253,15 @@ gigyaFunctions.RnR = function (settings) {
     $$('p.no-rating')[0].update().writeAttribute('id', settings.containerID);
   }
   settings.linkedCommentsUI = 'customer-reviews';
-  var mediaObj = {type: 'image', href: settings.ua.linkBack, src: settings.ua.imageUrl},
-  ua = new gigya.socialize.UserAction();
-  ua.setLinkBack(settings.ua.linkBack);
-  ua.setTitle(settings.ua.title);
-  ua.addActionLink(settings.ua.title, settings.ua.linkBack);
-  ua.setDescription(settings.ua.description);
-  ua.addMediaItem(mediaObj);
+  settings.imageBehavior = 'product';
+  ua = gigyaFunctions.createUserAction(settings);
   delete settings.ua;
   var reviews = {
     containerID: 'customer-reviews',
     categoryID: settings.categoryID,
     streamID: settings.streamID,
     scope: settings.scope,
+    privacy:  settings.privacy,
     onCommentSubmitted: gigyaFunctions.postReview,
     userAction: ua
   };
