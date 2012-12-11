@@ -8,7 +8,7 @@ class Gigya_Social_Model_Cart_Observer
   public function addShareUi($observer)
   {
     $productId = $observer->getProduct()->getId();
-    Mage::getSingleton('checkout/session')->setData('gigyaShare', $productId);
+    Mage::getSingleton('checkout/session')->setData('gigyaShare', array('pid' => $productId, 'op' => 'cart'));
   }
 
   public function addOrderShareUi(Varien_Event_Observer $observer)
@@ -21,7 +21,7 @@ class Gigya_Social_Model_Cart_Observer
         $items = $order->getAllItems();
         $prod = reset($items);
         $pid = $prod->getProductId();
-        Mage::getSingleton('checkout/session')->setData('gigyaShare', $pid);
+        Mage::getSingleton('checkout/session')->setData('gigyaShare', array('pid' => $pid, 'op' => 'order'));
   }
 
 }
