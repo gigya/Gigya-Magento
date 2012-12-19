@@ -12,7 +12,7 @@ class Gigya_Social_Block_Share extends Mage_Core_Block_Text_Tag_Js
         $config = Mage::helper('Gigya_Social')->getPluginConfig('gigya_share/gigya_share_action', 'json', TRUE);
         $product = Mage::getModel('catalog/product')->load($share['pid']);
         $desc = ($product->getShortDescription() !== NULL) ? $product->getShortDescription() : $product->getDescription();
-        $action = ($share['op'] === 'cart') ? $this->__('Added to cart') : $this->__('Orderd');
+        $action = ($share['op'] === 'cart') ? $this->__('Added to cart') : $this->__('Ordered');
         $ua = Mage::helper('core')->jsonEncode(array(
           'title'       => $product->getName(),
           'description' => $this->stripTags($desc),

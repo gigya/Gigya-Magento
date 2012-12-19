@@ -38,6 +38,11 @@
       </block>
     </reference>
   </cms_index_index>
+  <customer_account_logoutsuccess>
+    <reference name="head">
+      <block type="Gigya_Social_Block_logout" name="gigya.logout.action"/>
+    </reference>
+  </customer_account_logoutsuccess>
   <customer_account_login>
     <reference name="content">
       <block name="gigya.login" type="core/template" before="-" template="gigya/login/social_login_login_page.phtml"/>

@@ -327,6 +327,9 @@ document.observe("dom:loaded", function() {
       case 'RnR':
         gigyaFunctions.RnR(plugin.value);
         break;
+      case 'logout':
+        gigya.socialize.logout();
+        break;
       }
     });
   }

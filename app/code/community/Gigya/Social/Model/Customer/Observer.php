@@ -49,6 +49,7 @@ class Gigya_Social_Model_Customer_Observer
   public function notify_logout($observer)
   {
     $id = $observer->getEvent()->getCustomer()->getId();
+    Mage::getSingleton('core/session')->setData('logout', 'true');
     Mage::helper('Gigya_Social')->notifyLogout($id);
   }
 }
