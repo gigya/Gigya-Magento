@@ -90,7 +90,7 @@ gigyaFunctions.emailSubmit = function () {
         parameters: {json:JSON.stringify(toPost)},
         onSuccess: function (trans) {
           if (typeof trans.responseJSON.redirect !== 'undefined') {
-            window.location = trans.responseJSON.redirect;
+            document.location.reload(true);
           }
           if (trans.responseJSON.result === 'emailExsists') {
             gigyaFunctions.hideLogin(trans.responseJSON.id);
@@ -246,8 +246,11 @@ gigyaFunctions.postReview = function (eventObj) {
 
 };
 gigyaFunctions.RnR = function (settings) {
-  if ($$('table.ratings-table').length > 0) {
-    $$('table.ratings-table')[0].update().writeAttribute('id', settings.containerID).next('a').update();
+  if ($$('form table.ratings-table').length > 0) {
+    var table = $('product_addtocart_form').select('table.ratings-table');
+    table.each( function (itm) {
+      itm.update().writeAttribute('id', settings.containerID);
+    });
   }
   else {
     $$('p.no-rating')[0].update().writeAttribute('id', settings.containerID);
@@ -317,6 +320,7 @@ document.observe("dom:loaded", function() {
         gigya.socialize.showCommentsUI(plugin.value);
         break;
       case 'activityFeed':
+        delete plugin.value.privacy;
         gigya.socialize.showFeedUI(plugin.value);
         break;
       case 'gm':

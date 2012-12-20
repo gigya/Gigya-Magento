@@ -168,7 +168,7 @@
     <gigya_login>
       <gigya_login_conf>
         <enable>1</enable>
-        <buttonStyle>standart</buttonStyle>
+        <buttonsStyle>standart</buttonsStyle>
         <showTermsLink>0</showTermsLink>
         <loginBehavior>loginExistingUser</loginBehavior>
         <containerID>gigyaLogin</containerID>
@@ -181,6 +181,7 @@
         <width>210</width>
         <height>110</height>
         <showTermsLink>0</showTermsLink>
+        <showEditLink>1</showEditLink>
       </gigya_link_accounts>
     </gigya_login>
     <gigya_share>
@@ -198,6 +199,7 @@
         <enable_order>1</enable_order>
         <showAlwaysShare>hide</showAlwaysShare>
         <showNeverShare>1</showNeverShare>
+        <enabledProviders></enabledProviders>
         <scope>both</scope>
       </gigya_share_action>
     </gigya_share>
@@ -207,6 +209,9 @@
         <containerID>gigyaReactions</containerID>
         <layout>horizontal</layout>
         <showCounts>right</showCounts>
+        <countType>number</countType>
+        <multipleReactions>1</multipleReactions>
+        <enabledProviders></enabledProviders>
         <imageBehavior>defualt</imageBehavior>
         <scope>both</scope>
       </gigya_reactions_conf>
