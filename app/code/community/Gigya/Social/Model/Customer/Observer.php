@@ -24,14 +24,12 @@ class Gigya_Social_Model_Customer_Observer
 
   public function notify_login($observer)
   {
+    Mage::log('login');
     $action = Mage::getSingleton('customer/session')->getData('gigyaAction');
     $id = $observer->getEvent()->getCustomer()->getId();
     $gigya_uid = Mage::getSingleton('customer/session')->getData('gigyaUid');
     if (!empty($action)) {
-      if ($action == 'login') {
-        Mage::helper('Gigya_Social')->notifyLogin($id);
-      }
-      elseif ($action === 'linkAccount' && !empty($gigya_uid)) {
+      if ($action === 'linkAccount' && !empty($gigya_uid)) {
         Mage::helper('Gigya_Social')->notifyRegistration($gigya_uid, $id);
       }
     }
@@ -42,6 +40,7 @@ class Gigya_Social_Model_Customer_Observer
         'lastName' =>  $magInfo['lastname'],
         'email' => $magInfo['email'],
       );
+      Mage::log('site login');
       Mage::helper('Gigya_Social')->notifyLogin($id, 'false', $userInfo);
     }
   }

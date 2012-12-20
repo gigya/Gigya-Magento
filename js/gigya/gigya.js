@@ -295,6 +295,7 @@ document.observe("dom:loaded", function() {
   if (typeof gigyaSettings !== 'undefined'){
     $H(gigyaSettings).each( function (plugin) {
       delete plugin.value.enable;
+      //var a = JSON.parse(plugin.value);
       switch (plugin.key)
       {
       case 'login':

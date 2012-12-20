@@ -69,7 +69,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
           $cust_session = Mage::getSingleton('customer/session');
           $cust_session->setData('gigyaAction', 'login');
           $cust_session->loginById($post['user']['UID']);
-          Mage::log($cust_session);
           $this->getResponse()->setHeader('Content-type', 'application/json');
           //$url = Mage::getUrl('customer/account');
           $url = Mage::getUrl('*/*/*', array('_current' => true));

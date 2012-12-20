@@ -185,7 +185,8 @@
     </gigya_login>
     <gigya_share>
       <gigya_sharebar>
-        <enable>1</enable>
+        <enable_cart>1</enable_cart>
+        <enable_order>1</enable_order>
         <containerID>gigyaSharebar</containerID>
         <shareButtons>share,facebook-like,twitter-tweet</shareButtons>
         <layout>horizontal</layout>
@@ -193,7 +194,8 @@
         <imageBehavior>defualt</imageBehavior>
       </gigya_sharebar>
       <gigya_share_action>
-        <enable>1</enable>
+        <enable_cart>1</enable_cart>
+        <enable_order>1</enable_order>
         <showAlwaysShare>hide</showAlwaysShare>
         <showNeverShare>1</showNeverShare>
         <scope>both</scope>

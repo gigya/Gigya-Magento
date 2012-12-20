@@ -58,13 +58,15 @@
       <block name="gigya.login" type="core/template" as="form.additional.info" after="-" template="gigya/login/social_login.phtml"/>
     </reference>
   </checkout_onepage_index>
+  <checkout_onepage_success>
+    <reference name="content">
+      <block type="Gigya_Social_Block_Ordersharebar" name="gigya.sharebar" after="-" template="gigya/share/ordersharebar.phtml" />
+    </reference>
+  </checkout_onepage_success>
   <review_product_list>
     <reference name="product.info">
       <block type="catalog/product_view" as="extrahint" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>
       <block type="catalog/product_view" as="other"  name="gigya.reactions" after="-" template="gigya/share/reactions.phtml"/>
-    </reference>
-    <reference name="product.info.simple.extra">
-      <block type="catalog/product_view" as="product_type_data" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>
     </reference>
   </review_product_list>
   <catalog_product_view>

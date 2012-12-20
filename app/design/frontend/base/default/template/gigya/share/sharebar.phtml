@@ -1,7 +1,7 @@
 <?php
 //TODO: add comments
  ?>
- <?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_share/gigya_sharebar')) : ?>
+ <?php if (Mage::helper('Gigya_Social')->isShareBarEnabled('cart')) : ?>
  <?php
   $product = $this->getProduct();
   $desc = ($product->getShortDescription() !== NULL) ? $product->getShortDescription() : $product->getDescription();

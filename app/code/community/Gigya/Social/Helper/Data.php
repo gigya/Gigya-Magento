@@ -103,7 +103,6 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     $secretkey = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
     $request = new GSRequest($apiKey, $secretkey, 'socialize.' . $method);
     $params['format'] = 'json';
-    Mage::log($params);
     foreach ($params as $param => $val) {
       $request->setParam($param, $val);
     }
@@ -123,6 +122,12 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
   public function getPluginConfig($pluginName, $format = 'json', $feed = FALSE)
   {
     $config = Mage::getStoreConfig($pluginName);
+    foreach ($config as $key =>  $value){
+      //fix the magento yes/no as 1 or 0 so it would work in as true/false in javascript
+      if ($value === '0' || $value === '1') {
+        $config[$key] = ($value) ? true : false;
+      }
+    }
     if (!empty($config['advancedConfig'])) {
       $advConfig = $this->_confStringToArry($config['advancedConfig']);
       $config = $config + $advConfig;
@@ -145,6 +150,14 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
   public function isPluginEnabled($pluginName)
   {
     return Mage::getStoreConfig($pluginName . '/enable');
+  }
+  public function isShareBarEnabled($place)
+  {
+    return Mage::getStoreConfig('gigya_share/gigya_sharebar/enable_' . $place);
+  }
+  public function isShareActionEnabled($place)
+  {
+    return Mage::getStoreConfig('gigya_share/gigya_share_action/enable_' . $place);
   }
 
   public function _confStringToArry($str)
