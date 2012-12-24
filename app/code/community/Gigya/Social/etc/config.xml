@@ -211,7 +211,6 @@
         <showCounts>right</showCounts>
         <countType>number</countType>
         <multipleReactions>1</multipleReactions>
-        <enabledProviders></enabledProviders>
         <imageBehavior>defualt</imageBehavior>
         <scope>both</scope>
       </gigya_reactions_conf>

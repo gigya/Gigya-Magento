@@ -13,7 +13,7 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head
       $gigyaApiKey = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey'));
       $name = $uriPrefix . '.gigya.com/JS/socialize.js?apikey=' . $gigyaApiKey;
       $jsParams = array(
-        'enabledProviders' => Mage::getStoreConfig('gigya_global/gigya_global_conf/providers'),
+        'enabledProviders' => (Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') !== '') ? Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') : '*',
         'lang' => Mage::getStoreConfig('gigya_global/gigya_global_conf/laguages'),
         'sessionExpiration' => (int)Mage::getStoreConfig('web/cookie/cookie_lifetime'),
       );
