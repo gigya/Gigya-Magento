@@ -410,6 +410,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>0</show_in_store>
             </enabledProviders>
+            <moreEnabledProviders translate="label">
+              <label>"More seceen" providers</label>
+              <frontend_type>text</frontend_type>
+              <comment><![CDATA[A comma separated string of destination names that defines which destination sites buttons will be displayed on the "More" screen, and also determine the order. <br \> "*" means all providers. ]]></comment>
+              <sort_order>13</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+            </moreEnabledProviders>
             <scope translate="label">
               <label>Scope for publishing to Activity Feed</label>
               <frontend_type>select</frontend_type>
@@ -477,6 +486,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </reactions>
+            <enabledProviders translate="label">
+              <label>Providers</label>
+              <frontend_type>text</frontend_type>
+              <comment><![CDATA[List of relevant values is available <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showReactionsBarUI" target="_blank">here </a>under the "enabledProviders" parameter']]></comment>
+              <sort_order>13</sort_order>
+              <show_in_default>1</show_in_default>
+              <show_in_website>1</show_in_website>
+              <show_in_store>0</show_in_store>
+            </enabledProviders>
             <layout translate="label">
               <label>Reactions Bar layout</label>
               <frontend_type>select</frontend_type>

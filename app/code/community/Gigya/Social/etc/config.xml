@@ -199,7 +199,8 @@
         <enable_order>1</enable_order>
         <showAlwaysShare>hide</showAlwaysShare>
         <showNeverShare>1</showNeverShare>
-        <enabledProviders></enabledProviders>
+        <enabledProviders>facebook,twitter,linkedin,myspace,yahoo</enabledProviders>
+        <moreEnabledProviders>*</moreEnabledProviders>
         <scope>both</scope>
       </gigya_share_action>
     </gigya_share>
@@ -210,6 +211,7 @@
         <layout>horizontal</layout>
         <showCounts>right</showCounts>
         <countType>number</countType>
+        <enabledProviders>facebook,twitter,linkedin,myspace,yahoo</enabledProviders>
         <multipleReactions>1</multipleReactions>
         <imageBehavior>defualt</imageBehavior>
         <scope>both</scope>

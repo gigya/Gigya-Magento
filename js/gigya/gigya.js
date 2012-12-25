@@ -302,6 +302,7 @@ document.observe("dom:loaded", function() {
       switch (plugin.key)
       {
       case 'login':
+        delete plugin.value.loginBehavior;
         gigya.socialize.showLoginUI(plugin.value);
         break;
       case 'linkAccount':
