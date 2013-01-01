@@ -411,9 +411,9 @@
               <show_in_store>0</show_in_store>
             </enabledProviders>
             <moreEnabledProviders translate="label">
-              <label>"More seceen" providers</label>
+              <label>more seceen providers</label>
               <frontend_type>text</frontend_type>
-              <comment><![CDATA[A comma separated string of destination names that defines which destination sites buttons will be displayed on the "More" screen, and also determine the order. <br \> "*" means all providers. ]]></comment>
+              <comment><![CDATA[A comma separated string of destination names that defines which destination sites buttons will be displayed on the "More" screen, and also determine the order, possible values can be found  <a href="http://developers.gigya.com/010_Developer_Guide/18_Plugins/032_Share/030_Adding_More_Destinations" target="_blank">here</a>. <br \> "*" means all providers. ]]></comment>
               <sort_order>13</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
