@@ -249,7 +249,10 @@ gigyaFunctions.RnR = function (settings) {
   if ($$('form table.ratings-table').length > 0) {
     var table = $('product_addtocart_form').select('table.ratings-table');
     table.each( function (itm) {
-      itm.update().writeAttribute('id', settings.containerID).next('a').update();
+      itm.update().writeAttribute('id', settings.containerID);
+      if (typeof itm.next('a') !== 'undefined') {
+        itm.next('a').update();
+      }
     });
   }
   else {
