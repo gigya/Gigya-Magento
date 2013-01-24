@@ -177,7 +177,7 @@
       </gigya_login_conf>
       <gigya_link_accounts>
         <enable>0</enable>
-        <containerID>gigyaLinkAccount</containerID>
+        <containerID>gigyAaddConnections</containerID>
         <width>210</width>
         <height>110</height>
         <showTermsLink>0</showTermsLink>

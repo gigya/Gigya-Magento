@@ -182,7 +182,7 @@
           </fields>
         </gigya_login_conf>
         <gigya_link_accounts translate="lable">
-          <label>Gigya Social link accounts configuration</label>
+          <label>Gigya Add Connections configuration</label>
           <frontend_type>text</frontend_type>
           <sort_order>101</sort_order>
           <show_in_default>1</show_in_default>
@@ -190,7 +190,7 @@
           <show_in_store>0</show_in_store>
           <fields>
             <enable translate="label">
-              <label>Enable Gigya link accounts</label>
+              <label>Enable Gigya add connections</label>
               <frontend_type>select</frontend_type>
               <source_model>adminhtml/system_config_source_yesno</source_model>
               <sort_order>10</sort_order>
@@ -199,9 +199,9 @@
               <show_in_store>1</show_in_store>
             </enable>
             <containerID translate="label">
-              <label>Gigya link accounts container id</label>
+              <label>Gigya add connections container id</label>
               <frontend_type>text</frontend_type>
-              <comment><![CDATA[div ID for link accounts]]></comment>
+              <comment><![CDATA[div ID for add connections]]></comment>
               <sort_order>11</sort_order>
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
