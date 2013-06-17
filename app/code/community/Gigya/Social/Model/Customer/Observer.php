@@ -8,11 +8,13 @@ class Gigya_Social_Model_Customer_Observer
   public function notify_registration($observer)
   {
     $customer_data = $observer['customer']->getData();
+    $id = $customer_data['entity_id'];
     if (!empty($customer_data['gigyaUser'])) {
-      Mage::helper('Gigya_Social')->notifyRegistration($customer_data['gigyaUser']['UID'], $customer_data['entity_id']);
+      Mage::helper('Gigya_Social')->notifyRegistration($customer_data['gigyaUser']['UID'], $id);
     }
     else {
       Mage::helper('Gigya_Social')->notifyLogin($id, 'true');
+      Mage::getSingleton('customer/session')->setSuppressNoteLogin(TRUE);
     }
   }
 
@@ -24,22 +26,28 @@ class Gigya_Social_Model_Customer_Observer
 
   public function notify_login($observer)
   {
-    $action = Mage::getSingleton('customer/session')->getData('gigyaAction');
-    $id = $observer->getEvent()->getCustomer()->getId();
-    $gigya_uid = Mage::getSingleton('customer/session')->getData('gigyaUid');
-    if (!empty($action)) {
-      if ($action === 'linkAccount' && !empty($gigya_uid)) {
-        Mage::helper('Gigya_Social')->notifyRegistration($gigya_uid, $id);
+    Mage::log(Mage::getSingleton('customer/session')->getSuppressNoteLogin());
+    if (!Mage::getSingleton('customer/session')->getSuppressNoteLogin()){
+      $action = Mage::getSingleton('customer/session')->getData('gigyaAction');
+      $id = $observer->getEvent()->getCustomer()->getId();
+      $gigya_uid = Mage::getSingleton('customer/session')->getData('gigyaUid');
+      if (!empty($action)) {
+        if ($action === 'linkAccount' && !empty($gigya_uid)) {
+          Mage::helper('Gigya_Social')->notifyRegistration($gigya_uid, $id);
+        }
+      }
+      else {
+        $magInfo = $observer->getEvent()->getCustomer()->getData();
+        $userInfo = array(
+          'firstName' => $magInfo['firstname'],
+          'lastName' =>  $magInfo['lastname'],
+          'email' => $magInfo['email'],
+        );
+        Mage::helper('Gigya_Social')->notifyLogin($id, 'false', $userInfo);
       }
     }
     else {
-      $magInfo = $observer->getEvent()->getCustomer()->getData();
-      $userInfo = array(
-        'firstName' => $magInfo['firstname'],
-        'lastName' =>  $magInfo['lastname'],
-        'email' => $magInfo['email'],
-      );
-      Mage::helper('Gigya_Social')->notifyLogin($id, 'false', $userInfo);
+      Mage::getSingleton('customer/session')->unsSuppressNoteLogin();
     }
   }
 

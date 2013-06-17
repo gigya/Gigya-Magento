@@ -76,8 +76,6 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     );
     try {
       $res = $this->_gigya_api('deleteAccount', $params);
-      Mage::log($res);
-
     }
     catch (Exception $e) {
       $code = $e->getCode();
