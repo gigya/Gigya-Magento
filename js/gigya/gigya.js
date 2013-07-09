@@ -113,7 +113,7 @@ gigyaFunctions.createUserAction = function (settings) {
   {
   case 'default':
     if ($$('meta[property=og:image]').size() > 0) {
-      mediaObj.src = $$('meta[property=og:image]').readAttribute('content');
+      mediaObj.src = $$('meta[property=og:image]')[0].readAttribute('content');
     }
     else {
       mediaObj.src = settings.ua.imageUrl;
