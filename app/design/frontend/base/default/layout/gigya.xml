@@ -8,6 +8,17 @@
       <action method="addCss">
         <stylesheet>css/gigya.css</stylesheet>
       </action>
+        <action method="addJs">
+            <script>prototype/window.js</script>
+        </action>
+        <action method="addItem">
+            <type>js_css</type>
+            <name>prototype/windows/themes/default.css</name>
+        </action>
+        <action method="addItem">
+            <type>js_css</type>
+            <name>prototype/windows/themes/magento.css</name>
+        </action>
     </reference>
     <reference name="before_body_end">
       <block type="Gigya_Social_Block_Gamification_notifications" name="gigya.gm.notifications"/>

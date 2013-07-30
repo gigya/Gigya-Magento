@@ -184,8 +184,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     $session = $this->_getSession();
     if ($session->isLoggedIn()) {
       Mage::log('loggedIn');
-      echo '{bla: ok}';
-      //$this->_redirect('*/*/');
       return;
     }
     $session->setEscapeMessages(true); // prevent XSS injection in user input
@@ -239,8 +237,23 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
       }
 
       try {
+        $a = $customerForm->getAttributes();
         $customerErrors = $customerForm->validateData($customerData);
         if ($customerErrors !== true) {
+          $block = $this->getLayout()->createBlock(
+            'Mage_Customer_Block_Form_Register',
+            'regForm',
+            array('template' => 'persistent/customer/form/register.phtml')
+          );
+          $form = $block->renderView();
+          $res = array(
+            'result' => 'noEmail',
+            'html' => $form,
+            'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
+            'headline' => $this->__('Fill-in missing required info'),
+          );
+          $this->getResponse()->setHeader('Content-type', 'application/json');
+          $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
           $errors = array_merge($customerErrors, $errors);
         } else {
           $customerForm->compactData($customerData);
