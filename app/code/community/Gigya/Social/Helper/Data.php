@@ -146,17 +146,17 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         $config[$key] = ($value) ? true : false;
       }
     }
+    // New comments can be override in advanced config
+    if ($pluginName == 'gigya_comments/gigya_comments_conf') {
+      $config['version'] = 2;
+    }
     if (!empty($config['advancedConfig'])) {
       $advConfig = $this->_confStringToArry($config['advancedConfig']);
-      $config = $config + $advConfig;
+      $config = $advConfig + $config;
     }
     unset($config['advancedConfig']);
     if ($feed === TRUE) {
       $config['privacy'] = Mage::getStoreConfig('gigya_activityfeed/gigya_activityfeed_conf/privacy');
-    }
-    Mage::log($pluginName);
-    if ($pluginName == 'gigya_login/gigya_login_conf') {
-      $config['baseUrl'] = Mage::getBaseUrl();
     }
     if ($format === 'php') {
       return $config;
