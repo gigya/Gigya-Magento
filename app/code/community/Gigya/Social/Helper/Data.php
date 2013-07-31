@@ -97,15 +97,35 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
    *   The Gigya response.
    */
   public function _gigya_api($method, $params) {
+    $data_center = Mage::getStoreConfig('gigya_global/gigya_global_conf/dataCenter');
+    $data_center = !empty($data_center) ? $data_center : NULL;
     $apiKey = Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey');
     $secretkey = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
     $request = new GSRequest($apiKey, $secretkey, 'socialize.' . $method);
+    if ($data_center !== NULL){
+      $request->setAPIDomain($data_center);
+    }
     $params['format'] = 'json';
     foreach ($params as $param => $val) {
       $request->setParam($param, $val);
     }
     try {
       $response = $request->send();
+      // If wrong data center resend to right one
+      if ($response->getErrorCode() == 301001){
+        $data = $response->getData();
+        $domain = $data->getString('apiDomain', NULL);
+        if ($domain !== NULL){
+          Mage::getModel('core/config')->saveConfig('gigya_global/gigya_global_conf/dataCenter', $domain);
+          $this->_gigya_api($method, $params);
+        } else {
+          $ex = new Exception("Bad apiDomain return");
+          throw $ex;
+        }
+      } elseif ($response->getErrorCode() !== 0){
+        $exp = new Exception($response->getErrorMessage(), $response->getErrorCode());
+        throw $exp;
+      }
     }
     catch (Exception $e) {
       $code = $e->getCode();

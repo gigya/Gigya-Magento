@@ -1,8 +1,9 @@
 <?php
  /*
 * Copyright (C) 2011 Gigya, Inc.
-* Version 2.15.0
-*
+* Version 2.15.3
+* 
+ * 
  * Gigya PHP SDK
  * @author Shachar Bar-David
 */
@@ -43,17 +44,25 @@ class GSKeyNotFoundException extends GSException{
 
 class GSRequest { 	 
 	private static $cafile;
-	const version = "2.15";
+	const DEFAULT_API_DOMAIN = "gigya.com";
+	const version = "2.15.3";
+	
+	private $host;
   	private $domain;
 	private $path;
 	private $traceLog = array();
 	protected $method;
 	private $proxy;
-	
+	private $proxyType = CURLPROXY_HTTP;
+	private $proxyUserPass = ":";
+	private $curlArray = array();
+
 	private $apiKey; 	
 	private $secretKey; 
 	private $params; //GSObject 
 	private $useHTTPS; 
+	private $apiDomain = self::DEFAULT_API_DOMAIN;
+	
 
 	/**
 	 * Constructs a request using an apiKey and secretKey. 
@@ -68,7 +77,7 @@ class GSRequest {
 	 */
 	public function __construct($apiKey, $secretKey, $apiMethod, $params = null, $useHTTPS = false ) 
 	{
-		if (!isset($apiMethod) || $apiMethod == null || strlen($apiMethod)==0)
+		if (!isset($apiMethod) || strlen($apiMethod)==0)
 			return;
 		
 		if (substr($apiMethod,0,1) == "/")
@@ -76,12 +85,10 @@ class GSRequest {
 			
 		if (strrpos($apiMethod,".")==0)
 		{
-			
 			$this->domain = "socialize.gigya.com";
 			$this->path = "/socialize." . $apiMethod;
 		} else
 		{
-			
 			$tokens =  explode(".",$apiMethod);
 			$this->domain = $tokens[0].".gigya.com";
 			$this->path = "/".$apiMethod;
@@ -117,16 +124,39 @@ class GSRequest {
 	{
 		return $this->params;
 	}	
+	
+	/**
+	 * Sets the domain used for making API calls. This method provides the option to override the default domain "gigya.com" and specify an alternative data center to be used.
+	 * Parameters:
+	 *    $apiDomain - the domain of the data center to be used. For example: "eu1.gigya.com" for Europe data center.
+	 */
+	public function setAPIDomain($apiDomain)
+	{
+		if(!isset($apiDomain) || strlen($apiDomain)==0)
+			$this->apiDomain = self::DEFAULT_API_DOMAIN;
+		else
+			$this->apiDomain = $apiDomain;
+	}
 
 	public static function setCAFile($filename)
 	{
 		GSRequest::$cafile = $filename;
 	}
 	
-	public function setProxy($proxy)
+	public function setProxy($proxy, $proxyUserPass=":", $proxyType=CURLPROXY_HTTP)
 	{
 		$this->proxy = $proxy;
+		$this->proxyType = $proxyType;
+		$this->proxyUserPass = $proxyUserPass;
 		$this->traceField("proxy",$proxy);
+		$this->traceField("proxyType",$proxyType);
+		$this->traceField("proxyUserPass",$proxyUserPass);
+	}
+
+	public function setCurlOptionsArray($curlArray)
+	{
+		$this->curlArray = $curlArray;
+		$this->traceField("curlArray", $curlArray);
 	}
 	
 	/**
@@ -135,6 +165,16 @@ class GSRequest {
 	public function send($timeout=null) 
 	{
 		$format = $this->params->getString("format",null);
+
+		if (!strrpos($this->method, ".")) {
+			$this->host = "socialize.".$this->apiDomain;
+			$this->path = "/socialize.".$this->method;
+		} else {
+			$tokens = explode( ".", $this->method );
+			$this->host = $tokens[0].".".$this->apiDomain;
+			$this->path = "/".$this->method;
+		}
+		
 		//set json as default format.
 		if (empty($format))
 		{
@@ -156,9 +196,14 @@ class GSRequest {
 		try 
 		{
 			$this->setParam("httpStatusCodes", "false");
+			
+			$this->traceField("apiKey", $this->apiKey);
+			$this->traceField("apiMethod", $this->method);
 			$this->traceField("params",$this->params);
+			$this->traceField("useHTTPS", $this->useHTTPS);
 
-			$responseStr = $this->sendRequest("POST", $this->domain, $this->path, $this->params, $this->apiKey, $this->secretKey, $this->useHTTPS,$timeout);
+			$responseStr = $this->sendRequest("POST", $this->host, $this->path, $this->params, $this->apiKey, $this->secretKey, $this->useHTTPS,$timeout);
+			
 			return new GSResponse($this->method,$responseStr,null,0,null,$this->traceLog);
 		}
 		catch (Exception $ex) {
@@ -186,7 +231,7 @@ class GSRequest {
 		$timestamp = (string) time();
 		
 		//timestamp in milliseconds
-		$nonce  = (string)SigUtils::currentTimeMillis();
+		$nonce  = ((string)SigUtils::currentTimeMillis()).rand();
 		$httpMethod = "POST";
 
 		
@@ -218,7 +263,7 @@ class GSRequest {
 	}
 
 
-	private function curl($url, $params, $timeout=null, $options = array())
+	private function curl($url, $params, $timeout=null)
 	{   
 		foreach($params->getKeys() as $key)
 		{
@@ -229,33 +274,36 @@ class GSRequest {
 		$qs = http_build_query($postData);
 		$this->traceField("URL",$url);
 		$this->traceField("postData",$qs);
-		
+
 		/* POST */
 		$defaults = array(
 			CURLOPT_URL => $url,
 			CURLOPT_POST=>1,
 			CURLOPT_HEADER => 1,
-			CURLOPT_POSTFIELDS=>$postData,
+			CURLOPT_POSTFIELDS=>$qs,
 			CURLOPT_HTTPHEADER => array( 'Expect:'),
-			CURLOPT_RETURNTRANSFER => TRUE,
-			//CURLOPT_TIMEOUT => 10,
+			CURLOPT_RETURNTRANSFER => TRUE,			
 			CURLOPT_SSL_VERIFYPEER => TRUE, 
 			CURLOPT_SSL_VERIFYHOST => 2,
 			CURLOPT_CAINFO => GSRequest::$cafile ,
 			CURLOPT_PROXY => $this->proxy,
+			CURLOPT_PROXYTYPE => $this->proxyType,
+			CURLOPT_PROXYUSERPWD => $this->proxyUserPass,
 			CURLOPT_TIMEOUT_MS => $timeout
 		);
 		
 		$ch = curl_init();
-		curl_setopt_array($ch, ($options + $defaults));
+		$mergedCurlArray = ($this->curlArray + $defaults);
+
+		curl_setopt_array($ch, $mergedCurlArray);
 
 		if(!$result = curl_exec($ch))
 		{
 			$err = curl_error($ch) ;
 			throw new Exception($err);
 		}
+
 		curl_close($ch);
-		
 		
 		list($header, $body) = explode("\r\n\r\n", $result, 2); 
 		$headers = explode("\r\n", $header);
@@ -590,6 +638,8 @@ class GSObject {
 		if(gettype($json) == 'string')
 		{
 			$obj = json_decode($json,false);
+			
+			
 			if($obj == null){
 				throw new GSException();
 			}

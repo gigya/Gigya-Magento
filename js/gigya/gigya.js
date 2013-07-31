@@ -359,7 +359,7 @@ document.observe("dom:loaded", function() {
         gigyaFunctions.reactions(plugin.value);
         break;
       case 'comments':
-        gigya.socialize.showCommentsUI(plugin.value);
+        gigya.comments.showCommentsUI(plugin.value);
         break;
       case 'activityFeed':
         delete plugin.value.privacy;
