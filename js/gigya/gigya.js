@@ -28,6 +28,12 @@ gigyaFunctions.login = function (response) {
             $(trans.responseJSON.id).style.height = '';
             Form.Element.setValue('gigya-mini-login', gigyaCache.uInfo.user.email);
             break;
+            case 'moreInfo':
+                gigyaFunctions.showMoreInfoForm(trans.responseJSON.html);
+                gigyaFunctions.moreInfoSubmit();
+            break;
+
+
           }
         }
       }
@@ -91,12 +97,13 @@ gigyaFunctions.emailSubmit = function () {
         onSuccess: function (trans) {
           if (typeof trans.responseJSON.redirect !== 'undefined') {
             document.location.reload(true);
-          }
-          if (trans.responseJSON.result === 'emailExsists') {
+          } else if (trans.responseJSON.result === 'emailExsists') {
             gigyaFunctions.hideLogin(trans.responseJSON.id);
             gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline)
             $(trans.responseJSON.id).update(trans.responseJSON.html);
             Form.Element.setValue('gigya-mini-login', gigyaCache.uInfo.user.email);
+          } else if (trans.responseJSON.result === 'moreInfo') {
+              gigyaFunctions.showMoreInfoForm(trans.responseJSON.html);
           }
         }
     }
@@ -105,6 +112,22 @@ gigyaFunctions.emailSubmit = function () {
   else {
     alert ('please enter a valid email');
   }
+};
+
+gigyaFunctions.moreInfoSubmit = function () {
+    var toPost = gigyaCache.uInfo;
+    toPost.user.missInfo = $('gigyaMoreInfoForm').serialize(true);
+    new Ajax.Request('/gigyalogin/login/login', {
+        parameters: {json: JSON.stringify(toPost)},
+        onSuccess: function (trans){
+            if (trans.responseJSON.result === 'newUser'){
+                gigyaModal.close();
+                if (typeof trans.responseJSON.redirect !== 'undefined') {
+                    document.location.reload(true);
+                }
+            }
+        }
+    });
 };
 
 gigyaFunctions.createUserAction = function (settings) {
@@ -273,6 +296,21 @@ gigyaFunctions.RnR = function (settings) {
   };
   gigya.socialize.showRatingUI(settings);
   gigya.socialize.showCommentsUI(reviews);
+};
+
+gigyaFunctions.showMoreInfoForm = function(html){
+    gigyaModal = new Window({title:'Please fill in the missing information', height:300, width:300, closable:false, minimizable:false, maximizable:false });
+    gigyaModal.setHTMLContent(html);
+    gigyaModal.setZIndex(1000);
+    gigyaModal.showCenter(true);
+};
+
+gigyaFunctions.modalObserver = {
+    onShow: function(eventName, win){
+        if(win == gigyaModal){
+            gigyaFunctions.moreInfoSubmit();
+        }
+    }
 };
 
 gigyaFunctions.getUrlParam = function (param) {

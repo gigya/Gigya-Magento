@@ -102,7 +102,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             //check if we have the email on the system
             $customer = $this->_customerExists($post['user']['email']);
             if ($customer === FALSE) {
-              $this->_createCustomer($post['user']['email'], $firstName, $lastName, $post['user']);
+              $this->_createCustomer($email, $firstName, $lastName, $post['user']);
               $this->getResponse()->setHeader('Content-type', 'application/json');
             }
             else {
@@ -148,12 +148,27 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     $customer->setFirstname($firstName);
     $customer->setLastname($lastName);
     $customer->setEmail($email);
+    if (!empty($gigyaUser['missInfo'])) {
+      $missing_info = $gigyaUser['missInfo'];
+      if (array_key_exists('dob', $missing_info)) {
+        $this->buildDob($missing_info);
+      }
+      foreach ($missing_info as $key => $val) {
+        $k = 'set' . ucfirst($key);
+        $customer->{$k}($val);
+      }
+    }
     $password = Mage::helper('Gigya_Social')->_getPassword();
     $_POST['password'] = $password;
     $_POST['confirmation'] = $password;
     $customer->setData('gigyaUser', $gigyaUser);
     Mage::register('current_customer', $customer);
     $this->_forward('createPost');
+  }
+
+  private function buildDob(&$info){
+    $info['dob'] = $info['year'] . "-" . $info['month'] . "-" . $info['day'];
+    unset($info['year'], $info['month'], $info['day']);
   }
 
   protected function _customerExists($email, $websiteId = null)
@@ -237,24 +252,40 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
       }
 
       try {
-        $a = $customerForm->getAttributes();
         $customerErrors = $customerForm->validateData($customerData);
         if ($customerErrors !== true) {
-          $block = $this->getLayout()->createBlock(
-            'Mage_Customer_Block_Form_Register',
-            'regForm',
-            array('template' => 'persistent/customer/form/register.phtml')
-          );
-          $form = $block->renderView();
+          $fields = $customerForm->getAttributes();
+          foreach ($fields as $field) {
+            $requireds[$field->getAttributeCode()] = $field->getIsRequired();
+          }
+          //remove fields that we have data for
+          unset($requireds['firstname'], $requireds['lastname'], $requireds['email']);
+          $requireds = array_filter($requireds);
+          $html = '<div class="gigyaMoreInfo"><form action="' . Mage::getBaseUrl() . 'gigyalogin/login" name="moreInfo" id="gigyaMoreInfoForm">';
+          foreach ($requireds as $key => $r) {
+            $requireds[$key] = $fields[$key]->getStoreLabel();
+            if (!$fields[$key]->getIsUserDefined()) {
+              $html .= $this->getLayout()->createBlock('customer/widget_' . $key)->toHtml();
+            } else {
+              $html .='<div class="field">
+                        <label for="' . $key . '">' . $fields[$key]->getStoreLabel() . '</label>
+                        <div class="input-box">
+                            <input type="text" name="' . $key . '" id="' . $key . '" value="" class="input-text" />
+                        </div>
+                    </div>';
+            }
+          }
+          $html .= '<input class="button" id="gigyaMoreInfoSubmit" type="button" value="Send" onclick="gigyaFunctions.moreInfoSubmit()" "></form>';
+          $html .= '</div>';
+
           $res = array(
-            'result' => 'noEmail',
-            'html' => $form,
-            'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
-            'headline' => $this->__('Fill-in missing required info'),
+            'result' => 'moreInfo',
+            'fields' => $requireds,
+            'html' => $html,
           );
           $this->getResponse()->setHeader('Content-type', 'application/json');
           $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-          $errors = array_merge($customerErrors, $errors);
+          return;
         } else {
           $customerForm->compactData($customerData);
           $customer->setPassword($this->getRequest()->getPost('password'));
@@ -296,9 +327,11 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
           }
         } else {
           $session->setCustomerFormData($this->getRequest()->getPost());
+          $error = '';
           if (is_array($errors)) {
             foreach ($errors as $errorMessage) {
               $session->addError($errorMessage);
+              $error .= $errorMessage . "\n";
             }
             $res['result'] = 'error';
             $res['message'] = $error;

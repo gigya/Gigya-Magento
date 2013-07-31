@@ -17,7 +17,7 @@
         </action>
         <action method="addItem">
             <type>js_css</type>
-            <name>prototype/windows/themes/magento.css</name>
+            <name>prototype/windows/themes/lighting.css</name>
         </action>
     </reference>
     <reference name="before_body_end">

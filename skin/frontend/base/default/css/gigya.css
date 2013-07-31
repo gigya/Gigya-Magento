@@ -31,3 +31,10 @@ div.ratings-short .gig-rating div.gig-rating-star-empty {
   float: right;
   margin-top: 15px;
 }
+
+.gigyaMoreInfo {
+    margin: 15px;
+}
+ #gigyaMoreInfoSubmit {
+     margin-top: 5px;
+ }
