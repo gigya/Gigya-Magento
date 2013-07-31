@@ -160,6 +160,7 @@
     <gigya_global>
       <gigya_global_conf>
         <enable>1</enable>
+        <dataCenter>us1.gigya.com</dataCenter>
         <providers>*</providers>
         <laguages>en</laguages>
         <google_sa>0</google_sa>

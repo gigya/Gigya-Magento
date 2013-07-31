@@ -33,6 +33,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </enable>
+              <dataCenter translate="label">
+                  <label>Data Center Region</label>
+                  <frontend_type>select</frontend_type>
+                  <source_model>Gigya_Social_Model_config_source_datacenter</source_model>
+                  <sort_order>10</sort_order>
+                  <show_in_default>1</show_in_default>
+                  <show_in_website>1</show_in_website>
+                  <show_in_store>1</show_in_store>
+              </dataCenter>
             <apikey translate="label">
               <label>Gigya API key</label>
               <frontend_type>text</frontend_type>
