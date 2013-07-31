@@ -5,7 +5,7 @@ var gigyaFunctions = gigyaFunctions || {};
 var gigyaCache = {};
 gigyaFunctions.login = function (response) {
   gigyaCache.uInfo = response;
-  new Ajax.Request('/gigyalogin/login/login', {
+  new Ajax.Request(baseUrl + 'gigyalogin/login/login', {
       parameters: {json:JSON.stringify(response)},
       onSuccess: function (trans) {
         if (typeof trans.responseJSON.result !== 'undefined') {
@@ -71,7 +71,7 @@ gigyaFunctions.linkAccounts = function () {
   }
   else {
   var toPost = {username:email, password:password};
-  new Ajax.Request('/gigyalogin/login/loginPost', {
+  new Ajax.Request(baseUrl + 'gigyalogin/login/loginPost', {
       parameters: {login:JSON.stringify(toPost)},
       onSuccess: function (trans) {
         if (trans.responseJSON.result === 'success') {
@@ -92,7 +92,7 @@ gigyaFunctions.emailSubmit = function () {
     var toPost = gigyaCache.uInfo;
     toPost.user.email = email;
 
-    new Ajax.Request('/gigyalogin/login/login', {
+    new Ajax.Request(baseUrl + 'gigyalogin/login/login', {
         parameters: {json:JSON.stringify(toPost)},
         onSuccess: function (trans) {
           if (typeof trans.responseJSON.redirect !== 'undefined') {
@@ -117,7 +117,7 @@ gigyaFunctions.emailSubmit = function () {
 gigyaFunctions.moreInfoSubmit = function () {
     var toPost = gigyaCache.uInfo;
     toPost.user.missInfo = $('gigyaMoreInfoForm').serialize(true);
-    new Ajax.Request('/gigyalogin/login/login', {
+    new Ajax.Request(baseUrl + 'gigyalogin/login/login', {
         parameters: {json: JSON.stringify(toPost)},
         onSuccess: function (trans){
             if (trans.responseJSON.result === 'newUser'){
@@ -249,7 +249,7 @@ gigyaFunctions.postReview = function (eventObj) {
     detail:eventObj.commentText,
     ratings:ratings
   };
-  var reviewsUrl = '/gigyareviews/reviews/post',
+  var reviewsUrl = baseUrl + 'gigyareviews/reviews/post',
   id = '',
   category = '';
   if (id = gigyaFunctions.getUrlParam('id')) {
