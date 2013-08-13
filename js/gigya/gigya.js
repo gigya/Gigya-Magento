@@ -32,10 +32,24 @@ gigyaFunctions.login = function (response) {
                 gigyaFunctions.showMoreInfoForm(trans.responseJSON.html);
                 gigyaFunctions.moreInfoSubmit();
             break;
-
-
           }
         }
+      }
+  });
+};
+
+gigyaFunctions.logout = function(evData) {
+  console.log(evData);
+  new Ajax.Request(baseUrl + 'gigyalogin/login/logout', {
+      method:'get',
+      onSuccess: function(res){
+          if (res.responseJSON.result == 'success') {
+              window.location.reload();
+          } else {
+              if (typeof console !== 'undefined'){
+                  console.log('Error logging out');
+              }
+          }
       }
   });
 };
@@ -286,6 +300,7 @@ gigyaFunctions.RnR = function (settings) {
   ua = gigyaFunctions.createUserAction(settings);
   delete settings.ua;
   var reviews = {
+    context:{id: 'comments'},
     containerID: 'customer-reviews',
     categoryID: settings.categoryID,
     streamID: settings.streamID,
@@ -328,7 +343,8 @@ gigyaFunctions.getUrlParam = function (param) {
 function gigyaRegister() {
   if (typeof gigya !== 'undefined') {
     gigya.socialize.addEventHandlers({
-        onLogin: gigyaFunctions.login
+        onLogin: gigyaFunctions.login,
+        onLogout: gigyaFunctions.logout
     });
   }
 }

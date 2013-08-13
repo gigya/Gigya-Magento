@@ -32,6 +32,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         $openActions = array(
             'create',
             'login',
+            'logout',
             'loginPost',
             'logoutsuccess',
             'forgotpassword',
@@ -264,7 +265,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
           $html = '<div class="gigyaMoreInfo"><form action="' . Mage::getBaseUrl() . 'gigyalogin/login" name="moreInfo" id="gigyaMoreInfoForm">';
           foreach ($requireds as $key => $r) {
             $requireds[$key] = $fields[$key]->getStoreLabel();
-            if (!$fields[$key]->getIsUserDefined()) {
+            if (!$fields[$key]->getIsUserDefined() && is_object($this->getLayout()->createBlock('customer/widget_' . $key))) {
               $html .= $this->getLayout()->createBlock('customer/widget_' . $key)->toHtml();
             } else {
               $html .='<div class="field">
@@ -423,6 +424,16 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
           $this->getResponse()->setHeader('Content-type', 'application/json');
           $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
     }
+  public function logoutAction(){
+    $cust = $this->_getSession()->logout();
+    if ($cust->getId() === null){
+      $res['result'] = 'success';
+    } else {
+      $res['result'] = 'error';
+    }
+    $this->getResponse()->setHeader('Content-type', 'application/json');
+    $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
+  }
 
 }
 
