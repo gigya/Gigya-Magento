@@ -45,4 +45,7 @@ div.ratings-short .gig-rating div.gig-rating-star-empty {
      right: 50%;
      margin-top: -11px;
      margin-right: -11px;
+     width: 32px;
+     height: 32px;
+     background: transparent url("http://cdn.gigya.com/gs/i/progress_ani.gif") no-repeat;
  }

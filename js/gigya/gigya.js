@@ -141,7 +141,7 @@ gigyaFunctions.moreInfoSubmit = function () {
       }
     }
   });
-  $('gigyaMoreInfoForm').replace('<img class="trob" src="http://cdn.gigya.com/gs/i/progress_ani.gif"/>');
+  $('gigyaMoreInfoForm').replace('<div class="trob"></div>');
 };
 
 gigyaFunctions.createUserAction = function (settings) {
