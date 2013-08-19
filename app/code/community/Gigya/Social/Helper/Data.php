@@ -5,11 +5,11 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
 {
   public function _getPassword($length = 8)
   {
-    $characters = str_split('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
-    $str = '';
-    for ($p = 0; $p < $length; $p++) {
-      $str .= $characters[mt_rand(0, count($characters))];
-    }
+    $chars = Mage_Core_Helper_Data::CHARS_PASSWORD_LOWERS
+      . Mage_Core_Helper_Data::CHARS_PASSWORD_UPPERS
+      . Mage_Core_Helper_Data::CHARS_PASSWORD_DIGITS
+      . Mage_Core_Helper_Data::CHARS_PASSWORD_SPECIALS;
+    $str = Mage::helper('core')->getRandomString($length, $chars);
     return 'Gigya_' . $str;
   }
 
