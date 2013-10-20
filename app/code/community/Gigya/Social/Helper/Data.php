@@ -20,7 +20,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
       'siteUID' => $siteUid,
     );
     try {
-      $this->_gigya_api('notifyRegistration', $params);
+      $res = $this->_gigya_api('notifyRegistration', $params);
     }
     catch (Exception $e) {
       $code = $e->getCode();
@@ -152,6 +152,9 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     }
     if (!empty($config['advancedConfig'])) {
       $advConfig = $this->_confStringToArry($config['advancedConfig']);
+      foreach ($advConfig as $key => $val) {
+        $advConfig[$key] = $this->_string_to_bool($val);
+      }
       $config = $advConfig + $config;
     }
     unset($config['advancedConfig']);
@@ -185,7 +188,8 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
   public function _confStringToArry($str)
   {
     $lines = array();
-    $values =  explode(PHP_EOL, $str);
+    $str = str_replace("\r\n", "\n", $str);
+    $values =  explode("\n", $str);
     //some clean up
     $values = array_map('trim', $values);
     $values = array_filter($values, 'strlen');
@@ -194,6 +198,12 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
       $lines[$matches[1]] = $matches[2];
     }
     return $lines;
+  }
 
+  public function _string_to_bool($str){
+    if ($str === 'true' || $str === 'false') {
+      return (bool) $str;
+    }
+    return $str;
   }
 }

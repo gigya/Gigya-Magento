@@ -425,12 +425,13 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
           $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
     }
   public function logoutAction(){
-    $cust = $this->_getSession()->logout();
+    $cust = $this->_getSession()->logout()->setBeforeAuthUrl(null);
     if ($cust->getId() === null){
       $res['result'] = 'success';
     } else {
       $res['result'] = 'error';
     }
+
     $this->getResponse()->setHeader('Content-type', 'application/json');
     $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
   }

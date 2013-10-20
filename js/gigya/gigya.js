@@ -38,7 +38,7 @@ gigyaFunctions.login = function (response) {
 };
 
 gigyaFunctions.logout = function (evData) {
-  console.log(evData);
+  if (typeof evData.source !== 'undefined' && evData.source == "showCommentsUI"){
   new Ajax.Request(baseUrl + 'gigyalogin/login/logout', {
     method: 'get',
     onSuccess: function (res) {
@@ -51,6 +51,7 @@ gigyaFunctions.logout = function (evData) {
       }
     }
   });
+  }
 };
 
 gigyaFunctions.hideLogin = function (id) {
@@ -373,6 +374,7 @@ document.observe("dom:loaded", function () {
           gigyaFunctions.reactions(plugin.value);
           break;
         case 'comments':
+          plugin.context = {id: "comments"};
           gigya.comments.showCommentsUI(plugin.value);
           break;
         case 'activityFeed':
