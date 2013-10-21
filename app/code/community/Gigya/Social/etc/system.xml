@@ -33,6 +33,15 @@
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
             </enable>
+              <version translate="label">
+                  <label>Version number</label>
+                  <frontend_type>label</frontend_type>
+                  <frontend_model>Gigya_Social_Block_Adminhtml_version</frontend_model>
+                  <sort_order>9</sort_order>
+                  <show_in_default>1</show_in_default>
+                  <show_in_website>1</show_in_website>
+                  <show_in_store>1</show_in_store>
+              </version>
               <dataCenter translate="label">
                   <label>Data Center Region</label>
                   <frontend_type>select</frontend_type>

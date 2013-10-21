@@ -184,6 +184,10 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
   {
     return Mage::getStoreConfig('gigya_share/gigya_share_action/enable_' . $place);
   }
+  public function getExtensionVersion()
+  {
+    return (string) Mage::getConfig()->getNode()->modules->Gigya_Social->version;
+  }
 
   public function _confStringToArry($str)
   {
