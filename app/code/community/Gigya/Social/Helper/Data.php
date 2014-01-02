@@ -3,12 +3,16 @@
 include_once __DIR__ . '/../sdk/GSSDK.php';
 class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
 {
+  const CHARS_PASSWORD_LOWERS                 = 'abcdefghjkmnpqrstuvwxyz';
+  const CHARS_PASSWORD_UPPERS                 = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+  const CHARS_PASSWORD_DIGITS                 = '23456789';
+  const CHARS_PASSWORD_SPECIALS               = '!$*-.=?@_';
   public function _getPassword($length = 8)
   {
-    $chars = Mage_Core_Helper_Data::CHARS_PASSWORD_LOWERS
-      . Mage_Core_Helper_Data::CHARS_PASSWORD_UPPERS
-      . Mage_Core_Helper_Data::CHARS_PASSWORD_DIGITS
-      . Mage_Core_Helper_Data::CHARS_PASSWORD_SPECIALS;
+    $chars = self::CHARS_PASSWORD_LOWERS
+      . self::CHARS_PASSWORD_UPPERS
+      . self::CHARS_PASSWORD_DIGITS
+      . self::CHARS_PASSWORD_SPECIALS;
     $str = Mage::helper('core')->getRandomString($length, $chars);
     return 'Gigya_' . $str;
   }
