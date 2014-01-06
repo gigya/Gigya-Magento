@@ -3,6 +3,8 @@
 Create an immersive and completely social shopping experience with Gigya Extension for Magento. Gigya’s social technology combines the core elements that power ecommerce - product awareness and discovery coupled with customer acquisition and loyalty - into a comprehensive set of features and services that are designed to keep customers engaged as well as increase shopping cart conversions while on Magento sites.  The Gigya Extension for Magento enables efficient integration of the Gigya platform for Magento sites. Read more about the installation and configuration of the Gigya Extension:
 http://developers.gigya.com/050_Partners/050_CMS_Modules/050_Magento
 
+Gigya extension on Magento marketplace:
+http://www.magentocommerce.com/magento-connect/catalog/product/view/id/17597/s/gigya-social-infrastructure-8221
 
 Prominent features supported by the extension include:
 
