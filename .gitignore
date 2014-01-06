@@ -47,6 +47,7 @@ lib/
 LICENSE_AFL.txt
 LICENSE.html
 LICENSE.txt
+!LICENSE.GPL
 media/downloadable/
 media/import/
 nbproject/
