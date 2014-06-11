@@ -59,6 +59,11 @@
       <block name="gigya.login" type="core/template" before="-" template="gigya/login/social_login_login_page.phtml"/>
     </reference>
   </customer_account_login>
+	<customer_account_create>
+		<reference name="content">
+			<block name="gigya.login" type="core/template" before="-" template="gigya/login/social_login_login_page.phtml"/>
+		</reference>
+	</customer_account_create>
   <customer_account_index>
     <reference name="content">
       <block type="core/template" name="gigya.link.accounts" after="-" template="gigya/login/link_accounts.phtml"/>

@@ -1,0 +1,9 @@
+<layout>
+    <default>
+				<reference name="head">
+					<action method="addJs">
+						<name>gigya/admin.js</name>
+					</action>
+				</reference>
+    </default>
+</layout>

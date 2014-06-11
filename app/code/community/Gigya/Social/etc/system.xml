@@ -111,7 +111,7 @@
       </groups>
     </gigya_global>
     <gigya_login translate="label" module="Gigya_Social">
-      <label>Gigya Social login</label>
+      <label>Gigya User Management</label>
       <tab>gigya</tab>
       <frontend_type>text</frontend_type>
       <sort_order>100</sort_order>
@@ -119,6 +119,25 @@
       <show_in_website>1</show_in_website>
       <show_in_store>1</show_in_store>
       <groups>
+				<gigya_user_management translate="label">
+					<label>Gigya User Management</label>
+					<frontend_type>text</frontend_type>
+					<sort_order>100</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>0</show_in_store>
+					<fields>
+						<login_modes translate="label">
+							<label>Gigya User Management</label>
+							<frontend_type>radios</frontend_type>
+							<source_model>Gigya_Social_Model_config_source_loginModes</source_model>
+							<sort_order>9</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</login_modes>
+					</fields>
+				</gigya_user_management>
         <gigya_login_conf translate="label">
           <label>Gigya Social login configuration</label>
           <frontend_type>text</frontend_type>
@@ -127,7 +146,7 @@
           <show_in_website>1</show_in_website>
           <show_in_store>0</show_in_store>
           <fields>
-            <enable translate="label">
+<!--            <enable translate="label">
               <label>Enable Gigya Social login</label>
               <frontend_type>select</frontend_type>
               <source_model>adminhtml/system_config_source_yesno</source_model>
@@ -135,7 +154,7 @@
               <show_in_default>1</show_in_default>
               <show_in_website>1</show_in_website>
               <show_in_store>1</show_in_store>
-            </enable>
+            </enable>-->
             <buttonsStyle translate="label">
               <label>Button style</label>
               <frontend_type>select</frontend_type>
@@ -199,6 +218,127 @@
             </advancedConfig>
           </fields>
         </gigya_login_conf>
+				<gigya_raas_conf translate="label">
+					<label>Registration-as-a-Service</label>
+					<frontend_type>text</frontend_type>
+					<comment><![CDATA[RaaS requires initial configuration in Gigya's Admin Console. Screen sets can be defined in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a>. The page will display a list of predefined default screen-sets, each with an ID. Click on the "Visual Editor" link next to the screen-set that you want to use, this will open the <a class="external" target="_blank" title="010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor" rel="internal" href="http://dev-wiki.gigya.com/010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor">Visual Editor</a> window. You can modify the screens, or just hit the "Save" button to activate them. Please make sure that the screen-set IDs that are defined below match the IDs of the screen-sets you have configured in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a> page.']]></comment>
+					<sort_order>101</sort_order>
+					<show_in_default>1</show_in_default>
+					<show_in_website>1</show_in_website>
+					<show_in_store>0</show_in_store>
+					<fields>
+						<title translate="label">
+							<lable>Registration-as-a-Service</lable>
+							<frontend_type>label</frontend_type>
+							<frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
+							<sort_order>10</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</title>
+						<web_screen_set_id translate="label">
+							<label>Web Screen Set ID</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>11</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</web_screen_set_id>
+						<mobile_screen_set_id translate="label">
+							<label>Mobile Screen Set ID</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>12</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</mobile_screen_set_id>
+						<login_screen_id translate="label">
+							<label>Login Screen ID</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>13</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</login_screen_id>
+						<register_screen_id translate="label">
+							<label>Register Screen ID</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>13</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</register_screen_id>
+						<profile_title translate="label">
+							<lable>Registration-as-a-Service</lable>
+							<frontend_type>label</frontend_type>
+							<frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
+							<sort_order>14</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</profile_title>
+						<profile_screen_id translate="label">
+							<label>Profile Screen Set ID</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>15</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</profile_screen_id>
+						<mobile_profile_screen_id translate="label">
+							<label>Mobile Screen Set ID</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>16</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</mobile_profile_screen_id>
+						<override_links>
+							<label>Override Magento links</label>
+							<frontend_type>select</frontend_type>
+							<comment><![CDATA[When set to yes, the Magento default "Login", "Registration" and "Edit Profile" links pop-up RaaS screens instead of Magento screens.]]></comment>
+							<source_model>adminhtml/system_config_source_yesno</source_model>
+							<sort_order>17</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</override_links>
+						<div_ids_title translate="label">
+							<lable>Registration-as-a-Service</lable>
+							<frontend_type>label</frontend_type>
+							<frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
+							<comment><![CDATA[Specify the DIV IDs in which to embed the screen-sets. If the IDs are empty (default), then the screen-set would show as pop-up dialogs.]]></comment>
+							<sort_order>18</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>1</show_in_store>
+						</div_ids_title>
+						<raas_login_div_id translate="label">
+							<label>Login</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>19</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</raas_login_div_id>
+						<raas_register_div_id translate="label">
+							<label>Register</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>20</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</raas_register_div_id>
+						<raas_profile_div_id translate="label">
+							<label>Profile</label>
+							<frontend_type>text</frontend_type>
+							<sort_order>21</sort_order>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</raas_profile_div_id>
+					</fields>
+				</gigya_raas_conf>
         <gigya_link_accounts translate="lable">
           <label>Gigya Add Connections configuration</label>
           <frontend_type>text</frontend_type>

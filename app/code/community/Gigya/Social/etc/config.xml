@@ -154,6 +154,13 @@
         </admin>
       </resources>
     </acl>
+		<layout>
+			<updates>
+				<Gigya_Social>
+					<file>gigya_admin.xml</file>
+				</Gigya_Social>
+			</updates>
+		</layout>
   </adminhtml>
   <!--default values from admin sections-->
   <default>
@@ -167,8 +174,10 @@
       </gigya_global_conf>
     </gigya_global>
     <gigya_login>
+			<gigya_user_management>
+				<login_modes>social</login_modes>
+			</gigya_user_management>
       <gigya_login_conf>
-        <enable>1</enable>
         <buttonsStyle>standart</buttonsStyle>
         <showTermsLink>0</showTermsLink>
         <loginBehavior>loginExistingUser</loginBehavior>
@@ -184,6 +193,15 @@
         <showTermsLink>0</showTermsLink>
         <showEditLink>1</showEditLink>
       </gigya_link_accounts>
+			<gigya_raas_conf>
+				<web_screen_set_id>Login-web</web_screen_set_id>
+				<mobile_screen_set_id>Mobile-login</mobile_screen_set_id>
+				<login_screen_id>gigya-login-screen</login_screen_id>
+				<register_screen_id>gigya-register-screen</register_screen_id>
+				<profile_screen_id>Profile-web</profile_screen_id>
+				<mobile_profile_screen_id>Profile-mobile</mobile_profile_screen_id>
+				<override_links>1</override_links>
+			</gigya_raas_conf>
     </gigya_login>
     <gigya_share>
       <gigya_sharebar>
