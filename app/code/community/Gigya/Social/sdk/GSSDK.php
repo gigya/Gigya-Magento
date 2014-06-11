@@ -1,11 +1,11 @@
 <?php
  /*
-* Copyright (C) 2011 Gigya, Inc.
-* Version 2.15.3
+* Copyright (C) 2013 Gigya, Inc.
+* Version 2.15.5
 * 
- * 
- * Gigya PHP SDK
- * @author Shachar Bar-David
+* 
+* Gigya PHP SDK
+* @author Guy schaller
 */
 
 if (!function_exists('curl_init')) {
@@ -44,8 +44,8 @@ class GSKeyNotFoundException extends GSException{
 
 class GSRequest { 	 
 	private static $cafile;
-	const DEFAULT_API_DOMAIN = "gigya.com";
-	const version = "2.15.3";
+	const DEFAULT_API_DOMAIN = "us1.gigya.com";
+	const version = "2.15.5";
 	
 	private $host;
   	private $domain;
@@ -57,12 +57,18 @@ class GSRequest {
 	private $proxyUserPass = ":";
 	private $curlArray = array();
 
-	private $apiKey; 	
+	private $apiKey;
+	private $userKey;
 	private $secretKey; 
 	private $params; //GSObject 
 	private $useHTTPS; 
 	private $apiDomain = self::DEFAULT_API_DOMAIN;
 	
+
+	static function __constructStatic() 
+	{
+		GSRequest::$cafile = realpath('./cacert.pem');
+	}
 
 	/**
 	 * Constructs a request using an apiKey and secretKey. 
@@ -74,8 +80,10 @@ class GSRequest {
 	 * If namespaces is not supplied "socialize" is assumed
 	 * @param params the request parameters
 	 * @param useHTTPS useHTTPS set this to true if you want to use HTTPS. 
+	 * @param userKey userKey A key of an admin user with extra permissions. 
+	 * If this parameter is provided, then the secretKey parameter is assumed to be the admin user's secret key and not the site's secret key.
 	 */
-	public function __construct($apiKey, $secretKey, $apiMethod, $params = null, $useHTTPS = false ) 
+	public function __construct($apiKey, $secretKey, $apiMethod, $params = null, $useHTTPS = false, $userKey = null ) 
 	{
 		if (!isset($apiMethod) || strlen($apiMethod)==0)
 			return;
@@ -108,12 +116,10 @@ class GSRequest {
 		
 		$this->apiKey = $apiKey;
 		$this->secretKey = $secretKey;
+		$this->userKey = $userKey;
 		
 		$this->traceField("apiMethod",$apiMethod);
 		$this->traceField("apiKey",$apiKey);
-		
-		
-		
 	}	
 	
 	public function setParam($param, $val) {
@@ -186,23 +192,27 @@ class GSRequest {
 			$this->traceField("timeout",$timeout);
 		}
 		
-		if (	(empty($this->apiKey))
-			 || (empty($this->method))
-		 )
-		 {
+		if (empty($this->method) || (empty($this->apiKey) and empty($this->userKey)) )
+		{
 			return new GSResponse($this->method,null,$this->params,400002,null,$this->traceLog);
-		 }
+		}
 		
+		if ($this->useHTTPS && empty(GSRequest::$cafile)) 
+		{
+			return new GSResponse($this->method,null,$this->params,400003,null,$this->traceLog);
+		}
+
 		try 
 		{
 			$this->setParam("httpStatusCodes", "false");
 			
+			$this->traceField("userKey", $this->userKey);
 			$this->traceField("apiKey", $this->apiKey);
 			$this->traceField("apiMethod", $this->method);
 			$this->traceField("params",$this->params);
 			$this->traceField("useHTTPS", $this->useHTTPS);
 
-			$responseStr = $this->sendRequest("POST", $this->host, $this->path, $this->params, $this->apiKey, $this->secretKey, $this->useHTTPS,$timeout);
+			$responseStr = $this->sendRequest("POST", $this->host, $this->path, $this->params, $this->apiKey, $this->secretKey, $this->useHTTPS,$timeout, $this->userKey);
 			
 			return new GSResponse($this->method,$responseStr,null,0,null,$this->traceLog);
 		}
@@ -220,7 +230,7 @@ class GSRequest {
 		}
 	}
 
-	private function sendRequest($method,$domain,$path,$params,$token,$secret,$useHTTPS=false,$timeout=null)
+	private function sendRequest($method,$domain,$path,$params,$token,$secret,$useHTTPS=false,$timeout=null,$userKey=null)
 	{
 		$params->put("sdk", "php_".GSRequest::version);
 		//prepare query params
@@ -234,29 +244,26 @@ class GSRequest {
 		$nonce  = ((string)SigUtils::currentTimeMillis()).rand();
 		$httpMethod = "POST";
 
-		
+		if ($userKey)
+		{
+			$params->put("userKey", $userKey);	
+		}
+
 		if (!empty($secret))
 		{
 			$params->put("apiKey", $token);
 			
-			if ($useHTTPS)
-			{
-				$params->put("secret", $secret);
-			} else
-			{
-				$params->put("timestamp", $timestamp);
-				$params->put("nonce", $nonce);
+			$params->put("timestamp", $timestamp);
+			$params->put("nonce", $nonce);
 				
-				//signature
-				$signature = self::getOAuth1Signature($secret, $httpMethod, $resourceURI, $useHTTPS, $params);
-				$params->put("sig", $signature);
-			}
+			//signature
+			$signature = self::getOAuth1Signature($secret, $httpMethod, $resourceURI, $useHTTPS, $params);
+			$params->put("sig", $signature);
 		}
 		else {
-			
 			$params->put("oauth_token", $token);
 		}
-		
+
 		//get rest response.
 		$res = $this->curl($resourceURI, $params, $timeout);
 		return $res;
@@ -267,11 +274,11 @@ class GSRequest {
 	{   
 		foreach($params->getKeys() as $key)
 		{
-			$value = $params->getString($key);
+			$value = $params->getString($key);	
 			$postData[$key] = $value;
 		}
 		
-		$qs = http_build_query($postData);
+		$qs = http_build_query($postData); 
 		$this->traceField("URL",$url);
 		$this->traceField("postData",$qs);
 
@@ -334,10 +341,13 @@ class GSRequest {
 			$val = $params->getString($key);
 			if (isset($val))
 			{
-				$ret .="$key=".$val;
+				$ret .="$key=".urlencode($val);
 			}
 			$ret .='&';
 		}
+
+		$ret = rtrim($ret, "&");
+
 		return $ret;
 	}
 
@@ -413,11 +423,11 @@ class GSRequest {
 	
 	private function traceField($name,$value)
 	{
-		array_push($this->traceLog,$name."=". $value);
+		array_push($this->traceLog,$name."=". print_r($value, true)); 
 	}
 	
 }
-
+GSRequest::__constructStatic();
 
 /**
  * Wraps the server's response.
@@ -439,6 +449,7 @@ class GSResponse
 	public static function Init(){
 		self::$errorMsgDic = new GSObject();
 		self::$errorMsgDic->put(400002, "Required parameter is missing");
+		self::$errorMsgDic->put(400003, "You must set a certificate for HTTPS requests");
 		self::$errorMsgDic->put(500000, "General server error");
 	}
 	
@@ -746,7 +757,7 @@ class GSObject {
 	public function getString($key, $defaultValue=GSObject::DEFAULT_VALUE) 
 	{		
 		$obj = $this->get($key,$defaultValue);
-		return $obj;
+		return (string)$obj;
 	}
 
 	/* GET GSOBJECT */
