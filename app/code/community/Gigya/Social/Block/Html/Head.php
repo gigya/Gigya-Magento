@@ -33,10 +33,14 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
         );
       }
       // Add base url to JS
+      $userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
       $this->_data['items']['js/baseUrl'] = array(
         'type' => 'inline_js',
         'name' => 'baseUrl',
-        'params' => 'var baseUrl = "' . Mage::getBaseUrl() . '";',
+        'params' => 'var baseUrl = "' . Mage::getBaseUrl() . '",
+          gigyaSettings = gigyaSettings || {};
+          gigyaSettings.userMode = "' . $userMode . '";
+          gigyaSettings.RaaS = ' . Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf') . ';',
         'if' => '',
         'cond' => ''
       );

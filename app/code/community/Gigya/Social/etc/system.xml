@@ -236,38 +236,38 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</title>
-						<web_screen_set_id translate="label">
+						<WebScreen translate="label">
 							<label>Web Screen Set ID</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>11</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
-						</web_screen_set_id>
-						<mobile_screen_set_id translate="label">
+						</WebScreen>
+						<MobileScreen translate="label">
 							<label>Mobile Screen Set ID</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>12</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
-						</mobile_screen_set_id>
-						<login_screen_id translate="label">
+						</MobileScreen>
+						<LoginScreen translate="label">
 							<label>Login Screen ID</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>13</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
-						</login_screen_id>
-						<register_screen_id translate="label">
+						</LoginScreen>
+						<RegisterScreen translate="label">
 							<label>Register Screen ID</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>13</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
-						</register_screen_id>
+						</RegisterScreen>
 						<profile_title translate="label">
 							<lable>Registration-as-a-Service</lable>
 							<frontend_type>label</frontend_type>
@@ -277,22 +277,22 @@
 							<show_in_website>1</show_in_website>
 							<show_in_store>1</show_in_store>
 						</profile_title>
-						<profile_screen_id translate="label">
+						<ProfileWebScreen translate="label">
 							<label>Profile Screen Set ID</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>15</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
-						</profile_screen_id>
-						<mobile_profile_screen_id translate="label">
+						</ProfileWebScreen>
+						<ProfileMobileScreen translate="label">
 							<label>Mobile Screen Set ID</label>
 							<frontend_type>text</frontend_type>
 							<sort_order>16</sort_order>
 							<show_in_default>1</show_in_default>
 							<show_in_website>1</show_in_website>
 							<show_in_store>0</show_in_store>
-						</mobile_profile_screen_id>
+						</ProfileMobileScreen>
 						<override_links>
 							<label>Override Magento links</label>
 							<frontend_type>select</frontend_type>

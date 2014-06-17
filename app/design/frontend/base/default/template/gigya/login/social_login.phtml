@@ -1,8 +1,19 @@
-<?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_login/gigya_login_conf')) : ?>
+<?php
+$userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
+?>
+<?php if ($userMode === 'social') : ?>
+    <script type="text/javascript">//<![CDATA[
+        gigyaSettings.login =
+        <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_login_conf')  ?>
+        //]]>
+    </script>
+    <div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf') ?>"
+         class="gigya-login"></div>
+<?php endif ?>
+<?php if ($userMode === 'raas') : ?>
 <script type="text/javascript">//<![CDATA[
-  var gigyaSettings = gigyaSettings || {};
-  gigyaSettings.login = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_login_conf')  ?>
-  //]]>
+    gigyaSettings.RaaS =
+    <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf'); ?>
+    //]]>
 </script>
-<div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf') ?>" class="gigya-login"></div>
 <?php endif ?>

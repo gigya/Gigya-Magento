@@ -18,7 +18,9 @@ class Gigya_Social_Block_Login extends Mage_Core_Block_Template
     return Mage::getStoreConfig('gigya_login/gigya_login_conf/loginContainerId');
   }
   protected function _toHtml(){
-    return parent::_toHtml();
+      if (Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes') == 'social') {
+          return parent::_toHtml();
+      }
   }
 
 }
