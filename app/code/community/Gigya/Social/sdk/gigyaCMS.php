@@ -316,6 +316,18 @@ class GigyaCMS {
 		}
 	}
 
+    public function isApiKeyValid() {
+        $request = new GSRequest($this->api_key, $this->api_secret, 'shortenURL');
+        $request->setAPIDomain($this->api_domain);
+        $request->setParam('url', 'http://gigya.com');
+        $response = $request->send();
+        $error = $response->getErrorCode();
+        if ($error != 0) {
+            return false;
+        }
+        return true;
+    }
+
 /////////////////////////////////
 //            RaaS             //
 /////////////////////////////////
@@ -502,6 +514,19 @@ class GigyaCMS {
 		return false;
 	}
 
+    /**
+     * @param int $uid the user gigya uid
+     * @param array $counters the counter to increment.
+     * @return array
+     */
+    public function incrementCounter($uid, $counters) {
+        $params = array(
+            'UID' => $uid,
+            'counters' => json_encode($counters)
+        );
+        return $this->call('accounts.incrementCounters', $params);
+    }
+
 	public static function isSpider() {
 		// Add as many spiders you want in this array
 		$spiders = array( 'Googlebot', 'Yammybot', 'Openbot', 'Yahoo', 'Slurp', 'msnbot', 'ia_archiver', 'Lycos', 'Scooter', 'AltaVista', 'Teoma', 'Gigabot', 'Googlebot-Mobile' );
@@ -515,5 +540,86 @@ class GigyaCMS {
 		}
 		return FALSE;
 	}
+
+    /**
+     * @param mixed $api_domain
+     */
+    public function setApiDomain($api_domain)
+    {
+        $this->api_domain = $api_domain;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiDomain()
+    {
+        return $this->api_domain;
+    }
+
+    /**
+     * @param mixed $api_key
+     */
+    public function setApiKey($api_key)
+    {
+        $this->api_key = $api_key;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiKey()
+    {
+        return $this->api_key;
+    }
+
+    /**
+     * @param mixed $api_secret
+     */
+    public function setApiSecret($api_secret)
+    {
+        $this->api_secret = $api_secret;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getApiSecret()
+    {
+        return $this->api_secret;
+    }
+
+    /**
+     * @param mixed $user_key
+     */
+    public function setUserKey($user_key)
+    {
+        $this->user_key = $user_key;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserKey()
+    {
+        return $this->user_key;
+    }
+
+    /**
+     * @param mixed $user_secret
+     */
+    public function setUserSecret($user_secret)
+    {
+        $this->user_secret = $user_secret;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUserSecret()
+    {
+        return $this->user_secret;
+    }
+
 
 }

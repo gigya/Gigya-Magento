@@ -57,6 +57,11 @@
             <class>Gigya_Social_Model_Cart_Observer</class>
             <method>addOrderShareUi</method>
           </gigya_share_action>
+            <gigya_counters>
+                <type>singleton</type>
+                <class>Gigya_Social_Model_Cart_Observer</class>
+                <method>incCounters</method>
+            </gigya_counters>
         </observers>
       </checkout_onepage_controller_success_action>
     </events>

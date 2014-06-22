@@ -51,6 +51,10 @@ gigyaFunctions.RaaS.login = function (response) {
                         window.location.reload();
                     }
                 } else {
+                    if (trans.responseJSON.result == 'message') {
+                        var html = trans.responseJSON.message;
+                        gigyaFunctions.showModalWindow('Error', html);
+                    }
                     gigya.accounts.logout();
                 }
             }
@@ -90,7 +94,13 @@ gigyaFunctions.RaaS.init = function (params) {
     if (params.override_links) {
         $$('.gigya-raas-login').each(function (element) {
             element.observe('click', gigyaFunctions.RaaS.loginScreens);
-        })
+        });
+        $$('.gigya-raas-register').each(function (element) {
+            element.observe('click', gigyaFunctions.RaaS.registerScreens);
+        });
+        $$('.gigya-raas-profile').each(function (element) {
+            element.observe('click', gigyaFunctions.RaaS.profileScreens);
+        });
     } else {
         gigyaFunctions.RaaS.loginScreens();
     }
@@ -373,11 +383,16 @@ gigyaFunctions.RnR = function (settings) {
 };
 
 gigyaFunctions.showMoreInfoForm = function (html) {
-    gigyaModal = new Window({title: 'Please fill in the missing information', height: 300, width: 300, minimizable: false, maximizable: false });
+    gigyaFunctions.showModalWindow('Please fill in the missing information', html);
+};
+
+gigyaFunctions.showModalWindow = function (title, html) {
+    gigyaModal = new Window({title: title, height: 300, width: 300, minimizable: false, maximizable: false });
     gigyaModal.setHTMLContent(html);
     gigyaModal.setZIndex(1000);
     gigyaModal.showCenter(true);
-};
+
+}
 
 gigyaFunctions.modalObserver = {
     onShow: function (eventName, win) {

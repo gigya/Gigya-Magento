@@ -1,1037 +1,1054 @@
 <?xml version="1.0"?>
 <config>
-  <tabs>
-    <gigya translate="label">
-      <label>Gigya</label>
-      <sort_order>250</sort_order>
-    </gigya>
-  </tabs>
-  <sections>
-    <gigya_global translate="label" module="Gigya_Social">
-      <label>Gigya Global</label>
-      <tab>gigya</tab>
-      <frontend_type>text</frontend_type>
-      <sort_order>100</sort_order>
-      <show_in_default>1</show_in_default>
-      <show_in_website>1</show_in_website>
-      <show_in_store>1</show_in_store>
-      <groups>
-        <gigya_global_conf translate="label">
-          <label>Gigya global configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>100</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-              <label>Enable</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>
-              <version translate="label">
-                  <label>Version number</label>
-                  <frontend_type>label</frontend_type>
-                  <frontend_model>Gigya_Social_Block_Adminhtml_version</frontend_model>
-                  <sort_order>9</sort_order>
-                  <show_in_default>1</show_in_default>
-                  <show_in_website>1</show_in_website>
-                  <show_in_store>1</show_in_store>
-              </version>
-              <dataCenter translate="label">
-                  <label>Data Center Region</label>
-                  <frontend_type>select</frontend_type>
-                  <source_model>Gigya_Social_Model_config_source_datacenter</source_model>
-                  <sort_order>10</sort_order>
-                  <show_in_default>1</show_in_default>
-                  <show_in_website>1</show_in_website>
-                  <show_in_store>1</show_in_store>
-              </dataCenter>
-            <apikey translate="label">
-              <label>Gigya API key</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[Specify the Gigya API key for this domain]]></comment>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </apikey>
-            <secretkey translate="label">
-              <label>Gigya Secret key</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[Specify the Gigya Secret (Base64 encoded) key for this domain]]></comment>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </secretkey>
-            <providers translate="label">
-              <label>Providers</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[Comma separated list of networks that would be included. For example: "Facebook, Twitter, Yahoo". <br/>
+    <tabs>
+        <gigya translate="label">
+            <label>Gigya</label>
+            <sort_order>250</sort_order>
+        </gigya>
+    </tabs>
+    <sections>
+        <gigya_global translate="label" module="Gigya_Social">
+            <label>Gigya Global</label>
+            <tab>gigya</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <gigya_global_conf translate="label">
+                    <label>Gigya global configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <version translate="label">
+                            <label>Version number</label>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>Gigya_Social_Block_Adminhtml_version</frontend_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </version>
+                        <dataCenter translate="label">
+                            <label>Data Center Region</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_datacenter</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dataCenter>
+                        <apikey translate="label">
+                            <label>Gigya API key</label>
+                            <frontend_type>text</frontend_type>
+                            <backend_model>Gigya_Social_Model_Config_Backend_ApiKey</backend_model>
+                            <comment><![CDATA[Specify the Gigya API key for this domain]]></comment>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </apikey>
+                        <secretkey translate="label">
+                            <label>Gigya Secret key</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Specify the Gigya Secret (Base64 encoded) key for this domain]]></comment>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </secretkey>
+                        <providers translate="label">
+                            <label>Providers</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Comma separated list of networks that would be included. For example: "Facebook, Twitter, Yahoo". <br/>
           * means all networks. See list of available <a href="http://developers.gigya.com/020_Client_API/020_Methods/Socialize.showLoginUI" target="_blank">providers.</a>]]></comment>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </providers>
-            <laguages translate="label">
-              <label>Interface language</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_languages</source_model>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </laguages>
-            <google_sa translate="label">
-              <label>Enable Google Social Analytics</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>15</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </google_sa>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_global_conf>
-      </groups>
-    </gigya_global>
-    <gigya_login translate="label" module="Gigya_Social">
-      <label>Gigya User Management</label>
-      <tab>gigya</tab>
-      <frontend_type>text</frontend_type>
-      <sort_order>100</sort_order>
-      <show_in_default>1</show_in_default>
-      <show_in_website>1</show_in_website>
-      <show_in_store>1</show_in_store>
-      <groups>
-				<gigya_user_management translate="label">
-					<label>Gigya User Management</label>
-					<frontend_type>text</frontend_type>
-					<sort_order>100</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>0</show_in_store>
-					<fields>
-						<login_modes translate="label">
-							<label>Gigya User Management</label>
-							<frontend_type>radios</frontend_type>
-							<source_model>Gigya_Social_Model_config_source_loginModes</source_model>
-							<sort_order>9</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</login_modes>
-					</fields>
-				</gigya_user_management>
-        <gigya_login_conf translate="label">
-          <label>Gigya Social login configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>100</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-<!--            <enable translate="label">
-              <label>Enable Gigya Social login</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>-->
-            <buttonsStyle translate="label">
-              <label>Button style</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_buttons</source_model>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </buttonsStyle>
-            <showTermsLink translate="label">
-              <label>Show terms link</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </showTermsLink>
-            <loginBehavior translate="label">
-              <label>Login behavior</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_loginb</source_model>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </loginBehavior>
-            <containerID translate="label">
-              <label>Gigya login container id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[div ID for loginUI]]></comment>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </containerID>
-            <width translate="label">
-              <label>Width</label>
-              <frontend_type>text</frontend_type>
-              <sort_order>15</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </width>
-            <height translate="label">
-              <label>Height</label>
-              <frontend_type>text</frontend_type>
-              <sort_order>16</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </height>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_login_conf>
-				<gigya_raas_conf translate="label">
-					<label>Registration-as-a-Service</label>
-					<frontend_type>text</frontend_type>
-					<comment><![CDATA[RaaS requires initial configuration in Gigya's Admin Console. Screen sets can be defined in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a>. The page will display a list of predefined default screen-sets, each with an ID. Click on the "Visual Editor" link next to the screen-set that you want to use, this will open the <a class="external" target="_blank" title="010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor" rel="internal" href="http://dev-wiki.gigya.com/010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor">Visual Editor</a> window. You can modify the screens, or just hit the "Save" button to activate them. Please make sure that the screen-set IDs that are defined below match the IDs of the screen-sets you have configured in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a> page.']]></comment>
-					<sort_order>101</sort_order>
-					<show_in_default>1</show_in_default>
-					<show_in_website>1</show_in_website>
-					<show_in_store>0</show_in_store>
-					<fields>
-						<title translate="label">
-							<lable>Registration-as-a-Service</lable>
-							<frontend_type>label</frontend_type>
-							<frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
-							<sort_order>10</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</title>
-						<WebScreen translate="label">
-							<label>Web Screen Set ID</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>11</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</WebScreen>
-						<MobileScreen translate="label">
-							<label>Mobile Screen Set ID</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>12</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</MobileScreen>
-						<LoginScreen translate="label">
-							<label>Login Screen ID</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>13</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</LoginScreen>
-						<RegisterScreen translate="label">
-							<label>Register Screen ID</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>13</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</RegisterScreen>
-						<profile_title translate="label">
-							<lable>Registration-as-a-Service</lable>
-							<frontend_type>label</frontend_type>
-							<frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
-							<sort_order>14</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</profile_title>
-						<ProfileWebScreen translate="label">
-							<label>Profile Screen Set ID</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>15</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</ProfileWebScreen>
-						<ProfileMobileScreen translate="label">
-							<label>Mobile Screen Set ID</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>16</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</ProfileMobileScreen>
-						<override_links>
-							<label>Override Magento links</label>
-							<frontend_type>select</frontend_type>
-							<comment><![CDATA[When set to yes, the Magento default "Login", "Registration" and "Edit Profile" links pop-up RaaS screens instead of Magento screens.]]></comment>
-							<source_model>adminhtml/system_config_source_yesno</source_model>
-							<sort_order>17</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</override_links>
-						<div_ids_title translate="label">
-							<lable>Registration-as-a-Service</lable>
-							<frontend_type>label</frontend_type>
-							<frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
-							<comment><![CDATA[Specify the DIV IDs in which to embed the screen-sets. If the IDs are empty (default), then the screen-set would show as pop-up dialogs.]]></comment>
-							<sort_order>18</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>1</show_in_store>
-						</div_ids_title>
-						<raas_login_div_id translate="label">
-							<label>Login</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>19</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</raas_login_div_id>
-						<raas_register_div_id translate="label">
-							<label>Register</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>20</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</raas_register_div_id>
-						<raas_profile_div_id translate="label">
-							<label>Profile</label>
-							<frontend_type>text</frontend_type>
-							<sort_order>21</sort_order>
-							<show_in_default>1</show_in_default>
-							<show_in_website>1</show_in_website>
-							<show_in_store>0</show_in_store>
-						</raas_profile_div_id>
-					</fields>
-				</gigya_raas_conf>
-        <gigya_link_accounts translate="lable">
-          <label>Gigya Add Connections configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>101</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-              <label>Enable Gigya add connections</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>
-            <containerID translate="label">
-              <label>Gigya add connections container id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[div ID for add connections]]></comment>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </containerID>
-            <width translate="label">
-              <label>Width</label>
-              <frontend_type>text</frontend_type>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </width>
-            <height translate="label">
-              <label>Height</label>
-              <frontend_type>text</frontend_type>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </height>
-            <showTermsLink translate="label">
-              <label>Show terms link</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </showTermsLink>
-            <showEditLink translate="label">
-              <label>Show edit link</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </showEditLink>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_link_accounts>
-      </groups>
-    </gigya_login>
-    <gigya_share translate="label" module="Gigya_Social">
-      <label>Gigya Share</label>
-      <tab>gigya</tab>
-      <frontend_type>text</frontend_type>
-      <sort_order>101</sort_order>
-      <show_in_default>1</show_in_default>
-      <show_in_website>1</show_in_website>
-      <show_in_store>1</show_in_store>
-      <groups>
-        <gigya_sharebar translate="label">
-          <label>Gigya Sharebar configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>101</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable_cart translate="label">
-              <label>Enable Gigya Share Bar on product pages</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable_cart>
-            <enable_order translate="label">
-              <label>Enable Gigya Share Bar on order complete page</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable_order>
-            <containerID translate="label">
-              <label>Gigya Share Bar container id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[div ID for Share Bar]]></comment>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </containerID>
-            <shareButtons translate="label">
-              <label>Providers</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[List of relevant values is available <a href="http://developers.gigya.com/020_Client_API/020_Methods/socialize.showShareBarUI" target="_blank">here </a>under the "shareButtons" parameter']]></comment>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </shareButtons>
-            <layout translate="label">
-              <label>Share Bar layout</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_layout</source_model>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </layout>
-            <showCounts translate="label">
-              <label>Show counts</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_counts</source_model>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </showCounts>
-            <imageBehavior translate="label">
-              <label>Image</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_imageb</source_model>
-              <sort_order>15</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </imageBehavior>
-            <imageUrl translate="label">
-              <label>Image url</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[Default URL of the image to share.]]></comment>
-              <sort_order>16</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-              <depends>
-                <imageBehavior>url</imageBehavior>
-              </depends>
-            </imageUrl>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_sharebar>
-        <gigya_share_action translate="label">
-          <label>Gigya Share action configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>102</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-              <label>Enable Gigya Share Action</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>9</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>
-            <enable_cart translate="label">
-              <label>Enable Gigya Share on add to cart</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable_cart>
-            <enable_order translate="label">
-              <label>Enable Gigya Share on order complete</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable_order>
-            <showAlwaysShare translate="label">
-              <label>Show Always Share</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_allwaysShare</source_model>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </showAlwaysShare>
-            <showNeverShare translate="label">
-              <label>Show Never Share</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </showNeverShare>
-            <enabledProviders translate="label">
-              <label>Providers</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[List of relevant values is available <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showShareUI" target="_blank">here </a>under the "enabledProviders" parameter']]></comment>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </enabledProviders>
-            <moreEnabledProviders translate="label">
-              <label>more screen providers</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[A comma separated string of destination names that defines which destination sites buttons will be displayed on the "More" screen, and also determine the order, possible values can be found  <a href="http://developers.gigya.com/010_Developer_Guide/18_Plugins/032_Share/030_Adding_More_Destinations" target="_blank">here</a>. <br \> "*" means all providers. ]]></comment>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </moreEnabledProviders>
-            <scope translate="label">
-              <label>Scope for publishing to Activity Feed</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_scope</source_model>
-              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </scope>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_share_action>
-      </groups>
-    </gigya_share>
-    <gigya_reactions translate="label" module="Gigya_Social">
-      <label>Gigya Reactions</label>
-      <tab>gigya</tab>
-      <frontend_type>text</frontend_type>
-      <sort_order>102</sort_order>
-      <show_in_default>1</show_in_default>
-      <show_in_website>1</show_in_website>
-      <show_in_store>0</show_in_store>
-      <groups>
-        <gigya_reactions_conf translate="label">
-          <label>Gigya Reactions configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>102</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-              <label>Enable Gigya reactions</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>
-            <containerID translate="label">
-              <label>Gigya reactions container id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[div ID for Reactions Bar]]></comment>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </containerID>
-            <reactions translate="label">
-              <label>Reactions</label>
-              <frontend_type>textarea</frontend_type>
-              <cols>20</cols>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </reactions>
-            <enabledProviders translate="label">
-              <label>Providers</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[List of relevant values is available <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showReactionsBarUI" target="_blank">here </a>under the "enabledProviders" parameter']]></comment>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </enabledProviders>
-            <layout translate="label">
-              <label>Reactions Bar layout</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_layout</source_model>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </layout>
-            <showCounts translate="label">
-              <label>Show counts</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_counts</source_model>
-              <sort_order>15</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </showCounts>
-            <countType translate="label">
-              <label>Count type</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_countType</source_model>
-              <sort_order>15</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </countType>
-            <multipleReactions translate="label">
-              <label>Use multiple reactions</label>
-              <frontend_type>select</frontend_type>
-              <comment><![CDATA[whether the user is permitted to click on multiple reaction buttons on the same reaction bar, or click on one reaction button only]]></comment>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>16</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </multipleReactions>
-            <scope translate="label">
-              <label>Scope for publishing to Activity Feed</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_scope</source_model>
-              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </scope>
-            <imageBehavior translate="label">
-              <label>Image</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_imageb</source_model>
-              <sort_order>18</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </imageBehavior>
-            <imageUrl translate="label">
-              <label>Image url</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[Default URL of the image to share.]]></comment>
-              <sort_order>19</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-              <depends>
-                <imageBehavior>url</imageBehavior>
-              </depends>
-            </imageUrl>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>20</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_reactions_conf>
-      </groups>
-    </gigya_reactions>
-    <gigya_comments translate="label" module="Gigya_Social">
-      <label>Gigya Comments</label>
-      <tab>gigya</tab>
-      <frontend_type>text</frontend_type>
-      <sort_order>102</sort_order>
-      <show_in_default>1</show_in_default>
-      <show_in_website>1</show_in_website>
-      <show_in_store>0</show_in_store>
-      <groups>
-        <gigya_comments_conf translate="label">
-          <label>Gigya Comments configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>102</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-              <label>Enable Gigya Comments</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>
-            <containerID translate="label">
-              <label>Gigya Comments container id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[div ID for Comments]]></comment>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </containerID>
-            <categoryID translate="label">
-              <label>Gigya Comments Category id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[Category as set up in the Gigya admin site.]]></comment>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </categoryID>
-            <scope translate="label">
-              <label>Scope for publishing to Activity Feed</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_scope</source_model>
-              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </scope>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_comments_conf>
-      </groups>
-    </gigya_comments>
-    <gigya_activityfeed translate="label" module="Gigya_Social">
-      <label>Gigya Activity Feed</label>
-      <tab>gigya</tab>
-      <frontend_type>text</frontend_type>
-      <sort_order>102</sort_order>
-      <show_in_default>1</show_in_default>
-      <show_in_website>1</show_in_website>
-      <show_in_store>0</show_in_store>
-      <groups>
-        <gigya_activityfeed_conf translate="label">
-          <label>Gigya Activity Feed configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>102</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-              <label>Enable Gigya Activity Feed</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>
-            <containerID translate="label">
-              <label>Gigya Activity Feed container id</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[div ID for Activity Feed]]></comment>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </containerID>
-            <siteName translate="label">
-              <label>Site name</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[Your site name. This string will be planted into various headers of the plugin (for more information read the <a title="020 Developer Guide/65 The Newsfeed Widget" rel="internal" href="http://developers.gigya.com/010_Developer_Guide/18_Plugins/060_Activity_Feed_Plugin" target="_blank">Activity <span>Feed </span>Plugin</a><span> documentation</span>).]]></comment>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </siteName>
-            <tabOrder translate="label">
-              <label>Tabs and order</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[A comma delimited list of tabs names that defines which tabs to show and the tabs order. The optional tabs names are: "everyone", "friends", "me".]]></comment>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </tabOrder>
-            <privacy translate="label">
-              <label>Privacy</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_privacy</source_model>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </privacy>
-            <width translate="label">
-              <label>Width</label>
-              <frontend_type>text</frontend_type>
-              <sort_order>15</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </width>
-            <height translate="label">
-              <label>Height</label>
-              <frontend_type>text</frontend_type>
-              <sort_order>16</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </height>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_activityfeed_conf>
-      </groups>
-    </gigya_activityfeed>
-    <gigya_gamification translate="label" module="Gigya_Social">
-      <label>Gigya Gamification</label>
-      <tab>gigya</tab>
-      <frontend_type>text</frontend_type>
-      <sort_order>102</sort_order>
-      <show_in_default>1</show_in_default>
-      <show_in_website>1</show_in_website>
-      <show_in_store>0</show_in_store>
-      <groups>
-        <gigya_gamification_conf translate="label">
-          <label>Gigya Gamification configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>102</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-              <label>Enable Gigya Gamification</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>
-            <notifications translate="label">
-              <label>Enable Gamification notifications</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </notifications>
-            <period translate="label">
-              <label>Leaderboard Time Period</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_leaderboard</source_model>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </period>
-            <totalCount translate="label">
-              <label>Leaderboard User Count</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[The total number of users to display in the Leaderboard plugin. values between 1 - 36]]></comment>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </totalCount>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>17</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_gamification_conf>
-      </groups>
-    </gigya_gamification>
-    <gigya_r_and_r translate="label" module="Gigya_Social">
-      <label>Gigya Rating &amp; Reviews</label>
-      <tab>gigya</tab>
-      <frontend_type>text</frontend_type>
-      <sort_order>106</sort_order>
-      <show_in_default>1</show_in_default>
-      <show_in_website>1</show_in_website>
-      <show_in_store>0</show_in_store>
-      <groups>
-        <gigya_r_and_r_conf translate="label">
-          <label>Gigya Rating &amp; Reviews configuration</label>
-          <frontend_type>text</frontend_type>
-          <sort_order>102</sort_order>
-          <show_in_default>1</show_in_default>
-          <show_in_website>1</show_in_website>
-          <show_in_store>0</show_in_store>
-          <fields>
-            <enable translate="label">
-              <label>Enable Gigya Rating &amp; Reviews</label>
-              <frontend_type>select</frontend_type>
-              <source_model>adminhtml/system_config_source_yesno</source_model>
-              <sort_order>10</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </enable>
-            <containerID translate="label">
-              <label>Div ID</label>
-              <frontend_type>text</frontend_type>
-              <comment><![CDATA[The ratings continer div ID]]></comment>
-              <sort_order>11</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </containerID>
-            <categoryID translate="label">
-              <label>The identifier of the Comments Category.</label>
-              <frontend_type>text</frontend_type>
-              <sort_order>12</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>0</show_in_store>
-            </categoryID>
-            <scope translate="label">
-              <label>Scope for publishing to Activity Feed</label>
-              <frontend_type>select</frontend_type>
-              <source_model>Gigya_Social_Model_config_source_scope</source_model>
-              <comment><![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
-              <sort_order>13</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </scope>
-            <advancedConfig translate="label">
-              <label>Advanced configuration</label>
-              <frontend_type>Textarea</frontend_type>
-              <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-              <sort_order>14</sort_order>
-              <show_in_default>1</show_in_default>
-              <show_in_website>1</show_in_website>
-              <show_in_store>1</show_in_store>
-            </advancedConfig>
-          </fields>
-        </gigya_r_and_r_conf>
-      </groups>
-    </gigya_r_and_r>
-  </sections>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </providers>
+                        <laguages translate="label">
+                            <label>Interface language</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_languages</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </laguages>
+                        <google_sa translate="label">
+                            <label>Enable Google Social Analytics</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </google_sa>
+                        <counters translate="label">
+                            <label>Enable Gigya Counters</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </counters>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_global_conf>
+            </groups>
+        </gigya_global>
+        <gigya_login translate="label" module="Gigya_Social">
+            <label>Gigya User Management</label>
+            <tab>gigya</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <gigya_user_management translate="label">
+                    <label>Gigya User Management</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <login_modes translate="label">
+                            <label>Gigya User Management</label>
+                            <frontend_type>radios</frontend_type>
+                            <backend_model>Gigya_Social_Model_Config_Backend_UserMode</backend_model>
+                            <source_model>Gigya_Social_Model_config_source_loginModes</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </login_modes>
+                    </fields>
+                </gigya_user_management>
+                <gigya_login_conf translate="label">
+                    <label>Gigya Social login configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>100</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <buttonsStyle translate="label">
+                            <label>Button style</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_buttons</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </buttonsStyle>
+                        <showTermsLink translate="label">
+                            <label>Show terms link</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showTermsLink>
+                        <loginBehavior translate="label">
+                            <label>Login behavior</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_loginb</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </loginBehavior>
+                        <containerID translate="label">
+                            <label>Gigya login container id</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[div ID for loginUI]]></comment>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </containerID>
+                        <width translate="label">
+                            <label>Width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </width>
+                        <height translate="label">
+                            <label>Height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </height>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_login_conf>
+                <gigya_raas_conf translate="label">
+                    <label>Registration-as-a-Service</label>
+                    <frontend_type>text</frontend_type>
+                    <comment>
+                        <![CDATA[RaaS requires initial configuration in Gigya's Admin Console. Screen sets can be defined in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a>. The page will display a list of predefined default screen-sets, each with an ID. Click on the "Visual Editor" link next to the screen-set that you want to use, this will open the <a class="external" target="_blank" title="010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor" rel="internal" href="http://dev-wiki.gigya.com/010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor">Visual Editor</a> window. You can modify the screens, or just hit the "Save" button to activate them. Please make sure that the screen-set IDs that are defined below match the IDs of the screen-sets you have configured in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a> page.']]></comment>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <title translate="label">
+                            <lable>Registration-as-a-Service</lable>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </title>
+                        <WebScreen translate="label">
+                            <label>Web Screen Set ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </WebScreen>
+                        <MobileScreen translate="label">
+                            <label>Mobile Screen Set ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </MobileScreen>
+                        <LoginScreen translate="label">
+                            <label>Login Screen ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </LoginScreen>
+                        <RegisterScreen translate="label">
+                            <label>Register Screen ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </RegisterScreen>
+                        <profile_title translate="label">
+                            <lable>Registration-as-a-Service</lable>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </profile_title>
+                        <ProfileWebScreen translate="label">
+                            <label>Profile Screen Set ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </ProfileWebScreen>
+                        <ProfileMobileScreen translate="label">
+                            <label>Mobile Screen Set ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </ProfileMobileScreen>
+                        <override_links>
+                            <label>Override Magento links</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>
+                                <![CDATA[When set to yes, the Magento default "Login", "Registration" and "Edit Profile" links pop-up RaaS screens instead of Magento screens.]]></comment>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </override_links>
+                        <div_ids_title translate="label">
+                            <lable>Registration-as-a-Service</lable>
+                            <frontend_type>label</frontend_type>
+                            <frontend_model>Gigya_Social_Block_Adminhtml_raasTitles</frontend_model>
+                            <comment>
+                                <![CDATA[Specify the DIV IDs in which to embed the screen-sets. If the IDs are empty (default), then the screen-set would show as pop-up dialogs.]]></comment>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </div_ids_title>
+                        <raas_login_div_id translate="label">
+                            <label>Login</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </raas_login_div_id>
+                        <raas_register_div_id translate="label">
+                            <label>Register</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </raas_register_div_id>
+                        <raas_profile_div_id translate="label">
+                            <label>Profile</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>21</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </raas_profile_div_id>
+                    </fields>
+                </gigya_raas_conf>
+                <gigya_link_accounts translate="lable">
+                    <label>Gigya Add Connections configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Gigya add connections</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <containerID translate="label">
+                            <label>Gigya add connections container id</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[div ID for add connections]]></comment>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </containerID>
+                        <width translate="label">
+                            <label>Width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </width>
+                        <height translate="label">
+                            <label>Height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </height>
+                        <showTermsLink translate="label">
+                            <label>Show terms link</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showTermsLink>
+                        <showEditLink translate="label">
+                            <label>Show edit link</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showEditLink>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_link_accounts>
+            </groups>
+        </gigya_login>
+        <gigya_share translate="label" module="Gigya_Social">
+            <label>Gigya Share</label>
+            <tab>gigya</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>101</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <gigya_sharebar translate="label">
+                    <label>Gigya Sharebar configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>101</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable_cart translate="label">
+                            <label>Enable Gigya Share Bar on product pages</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_cart>
+                        <enable_order translate="label">
+                            <label>Enable Gigya Share Bar on order complete page</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_order>
+                        <containerID translate="label">
+                            <label>Gigya Share Bar container id</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[div ID for Share Bar]]></comment>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </containerID>
+                        <shareButtons translate="label">
+                            <label>Providers</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[List of relevant values is available <a href="http://developers.gigya.com/020_Client_API/020_Methods/socialize.showShareBarUI" target="_blank">here </a>under the "shareButtons" parameter']]></comment>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </shareButtons>
+                        <layout translate="label">
+                            <label>Share Bar layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_layout</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </layout>
+                        <showCounts translate="label">
+                            <label>Show counts</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_counts</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showCounts>
+                        <imageBehavior translate="label">
+                            <label>Image</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_imageb</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </imageBehavior>
+                        <imageUrl translate="label">
+                            <label>Image url</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Default URL of the image to share.]]></comment>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <imageBehavior>url</imageBehavior>
+                            </depends>
+                        </imageUrl>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_sharebar>
+                <gigya_share_action translate="label">
+                    <label>Gigya Share action configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Gigya Share Action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>9</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <enable_cart translate="label">
+                            <label>Enable Gigya Share on add to cart</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_cart>
+                        <enable_order translate="label">
+                            <label>Enable Gigya Share on order complete</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable_order>
+                        <showAlwaysShare translate="label">
+                            <label>Show Always Share</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_allwaysShare</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showAlwaysShare>
+                        <showNeverShare translate="label">
+                            <label>Show Never Share</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showNeverShare>
+                        <enabledProviders translate="label">
+                            <label>Providers</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[List of relevant values is available <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showShareUI" target="_blank">here </a>under the "enabledProviders" parameter']]></comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enabledProviders>
+                        <moreEnabledProviders translate="label">
+                            <label>more screen providers</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[A comma separated string of destination names that defines which destination sites buttons will be displayed on the "More" screen, and also determine the order, possible values can be found  <a href="http://developers.gigya.com/010_Developer_Guide/18_Plugins/032_Share/030_Adding_More_Destinations" target="_blank">here</a>. <br \> "*" means all providers. ]]></comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </moreEnabledProviders>
+                        <scope translate="label">
+                            <label>Scope for publishing to Activity Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_scope</source_model>
+                            <comment>
+                                <![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </scope>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_share_action>
+            </groups>
+        </gigya_share>
+        <gigya_reactions translate="label" module="Gigya_Social">
+            <label>Gigya Reactions</label>
+            <tab>gigya</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>102</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <gigya_reactions_conf translate="label">
+                    <label>Gigya Reactions configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Gigya reactions</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <containerID translate="label">
+                            <label>Gigya reactions container id</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[div ID for Reactions Bar]]></comment>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </containerID>
+                        <reactions translate="label">
+                            <label>Reactions</label>
+                            <frontend_type>textarea</frontend_type>
+                            <cols>20</cols>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </reactions>
+                        <enabledProviders translate="label">
+                            <label>Providers</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[List of relevant values is available <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showReactionsBarUI" target="_blank">here </a>under the "enabledProviders" parameter']]></comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </enabledProviders>
+                        <layout translate="label">
+                            <label>Reactions Bar layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_layout</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </layout>
+                        <showCounts translate="label">
+                            <label>Show counts</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_counts</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </showCounts>
+                        <countType translate="label">
+                            <label>Count type</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_countType</source_model>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </countType>
+                        <multipleReactions translate="label">
+                            <label>Use multiple reactions</label>
+                            <frontend_type>select</frontend_type>
+                            <comment>
+                                <![CDATA[whether the user is permitted to click on multiple reaction buttons on the same reaction bar, or click on one reaction button only]]></comment>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </multipleReactions>
+                        <scope translate="label">
+                            <label>Scope for publishing to Activity Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_scope</source_model>
+                            <comment>
+                                <![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </scope>
+                        <imageBehavior translate="label">
+                            <label>Image</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_imageb</source_model>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </imageBehavior>
+                        <imageUrl translate="label">
+                            <label>Image url</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Default URL of the image to share.]]></comment>
+                            <sort_order>19</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends>
+                                <imageBehavior>url</imageBehavior>
+                            </depends>
+                        </imageUrl>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_reactions_conf>
+            </groups>
+        </gigya_reactions>
+        <gigya_comments translate="label" module="Gigya_Social">
+            <label>Gigya Comments</label>
+            <tab>gigya</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>102</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <gigya_comments_conf translate="label">
+                    <label>Gigya Comments configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Gigya Comments</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <containerID translate="label">
+                            <label>Gigya Comments container id</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[div ID for Comments]]></comment>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </containerID>
+                        <categoryID translate="label">
+                            <label>Gigya Comments Category id</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Category as set up in the Gigya admin site.]]></comment>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </categoryID>
+                        <scope translate="label">
+                            <label>Scope for publishing to Activity Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_scope</source_model>
+                            <comment>
+                                <![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </scope>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_comments_conf>
+            </groups>
+        </gigya_comments>
+        <gigya_activityfeed translate="label" module="Gigya_Social">
+            <label>Gigya Activity Feed</label>
+            <tab>gigya</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>102</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <gigya_activityfeed_conf translate="label">
+                    <label>Gigya Activity Feed configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Gigya Activity Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <containerID translate="label">
+                            <label>Gigya Activity Feed container id</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[div ID for Activity Feed]]></comment>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </containerID>
+                        <siteName translate="label">
+                            <label>Site name</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[Your site name. This string will be planted into various headers of the plugin (for more information read the <a title="020 Developer Guide/65 The Newsfeed Widget" rel="internal" href="http://developers.gigya.com/010_Developer_Guide/18_Plugins/060_Activity_Feed_Plugin" target="_blank">Activity <span>Feed </span>Plugin</a><span> documentation</span>).]]></comment>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </siteName>
+                        <tabOrder translate="label">
+                            <label>Tabs and order</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[A comma delimited list of tabs names that defines which tabs to show and the tabs order. The optional tabs names are: "everyone", "friends", "me".]]></comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </tabOrder>
+                        <privacy translate="label">
+                            <label>Privacy</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_privacy</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </privacy>
+                        <width translate="label">
+                            <label>Width</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </width>
+                        <height translate="label">
+                            <label>Height</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </height>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_activityfeed_conf>
+            </groups>
+        </gigya_activityfeed>
+        <gigya_gamification translate="label" module="Gigya_Social">
+            <label>Gigya Gamification</label>
+            <tab>gigya</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>102</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <gigya_gamification_conf translate="label">
+                    <label>Gigya Gamification configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Gigya Gamification</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <notifications translate="label">
+                            <label>Enable Gamification notifications</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </notifications>
+                        <period translate="label">
+                            <label>Leaderboard Time Period</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_leaderboard</source_model>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </period>
+                        <totalCount translate="label">
+                            <label>Leaderboard User Count</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[The total number of users to display in the Leaderboard plugin. values between 1 - 36]]></comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </totalCount>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>17</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_gamification_conf>
+            </groups>
+        </gigya_gamification>
+        <gigya_r_and_r translate="label" module="Gigya_Social">
+            <label>Gigya Rating &amp; Reviews</label>
+            <tab>gigya</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>106</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <gigya_r_and_r_conf translate="label">
+                    <label>Gigya Rating &amp; Reviews configuration</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>102</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable Gigya Rating &amp; Reviews</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <containerID translate="label">
+                            <label>Div ID</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[The ratings continer div ID]]></comment>
+                            <sort_order>11</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </containerID>
+                        <categoryID translate="label">
+                            <label>The identifier of the Comments Category.</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>12</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </categoryID>
+                        <scope translate="label">
+                            <label>Scope for publishing to Activity Feed</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_scope</source_model>
+                            <comment>
+                                <![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </scope>
+                        <advancedConfig translate="label">
+                            <label>Advanced configuration</label>
+                            <frontend_type>Textarea</frontend_type>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </advancedConfig>
+                    </fields>
+                </gigya_r_and_r_conf>
+            </groups>
+        </gigya_r_and_r>
+    </sections>
 </config>

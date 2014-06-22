@@ -9,6 +9,7 @@ require_once('Mage/Customer/controllers/AccountController.php');
 class Gigya_Social_LoginController extends Mage_Customer_AccountController
 {
     private $helper;
+    private $userMode;
 
     public function indexAction()
     {
@@ -59,14 +60,14 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     public function loginAction()
     {
         $this->helper = Mage::helper("Gigya_Social");
-        $userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
+        $this->userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
         $session = $this->_getSession();
         $req = $this->getRequest()->getPost('json');
         $post = json_decode($req, TRUE);
         $this->getResponse()->setHeader('Content-type', 'application/json');
-        if ($userMode === 'social') {
+        if ($this->userMode === 'social') {
             $this->_socialLogin($session, $post);
-        } elseif ($userMode === 'raas') {
+        } elseif ($this->userMode === 'raas') {
             $this->_raasLogin($session, $post);
         } else {
             $this->_getSession()->addError($this->__('Gigya login is disabled'));
@@ -82,18 +83,20 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
         if ($valid) {
             $accountInfo = $this->helper->utils->getAccount($post['UID']);
-            $email = $accountInfo['loginIDs']['emails'][0];
+            $email = reset($accountInfo['loginIDs']['emails']);
             $cust_session = Mage::getSingleton('customer/session');
             // loginIDs is empty so this is the "secondary" user in Gigya
             if (empty($email)) {
                 // delete user in gigya etc...
                 $this->_removeGigyaSeconderyAccount($post['UID'], $accountInfo);
+                return;
             }
             $cust = $this->_customerExists($email);
             // customer email exists login flow
             if ($cust != false) {
                 $cust_session->setCustomerAsLoggedIn($cust);
                 $url = Mage::getUrl('*/*/*', array('_current' => true));
+                $cust_session->setData('gigyaAccount', $accountInfo);
                 $res = array(
                     'result' => 'login',
                     'redirect' => $url
@@ -124,7 +127,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
 
     private function _removeGigyaSeconderyAccount($uid, $account) {
         Mage::helper('Gigya_Social')->utils->deleteAccountByGUID($uid);
-        $providers = Mage::helper('Gigya_Social')->utils->getProvider($account);
+        $providers = Mage::helper('Gigya_Social')->utils->getProviders($account);
         $msg = sprintf($this->__( 'We found your email in our system.<br>Please login to your existing account using your <strong>%1$s</strong> identity.' ), $providers['primary'], $providers['secondary'] );
         $res = array(
             'result' => 'message',
@@ -247,7 +250,12 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         $password = Mage::helper('Gigya_Social')->_getPassword();
         $_POST['password'] = $password;
         $_POST['confirmation'] = $password;
-        $customer->setData('gigyaUser', $gigyaUser);
+        if ($this->userMode == 'social') {
+            $customer->setData('gigyaUser', $gigyaUser);
+        } else if ($this->userMode == 'raas') {
+            $cust_session = Mage::getSingleton('customer/session');
+            $cust_session->setData('gigyaAccount', $gigyaUser);
+        }
         Mage::register('current_customer', $customer);
         $this->_forward('createPost');
     }
