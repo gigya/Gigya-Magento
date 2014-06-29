@@ -70,12 +70,39 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </secretkey>
+                        <useUserKey translate="label">
+                            <label>Ues user key and secret </label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>13</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </useUserKey>
+                        <userKey translate="label">
+                            <label>Gigya User key</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Gigya User key]]></comment>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </userKey>
+                        <userSecret translate="label">
+                            <label>Gigya User Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[Specify the Gigya User Secret]]></comment>
+                            <sort_order>15</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </userSecret>
                         <providers translate="label">
                             <label>Providers</label>
                             <frontend_type>text</frontend_type>
                             <comment><![CDATA[Comma separated list of networks that would be included. For example: "Facebook, Twitter, Yahoo". <br/>
           * means all networks. See list of available <a href="http://developers.gigya.com/020_Client_API/020_Methods/Socialize.showLoginUI" target="_blank">providers.</a>]]></comment>
-                            <sort_order>13</sort_order>
+                            <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -84,7 +111,7 @@
                             <label>Interface language</label>
                             <frontend_type>select</frontend_type>
                             <source_model>Gigya_Social_Model_config_source_languages</source_model>
-                            <sort_order>14</sort_order>
+                            <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -93,7 +120,7 @@
                             <label>Enable Google Social Analytics</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>15</sort_order>
+                            <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -102,7 +129,7 @@
                             <label>Enable Gigya Counters</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>16</sort_order>
+                            <sort_order>19</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -111,7 +138,7 @@
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
                             <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-                            <sort_order>17</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -970,6 +997,15 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </totalCount>
+                        <purchaseAction translate="label">
+                            <label>Enable Gigya Gamification on purchase action</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>14</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </purchaseAction>
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>

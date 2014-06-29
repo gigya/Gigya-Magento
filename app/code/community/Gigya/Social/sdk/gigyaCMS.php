@@ -10,15 +10,19 @@ class GigyaCMS {
     private $api_domain;
     private $user_key;
     private $user_secret;
+    private $useUserKey;
 
 	/**
 	 * Constructs a GigyaApi object.
 	 */
-	public function __construct($apiKey, $secret, $apiDomain, $userSecret = NULL, $userKey = NULL) {
+	public function __construct($apiKey, $secret, $apiDomain, $userSecret = NULL, $userKey = NULL, $useUserKey = false) {
 
 		$this->api_key    = $apiKey;
 		$this->api_secret = $secret;
         $this->api_domain = $apiDomain;
+        $this->user_key = $userKey;
+        $this->user_secret = $userSecret;
+        $this->use_user_key = $useUserKey;
 
 	}
 
@@ -36,7 +40,11 @@ class GigyaCMS {
 	public function call( $method, $params ) {
 
 		// Initialize new request.
-		$request   = new GSRequest( $this->api_key, $this->api_secret, $method );
+        if ($this->use_user_key) {
+            $request   = new GSRequest( $this->api_key, $this->user_secret, $method, null, false, $this->user_key );
+        } else {
+            $request   = new GSRequest( $this->api_key, $this->api_secret, $method );
+        }
 		$user_info = NULL;
 		if ( ! empty( $params ) ) {
 			foreach ( $params as $param => $val ) {
@@ -60,11 +68,12 @@ class GigyaCMS {
 		// Check for errors
 		$err_code = $response->getErrorCode();
 		if ( $err_code != 0 ) {
-
 			if ( function_exists( '_gigya_error_log' ) ) {
 				$log = explode( "\r\n", $response->getLog() );
 				_gigya_error_log( $log );
 			}
+            //throw new Exception($response->getErrorMessage(), $response->getErrorCode());
+            return $err_code;
 		} else {
 			if ( ! empty( $user_info ) ) {
 

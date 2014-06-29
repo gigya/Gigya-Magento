@@ -9,7 +9,7 @@
 var gigyaAdmin = gigyaAdmin || {};
 
 gigyaAdmin.userManegmentUI = function(userMod) {
-	if (typeof userMod == 'undefined') {
+	if (userMod == null) {
 		var userMod = $$('#row_gigya_login_gigya_user_management_login_modes .value input:checked[type="radio"][name="groups[gigya_user_management][fields][login_modes][value]"').pluck('value')[0];
 	}
 	switch (userMod) {
@@ -32,6 +32,30 @@ gigyaAdmin.userManegmentUI = function(userMod) {
 	}
 }
 
+gigyaAdmin.userKeyUI = function (useKey) {
+    if (useKey == null) {
+        var useKey = $F('gigya_global_gigya_global_conf_useUserKey');
+    }
+    if (useKey == 0) {
+        gigyaAdmin.hideUserKey();
+    } else {
+        gigyaAdmin.showUserKey();
+    }
+
+}
+
+gigyaAdmin.hideUserKey = function () {
+    $('row_gigya_global_gigya_global_conf_userKey').hide();
+    $('row_gigya_global_gigya_global_conf_userSecret').hide();
+    $('row_gigya_global_gigya_global_conf_secretkey').show();
+}
+
+gigyaAdmin.showUserKey = function () {
+    $('row_gigya_global_gigya_global_conf_userKey').show();
+    $('row_gigya_global_gigya_global_conf_userSecret').show();
+    $('row_gigya_global_gigya_global_conf_secretkey').hide();
+}
+
 gigyaAdmin.hideSection = function (section) {
 	$(section).up('.section-config').hide();
 }
@@ -41,14 +65,22 @@ gigyaAdmin.showSection = function (section) {
 }
 
 
-
 document.observe("dom:loaded", function () {
-	gigyaAdmin.userManegmentUI();
+	gigyaAdmin.userManegmentUI(null);
+    gigyaAdmin.userKeyUI(null);
 	// bind events
+    if ($("row_gigya_login_gigya_user_management_login_modes") != null){
 	$("row_gigya_login_gigya_user_management_login_modes").observe("click", function(event) {
 		var el = event.findElement("input");
 		if (typeof el !== 'undefined') {
 			gigyaAdmin.userManegmentUI(el.value);
 		}
 	})
+    }
+    if($("gigya_global_gigya_global_conf_useUserKey") != null) {
+    $("gigya_global_gigya_global_conf_useUserKey").observe("change", function(event) {
+        var useKey = $F('gigya_global_gigya_global_conf_useUserKey');
+        gigyaAdmin.userKeyUI(useKey);
+    })
+    }
 });

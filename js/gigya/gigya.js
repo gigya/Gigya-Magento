@@ -378,8 +378,8 @@ gigyaFunctions.RnR = function (settings) {
         onCommentSubmitted: gigyaFunctions.postReview,
         userAction: ua
     };
-    gigya.socialize.showRatingUI(settings);
-    gigya.socialize.showCommentsUI(reviews);
+    gigya.comments.showRatingUI(settings);
+    gigya.comments.showCommentsUI(reviews);
 };
 
 gigyaFunctions.showMoreInfoForm = function (html) {

@@ -7,11 +7,15 @@
 class Gigya_Social_Model_Customer_Observer
 {
     protected $userMod;
+    protected $helper;
 
-    public function __constract()
+
+    function __construct()
     {
         $this->userMod = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
+        $this->helper = Mage::helper('Gigya_Social');
     }
+
 
     public function notify_registration($observer)
     {
@@ -19,9 +23,9 @@ class Gigya_Social_Model_Customer_Observer
             $customer_data = $observer['customer']->getData();
             $id = $customer_data['entity_id'];
             if (!empty($customer_data['gigyaUser'])) {
-                Mage::helper('Gigya_Social')->notifyRegistration($customer_data['gigyaUser']['UID'], $id);
+                $this->helper->notifyRegistration($customer_data['gigyaUser']['UID'], $id);
             } else {
-                Mage::helper('Gigya_Social')->notifyLogin($id, 'true');
+                $this->helper->notifyLogin($id, 'true');
                 Mage::getSingleton('customer/session')->setSuppressNoteLogin(TRUE);
             }
         }
@@ -29,13 +33,23 @@ class Gigya_Social_Model_Customer_Observer
 
     public function notify_delete($observer)
     {
-        $id = $observer->getEvent()->getCustomer()->getId();
-        Mage::helper('Gigya_Social')->deleteAccount($id);
+
+        $helper = Mage::helper('Gigya_Social');
+        $this->userMod = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
+        if ($this->userMod == 'social') {
+            $id = $observer->getEvent()->getCustomer()->getId();
+            $this->helper->deleteAccount($id);
+        } elseif ($this->userMod == 'raas') {
+            $cust = $observer->getEvent()->getCustomer() ;
+            $gigyaUid = $cust->getData('gigya_uid');
+            if (!empty($gigyaUid)) {
+                $helper->utils->deleteAccountByGUID($gigyaUid);
+            }
+        }
     }
 
     public function notify_login($observer)
     {
-
         if ($this->userMod == 'social') {
             Mage::log(Mage::getSingleton('customer/session')->getSuppressNoteLogin());
             if (!Mage::getSingleton('customer/session')->getSuppressNoteLogin()) {
@@ -44,7 +58,7 @@ class Gigya_Social_Model_Customer_Observer
                 $gigya_uid = Mage::getSingleton('customer/session')->getData('gigyaUid');
                 if (!empty($action)) {
                     if ($action === 'linkAccount' && !empty($gigya_uid)) {
-                        Mage::helper('Gigya_Social')->notifyRegistration($gigya_uid, $id);
+                        $this->helper->notifyRegistration($gigya_uid, $id);
                     }
                 } else {
                     $magInfo = $observer->getEvent()->getCustomer()->getData();
@@ -53,7 +67,7 @@ class Gigya_Social_Model_Customer_Observer
                         'lastName' => $magInfo['lastname'],
                         'email' => $magInfo['email'],
                     );
-                    Mage::helper('Gigya_Social')->notifyLogin($id, 'false', $userInfo);
+                    $this->helper->notifyLogin($id, 'false', $userInfo);
                 }
             } else {
                 Mage::getSingleton('customer/session')->unsSuppressNoteLogin();
@@ -63,9 +77,15 @@ class Gigya_Social_Model_Customer_Observer
 
     public function notify_logout($observer)
     {
-        $id = $observer->getEvent()->getCustomer()->getId();
-        Mage::getSingleton('core/session')->setData('logout', 'true');
-        Mage::helper('Gigya_Social')->notifyLogout($id);
+        if ($this->userMod == 'social') {
+            $id = $observer->getEvent()->getCustomer()->getId();
+            Mage::getSingleton('core/session')->setData('logout', 'true');
+            $this->helper->notifyLogout($id);
+        } else if ($this->userMod == 'raas') {
+            $id = $observer->getEvent()->getCustomer()->getData('gigya_uid');
+            $params = array('UID' => $id);
+            $this->helper->utils->call('accounts.logout', $params);
+        }
     }
 }
 

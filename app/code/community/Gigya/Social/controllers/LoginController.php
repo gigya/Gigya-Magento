@@ -94,6 +94,10 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             $cust = $this->_customerExists($email);
             // customer email exists login flow
             if ($cust != false) {
+                Mage::dispatchEvent('gigya_raas_pre_login', array(
+                   'customer' => $cust,
+                   'gigyaAccount' => $accountInfo
+                ));
                 $cust_session->setCustomerAsLoggedIn($cust);
                 $url = Mage::getUrl('*/*/*', array('_current' => true));
                 $cust_session->setData('gigyaAccount', $accountInfo);
@@ -233,6 +237,10 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     protected function _createCustomer($email, $firstName = NULL, $lastName = NULL, $gigyaUser)
     {
         $customer = Mage::getModel('customer/customer')->setId(null);
+        Mage::dispatchEvent('gigya_pre_customer_create', array(
+            'customer' => $customer,
+            'gigyaUser' => $gigyaUser
+        ));
         $customer->getGroupId();
         $customer->setFirstname($firstName);
         $customer->setLastname($lastName);
@@ -255,6 +263,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         } else if ($this->userMode == 'raas') {
             $cust_session = Mage::getSingleton('customer/session');
             $cust_session->setData('gigyaAccount', $gigyaUser);
+            $customer->setData('gigya_uid', $gigyaUser['UID']);
         }
         Mage::register('current_customer', $customer);
         $this->_forward('createPost');
@@ -268,7 +277,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
 
     public function createPostAction()
     {
-        //TODO: Deal with logedin user
         $session = $this->_getSession();
         if ($session->isLoggedIn()) {
             Mage::log('loggedIn');
@@ -370,7 +378,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                 }
 
                 $validationResult = count($errors) == 0;
-                Mage::log($errors);
 
                 if (true === $validationResult) {
                     $customer->save();
@@ -399,6 +406,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
                     }
                 } else {
+                    Mage::log($errors);
                     $session->setCustomerFormData($this->getRequest()->getPost());
                     $error = '';
                     if (is_array($errors)) {

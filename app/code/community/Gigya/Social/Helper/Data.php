@@ -25,7 +25,8 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         $this->apiDomain = Mage::getStoreConfig('gigya_global/gigya_global_conf/dataCenter');
         $this->userKey = Mage::getStoreConfig('gigya_global/gigya_global_conf/userKey');
         $this->userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
-        $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret, $this->userKey);
+        $use_user_key = $this->userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/useUserKey');
+        $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret, $this->userKey, $use_user_key);
     }
     public function _getPassword($length = 8)
     {
@@ -117,42 +118,16 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
      */
     public function _gigya_api($method, $params)
     {
-        $data_center = Mage::getStoreConfig('gigya_global/gigya_global_conf/dataCenter');
-        $data_center = !empty($data_center) ? $data_center : NULL;
-        $apiKey = Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey');
-        $secretkey = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
-        $request = new GSRequest($apiKey, $secretkey, 'socialize.' . $method);
-        if ($data_center !== NULL) {
-            $request->setAPIDomain($data_center);
-        }
         $params['format'] = 'json';
-        foreach ($params as $param => $val) {
-            $request->setParam($param, $val);
-        }
         try {
-            $response = $request->send();
+            $response = $this->utils->call($method, $params);
             // If wrong data center resend to right one
-            if ($response->getErrorCode() == 301001) {
-                $data = $response->getData();
-                $domain = $data->getString('apiDomain', NULL);
-                if ($domain !== NULL) {
-                    Mage::getModel('core/config')->saveConfig('gigya_global/gigya_global_conf/dataCenter', $domain);
-                    $this->_gigya_api($method, $params);
-                } else {
-                    $ex = new Exception("Bad apiDomain return");
-                    throw $ex;
-                }
-            } elseif ($response->getErrorCode() !== 0) {
-                $exp = new Exception($response->getErrorMessage(), $response->getErrorCode());
-                throw $exp;
-            }
         } catch (Exception $e) {
             $code = $e->getCode();
             $message = $e->getMessage();
             Mage::log($message);
             return $code;
         }
-
         return $response;
     }
 
@@ -209,8 +184,11 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     public function isCountersEnabled()
     {
         return (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/counters');
+    }
 
-
+    public function isGmNotifyActionEnabled()
+    {
+        return (bool) Mage::getStoreConfig('gigya_gamification/gigya_gamification_conf/purchaseAction');
     }
 
 
