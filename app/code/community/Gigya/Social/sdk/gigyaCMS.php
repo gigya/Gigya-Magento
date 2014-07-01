@@ -40,7 +40,7 @@ class GigyaCMS {
 	public function call( $method, $params ) {
 
 		// Initialize new request.
-        if ($this->use_user_key) {
+        if ($this->useUserKey) {
             $request   = new GSRequest( $this->api_key, $this->user_secret, $method, null, false, $this->user_key );
         } else {
             $request   = new GSRequest( $this->api_key, $this->api_secret, $method );
@@ -629,6 +629,23 @@ class GigyaCMS {
     {
         return $this->user_secret;
     }
+
+    /**
+     * @param boolean $use_user_key
+     */
+    public function setUseUserKey($use_user_key)
+    {
+        $this->use_user_key = $use_user_key;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getUseUserKey()
+    {
+        return $this->use_user_key;
+    }
+
 
 
 }
