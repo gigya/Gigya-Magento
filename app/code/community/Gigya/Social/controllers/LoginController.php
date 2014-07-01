@@ -83,12 +83,19 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
         if ($valid) {
             $accountInfo = $this->helper->utils->getAccount($post['UID']);
+            if (is_numeric($accountInfo)) {
+                $res = array(
+                    'result' => 'message',
+                    'message' => "Change Me"
+                );
+                $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
+            }
             $email = reset($accountInfo['loginIDs']['emails']);
             $cust_session = Mage::getSingleton('customer/session');
             // loginIDs is empty so this is the "secondary" user in Gigya
             if (empty($email)) {
                 // delete user in gigya etc...
-                $this->_removeGigyaSeconderyAccount($post['UID'], $accountInfo);
+                $this->_disableGigyaSeconderyAccount($post['UID'], $accountInfo);
                 return;
             }
             $cust = $this->_customerExists($email);
@@ -129,8 +136,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
     }
 
-    private function _removeGigyaSeconderyAccount($uid, $account) {
-        Mage::helper('Gigya_Social')->utils->deleteAccountByGUID($uid);
+    private function _disableGigyaSeconderyAccount($uid, $account) {
+        Mage::helper('Gigya_Social')->utils->disableAccountByGUID($uid);
         $providers = Mage::helper('Gigya_Social')->utils->getProviders($account);
         $msg = sprintf($this->__( 'We found your email in our system.<br>Please login to your existing account using your <strong>%1$s</strong> identity.' ), $providers['primary'], $providers['secondary'] );
         $res = array(

@@ -214,6 +214,7 @@
         <providers>*</providers>
         <laguages>en</laguages>
         <google_sa>0</google_sa>
+        <debug_log>0</debug_log>
       </gigya_global_conf>
     </gigya_global>
     <gigya_login>

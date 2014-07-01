@@ -26,7 +26,8 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         $this->userKey = Mage::getStoreConfig('gigya_global/gigya_global_conf/userKey');
         $this->userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
         $use_user_key = $this->userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/useUserKey');
-        $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret, $this->userKey, $use_user_key);
+        $debug = Mage::getStoreConfig('gigya_global/gigya_global_conf/debug_log');
+        $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret, $this->userKey, $use_user_key, $debug);
     }
     public function _getPassword($length = 8)
     {

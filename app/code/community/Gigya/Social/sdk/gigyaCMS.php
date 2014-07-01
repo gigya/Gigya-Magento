@@ -11,11 +11,12 @@ class GigyaCMS {
     private $user_key;
     private $user_secret;
     private $useUserKey;
+    private $debug = false;
 
 	/**
 	 * Constructs a GigyaApi object.
 	 */
-	public function __construct($apiKey, $secret, $apiDomain, $userSecret = NULL, $userKey = NULL, $useUserKey = false) {
+	public function __construct($apiKey, $secret, $apiDomain, $userSecret = NULL, $userKey = NULL, $useUserKey = false, $debug = false) {
 
 		$this->api_key    = $apiKey;
 		$this->api_secret = $secret;
@@ -23,6 +24,7 @@ class GigyaCMS {
         $this->user_key = $userKey;
         $this->user_secret = $userSecret;
         $this->use_user_key = $useUserKey;
+        $this->debug = $debug;
 
 	}
 
@@ -37,7 +39,8 @@ class GigyaCMS {
 	 * @return array
 	 *   The Gigya response.
 	 */
-	public function call( $method, $params ) {
+	public function call( $method, $params, $trys = 0, $retrys = 0) {
+
 
 		// Initialize new request.
         if ($this->useUserKey) {
@@ -62,7 +65,13 @@ class GigyaCMS {
 
 		// Make the request.
 		ini_set('arg_separator.output', '&');
+        if ($this->debug) {
+            $this->_gigya_debug_log($request);
+        }
 		$response = $request->send();
+        if ($this->debug) {
+            $this->_gigya_debug_log($response->getLog());
+        }
 		ini_restore ( 'arg_separator.output' );
 
 		// Check for errors
@@ -72,7 +81,9 @@ class GigyaCMS {
 				$log = explode( "\r\n", $response->getLog() );
 				_gigya_error_log( $log );
 			}
-            //throw new Exception($response->getErrorMessage(), $response->getErrorCode());
+            if ($retrys < $trys) {
+                $this->call($method, $params, 1);
+            }
             return $err_code;
 		} else {
 			if ( ! empty( $user_info ) ) {
@@ -364,7 +375,7 @@ class GigyaCMS {
 
 		// Because we can only trust the UID parameter from the origin object,
 		// We'll ask Gigya's API for account-info straight from the server.
-		return $this->call( 'accounts.getAccountInfo', $req_params );
+		return $this->call( 'accounts.getAccountInfo', $req_params, 1 );
 
 	}
 
@@ -409,6 +420,15 @@ class GigyaCMS {
 		$this->call( 'accounts.deleteAccount', array( 'UID' => $guid ) );
 
 	}
+
+    public function disableAccountByGUID($guid){
+        // Disable Account
+        $params = array(
+            'UID' => $guid,
+            'isActive' => false
+        );
+        $this->call("accounts.setAccountInfo", $params);
+    }
 
 	/**
 	 * @param $account
@@ -549,6 +569,21 @@ class GigyaCMS {
 		}
 		return FALSE;
 	}
+
+    public function _gigya_error_log($log){
+        foreach ($log as $error) {
+            Mage::log('Gigya: ' . $error, Zend_Log::ERR);
+        }
+    }
+
+    public function _gigya_debug_log($log) {
+        if (is_array($log) || is_object($log)) {
+            $toLog = print_r($log, true);
+        } else {
+            $toLog = $log;
+        }
+        Mage::log($toLog, Zend_Log::DEBUG, "gigya_debug_log");
+    }
 
     /**
      * @param mixed $api_domain

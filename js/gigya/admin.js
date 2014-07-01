@@ -34,7 +34,11 @@ gigyaAdmin.userManegmentUI = function(userMod) {
 
 gigyaAdmin.userKeyUI = function (useKey) {
     if (useKey == null) {
-        var useKey = $F('gigya_global_gigya_global_conf_useUserKey');
+        if ($("gigya_global_gigya_global_conf_useUserKey") != null){
+            var useKey = $F('gigya_global_gigya_global_conf_useUserKey');
+        } else {
+            return false;
+        }
     }
     if (useKey == 0) {
         gigyaAdmin.hideUserKey();
