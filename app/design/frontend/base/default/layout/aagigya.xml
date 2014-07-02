@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addJs">
+                <file>gigya/gigya.js</file>
+            </action>
+            <action method="addCss">
+                <stylesheet>css/gigya.css</stylesheet>
+            </action>
+            <action method="addJs">
+                <script>prototype/window.js</script>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/default.css</name>
+            </action>
+            <action method="addItem">
+                <type>js_css</type>
+                <name>prototype/windows/themes/lighting.css</name>
+            </action>
+        </reference>
+        <reference name="before_body_end">
+            <block type="Gigya_Social_Block_Gamification_notifications" name="gigya.gm.notifications"/>
+            <block type="Gigya_Social_Block_share" name="gigya.share.action"/>
+        </reference>
+        <reference name="right">
+            <block name="gigya.activity.feed" type="core/template" after="-" template="gigya/activityfeed.phtml"/>
+        </reference>
+        <reference name="top.links" >
+            <action method="addParamsByUrl">
+                <url helper="customer/getRegisterUrl"/>
+                <params>
+                    <a_params><class>gigya-raas-register</class></a_params>
+                </params>
+                <ifConfig><config>gigya_login/gigya_user_management/login_modes</config><value>raas</value></ifConfig>
+            </action>
+            <action method="addParamsByUrl">
+                <url helper="customer/getAccountUrl"/>
+                <params>
+                    <a_params><class>gigya-raas-profile</class></a_params>
+                </params>
+                <ifConfig><config>gigya_login/gigya_user_management/login_modes</config><value>raas</value></ifConfig>
+            </action>
+        </reference>
+    </default>
+    <customer_logged_out>
+        <reference name="top.links" >
+        <action method="addParamsByUrl">
+            <url helper="customer/getLoginUrl"/>
+            <params>
+                <a_params><class>gigya-raas-login</class></a_params>
+            </params>
+            <ifConfig><config>gigya_login/gigya_user_management/login_modes</config><value>raas</value></ifConfig>
+        </action>
+        </reference>
+    </customer_logged_out>
+    <customer_logged_in>
+        <remove name="gigya.hp.login"/>
+    </customer_logged_in>
+    <cms_index_index>
+        <reference name="right">
+            <block type="core/template" name="gigya.hp.login" before="-" template="gigya/login/social_login.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="Gigya_Social_Block_Gamification_plugins" after="-" name="left.gigya.gm.blocks"
+                   template="gigya/gamification.phtml">
+                <action method="setData">
+                    <name>layout</name>
+                    <value>
+                        <UserStatus>divUserStatus</UserStatus>
+                        <ChallengeStatus>divChallenge</ChallengeStatus>
+                        <Achievements>divAchievements</Achievements>
+                        <Leaderboard>divLeaderboard</Leaderboard>
+                    </value>
+                </action>
+            </block>
+        </reference>
+    </cms_index_index>
+    <customer_account_logoutsuccess>
+        <reference name="head">
+            <block type="Gigya_Social_Block_logout" name="gigya.logout.action"/>
+        </reference>
+    </customer_account_logoutsuccess>
+    <customer_account_login>
+        <reference name="content">
+            <block name="gigya.login" type="core/template" before="-"
+                   template="gigya/login/social_login_login_page.phtml"/>
+        </reference>
+    </customer_account_login>
+    <customer_account_create>
+        <reference name="content">
+            <block name="gigya.login" type="core/template" before="-"
+                   template="gigya/login/social_login_login_page.phtml"/>
+        </reference>
+    </customer_account_create>
+    <customer_account_index>
+        <reference name="content">
+            <block type="core/template" name="gigya.link.accounts" after="-"
+                   template="gigya/login/link_accounts.phtml"/>
+        </reference>
+    </customer_account_index>
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.login">
+            <block name="gigya.login" type="core/template" as="form.additional.info" after="-"
+                   template="gigya/login/social_login.phtml"/>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_success>
+        <reference name="content">
+            <block type="Gigya_Social_Block_Ordersharebar" name="gigya.sharebar" after="-"
+                   template="gigya/share/ordersharebar.phtml"/>
+        </reference>
+    </checkout_onepage_success>
+    <review_product_list>
+        <reference name="product.info">
+            <block type="catalog/product_view" as="extrahint" name="gigya.sharebar" after="-"
+                   template="gigya/share/sharebar.phtml"/>
+            <block type="catalog/product_view" as="other" name="gigya.reactions" after="-"
+                   template="gigya/share/reactions.phtml"/>
+        </reference>
+    </review_product_list>
+    <catalog_product_view>
+        <reference name="product.info.extrahint">
+            <block type="catalog/product_view" name="gigya.sharebar" after="-" template="gigya/share/sharebar.phtml"/>
+            <block type="catalog/product_view" name="gigya.reactions" after="-" template="gigya/share/reactions.phtml"/>
+        </reference>
+        <reference name="content">
+            <block type="catalog/product_view" name="gigya.comments" after="-" template="gigya/comments.phtml"/>
+            <reference name="product.info">
+                <action method="addReviewSummaryTemplate">
+                    <type>default</type>
+                    <template>gigya/ratings/summary.phtml</template>
+                </action>
+                <action method="addReviewSummaryTemplate">
+                    <type>short</type>
+                    <template>gigya/ratings/summary_short.phtml</template>
+                </action>
+            </reference>
+            <reference name="product.info.upsell">
+                <action method="addReviewSummaryTemplate">
+                    <type>default</type>
+                    <template>gigya/ratings/summary_short.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </catalog_product_view>
+    <catalog_category_default>
+        <reference name="content">
+            <block name="product_list">
+                <action method="addReviewSummaryTemplate">
+                    <type>short</type>
+                    <template>gigya/ratings/summary_short.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </catalog_category_default>
+    <catalog_category_layered>
+        <reference name="content">
+            <block name="product_list">
+                <action method="addReviewSummaryTemplate">
+                    <type>short</type>
+                    <template>gigya/ratings/summary_short.phtml</template>
+                </action>
+            </block>
+        </reference>
+    </catalog_category_layered>
+    <review_product_view>
+        <reference name="content">
+            <reference name="product.info">
+                <action method="addReviewSummaryTemplate">
+                    <type>default</type>
+                    <template>gigya/ratings/summary.phtml</template>
+                </action>
+            </reference>
+        </reference>
+    </review_product_view>
+    <review_product_list>
+        <reference name="content">
+            <block type="Gigya_Social_Block_reviews" name="gigya.ratings" after="-"/>
+        </reference>
+    </review_product_list>
+</layout>
