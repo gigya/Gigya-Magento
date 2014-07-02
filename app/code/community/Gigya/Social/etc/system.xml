@@ -175,7 +175,7 @@
                     <fields>
                         <login_modes translate="label">
                             <label>Gigya User Management</label>
-                            <frontend_type>radios</frontend_type>
+                            <frontend_type>select</frontend_type>
                             <backend_model>Gigya_Social_Model_Config_Backend_UserMode</backend_model>
                             <source_model>Gigya_Social_Model_config_source_loginModes</source_model>
                             <sort_order>9</sort_order>

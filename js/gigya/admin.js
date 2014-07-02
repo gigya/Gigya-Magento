@@ -10,7 +10,7 @@ var gigyaAdmin = gigyaAdmin || {};
 
 gigyaAdmin.userManegmentUI = function(userMod) {
 	if (userMod == null) {
-		var userMod = $$('#row_gigya_login_gigya_user_management_login_modes .value input:checked[type="radio"][name="groups[gigya_user_management][fields][login_modes][value]"').pluck('value')[0];
+		var userMod = $F('gigya_login_gigya_user_management_login_modes');
 	}
 	switch (userMod) {
 		case "social":
@@ -73,9 +73,9 @@ document.observe("dom:loaded", function () {
 	gigyaAdmin.userManegmentUI(null);
     gigyaAdmin.userKeyUI(null);
 	// bind events
-    if ($("row_gigya_login_gigya_user_management_login_modes") != null){
-	$("row_gigya_login_gigya_user_management_login_modes").observe("click", function(event) {
-		var el = event.findElement("input");
+    if ($("gigya_login_gigya_user_management_login_modes") != null){
+	$("gigya_login_gigya_user_management_login_modes").observe("change", function(event) {
+		var el = $F('gigya_login_gigya_user_management_login_modes');
 		if (typeof el !== 'undefined') {
 			gigyaAdmin.userManegmentUI(el.value);
 		}
