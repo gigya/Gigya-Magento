@@ -64,28 +64,30 @@ gigyaFunctions.RaaS.login = function (response) {
 
 gigyaFunctions.RaaS.loginScreens = function (event) {
     var params = gigyaSettings.RaaS;
-    if (typeof params.raas_login_div_id !== 'undefined') {
-        gigya.accounts.showScreenSet(JSON.parse('{"ScreenSet": "' + params.WebScreen + '", "containerID": "' + params.raas_login_div_id + '" , "mobileScreenSet":"' + params.MobileScreen + '", "startScreen":"' + params.LoginScreen + '"}'));
+    if (!params.raas_login_div_id.length === 0) {
+        gigya.accounts.showScreenSet(JSON.parse('{"screenSet": "' + params.WebScreen + '", "containerID": "' + params.raas_login_div_id + '" , "mobileScreenSet":"' + params.MobileScreen + '", "startScreen":"' + params.LoginScreen + '"}'));
     } else {
-        gigya.accounts.showScreenSet(JSON.parse('{"ScreenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
+        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
         Event.stop(event);
     }
 }
 
 gigyaFunctions.RaaS.registerScreens = function (event) {
-    if (typeof params.raas_register_div_id !== 'undefined') {
-        gigya.accounts.showScreenSet(JSON.parse('{"ScreenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
+    var params = gigyaSettings.RaaS;
+    if (!params.raas_register_div_id === 0) {
+        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
     } else {
-        gigya.accounts.showScreenSet(JSON.parse('{"ScreenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '","startScreen": "' + params.RegisterScreen + '"}'));
+        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '","startScreen": "' + params.RegisterScreen + '"}'));
         Event.stop(event);
     }
 }
 
 gigyaFunctions.RaaS.profileScreens = function (event) {
-    if (typeof params.raas_profile_div_id !== 'undefined') {
-        gigya.accounts.showScreenSet(JSON.parse('{"ScreenSet":"' + params.ProfileWebScreen + '", "containerID":"' + params.raas_profile_div_id + '", "mobileScreenSet:"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
+    var params = gigyaSettings.RaaS;
+    if (!params.raas_profile_div_id === 0) {
+        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "containerID":"' + params.raas_profile_div_id + '", "mobileScreenSet:"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
     } else {
-        gigya.accounts.showScreenSet(JSON.parse('{"ScreenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '"}'));
+        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '"}'));
         Event.stop(event);
     }
 }
