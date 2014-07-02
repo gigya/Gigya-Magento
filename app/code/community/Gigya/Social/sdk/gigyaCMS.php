@@ -556,6 +556,24 @@ class GigyaCMS {
         return $this->call('accounts.incrementCounters', $params);
     }
 
+    public function isCounters() {
+        $res = $this->call( 'accounts.getRegisteredCounters', array() );
+        if ( $res['errorCode'] === 403036 ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function isGm() {
+        $res = $this->call( 'accounts.getRegisteredCounters', array() );
+        if ( $res['errorCode'] === 403036 ) {
+            return false;
+        }
+
+        return true;
+    }
+
 	public static function isSpider() {
 		// Add as many spiders you want in this array
 		$spiders = array( 'Googlebot', 'Yammybot', 'Openbot', 'Yahoo', 'Slurp', 'msnbot', 'ia_archiver', 'Lycos', 'Scooter', 'AltaVista', 'Teoma', 'Gigabot', 'Googlebot-Mobile' );
