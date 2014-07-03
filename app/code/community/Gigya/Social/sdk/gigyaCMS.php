@@ -566,7 +566,7 @@ class GigyaCMS {
     }
 
     public function isGm() {
-        $res = $this->call( 'accounts.getRegisteredCounters', array() );
+        $res = $this->call( 'gm.getGlobalConfig', array() );
         if ( $res['errorCode'] === 403036 ) {
             return false;
         }

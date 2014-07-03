@@ -142,7 +142,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
             }
         }
         // New comments can be override in advanced config
-        if ($pluginName == 'gigya_comments/gigya_comments_conf') {
+        if ($pluginName == 'gigya_comments/gigya_comments_conf' || $pluginName = 'gigya_r_and_r/gigya_r_and_r_conf') {
             $config['version'] = 2;
         }
         if (!empty($config['advancedConfig'])) {
