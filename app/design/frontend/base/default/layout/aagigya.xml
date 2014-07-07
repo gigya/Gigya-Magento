@@ -101,6 +101,11 @@
         </reference>
     </customer_account_index>
     <checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs">
+                <file>gigya/onepage_raas.js</file>
+            </action>
+        </reference>
         <reference name="checkout.onepage.login">
             <block name="gigya.login" type="core/template" as="form.additional.info" after="-"
                    template="gigya/login/social_login.phtml"/>

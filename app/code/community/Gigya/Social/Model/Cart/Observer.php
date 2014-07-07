@@ -79,6 +79,10 @@ class Gigya_Social_Model_Cart_Observer
                 'UID' => $gigyaUid,
                 'data' => json_encode(array('reviewReminder' => $gData))
             );
+            Mage::dispatchEvent('gigya_pre_review_reminder', array(
+                    'params' => $params,
+                    'order' => $order
+                ));
             $this->helper->utils->call('accounts.setAccountInfo', $params);
         }
     }
