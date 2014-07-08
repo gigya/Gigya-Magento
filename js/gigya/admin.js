@@ -19,17 +19,19 @@ gigyaAdmin.userManegmentUI = function(userMod) {
 			this.hideSection("gigya_login_gigya_raas_conf");
 			this.showSection("gigya_login_gigya_link_accounts-state");
 			this.showSection("gigya_login_gigya_login_conf-state");
-
+            $$('.raas-comment')[0].hide();
 			break;
 		case "disable":
 			this.hideSection("gigya_login_gigya_raas_conf");
 			this.hideSection("gigya_login_gigya_link_accounts-state");
 			this.hideSection("gigya_login_gigya_login_conf-state");
+            $$('.raas-comment')[0].hide();
 			break;
 		case "raas":
 			this.hideSection("gigya_login_gigya_link_accounts-state");
 			this.hideSection("gigya_login_gigya_login_conf-state");
-				this.showSection("gigya_login_gigya_raas_conf");
+			this.showSection("gigya_login_gigya_raas_conf");
+            $$('.raas-comment')[0].show();
 			break;
 	}
 }

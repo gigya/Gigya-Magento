@@ -71,7 +71,7 @@
                             <show_in_store>0</show_in_store>
                         </secretkey>
                         <useUserKey translate="label">
-                            <label>Use user key and secret </label>
+                            <label>Use user key and secret</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <sort_order>13</sort_order>
@@ -82,7 +82,8 @@
                         <userKey translate="label">
                             <label>Gigya User key</label>
                             <frontend_type>text</frontend_type>
-                            <comment><![CDATA[<b style="color: red;">Warning: your User Key may have limited Gigya permissions. This may cause permission errors that will limit/damage the module functionality.</b>]]></comment>
+                            <comment>
+                                <![CDATA[<b style="color: red;">Warning: your User Key may have limited Gigya permissions. This may cause permission errors that will limit/damage the module functionality.</b>]]></comment>
                             <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -130,7 +131,8 @@
                             <frontend_type>select</frontend_type>
                             <backend_model>Gigya_Social_Model_Config_Backend_Counters</backend_model>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <comment><![CDATA[Notify Gigya of purchases carried out in the store. The accumulated values will show under Revenue <a href="https://console.gigya.com/Site/partners/Insights.aspx#Revenue%20Activity">Activity</a> section of Customer Insights]]></comment>
+                            <comment>
+                                <![CDATA[Notify Gigya of purchases carried out in the store. The accumulated values will show under Revenue <a href="https://console.gigya.com/Site/partners/Insights.aspx#Revenue%20Activity">Activity</a> section of Customer Insights]]></comment>
                             <sort_order>19</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -180,6 +182,7 @@
                             <frontend_type>select</frontend_type>
                             <backend_model>Gigya_Social_Model_Config_Backend_UserMode</backend_model>
                             <source_model>Gigya_Social_Model_config_source_loginModes</source_model>
+                            <comment><![CDATA[<span style="display: none;" class="raas-comment">Selecting this option overrides Magento's user management system. This requires additional administration steps. Learn more <a href="http://developers.gigya.com/015_Partners/030_CMS_and_Ecommerce_Platforms/050_Magento">here</a></span>]]></comment>
                             <sort_order>9</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -262,7 +265,7 @@
                     <label>Registration-as-a-Service</label>
                     <frontend_type>text</frontend_type>
                     <comment>
-                        <![CDATA[RaaS requires initial configuration in Gigya's Admin Console. Screen sets can be defined in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a>. The page will display a list of predefined default screen-sets, each with an ID. Click on the "Visual Editor" link next to the screen-set that you want to use, this will open the <a class="external" target="_blank" title="010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor" rel="internal" href="http://dev-wiki.gigya.com/010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor">Visual Editor</a> window. You can modify the screens, or just hit the "Save" button to activate them. Please make sure that the screen-set IDs that are defined below match the IDs of the screen-sets you have configured in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a> page.']]></comment>
+                        <![CDATA[RaaS requires initial configuration in Gigya's Admin Console. Screen sets can be defined in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a>. The page will display a list of predefined default screen-sets, each with an ID. Click on the "Visual Editor" link next to the screen-set that you want to use, this will open the <a class="external" target="_blank" title="010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor" rel="internal" href="http://developers.gigya.com/010_Developer_Guide/10_UM360/040_Raas/020_UI_Builder#Visual_Editor">Visual Editor</a> window. You can modify the screens, or just hit the "Save" button to activate them. Please make sure that the screen-set IDs that are defined below match the IDs of the screen-sets you have configured in the <a class="link-https" target="_blank" rel="external nofollow" href="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets" title="https://platform.gigya.com/site/partners/Settings.aspx#cmd%3DUserManagement360.ScreenSets">UI Builder</a> page.']]></comment>
                     <sort_order>101</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
