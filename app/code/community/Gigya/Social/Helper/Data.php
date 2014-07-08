@@ -12,6 +12,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     private $userKey = null;
     private $userSecret = null;
     public  $utils;
+    private $userMod;
     const CHARS_PASSWORD_LOWERS = 'abcdefghjkmnpqrstuvwxyz';
     const CHARS_PASSWORD_UPPERS = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
     const CHARS_PASSWORD_DIGITS = '23456789';
@@ -28,6 +29,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         $use_user_key = $this->userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/useUserKey');
         $debug = Mage::getStoreConfig('gigya_global/gigya_global_conf/debug_log');
         $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret, $this->userKey, $use_user_key, $debug);
+        $this->userMod = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
     }
     public function _getPassword($length = 8)
     {
@@ -198,8 +200,12 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         return (string)Mage::getConfig()->getNode()->modules->Gigya_Social->version;
     }
 
-    public function getUserMode()
+    public function getUserMod()
     {
+        if (empty($this->userMod)) {
+            $this->userMod = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
+        }
+        return $this->userMod;
 
     }
 

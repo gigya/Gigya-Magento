@@ -62,6 +62,29 @@ gigyaFunctions.RaaS.login = function (response) {
     });
 }
 
+gigyaFunctions.RaaS.profileEdit = function (data) {
+    new Ajax.Request(baseUrl + 'gigyaAccount/account/editPost', {
+        parameters: {json: JSON.stringify(data)},
+        onSuccess: function (trans) {
+            if (typeof trans.responseJSON.result !== 'undefined') {
+                if (trans.responseJSON.result == 'newUser' || trans.responseJSON.result == 'login') {
+                    if (typeof trans.responseJSON.url != 'undefined') {
+                        window.location.replace(trans.responseJSON.url);
+                    } else {
+                        window.location.reload();
+                    }
+                } else {
+                    if (trans.responseJSON.result == 'message') {
+                        var html = trans.responseJSON.message;
+                        gigyaFunctions.showModalWindow('Error', html);
+                    }
+                    gigya.accounts.logout();
+                }
+            }
+        }
+    });
+}
+
 gigyaFunctions.RaaS.loginScreens = function (event) {
     var params = gigyaSettings.RaaS;
     if (!params.raas_login_div_id.length === 0) {
@@ -75,7 +98,7 @@ gigyaFunctions.RaaS.loginScreens = function (event) {
 gigyaFunctions.RaaS.registerScreens = function (event) {
     var params = gigyaSettings.RaaS;
     if (!params.raas_register_div_id === 0) {
-        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
+        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.RegisterScreen + '"}'));
     } else {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '","startScreen": "' + params.RegisterScreen + '"}'));
         Event.stop(event);
@@ -84,11 +107,33 @@ gigyaFunctions.RaaS.registerScreens = function (event) {
 
 gigyaFunctions.RaaS.profileScreens = function (event) {
     var params = gigyaSettings.RaaS;
+    var jsonParams = {};
     if (!params.raas_profile_div_id === 0) {
-        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "containerID":"' + params.raas_profile_div_id + '", "mobileScreenSet:"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
+        jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "containerID":"' + params.raas_profile_div_id + '", "mobileScreenSet:"' + params.ProfileMobileScreen + '", "startScreen": "' + params.ProfileWebScreen + '"}');
+        jsonParams.onAfterSubmit = gigyaFunctions.RaaS.profileEdit;
+        gigya.accounts.showScreenSet(jsonParams);
     } else {
-        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '"}'));
+        jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '"}');
+        jsonParams.onAfterSubmit = gigyaFunctions.RaaS.profileEdit;
+        gigya.accounts.showScreenSet(jsonParams);
         Event.stop(event);
+    }
+}
+
+gigyaFunctions.RaaS.resetPass = function () {
+    var params = gigyaSettings.RaaS;
+    var jsonParams = {};
+    jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '", "startScreen": "gigya-change-password-screen"}');
+    gigya.accounts.showScreenSet(jsonParams);
+    Event.stop(event);
+
+}
+
+gigyaFunctions.RaaS.accountEmbed = function () {
+    if ( typeof  $$('body.customer-account-edit')[0] != 'undefined') {
+        var params = gigyaSettings.RaaS;
+        var jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '", "containerID": "form-validate"}');
+        gigya.accounts.showScreenSet(jsonParams);
     }
 }
 
@@ -103,9 +148,13 @@ gigyaFunctions.RaaS.init = function (params) {
         $$('.gigya-raas-profile').each(function (element) {
             element.observe('click', gigyaFunctions.RaaS.profileScreens);
         });
+        $$('.gigya-raas-pass').each(function (element) {
+            element.observe('click', gigyaFunctions.RaaS.resetPass);
+        });
     } else {
         gigyaFunctions.RaaS.loginScreens();
     }
+    gigyaFunctions.RaaS.accountEmbed();
 
 }
 

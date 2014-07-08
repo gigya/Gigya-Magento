@@ -90,6 +90,13 @@
           <frontName>gigyareviews</frontName>
         </args>
       </reviews>
+        <accountEdit>
+            <use>standard</use>
+            <args>
+                <module>Gigya_Social</module>
+                <frontName>gigyaAccount</frontName>
+            </args>
+        </accountEdit>
     </routers>
     <layout>
       <updates>
@@ -115,6 +122,11 @@
           <template_links>Gigya_Social_Block_Template_Links</template_links>
         </rewrite>
       </page>
+<!--        <customer>
+            <rewrite>
+                <account_dashboard_info>Gigya_Social_Block_Template_Info</account_dashboard_info>
+            </rewrite>
+        </customer>-->
     </blocks>
     <events>
     </events>

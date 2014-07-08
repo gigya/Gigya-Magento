@@ -99,6 +99,11 @@
             <block type="core/template" name="gigya.link.accounts" after="-"
                    template="gigya/login/link_accounts.phtml"/>
         </reference>
+        <reference name="customer_account_dashboard_info">
+            <action method="setTemplate">
+                <template>gigya/dashboard/info.phtml</template>
+            </action>
+        </reference>
     </customer_account_index>
     <checkout_onepage_index>
         <reference name="head">
