@@ -225,6 +225,7 @@
         <dataCenter>us1.gigya.com</dataCenter>
         <providers>*</providers>
         <laguages>en</laguages>
+        <loginBehavior>loginExistingUser</loginBehavior>
         <google_sa>0</google_sa>
         <debug_log>0</debug_log>
       </gigya_global_conf>
@@ -236,7 +237,6 @@
       <gigya_login_conf>
         <buttonsStyle>standart</buttonsStyle>
         <showTermsLink>0</showTermsLink>
-        <loginBehavior>loginExistingUser</loginBehavior>
         <containerID>gigyaLogin</containerID>
         <width>210</width>
         <height>110</height>

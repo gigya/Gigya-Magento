@@ -14,7 +14,7 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
         'enabledProviders' => (Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') !== '') ? Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') : '*',
         'lang' => Mage::getStoreConfig('gigya_global/gigya_global_conf/laguages'),
         'sessionExpiration' => (int) Mage::getStoreConfig('web/cookie/cookie_lifetime'),
-        'connectWithoutLoginBehavior' => Mage::getStoreConfig('gigya_login/gigya_login_conf/loginBehavior'),
+        'connectWithoutLoginBehavior' => Mage::getStoreConfig('gigya_global/gigya_login_conf/loginBehavior'),
       );
       $this->_data['items']['js/gigya'] = array(
         'type' => 'external_js',
