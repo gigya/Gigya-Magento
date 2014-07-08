@@ -152,7 +152,9 @@ gigyaFunctions.RaaS.init = function (params) {
             element.observe('click', gigyaFunctions.RaaS.resetPass);
         });
     } else {
-        gigyaFunctions.RaaS.loginScreens();
+        if (!params.raas_login_div_id.length === 0) {
+            gigyaFunctions.RaaS.loginScreens();
+        }
     }
     gigyaFunctions.RaaS.accountEmbed();
 

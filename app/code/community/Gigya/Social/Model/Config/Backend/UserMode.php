@@ -17,9 +17,7 @@ class Gigya_Social_Model_Config_Backend_UserMode extends Mage_Core_Model_Config_
                 Mage::throwException(Mage::helper('adminhtml')->__("Gigya's Registration-as-a-Service (RaaS) is currently not part of your site package.
             Please contact your Gigya account manager to activate the package."));
             } else {
-                $data = $this->getData();
-                $raasConfig = $data['gigya_raas_conf']['fields'];
-                if (!$this->checkNotEmptyRaas($raasConfig)) {
+                if (!$this->checkNotEmptyRaas()) {
                     Mage::throwException(Mage::helper('adminhtml')->__("Screen set IDs can not be empty"));
                 }
             }
@@ -27,11 +25,13 @@ class Gigya_Social_Model_Config_Backend_UserMode extends Mage_Core_Model_Config_
 
     }
 
-    private function checkNotEmptyRaas($config)
+    private function checkNotEmptyRaas()
     {
+        $data = $this->getData();
+        $raasConfig = $data['groups']['gigya_raas_conf']['fields'];
         $required = array('WebScreen', 'MobileScreen', 'LoginScreen', 'RegisterScreen', 'ProfileWebScreen', 'ProfileMobileScreen');
         foreach ($required as $field) {
-            if (empty($config[$field]['value'])) {
+            if (empty($raasConfig[$field]['value'])) {
                 return false;
             }
        }
