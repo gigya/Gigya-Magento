@@ -22,9 +22,10 @@ class Gigya_Social_Model_Config_Backend_UserMode extends Mage_Core_Model_Config_
                 }
             }
         } elseif ($value == 'social') {
-            Mage::throwException("This site is configured on Gigya server to use Registration-as-a-Service.
+            if ($helper->utils->isRaaS()) {
+                Mage::throwException("This site is configured on Gigya server to use Registration-as-a-Service.
                      Please contact your Gigya account manager for migration instruction");
-
+            }
         }
     }
 

@@ -67,8 +67,8 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         }
         try {
             $res = $this->_gigya_api('notifyLogin', $params);
-            if (is_object($res) && $res->getErrorCode() === 0) {
-                setcookie($res->getString("cookieName"), $res->getString("cookieValue"), 0, $res->getString("cookiePath"), $res->getString("cookieDomain"));
+            if (is_array($res) && $res["errorCode"] === 0) {
+                setcookie($res["cookieName"], $res["cookieValue"], 0, $res["cookiePath"], $res["cookieDomain"]);
             } else {
                 Mage::logException($res);
             }
@@ -171,7 +171,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function isPluginEnabled($pluginName)
     {
-        return Mage::getStoreConfig($pluginName . '/enable');
+        return (bool) Mage::getStoreConfig($pluginName . '/enable');
     }
 
     public function isShareBarEnabled($place)

@@ -317,6 +317,7 @@
         <notifications>0</notifications>
         <period>7days</period>
         <totalCount>12</totalCount>
+        <purchaseAction>0</purchaseAction>
       </gigya_gamification_conf>
     </gigya_gamification>
     <gigya_r_and_r>

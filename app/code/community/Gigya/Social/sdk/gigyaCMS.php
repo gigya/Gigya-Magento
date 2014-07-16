@@ -354,7 +354,7 @@ class GigyaCMS {
 
 	public function isRaaS() {
 		$res = $this->call( 'accounts.getSchema', array() );
-		if ( $res['errorCode'] === 403036 ) {
+		if ( $res === 403036 ) {
 			return false;
 		}
 
@@ -558,7 +558,7 @@ class GigyaCMS {
 
     public function isCounters() {
         $res = $this->call( 'accounts.getRegisteredCounters', array() );
-        if ( $res['errorCode'] === 403036 ) {
+        if ( $res === 403036 ) {
             return false;
         }
 
@@ -567,7 +567,7 @@ class GigyaCMS {
 
     public function isGm() {
         $res = $this->call( 'gm.getGlobalConfig', array() );
-        if ( $res['errorCode'] === 403036 ) {
+        if ( $res === 403036 ) {
             return false;
         }
 

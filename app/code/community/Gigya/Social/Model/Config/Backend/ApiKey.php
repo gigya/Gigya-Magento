@@ -19,8 +19,14 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
         $userSecret = $data['fieldset_data']['userSecret'];
         $useUserKey = $data['fieldset_data']['useUserKey'];
         $helper->utils->setApiDomain($dataCenter);
-
         if ($useUserKey) {
+            if(empty($useUserKey)){
+                Mage::throwException(Mage::helper('adminhtml')->__("Gigya user key is required."));
+            }
+            if (empty($userSecret)){
+                Mage::throwException(Mage::helper('adminhtml')->__("Gigya user secret is required."));
+
+            }
             $helper->utils->setUserKey($userKey);
             $helper->utils->setUserSecret($userSecret);
             $helper->utils->setUseUserKey($useUserKey);
