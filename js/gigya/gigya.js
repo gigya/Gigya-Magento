@@ -472,7 +472,7 @@ function gigyaRegister() {
         if (gigyaSettings.userMode === 'raas') {
             gigya.socialize.addEventHandlers({
                 onLogin: gigyaFunctions.RaaS.login,
-                onLogout: gigyaFunctions.RaaS.logout
+                onLogout: gigyaFunctions.logout
             });
         } else if (gigyaSettings.userMode === 'social') {
         gigya.socialize.addEventHandlers({

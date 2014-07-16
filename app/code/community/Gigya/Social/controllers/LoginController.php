@@ -104,7 +104,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             $cust = $this->_customerExists($email);
             // customer email exists login flow
             if ($cust != false) {
-                Mage::dispatchEvent('gigya_pre_login', array(
+                Mage::dispatchEvent('gigya_raas_pre_login', array(
                    'customer' => $cust,
                    'gigyaData' => $this->gigyaData
                 ));
@@ -112,7 +112,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                 $cust->lastname = $accountInfo['profile']['lastName'];
                 $cust->save();
                 $cust_session->setCustomerAsLoggedIn($cust);
-                Mage::dispatchEvent('gigya_post_login', array(
+                Mage::dispatchEvent('gigya_raas_post_login', array(
                         'customer_session' => $cust_session,
                         'gigyaData' => $this->gigyaData
                     ));
@@ -170,12 +170,12 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                 if ($post['isSiteUID'] && is_numeric($post['UID'])) {
                     $cust_session = Mage::getSingleton('customer/session');
                     $cust_session->setData('gigyaAction', 'login');
-                    Mage::dispatchEvent('gigya_pre_login', array(
+                    Mage::dispatchEvent('gigya_social_pre_login', array(
                             'customer_session' => $cust_session,
                             'gigyaData' => $this->gigyaData
                         ));
                     $cust_session->loginById($post['user']['UID']);
-                    Mage::dispatchEvent('gigya_post_login', array(
+                    Mage::dispatchEvent('gigya_social_post_login', array(
                             'customer_session' => $cust_session,
                             'gigyaData' => $this->gigyaData
                         ));

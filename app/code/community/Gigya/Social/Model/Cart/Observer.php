@@ -57,7 +57,7 @@ class Gigya_Social_Model_Cart_Observer
             $counter->path = "/";
             $counter->count = (int) $order->getTotalQtyOrdered();
             $counter->value = $order->getGrandTotal();
-            Mage::dispatchEvent('gigya_counter_pre_send', array('counter' => $counter));
+            Mage::dispatchEvent('gigya_counter_pre_send', array('counter' => $counter, 'order' => $order));
             $counters[] = $counter;
             $res = $this->helper->utils->incrementCounter($gigyaUid, $counters);
         }
