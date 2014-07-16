@@ -10,9 +10,9 @@ class Gigya_Social_Model_Config_Backend_UserMode extends Mage_Core_Model_Config_
 {
     protected function _beforeSave()
     {
+        $helper = Mage::helper('Gigya_Social');
         $value = $this->getValue();
         if ($value == 'raas') {
-            $helper = Mage::helper('Gigya_Social');
             if (!$helper->utils->isRaaS()) {
                 Mage::throwException(Mage::helper('adminhtml')->__("Gigya's Registration-as-a-Service (RaaS) is currently not part of your site package.
             Please contact your Gigya account manager to activate the package."));
@@ -21,8 +21,11 @@ class Gigya_Social_Model_Config_Backend_UserMode extends Mage_Core_Model_Config_
                     Mage::throwException(Mage::helper('adminhtml')->__("Screen set IDs can not be empty"));
                 }
             }
-        }
+        } elseif ($value == 'social') {
+            Mage::throwException("This site is configured on Gigya server to use Registration-as-a-Service.
+                     Please contact your Gigya account manager for migration instruction");
 
+        }
     }
 
     private function checkNotEmptyRaas()
