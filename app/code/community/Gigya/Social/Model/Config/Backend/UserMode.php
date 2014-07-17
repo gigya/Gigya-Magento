@@ -14,7 +14,7 @@ class Gigya_Social_Model_Config_Backend_UserMode extends Mage_Core_Model_Config_
         $value = $this->getValue();
         if ($value == 'raas') {
             if (!$helper->utils->isRaaS()) {
-                Mage::throwException(Mage::helper('adminhtml')->__("Gigya's Registration-as-a-Service (RaaS) is currently not part of your site package.
+                Mage::getSingleton('adminhtml/session')->addWarning(Mage::helper('adminhtml')->__("Gigya's Registration-as-a-Service (RaaS) is currently not part of your site package.
             Please contact your Gigya account manager to activate the package."));
             } else {
                 if (!$this->checkNotEmptyRaas()) {
@@ -23,7 +23,7 @@ class Gigya_Social_Model_Config_Backend_UserMode extends Mage_Core_Model_Config_
             }
         } elseif ($value == 'social') {
             if ($helper->utils->isRaaS()) {
-                Mage::throwException("This site is configured on Gigya server to use Registration-as-a-Service.
+                Mage::getSingleton('adminhtml/session')->addWarning("This site is configured on Gigya server to use Registration-as-a-Service.
                      Please contact your Gigya account manager for migration instruction");
             }
         }

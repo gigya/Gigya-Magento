@@ -1070,7 +1070,8 @@
                             <show_in_store>0</show_in_store>
                         </containerID>
                         <categoryID translate="label">
-                            <label>The identifier of the Comments Category.</label>
+                            <label>The identifier of the Comments Category</label>
+                            <comment><![CDATA[Category name, as set up in the <a href="https://console.gigya.com/Site/partners/Settings.aspx#cmd%3DSettings.CommentsSetup">Gigya Administration Console</a> site]]></comment>
                             <frontend_type>text</frontend_type>
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>

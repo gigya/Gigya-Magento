@@ -11,17 +11,16 @@ class Gigya_Social_Model_Config_Backend_Counters extends Mage_Core_Model_Config_
     protected function _beforeSave()
     {
         $value  = $this->getValue();
-        $helper = Mage::helper('Gigya_Social');
-        if (!$helper->utils->isCounters()) {
-            Mage::throwException(
-                Mage::helper('adminhtml')->__(
-                    "Consumer Insights is a premium Gigya service that is not part of your site package.
-                    Please contact your Gigya account manager if you wish to activate this feature."
-                )
-            );
+        if ($value == 1) {
+            $helper = Mage::helper('Gigya_Social');
+            if (!$helper->utils->isCounters()) {
+                Mage::getSingleton('adminhtml/session')->addWarning(
+                    Mage::helper('adminhtml')->__(
+                        "Consumer Insights is a premium Gigya service that is not part of your site package.
+                        Please contact your Gigya account manager if you wish to activate this feature."
+                    )
+                );
+            }
         }
-
     }
-
-
-} 
+}

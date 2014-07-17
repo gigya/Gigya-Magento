@@ -14,7 +14,7 @@ class Gigya_Social_Model_Config_Backend_Gm extends Mage_Core_Model_Config_Data
         if ($value == 1) {
             $helper = Mage::helper('Gigya_Social');
             if (!$helper->utils->isGm()) {
-                Mage::throwException(Mage::helper('adminhtml')->__("Gamification is a premium Gigya service that is not part of your site package.
+                Mage::getSingleton('adminhtml/session')->addWarning(Mage::helper('adminhtml')->__("Gamification is a premium Gigya service that is not part of your site package.
                 Please contact your Gigya account manager if you wish to activate this feature."));
             }
         }
