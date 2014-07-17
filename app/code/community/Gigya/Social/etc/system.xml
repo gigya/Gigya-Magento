@@ -28,7 +28,7 @@
                             <label>Enable</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>10</sort_order>
+                            <sort_order>8</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -42,15 +42,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </version>
-                        <dataCenter translate="label">
-                            <label>Data Center Region</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_datacenter</source_model>
-                            <sort_order>10</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </dataCenter>
                         <apikey translate="label">
                             <label>Gigya API key</label>
                             <frontend_type>text</frontend_type>
@@ -70,15 +61,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </secretkey>
-                        <useUserKey translate="label">
-                            <label>Use user key and secret</label>
-                            <frontend_type>select</frontend_type>
-                            <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>13</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </useUserKey>
                         <userKey translate="label">
                             <label>Gigya User key</label>
                             <frontend_type>text</frontend_type>
@@ -98,21 +80,39 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </userSecret>
+                        <useUserKey translate="label">
+                            <label>Use user key and secret</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>16</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </useUserKey>
                         <providers translate="label">
                             <label>Providers</label>
                             <frontend_type>text</frontend_type>
                             <comment><![CDATA[Comma separated list of networks that would be included. For example: "Facebook, Twitter, Yahoo". <br/>
           * means all networks. See list of available <a href="http://developers.gigya.com/020_Client_API/020_Methods/Socialize.showLoginUI" target="_blank">providers.</a>]]></comment>
-                            <sort_order>16</sort_order>
+                            <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </providers>
+                        <dataCenter translate="label">
+                            <label>Data Center Region</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_datacenter</source_model>
+                            <sort_order>18</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </dataCenter>
                         <laguages translate="label">
                             <label>Interface language</label>
                             <frontend_type>select</frontend_type>
                             <source_model>Gigya_Social_Model_config_source_languages</source_model>
-                            <sort_order>17</sort_order>
+                            <sort_order>19</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -121,7 +121,7 @@
                             <label>Login behavior</label>
                             <frontend_type>select</frontend_type>
                             <source_model>Gigya_Social_Model_config_source_loginb</source_model>
-                            <sort_order>18</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -130,7 +130,7 @@
                             <label>Enable Google Social Analytics</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>19</sort_order>
+                            <sort_order>21</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -142,7 +142,7 @@
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <comment>
                                 <![CDATA[Notify Gigya of purchases carried out in the store. The accumulated values will show under Revenue <a href="https://console.gigya.com/Site/partners/Insights.aspx#Revenue%20Activity">Activity</a> section of Customer Insights]]></comment>
-                            <sort_order>20</sort_order>
+                            <sort_order>22</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -151,7 +151,7 @@
                             <label>Enable Gigya debug log</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>21</sort_order>
+                            <sort_order>23</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -159,8 +159,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
-                            <sort_order>22</sort_order>
+                            <comment><![CDATA[Add configuration in key|value convention one per a line. See list of available <a href="http://developers.gigya.com/030_API_reference/010_Client_API/010_Objects/Conf_object">parameters</a>.]]></comment>
+                            <sort_order>24</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
