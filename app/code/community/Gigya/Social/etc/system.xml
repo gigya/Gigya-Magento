@@ -65,7 +65,8 @@
                             <label>Gigya User key</label>
                             <frontend_type>text</frontend_type>
                             <comment>
-                                <![CDATA[<b style="color: red;">Warning: your User Key may have limited Gigya permissions. This may cause permission errors that will limit/damage the module functionality.</b>]]></comment>
+                                <![CDATA["Specify your User key. Both User Key & User Secret key are mandatory. Learn more in <a href="http://developers.gigya.com/010_Developer_Guide/83_Roles_and_Permissions#Obtaining_and_Using_the_User_Key">Obtaining and Using the User Key</a>"
+                                <br/><b style="color: red;">Warning: your User Key may have limited Gigya permissions. This may cause permission errors that will limit/damage the module functionality.</b>]]></comment>
                             <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -74,16 +75,17 @@
                         <userSecret translate="label">
                             <label>Gigya User Secret</label>
                             <frontend_type>text</frontend_type>
-                            <comment><![CDATA[Specify the Gigya User Secret]]></comment>
+                            <comment><![CDATA[Specify your User Secret key. Both User Key & User Secret key are mandatory. Learn more in <a href="http://developers.gigya.com/010_Developer_Guide/83_Roles_and_Permissions#Obtaining_and_Using_the_User_Key">Obtaining and Using the User Key</a>"]]></comment>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </userSecret>
                         <useUserKey translate="label">
-                            <label>Use user key and secret</label>
+                            <label>Use user key &amp; User secret</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <comment><![CDATA[Choose whether to set above your Gigya Secret key (default) or to set a user specific User key &amp; User Secret key. Learn more in <a href="http://developers.gigya.com/010_Developer_Guide/83_Roles_and_Permissions#Obtaining_and_Using_the_User_Key">Obtaining and Using the User Key</comment>a>]]></comment>
                             <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
