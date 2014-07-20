@@ -119,6 +119,10 @@ gigyaFunctions.RaaS.profileScreens = function (event) {
             gigya.accounts.showScreenSet(jsonParams);
             Event.stop(event);
         }
+    } else {
+        Event.stop(event);
+        gigyaFunctions.RaaS.loginScreens();
+
     }
 }
 
@@ -371,7 +375,7 @@ gigyaFunctions.gm = function (settings) {
                 case 'Leaderboard':
                     gigya.gm.showLeaderboardUI(parms);
                     break;
-            }
+            }6536931
         })
 
     }
