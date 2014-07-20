@@ -14,7 +14,7 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
         'enabledProviders' => (Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') !== '') ? Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') : '*',
         'lang' => Mage::getStoreConfig('gigya_global/gigya_global_conf/laguages'),
         'sessionExpiration' => (int) Mage::getStoreConfig('web/cookie/cookie_lifetime'),
-        'connectWithoutLoginBehavior' => Mage::getStoreConfig('gigya_global/gigya_login_conf/loginBehavior'),
+        'connectWithoutLoginBehavior' => Mage::getStoreConfig('gigya_global/gigya_global_conf/loginBehavior'),
       );
       $this->_data['items']['js/gigya'] = array(
         'type' => 'external_js',
@@ -37,13 +37,15 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
       $this->_data['items']['js/baseUrl'] = array(
         'type' => 'inline_js',
         'name' => 'baseUrl',
+        'if' => '',
+        'cond' => '',
         'params' => 'var baseUrl = "' . Mage::getBaseUrl() . '",
           gigyaSettings = gigyaSettings || {};
-          gigyaSettings.userMode = "' . $userMode . '";
-          gigyaSettings.RaaS = ' . Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf') . ';',
-        'if' => '',
-        'cond' => ''
+          gigyaSettings.userMode = "' . $userMode . '";'
       );
+        if ($userMode == "raas") {
+            $this->_data['items']['js/baseUrl']['params'] .=  'gigyaSettings.RaaS = ' . Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf') . ';';
+        }
     }
   }
 
