@@ -179,6 +179,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                             'customer_session' => $cust_session,
                             'gigyaData' => $this->gigyaData
                         ));
+                    $cust_session->setData('gigyaAccount', $post);
                     //$url = Mage::getUrl('customer/account');
                     $url = Mage::getUrl('*/*/*', array('_current' => true));
                     $res = array(
