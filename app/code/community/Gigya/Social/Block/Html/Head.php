@@ -46,7 +46,10 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
         if ($userMode == "raas") {
             $this->_data['items']['js/baseUrl']['params'] .=  'gigyaSettings.RaaS = ' . Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf') . ';';
         }
+    } else {
+        parent::_construct();
     }
+
   }
 
   protected function _separateOtherHtmlHeadElements(&$lines, $itemIf, $itemType, $itemParams, $itemName, $itemThe) {
