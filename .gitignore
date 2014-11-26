@@ -1,3 +1,5 @@
+.idea/
+app/code/community/Cm/
 app/code/community/Phoenix/
 app/code/core/
 app/design/*
@@ -24,9 +26,11 @@ app/design/frontend/default/blank/
 app/design/frontend/default/iphone/
 app/design/frontend/default/modern/
 app/design/install/
+app/etc/local.xml
 app/etc/modules/
 !app/etc/modules/gigya.xml
 app/etc/config.xml
+app/locale
 app/etc/local.xml.additional
 app/etc/local.xml.template
 app/locale/en_US/

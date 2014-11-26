@@ -1,9 +1,16 @@
 <layout>
     <default>
-				<reference name="head">
-					<action method="addJs">
-						<name>gigya/admin.js</name>
-					</action>
-				</reference>
+        <reference name="head">
+            <action method="addJs">
+                <name>gigya/admin.js</name>
+            </action>
+        </reference>
     </default>
+    <adminhtml_system_config_edit>
+        <reference name="head">
+            <action method="addCss">
+                <file>gigya/social/gigya.css</file> <!-- Base dir for path is: /skin/adminhtml/default/default/ -->
+            </action>
+        </reference>
+    </adminhtml_system_config_edit>
 </layout>

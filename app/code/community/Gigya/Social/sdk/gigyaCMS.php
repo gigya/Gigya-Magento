@@ -336,17 +336,18 @@ class GigyaCMS {
 		}
 	}
 
-    public function isApiKeyValid() {
+    public function testApiconfig() {
         $request = new GSRequest($this->api_key, $this->api_secret, 'shortenURL');
         $request->setAPIDomain($this->api_domain);
         $request->setParam('url', 'http://gigya.com');
         $response = $request->send();
         $error = $response->getErrorCode();
         if ($error != 0) {
-            return false;
+            return $error;
         }
-        return true;
+        return false;
     }
+
 
 /////////////////////////////////
 //            RaaS             //

@@ -72,6 +72,14 @@ gigyaAdmin.showSection = function (section) {
 	$(section).up('.section-config').show();
 }
 
+// toggle other-data-center text-field in general settings page
+gigyaAdmin.hideOtherDataCenter = function () {
+    $('row_gigya_global_gigya_global_conf_dataCenterOther').hide();
+}
+gigyaAdmin.showOtherDataCenter = function () {
+    $('row_gigya_global_gigya_global_conf_dataCenterOther').show();
+}
+
 
 document.observe("dom:loaded", function () {
     if ($('gigya_login_gigya_user_management_login_modes') != null) {
@@ -93,4 +101,16 @@ document.observe("dom:loaded", function () {
         gigyaAdmin.userKeyUI(useKey);
     })
     }
+    gigyaAdmin.hideOtherDataCenter();
+
+    // When 'other' data center is selected, show text field
+    $('gigya_global_gigya_global_conf_dataCenter').observe('change', function(event) {
+        if (!this.value) {
+            gigyaAdmin.showOtherDataCenter();
+        } else {
+            gigyaAdmin.hideOtherDataCenter();
+        }
+    });
+
+
 });
