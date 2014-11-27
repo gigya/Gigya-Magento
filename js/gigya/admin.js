@@ -101,16 +101,22 @@ document.observe("dom:loaded", function () {
         gigyaAdmin.userKeyUI(useKey);
     })
     }
-    gigyaAdmin.hideOtherDataCenter();
-
-    // When 'other' data center is selected, show text field
-    $('gigya_global_gigya_global_conf_dataCenter').observe('change', function(event) {
-        if (!this.value) {
-            gigyaAdmin.showOtherDataCenter();
-        } else {
+    if ($('row_gigya_global_gigya_global_conf_dataCenterOther') != null) {
+        if ($(gigya_global_gigya_global_conf_dataCenterOther).value == '') {
             gigyaAdmin.hideOtherDataCenter();
         }
-    });
+
+        // When 'other' data center is selected, show text field
+        $('gigya_global_gigya_global_conf_dataCenter').observe('change', function(event) {
+            if (!this.value) {
+                gigyaAdmin.showOtherDataCenter();
+            } else {
+                gigyaAdmin.hideOtherDataCenter();
+            }
+        });
+    }
+
+
 
 
 });
