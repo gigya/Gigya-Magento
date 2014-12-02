@@ -201,6 +201,9 @@
                     <gigya_r_and_r>
                       <title>Gigya Rating &amp; Reviews configuration</title>
                     </gigya_r_and_r>
+                      <gigya_follow_bar>
+                          <title>Gigya Followbar configuration</title>
+                      </gigya_follow_bar>
                   </children>
                 </config>
               </children>
@@ -327,5 +330,13 @@
         <scope>both</scope>
       </gigya_r_and_r_conf>
     </gigya_r_and_r>
+    <gigya_followbar>
+        <gigya_followbar_conf>
+            <enable>0</enable>
+            <containerID>gigyaFollowbar</containerID>
+            <layout>horizontal</layout>
+            <iconSize>32</iconSize>
+        </gigya_followbar_conf>
+    </gigya_followbar>
   </default>
 </config>

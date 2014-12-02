@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!-- Guide: http://www.ecomdev.org/2010/10/27/custom-configuration-fields-in-magento.html -->
 <config>
     <tabs>
         <gigya translate="label">
@@ -1070,16 +1071,16 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </enable>
-                        <containerID translate="label">
+                        <containerID translate="label,comment">
                             <label>Div ID</label>
                             <frontend_type>text</frontend_type>
-                            <comment><![CDATA[The ratings continer div ID]]></comment>
+                            <comment><![CDATA[The ratings container div ID]]></comment>
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </containerID>
-                        <categoryID translate="label">
+                        <categoryID translate="label,comment">
                             <label>The identifier of the Comments Category</label>
                             <comment><![CDATA[Category name, as set up in the <a href="https://console.gigya.com/Site/partners/Settings.aspx#cmd%3DSettings.CommentsSetup">Gigya Administration Console</a> site]]></comment>
                             <frontend_type>text</frontend_type>
@@ -1112,5 +1113,81 @@
                 </gigya_r_and_r_conf>
             </groups>
         </gigya_r_and_r>
+
+        <gigya_followbar translate="label" module="Gigya_Social">
+            <label>Gigya Follow Bar</label>
+            <tab>gigya</tab>
+            <sort_order>107</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <gigya_followbar_conf translate="label">
+                    <label>Follow bar configuration</label>
+                    <sort_order>1</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
+                    <fields>
+                        <enable translate="label">
+                            <label>Enable</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </enable>
+                        <containerID translate="label,comment">
+                            <label>Div ID</label>
+                            <frontend_type>text</frontend_type>
+                            <comment><![CDATA[An ID of a &lt;DIV&gt; element on the page in which you want to display the plugin.]]></comment>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </containerID>
+                        <layout translate="label,comment">
+                            <label>Follow Bar layout</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>Gigya_Social_Model_config_source_layout</source_model>
+                            <sort_order>3</sort_order>
+                            <comment>Sets the arrangement of buttons in the bar.</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </layout>
+                        <iconSize translate="label,comment">
+                            <label>Icon size</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>The size in pixels of the icons displayed in the bar.</comment>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </iconSize>
+                        <buttons translate="label,comment">
+                            <label>Follow buttons</label>
+                            <frontend_type>textarea</frontend_type>
+                            <comment><![CDATA[Please enter a list of <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#FollowButton_Object" target="blank">FollowButton</a> Objects that should appear on the Follow Bar]]></comment>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </buttons>
+                        <advancedConfig translate="label,comment">
+                            <label>Advanced showFollowBarUI Configuration</label>
+                            <frontend_type>textarea</frontend_type>
+                            <comment><![CDATA[Enter valid JSON format. See list available: <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#Method_Parameters" target="blank">Parameters</a> ]]></comment>
+                            <sort_order>6</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                      </advancedConfig>
+                    </fields>
+                </gigya_followbar_conf>
+            </groups>
+        </gigya_followbar>
     </sections>
 </config>

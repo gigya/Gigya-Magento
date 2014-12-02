@@ -23,6 +23,7 @@
         <reference name="before_body_end">
             <block type="Gigya_Social_Block_Gamification_notifications" name="gigya.gm.notifications"/>
             <block type="Gigya_Social_Block_share" name="gigya.share.action"/>
+
         </reference>
         <reference name="right">
             <block name="gigya.activity.feed" type="core/template" after="-" template="gigya/activityfeed.phtml"/>
@@ -42,6 +43,9 @@
                 </params>
                 <ifConfig><config>gigya_login/gigya_user_management/login_modes</config><value>raas</value></ifConfig>
             </action>
+        </reference>
+        <reference name="bottom.container">
+           <block type="core/template" name="gigya.followbar" template="gigya/followbar.phtml"/>
         </reference>
     </default>
     <customer_logged_out>

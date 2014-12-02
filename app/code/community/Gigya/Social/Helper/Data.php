@@ -134,7 +134,15 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         return $response;
     }
 
-    public function getPluginConfig($pluginName, $format = 'json', $feed = FALSE)
+  /**
+   * Return the store config for a plugin.
+   * @param $pluginName
+   * @param string $format
+   * @param bool $feed
+   *
+   * @return array|mixed
+   */
+  public function getPluginConfig($pluginName, $format = 'json', $feed = FALSE)
     {
         $config = Mage::getStoreConfig($pluginName);
         foreach ($config as $key => $value) {
@@ -142,11 +150,13 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
             if ($value === '0' || $value === '1') {
                 $config[$key] = ($value) ? true : false;
             }
+
         }
         // New comments can be override in advanced config
         if ($pluginName == 'gigya_comments/gigya_comments_conf' || $pluginName = 'gigya_r_and_r/gigya_r_and_r_conf') {
             $config['version'] = 2;
         }
+        // Format advanced config
         if (!empty($config['advancedConfig'])) {
             $advConfig = $this->_confStringToArry($config['advancedConfig']);
             foreach ($advConfig as $key => $val) {
@@ -155,6 +165,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
             $config = $advConfig + $config;
         }
         unset($config['advancedConfig']);
+        //
         if ($feed === TRUE) {
             $config['privacy'] = Mage::getStoreConfig('gigya_activityfeed/gigya_activityfeed_conf/privacy');
         }
@@ -194,6 +205,10 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         return (bool) Mage::getStoreConfig('gigya_gamification/gigya_gamification_conf/purchaseAction');
     }
 
+    public function isFollowbarEnabled()
+    {
+        return (bool) Mage::getStoreConfig('gigya_followbar/gigya_followbar_conf/enable');
+    }
 
     public function getExtensionVersion()
     {

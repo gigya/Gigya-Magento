@@ -555,6 +555,8 @@ document.observe("dom:loaded", function () {
                 case 'RaaS':
                     gigyaFunctions.RaaS.init(plugin.value);
                     break;
+                case 'followbar':
+                    gigya.socialize.showFollowBarUI(plugin.value);
             }
         });
     }
