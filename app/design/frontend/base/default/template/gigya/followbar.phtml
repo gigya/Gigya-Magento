@@ -1,0 +1,88 @@
+<?php
+/**
+ * Retrieve the sharebar settings set in admin and add the parameters to gigyaSettings js object.
+ * print thegigyaSettings.sharebar settings object to front end.
+ *
+ */
+?>
+<?php if (Mage::helper('Gigya_Social')->isFollowbarEnabled()) : ?>
+
+  <script type="text/javascript">//<![CDATA[
+    var params = {
+      containerID: 'gigyaFollowBar',
+      iconSize: "32",
+      buttons:[
+        {
+          provider: 'facebook',
+          actionURL: 'https://www.facebook.com/gigya',
+          action: 'dialog'
+        },
+        {
+          provider: 'twitter',
+          followUsers: 'gigya, gigyaDev',
+          action: 'dialog'
+        },
+        {
+          provider: 'googleplus',
+          actionURL: 'https://plus.google.com/107788669599113247501/posts',
+          action: 'window'
+        },
+        {
+          provider: 'linkedin',
+          actionURL: 'http://www.linkedin.com/company/gigya',
+          action: 'window'
+        },
+        {
+          provider: 'rss',
+          actionURL: 'http://blog.gigya.com/feed/',
+          action: 'window'
+        },
+        {
+          provider: 'email',
+          confirmationText:'Thank you for following us',
+          action: 'dialog'
+        }
+      ]
+    }
+    //]]>
+  </script>
+<script type="text/javascript">//<![CDATA[
+  var gigyaSettings = gigyaSettings || {};
+  gigyaSettings.followbar = params;
+  //]]>
+</script>
+<div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_followbar/gigya_followbar_conf'); ?>" class="gigya-followbar" style="margin-bottom: 10px;"></div>
+<?php endif ?>
+<?php
+/*
+{
+provider: 'facebook',
+actionURL: 'https://www.facebook.com/gigya',
+action: 'dialog'
+},
+{
+provider: 'twitter',
+followUsers: 'gigya, gigyaDev',
+action: 'dialog'
+},
+{
+provider: 'googleplus',
+actionURL: 'https://plus.google.com/107788669599113247501/posts',
+action: 'window'
+},
+{
+provider: 'linkedin',
+actionURL: 'http://www.linkedin.com/company/gigya',
+action: 'window'
+},
+{
+provider: 'rss',
+actionURL: 'http://blog.gigya.com/feed/',
+action: 'window'
+},
+{
+provider: 'email',
+confirmationText:'Thank you for following us',
+action: 'dialog'
+}
+ */ ?>
