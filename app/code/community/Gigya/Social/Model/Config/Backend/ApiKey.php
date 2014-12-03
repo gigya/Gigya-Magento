@@ -69,17 +69,20 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
 	 * Provide error code messages
 	 * http://developers.gigya.com/037_API_reference/zz_Response_Codes_and_Errors
 	 * @param $error
-	 * @return string
+     * @param $dataCenter
+     *
+	 * @return string $errMsg
 	 */
 	protected  function _APIerrorHandler($error, $dataCenter) {
 		switch ($error) {
 			case '301001' :
-				$errMsg = "The data center region you have configured: " . $dataCenter . ", does not correspond with the site data center set in Gigya console for this API";
+				$errMsg = "The data center region you have configured: " . $dataCenter . ", does not correspond with the site data center set in Gigya console for this API.";
 				break;
 			case '400093' :
-				$errMsg = "Invalid ApiKey parameter";
+				$errMsg = "Invalid ApiKey parameter.";
 			default :
-				$errMsg = "Something went wrong, please try again or contact Gigya for more details. error code:" . $error ;
+				$errMsg = "Something went wrong, please try again or contact Gigya for more details. error code:" . $error
+                          . ".<a href='http://developers.gigya.com/037_API_reference/zz_Response_Codes_and_Errors' target='_blank'> Response Codes and Errors</a>" ;
 		}
 		return $errMsg;
 	}

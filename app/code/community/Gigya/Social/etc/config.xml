@@ -201,9 +201,9 @@
                     <gigya_r_and_r>
                       <title>Gigya Rating &amp; Reviews configuration</title>
                     </gigya_r_and_r>
-                      <gigya_follow_bar>
+                      <gigya_followbar>
                           <title>Gigya Followbar configuration</title>
-                      </gigya_follow_bar>
+                      </gigya_followbar>
                   </children>
                 </config>
               </children>
