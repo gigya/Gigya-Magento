@@ -58,6 +58,10 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
     }
 
+    /*
+     * create login events in magento system, based on gigya login response passed by ajax from gigya.js after login event
+     *
+     */
     public function loginAction()
     {
         $this->helper = Mage::helper("Gigya_Social");
@@ -86,6 +90,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         if ($valid) {
             $accountInfo = $this->helper->utils->getAccount($post['UID']);
             if (is_numeric($accountInfo)) {
+              // Check if retry flag is set, if not, Retry once and set one retry flag.
+              // Log out of gigya
                 $res = array(
                     'result' => 'message',
                     'message' => "Oops! Something went wrong during your login/registration process. Please try to login/register again."

@@ -4,6 +4,9 @@
  */
 var gigyaFunctions = gigyaFunctions || {};
 var gigyaCache = {};
+/**
+ * create ajax request to loginController/login action
+ */
 gigyaFunctions.login = function (response) {
     gigyaCache.uInfo = response;
     new Ajax.Request(baseUrl + 'gigyalogin/login/login', {
@@ -429,6 +432,10 @@ gigyaFunctions.postReview = function (eventObj) {
 
 
 };
+/*
+ * magento pulls native reviews, if gigya reviews is enabled then gigya substitutes magento reviews, but gigya keeps updating magento native reviews.
+ *
+ */
 gigyaFunctions.RnR = function (settings) {
     if ($$('form table.ratings-table').length > 0) {
         var table = $('product_addtocart_form').select('table.ratings-table');
@@ -490,7 +497,7 @@ gigyaFunctions.getUrlParam = function (param) {
 }
 
 /*
- * register events
+ * Register events
  */
 function gigyaRegister() {
     if (typeof gigya !== 'undefined') {
@@ -510,6 +517,10 @@ function gigyaRegister() {
 
 gigyaRegister();
 
+/*
+   * On document load, loop through gigyaSettings object, and fire gigya functions accordingly
+   *
+ */
 document.observe("dom:loaded", function () {
     if (typeof gigyaSettings !== 'undefined') {
         $H(gigyaSettings).each(function (plugin) {

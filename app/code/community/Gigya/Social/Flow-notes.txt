@@ -1,0 +1,12 @@
+Login process:
+app/design/frontend/base/default/template/gigya/login/social_login.phtml
+use helper/data.php methods to query system config for the selected user mode (disabled,social,RAAS).
+Retrieves the configuration for the selected mode, and sets the gigyaSettings object accordingly.
+(in social mode it also prints the lgin div)
+
+js/gigya.js
+Listen to registration, login, logout events.
+Show the selected login screens
+create the gigya Login call
+pass the response from gigya to Login Controller
+Accept callback from login controller and respond
