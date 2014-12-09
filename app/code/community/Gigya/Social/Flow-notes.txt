@@ -1,4 +1,5 @@
 Login process:
+--------------
 app/design/frontend/base/default/template/gigya/login/social_login.phtml
 use helper/data.php methods to query system config for the selected user mode (disabled,social,RAAS).
 Retrieves the configuration for the selected mode, and sets the gigyaSettings object accordingly.
@@ -10,3 +11,15 @@ Show the selected login screens
 create the gigya Login call
 pass the response from gigya to Login Controller
 Accept callback from login controller and respond
+
+#########################################################
+
+Followbar flow:
+---------------
+gigya/etc/system.xml - add the admin configuration tab in admin (set defaults in config.xml)
+app/design/frontend/base/default/layout/aagigya.xml - set the location in layout to display the Sharebar
+
+create phtml file that will: pull data from feature config/default, create empty div, extend the gigiya settings js object to hold feature params
+in gigya.js add observer to pull the feature params and fire the feature js call to Gigya
+
+magento layout wiki: http://www.magentocommerce.com/wiki/4_-_themes_and_template_customization/0_-_theming_in_magento/designing-for-magento#using_xml_to_change_layout

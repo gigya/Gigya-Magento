@@ -79,8 +79,29 @@ gigyaAdmin.hideOtherDataCenter = function () {
 gigyaAdmin.showOtherDataCenter = function () {
     $('row_gigya_global_gigya_global_conf_dataCenterOther').show();
 }
+gigyaAdmin.JsonExampleWindow = function(event) {
+    var w = window.open( "about:blank", "jsonExample", "width=440,height=330" );
+    var json_example = '{ &#013;' +
+        '  "key1" : "value1",&#013;' +
+        '  "key2" : "value2" &#013;' +
+        '  "key3" : "value3" &#013;' +
+        '  "key4" : "value4" &#013;' +
+        '}';
+    w.document.write( '<p>JSON Example:</p><textarea  rows="8" cols="45">' + json_example + '</textarea><br><small>Tips for valid JSON:<ol><li>{curly brackets} are for objects (key:value).</li><li>[square brackets] are for arrays (value).</li><li>Both keys and values must have double quote ("").</li><li>No trailing commas.</li></ol></small>' );
+}
 
+/*
+// Validate advanced config json:
+// added jsonlint to js/gigya/json
+try to activate following - http://blog.kyp.fr/how-to-validate-magento-configuration-values-format/
+Validation.addAllThese([
+   ['validate-advanced-json','the text you have entered is not a valid JSON format.', function(v) {
+       return Validation.get('IsEmpty').test(v) || /^[a-zA-Z]{3}$/i.test(v)
+   }]
+]);
+*/
 
+// On document load :
 document.observe("dom:loaded", function () {
     if ($('gigya_login_gigya_user_management_login_modes') != null) {
         gigyaAdmin.userManegmentUI(null);
@@ -106,7 +127,8 @@ document.observe("dom:loaded", function () {
             gigyaAdmin.hideOtherDataCenter();
         }
 
-        // When 'other' data center is selected, show text field
+        // Global config - When 'other' data center is selected, show text field
+        // (this can be avoided by defining field dependancy in system.xml
         $('gigya_global_gigya_global_conf_dataCenter').observe('change', function(event) {
             if (!this.value) {
                 gigyaAdmin.showOtherDataCenter();
@@ -115,8 +137,41 @@ document.observe("dom:loaded", function () {
             }
         });
     }
-
-
-
+    // Open JSON example window for Advanced configuration
+    $('valid-json-example').observe('click', function (event) {
+        gigyaAdmin.JsonExampleWindow(event);
+    });
 
 });
+
+/**
+ * JSONLint.
+ */
+    /*
+var jsonValidate = function ( textField, e ) {
+    var json = textField.val();
+    if ( json.length > 0 ) {
+        $( '.msg' ).remove();
+        try {
+            var result = jsonlint.parse( json );
+            if ( result ) {
+                textField.after( '<div class="msg updated">JSON is valid</div>' );
+                textField.addClass( 'valid' );
+            }
+        } catch ( err ) {
+            textField.after( '<div class="msg error">Error: the text you have entered is not a valid JSON format. JSON Parser error message: ' + err + '</div>' );
+            textField.addClass( 'error' );
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }
+
+}
+
+// Validate JSON before submit on settings form.
+$( 'form.gigya-settings' ).on( 'submit', function ( e ) {
+    $( 'form.gigya-settings textarea' ).each( function () {
+        jsonValidate( $( this ), e );
+    } )
+} );
+*/

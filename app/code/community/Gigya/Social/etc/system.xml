@@ -1172,7 +1172,7 @@
                         <buttons translate="label,comment">
                             <label>Follow buttons</label>
                             <frontend_type>textarea</frontend_type>
-                            <comment><![CDATA[Please enter a list of <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#FollowButton_Object" target="blank">FollowButton</a> Objects that should appear on the Follow Bar]]></comment>
+                            <comment><![CDATA[Please enter a list of <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#FollowButton_Object" target="blank">FollowButton</a> Objects that should appear on the Follow Bar.]</div>]]></comment>
                             <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1181,8 +1181,9 @@
                         <advancedConfig translate="label,comment">
                             <label>Advanced showFollowBarUI Configuration</label>
                             <frontend_type>textarea</frontend_type>
-                            <comment><![CDATA[Enter valid JSON format. See list available: <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#Method_Parameters" target="blank">Parameters</a> ]]></comment>
+                            <comment><![CDATA[<p>Enter <span id="valid-json-example">valid JSON format.</span><p/><p> See list of available: <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#Method_Parameters" target="blank">Parameters</a></p> ]]></comment>
                             <sort_order>6</sort_order>
+                            <validation>validate-advanced-json</validation>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -1193,3 +1194,4 @@
         </gigya_followbar>
     </sections>
 </config>
+

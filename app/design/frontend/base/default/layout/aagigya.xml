@@ -45,7 +45,7 @@
             </action>
         </reference>
         <reference name="bottom.container">
-           <block type="core/template" name="gigya.followbar" template="gigya/followbar.phtml"/>
+           <block type="Gigya_Social_Block_Followbar" name="gigya.followbar" template="gigya/followbar.phtml"/>
         </reference>
     </default>
     <customer_logged_out>
