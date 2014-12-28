@@ -1,7 +1,7 @@
 <?php
 /**
  * Class Gigya_Social_Emailform
- * @author
+ * @author //
  */
 class Gigya_Social_Emailform extends Mage_Core_Block_Template
 {
