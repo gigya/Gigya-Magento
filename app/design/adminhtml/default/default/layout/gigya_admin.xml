@@ -11,6 +11,9 @@
             <action method="addJs">
                 <name>gigya/json/jsonlint.js</name>
             </action>
+            <action method="addJs">
+                <name>gigya/json/validateJson.js</name>
+            </action>
             <action method="addCss">
                 <file>gigya/social/gigya.css</file> <!-- Base dir for path is: /skin/adminhtml/default/default/ -->
             </action>

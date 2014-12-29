@@ -129,8 +129,8 @@ document.observe("dom:loaded", function () {
 
         // Global config - When 'other' data center is selected, show text field
         // (this can be avoided by defining field dependancy in system.xml
-        $('gigya_global_gigya_global_conf_dataCenter').observe('change', function(event) {
-            if (!this.value) {
+        $( 'gigya_global_gigya_global_conf_dataCenter' ).observe('change', function(event) {
+            if ( !this.value ) {
                 gigyaAdmin.showOtherDataCenter();
             } else {
                 gigyaAdmin.hideOtherDataCenter();
@@ -143,35 +143,3 @@ document.observe("dom:loaded", function () {
     });
 
 });
-
-/**
- * JSONLint.
- */
-    /*
-var jsonValidate = function ( textField, e ) {
-    var json = textField.val();
-    if ( json.length > 0 ) {
-        $( '.msg' ).remove();
-        try {
-            var result = jsonlint.parse( json );
-            if ( result ) {
-                textField.after( '<div class="msg updated">JSON is valid</div>' );
-                textField.addClass( 'valid' );
-            }
-        } catch ( err ) {
-            textField.after( '<div class="msg error">Error: the text you have entered is not a valid JSON format. JSON Parser error message: ' + err + '</div>' );
-            textField.addClass( 'error' );
-            e.preventDefault();
-            e.stopPropagation();
-        }
-    }
-
-}
-
-// Validate JSON before submit on settings form.
-$( 'form.gigya-settings' ).on( 'submit', function ( e ) {
-    $( 'form.gigya-settings textarea' ).each( function () {
-        jsonValidate( $( this ), e );
-    } )
-} );
-*/

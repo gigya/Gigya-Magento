@@ -1181,9 +1181,9 @@
                         <advancedConfig translate="label,comment">
                             <label>Advanced showFollowBarUI Configuration</label>
                             <frontend_type>textarea</frontend_type>
+                            <validate>validate-json</validate>
                             <comment><![CDATA[<p>Enter <span id="valid-json-example">valid JSON format.</span><p/><p> See list of available: <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#Method_Parameters" target="blank">Parameters</a></p> ]]></comment>
                             <sort_order>6</sort_order>
-                            <validation>validate-advanced-json</validation>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
