@@ -8,9 +8,29 @@
  */
 
 $config = Mage::getStoreConfig('gigya_followbar/gigya_followbar_conf');
+// set buttons json
 $buttons = json_decode($config['buttons']);
 $config['buttons'] = $buttons;
-$config_json = json_encode($config);
+// set advanced config json
+$config_json = configToJson($config);
+
+/*
+ * Extract advanced params array if exists from config
+ * add them to config array
+ * transform complete config to gigya json format
+ *
+ * @param array $config
+ * @return json $config_json
+ */
+function configToJson($config) {
+  if ($config['advancedConfig']) {
+    $advanced = json_decode($config['advancedConfig'], true);
+    $config = array_merge($config, $advanced);
+    unset($config['advancedConfig']);
+  }
+  return $config_json = json_encode($config);
+}
+
 ?>
 <script type="text/javascript">//<![CDATA[
   var gigyaSettings = gigyaSettings || {};
