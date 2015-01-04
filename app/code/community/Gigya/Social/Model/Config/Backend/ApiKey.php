@@ -9,15 +9,15 @@
 class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Data {
     protected function _beforeSave()
     {
-        $value = $this->getValue();
-        $helper = Mage::helper('Gigya_Social');
-        $helper->utils->setApiKey($value);
+        $value = $this->getValue(); // the newly submitted values in _data
+        $helper = Mage::helper('Gigya_Social'); // get the existing settings data
+        $helper->utils->setApiKey($value); // set the api key to the submitted key
         $data = $this->getData();
-        $secret = $data['fieldset_data']['secretkey'];
-        $userKey = $data['fieldset_data']['userKey'];
+        $secret = $data['fieldset_data']['secretkey']; // submitted secret
+        $userKey = $data['fieldset_data']['userKey']; // submitted api key
         $userSecret = $data['fieldset_data']['userSecret'];
         $useUserKey = $data['fieldset_data']['useUserKey'];
-	    $dataCenter = $this->_setDataCenter($data['fieldset_data']);
+	    $dataCenter = $this->_setDataCenter($data['fieldset_data']); // submitted DC
 
         if ($useUserKey) {
             if(empty($useUserKey)){
