@@ -59,7 +59,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     }
 
     /*
-     * create login events in magento system, based on gigya login response passed by ajax from gigya.js after login event
+     * create login events in magento system,
+     * based on gigya login response passed by ajax from gigya.js after login event
      *
      */
     public function loginAction()
@@ -166,11 +167,14 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     protected function  _socialLogin($session, $post)
     {
         if (!empty($post) && isset($post['signature'])) {
+            // check if the returned user from gigya is a valid user (validate with gigya)
             $secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
             $valid = SigUtils::validateUserSignature($post['UID'], $post['timestamp'], $secret, $post['signature']);
+            // set user minimum details
             $firstName = $post['user']['firstName'];
             $lastName = $post['user']['lastName'];
             $email = $post['user']['email'];
+
             if ($valid == TRUE) {
                 //see if user is a site user
                 if ($post['isSiteUID'] && is_numeric($post['UID'])) {
@@ -218,7 +222,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                             $this->_createCustomer($email, $firstName, $lastName, $post['user']);
                             $this->getResponse()->setHeader('Content-type', 'application/json');
                         } else {
-                            //email exsites
+                            //email exists
                             try {
                                 //return login form
                                 $block = $this->getLayout()->createBlock(

@@ -4,6 +4,7 @@
  */
 var gigyaFunctions = gigyaFunctions || {};
 var gigyaCache = {};
+//baseUrl = 'https://mage1.local/';
 /**
  * create ajax request to loginController/login action
  */
@@ -498,6 +499,8 @@ gigyaFunctions.getUrlParam = function (param) {
 
 /*
  * Register events
+ * Listen to onbLogin / onLogout events returned from Gigya
+ * fire social or Raas login/logout callback functions
  */
 function gigyaRegister() {
     if (typeof gigya !== 'undefined') {

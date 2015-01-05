@@ -5,18 +5,19 @@
 class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
 
   protected function _construct() {
-    if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_global/gigya_global_conf')) {
-      $this->setTemplate('page/html/head.phtml');
-      $uriPrefix = !empty($_SERVER['HTTPS']) ? 'https://cdns' : 'http://cdn';
-      $gigyaApiKey = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey'));
-      $name = $uriPrefix . '.gigya.com/JS/socialize.js?apikey=' . $gigyaApiKey;
-      $jsParams = array(
+    if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_global/gigya_global_conf')) { // check if gigiya plugin enabled
+      $this->setTemplate('page/html/head.phtml'); // set output template
+
+      $uriPrefix = !empty($_SERVER['HTTPS']) ? 'https://cdns' : 'http://cdn'; // check if domain is secured and set gigya domain accordingly
+      $gigyaApiKey = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey')); // get api key from store
+      $name = $uriPrefix . '.gigya.com/JS/socialize.js?apikey=' . $gigyaApiKey; // set full socialize url
+      $jsParams = array( // set config basic params (enabledProviders, lang, sessionExpiration, connectWithoutLoginBehavior)
         'enabledProviders' => (Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') !== '') ? Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') : '*',
         'lang' => Mage::getStoreConfig('gigya_global/gigya_global_conf/laguages'),
         'sessionExpiration' => (int) Mage::getStoreConfig('web/cookie/cookie_lifetime'),
         'connectWithoutLoginBehavior' => Mage::getStoreConfig('gigya_global/gigya_global_conf/loginBehavior'),
       );
-      $this->_data['items']['js/gigya'] = array(
+      $this->_data['items']['js/gigya'] = array( // set template data parameters for script tag
         'type' => 'external_js',
         'name' => $name,
         'if' => '',
@@ -32,8 +33,17 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
           'cond' => '',
         );
       }
-      // Add base url to JS
+
       $userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
+      // check store base url / base secure url addresses
+//      $isSecure = Mage::app()->getStore()->isCurrentlySecure();
+//      if ($isSecure) {
+//        $baseUrl = Mage::getUrl('', array('_secure'=>true));
+//      } else {
+//        $baseUrl =  Mage::getBaseUrl();
+//      }
+//      $baseUrl =  Mage::getBaseUrl();
+      // Set JS base url
       $this->_data['items']['js/baseUrl'] = array(
         'type' => 'inline_js',
         'name' => 'baseUrl',
@@ -43,7 +53,7 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
           gigyaSettings = gigyaSettings || {};
           gigyaSettings.userMode = "' . $userMode . '";'
       );
-        if ($userMode == "raas") {
+        if ($userMode == "raas") { // in raas mode add extra params to js base url
             $this->_data['items']['js/baseUrl']['params'] .=  'gigyaSettings.RaaS = ' . Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf') . ';';
         }
     } else {
