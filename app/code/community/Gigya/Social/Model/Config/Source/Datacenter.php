@@ -11,7 +11,7 @@ public function toOptionArray(){
   return array(
     array('value' => 'us1.gigya.com', 'label' => 'US Data Center'),
     array('value' => 'eu1.gigya.com', 'label' => 'EU Data Center'),
-	array('value' => 'au.gigya.com', 'label' => 'AU Data Center'),
+	array('value' => 'au1.gigya.com', 'label' => 'AU Data Center'),
 	array('value' => '', 'label' => 'Other')
   );
 }

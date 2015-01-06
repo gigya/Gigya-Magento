@@ -138,8 +138,10 @@ document.observe("dom:loaded", function () {
         });
     }
     // Open JSON example window for Advanced configuration
-    $('valid-json-example').observe('click', function (event) {
-        gigyaAdmin.JsonExampleWindow(event);
+    $$('.valid-json-example').each( function (elem) {
+        elem.observe('click', function (event) {
+            gigyaAdmin.JsonExampleWindow(event);
+        });
     });
 
 });

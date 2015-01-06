@@ -6,38 +6,26 @@
  * print the gigyaSettings.sharebar settings object to front end.
  *
  */
-
-$config = Mage::getStoreConfig('gigya_followbar/gigya_followbar_conf');
-// set buttons json
-$buttons = json_decode($config['buttons']);
-$config['buttons'] = $buttons;
 // set advanced config json
-$config_json = configToJson($config);
+$plugin_conf = 'gigya_followbar/gigya_followbar_conf';
+if (Mage::helper('Gigya_Social')->isPluginEnabled($plugin_conf)) :
 
-/*
- * Extract advanced params array if exists from config
- * add them to config array
- * transform complete config to gigya json format
- *
- * @param array $config
- * @return json $config_json
- */
-function configToJson($config) {
-  if ($config['advancedConfig']) {
-    $advanced = json_decode($config['advancedConfig'], true);
-    $config = array_merge($config, $advanced);
-    unset($config['advancedConfig']);
-  }
-  return $config_json = json_encode($config);
-}
+  $config = Mage::helper('Gigya_Social')->getPluginConfig($plugin_conf, 'php');
+  // set buttons json
+  $buttons = json_decode($config['buttons']);
+  $config['buttons'] = $buttons;
 
-?>
-<script type="text/javascript">//<![CDATA[
-  var gigyaSettings = gigyaSettings || {};
-  gigyaSettings.followbar = <?php echo $config_json ?>;
-  //]]>
-</script>
-<div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_followbar/gigya_followbar_conf'); ?>" class="gigya-followbar" style="margin-bottom: 10px;"></div>
+  $params = Mage::helper('core')->jsonEncode($config);
+
+  ?>
+  <script type="text/javascript">//<![CDATA[
+    var gigyaSettings = gigyaSettings || {};
+    gigyaSettings.followbar = <?php echo $params ?>;
+    //]]>
+  </script>
+  <div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId($plugin_conf); ?>" class="gigya-followbar" style="margin-bottom: 10px;"></div>
+
+<?php endif ?>
 
 <!--
 /* default buttons template:
