@@ -170,7 +170,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line. See list of available <a href="http://developers.gigya.com/030_API_reference/010_Client_API/010_Objects/Conf_object">parameters</a>.]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/030_API_reference/010_Client_API/010_Objects/Conf_object">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>24</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -264,7 +265,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/010_Socialize/Socialize.showLoginUI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -459,7 +461,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showAddConnectionsUI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -565,7 +568,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showShareBarUI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -660,7 +664,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showShareBarUI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -797,7 +802,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showReactionsBarUI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -865,7 +871,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/030_Comments/comments.showCommentsUI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -958,7 +965,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFeedUI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1035,7 +1043,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/040_GMI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1103,7 +1112,8 @@
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
-                            <comment><![CDATA[Add configuration in key|value convention one per a line]]></comment>
+                            <validate>validate-json</validate>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/030_Comments/comments.showRatingUI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1182,7 +1192,7 @@
                             <label>Advanced showFollowBarUI Configuration</label>
                             <frontend_type>textarea</frontend_type>
                             <validate>validate-json</validate>
-                            <comment><![CDATA[<p>Enter <span id="valid-json-example">valid JSON format.</span><p/><p> See list of available: <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#Method_Parameters" target="blank">Parameters</a></p> ]]></comment>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span><p/><p> See list of available: <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#Method_Parameters" target="blank">Parameters</a></p> ]]></comment>
                             <sort_order>6</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
