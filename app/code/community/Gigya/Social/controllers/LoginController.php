@@ -59,8 +59,9 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     }
 
     /*
-     * create login events in magento system,
-     * based on gigya login response passed by ajax from gigya.js after login event
+     * Login Gateway
+     * Check which login mode is enabled
+     * activate social Login or Raas accordingly
      *
      */
     public function loginAction()
@@ -71,88 +72,126 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         $req = $this->getRequest()->getPost('json');
         $post = json_decode($req, TRUE);
         $this->getResponse()->setHeader('Content-type', 'application/json');
-        if ($this->userMode === 'social') {
-            $this->_socialLogin($session, $post);
-            $this->gigyaData = $post;
-        } elseif ($this->userMode === 'raas') {
-            $this->_raasLogin($session, $post);
+
+        if (!empty($post)) {
+            if ($this->userMode === 'social') {
+                $this->_socialLogin($session, $post);
+                $this->gigyaData = $post;
+            } elseif ($this->userMode === 'raas') {
+                $this->_raasLogin($session, $post);
+            } else {
+                $this->_getSession()->addError($this->__('Gigya login is disabled'));
+            }
         } else {
-            $this->_getSession()->addError($this->__('Gigya login is disabled'));
+            // generate error - $post arrived empty
         }
+
     }
 
     protected function _raasLogin($session, $post)
     {
-        $valid = false;
-        if (!empty($post) && isset($post['UIDSignature'])) {
-            $secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
-            $valid = SigUtils::validateUserSignature($post['UID'], $post['signatureTimestamp'], $secret, $post['UIDSignature']);
+        if (isset($post['UIDSignature'])) {
+            $valid = $this->_validateRaasUser($post);
+        } else {
+            Mage::log('Gigya UIDSignature missing '. __FILE__ . ' ' . __LINE__);
         }
+        ////
         if ($valid) {
-            $accountInfo = $this->helper->utils->getAccount($post['UID']);
-            if (is_numeric($accountInfo)) {
-              // Check if retry flag is set, if not, Retry once and set one retry flag.
-              // Log out of gigya
-                $res = array(
-                    'result' => 'message',
-                    'message' => "Oops! Something went wrong during your login/registration process. Please try to login/register again."
-                );
-                $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-            }
-            $email = reset($accountInfo['loginIDs']['emails']);
-            $this->gigyaData = $accountInfo;
-            $cust_session = Mage::getSingleton('customer/session');
+            $accountInfo = $this->_raasAccountInfo($post['UID']); // account info from gigya
+            //  deprecated - select social primary account, cancelled after link accounts feature released
             // loginIDs is empty so this is the "secondary" user in Gigya
+            /*
+            $email = reset($accountInfo['loginIDs']['emails']);
             if (empty($email)) {
                 // delete user in gigya etc...
                 $this->_disableGigyaSeconderyAccount($post['UID'], $accountInfo);
                 return;
             }
-            $cust = $this->_customerExists($email);
-            // customer email exists login flow
-            if ($cust != false) {
-                Mage::dispatchEvent('gigya_raas_pre_login', array(
-                   'customer' => $cust,
-                   'gigyaData' => $this->gigyaData
-                ));
-                $cust->firstname = $accountInfo['profile']['firstName'];
-                $cust->lastname = $accountInfo['profile']['lastName'];
-                $cust->save();
-                $cust_session->setCustomerAsLoggedIn($cust);
-                Mage::dispatchEvent('gigya_raas_post_login', array(
+            */
+            ////////
+            if ($accountInfo) { // if $accountInfo is false skip this and continue with response to ajax
+                $this->gigyaData = $accountInfo;
+                $cust_session = Mage::getSingleton('customer/session');
+                $email = $this->gigyaData['profile']['email'];
+                $cust = $this->_customerExists($email); // if customer exists in Magento receive obj, else false
+                // customer email exists login flow
+                if ($cust != false) {
+                    // create event hook
+                    Mage::dispatchEvent('gigya_raas_pre_login', array(
+                        'customer' => $cust,
+                        'gigyaData' => $this->gigyaData
+                    ));
+                    $cust->firstname = $accountInfo['profile']['firstName'];
+                    $cust->lastname = $accountInfo['profile']['lastName'];
+                    $cust->save();  // create customer in magento
+                    $cust_session->setCustomerAsLoggedIn($cust);
+                    Mage::dispatchEvent('gigya_raas_post_login', array(
                         'customer_session' => $cust_session,
                         'gigyaData' => $this->gigyaData
                     ));
-                $url = Mage::getUrl('*/*/*', array('_current' => true));
-                $cust_session->setData('gigyaAccount', $accountInfo);
-                $res = array(
-                    'result' => 'login',
-                    'redirect' => $url
-                );
-                $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-            } else {
-                // create a user in magento
-                $firstName = $accountInfo['profile']['firstName'];
-                $lastName = $accountInfo['profile']['lastName'];
-                $this->_createCustomer($email, $firstName, $lastName, $accountInfo);
+                    $url = Mage::getUrl('*/*/*', array('_current' => true)); // url for reload after creating logged in user
+                    $cust_session->setData('gigyaAccount', $accountInfo); // add all gigya accountinfo to customer session
+                    $res = array(
+                        'result' => 'login',
+                        'redirect' => $url
+                    );
+                    $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res)); // js will create the redirect after login
+                } else {
+                    // create a user in magento
+                    $firstName = $accountInfo['profile']['firstName'];
+                    $lastName = $accountInfo['profile']['lastName'];
+                    $this->_createCustomer($email, $firstName, $lastName, $accountInfo);
+                }
             }
         }
     }
 
-    private function _cutomerExist($email) {
-        $customer = Mage::getModel('customer/customer');
-        $websiteId = Mage::app()->getWebsite()->getId();
-        if ($websiteId) {
-            $customer->setWebsiteId($websiteId);
-        }
-        $customer->loadByEmail($email);
-        if ($customer->getId()) {
-            return $customer;
-        } else {
+    /*
+    * get Raas account info from gigya server
+    * @param int id
+    * $return mixed obj/false $accountInfo
+    */
+    protected function _raasAccountInfo($uid) {
+        $accountInfo = $this->helper->utils->getAccount($uid); // (utils is set to GigyaCMS.php)
+        // getAccount in gigyaCMS is calling call().
+        // if call fails, it Checks if retry flag is set, if not, Retry once and set one retry flag.
+        // if it fails it returns error
+        if (is_numeric($accountInfo)) {
+            // js should log out from gigya
+            $res = array(
+                'result' => 'message',
+                'message' => "Oops! Something went wrong during your login/registration process. Please try to login/register again."
+            );
+            $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res)); // *js should log out from gigya
+            Mage::log('Could not retrieve site account infoError '. __FILE__ . ' ' . __LINE__);
             return false;
+        } else {
+            return $accountInfo;
         }
     }
 
+    /*
+  * Validate user authenticity
+  * @param array $post
+  * @return bool $valid
+  */
+    protected function _validateRaasUser($post) {
+        $valid = false;
+        $secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
+        $valid = SigUtils::validateUserSignature($post['UID'], $post['signatureTimestamp'], $secret, $post['UIDSignature']);
+        if ($valid) {
+            return $valid;
+        } else {
+            Mage::log('User signature not valid '. __FILE__ . ' ' . __LINE__);
+            return FALSE;
+        }
+
+    }
+
+    /*
+     * Disabled.
+     * Used in older versions before link-accounts was published.
+     */
     private function _disableGigyaSeconderyAccount($uid, $account) {
         Mage::helper('Gigya_Social')->utils->disableAccountByGUID($uid);
         $providers = Mage::helper('Gigya_Social')->utils->getProviders($account);
@@ -166,7 +205,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
 
     protected function  _socialLogin($session, $post)
     {
-        if (!empty($post) && isset($post['signature'])) {
+        if (isset($post['signature'])) {  // this should be moved to LoginAction, if at all.
             // check if the returned user from gigya is a valid user (validate with gigya)
             $secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
             $valid = SigUtils::validateUserSignature($post['UID'], $post['timestamp'], $secret, $post['signature']);
@@ -177,14 +216,18 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
 
             if ($valid == TRUE) {
                 //see if user is a site user
+                // the difference from raas is that raas is using email as id
+                // and social is using magento uid as the common id
                 if ($post['isSiteUID'] && is_numeric($post['UID'])) {
                     $cust_session = Mage::getSingleton('customer/session');
-                    $cust_session->setData('gigyaAction', 'login');
+                    $cust_session->setData('gigyaAction', 'login'); // add gigya login data to customer session
+                    // the data will be used by observers set in model/customer/observer.php (and registered in config.php events). such as notify_login
                     Mage::dispatchEvent('gigya_social_pre_login', array(
                             'customer_session' => $cust_session,
                             'gigyaData' => $this->gigyaData
                         ));
-                    $cust_session->loginById($post['user']['UID']);
+                    $cust_session->loginById($post['user']['UID']); // the actual gigya user log in to magento ! this can return with error. if so, need to logout from gigya!
+
                     Mage::dispatchEvent('gigya_social_post_login', array(
                             'customer_session' => $cust_session,
                             'gigyaData' => $this->gigyaData
@@ -197,8 +240,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                         'redirect' => $url
                     );
                     $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-                } else {
-                    //no email
+                } else { // no siteID , break to regsiter function. with 2 main options: email exists (in post) or not.
+                    //no email (e.g Twitter user) - flow to create form to get missing email and resubmit process. (can be moved to FE JS)
                     if (empty($post['user']['email'])) {
                         //return email form
                         $block = $this->getLayout()->createBlock(
@@ -218,11 +261,13 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                     } else {
                         //check if we have the email on the system
                         $customer = $this->_customerExists($post['user']['email']);
+                        // create customer and
                         if ($customer === FALSE) {
                             $this->_createCustomer($email, $firstName, $lastName, $post['user']);
                             $this->getResponse()->setHeader('Content-type', 'application/json');
+                            //
                         } else {
-                            //email exists
+                            //email exists - link accounts
                             try {
                                 //return login form
                                 $block = $this->getLayout()->createBlock(
@@ -243,18 +288,24 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                                 $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
                             } catch (Exception $e) {
                                 //TODO:add error handeling
-                                Mage::log($e);
+                                Mage::log($e . __FILE__ . ' ' . __LINE__);
                             }
                         }
                     }
                 }
             } else {
                 //not valid
-                Mage::log('Not Valid');
+                Mage::log('Not Valid '. __FILE__ . ' ' . __LINE__);
             }
         }
     }
 
+    /*
+     * Check if customer exists in Magento
+     * @param string @email
+     *
+     * @return mixed $customer obj / False
+     */
     protected function _customerExists($email, $websiteId = null)
     {
         $customer = Mage::getModel('customer/customer');
@@ -266,8 +317,11 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         $customer->loadByEmail($email);
         if ($customer->getId()) {
             return $customer;
+        } else {
+            Mage::log('Customer could not be found in Magento DB using email from Gigya user. creating new user '. __FILE__ . ' ' . __LINE__);
+            return FALSE;
         }
-        return FALSE;
+
     }
 
     protected function _createCustomer($email, $firstName = NULL, $lastName = NULL, $gigyaUser)
@@ -299,6 +353,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
         Mage::register('current_customer', $customer);
         $this->_forward('createPost', null, null, array('gigyaData' => $gigyaUser));
+        // forward is magento way to call createPost function.
+        // createPost created the actual registration by posting to magento.
     }
 
     private function buildDob(&$info)
@@ -307,11 +363,14 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         unset($info['year'], $info['month'], $info['day']);
     }
 
+    /*
+     * dif with original magento action
+     */
     public function createPostAction()
     {
         $session = $this->_getSession();
         if ($session->isLoggedIn()) {
-            Mage::log('loggedIn');
+            Mage::log('loggedIn '. __FILE__ . ' ' . __LINE__);
             return;
         }
         $session->setEscapeMessages(true); // prevent XSS injection in user input
@@ -444,7 +503,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
                     }
                 } else {
-                    Mage::log($errors);
+                    Mage::log($errors. __FILE__ . ' ' . __LINE__);
                     $session->setCustomerFormData($this->getRequest()->getPost());
                     $error = '';
                     if (is_array($errors)) {
@@ -483,7 +542,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             }
         }
 
-        Mage::log('error');
+        Mage::log('error '. __FILE__ . ' ' . __LINE__);
         //$this->_redirectError(Mage::getUrl('*/*/create', array('_secure' => true)));
     }
 
@@ -554,11 +613,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
 
         $this->getResponse()->setHeader('Content-type', 'application/json');
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-    }
-
-    protected function _isSiteUser($info)
-    {
-        return null;
     }
 
 }

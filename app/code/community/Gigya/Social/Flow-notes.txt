@@ -43,14 +43,18 @@ _Construct:
     // in raas mode add extra params to js base url
 Initiate construct method
 ------
-Social Login:
-First connect to gigya
-when gigya response returns, ajax to Login controller with gigya response data (gigya.js - show exact action)
-LoginController:
-first is method - _socialLogin:
-    // check if the returned user from gigya is a valid user (validate with gigya)
-    // set user minimum details
-    //see if user is a site user
+Login controller:
+LoginAction - check login mode and activate corrsponding func
+Social login options:
+already existing site user -has UID => log in the user, update customer session and reload (192-216)
+if a uid does not exist go to regsitration function.
+Registration:
+    email does not exist - generate add email and resubmit process (if possible move this part to JS)
+    email exists, 2 option:
+        customer does not exist in magento - register user and login
+        customer exists in magento - link accounts process
+
+
 
 
 
