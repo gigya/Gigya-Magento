@@ -218,68 +218,15 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             // validate user signature authenticity
             $secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
             $valid = SigUtils::validateUserSignature($post['UID'], $post['timestamp'], $secret, $post['signature']);
-            // set user minimum details
-            $firstName = $post['user']['firstName'];
-            $lastName = $post['user']['lastName'];
-            $email = $post['user']['email'];
 
             if ($valid == TRUE) {
                 // check if user exists in magento
-                // soical is using 'isSiteID' as common id with magento (while raas is using email)
+                // social is using 'UID' as common id with magento (while raas is using email)
+                // (on first Gigya reg. Gigya creates temp UID. after site registration, the UID in gigya is updated to site UID and isSiteUID is set to true)
                 if ($post['isSiteUID'] && is_numeric($post['UID'])) {
                     $this->_doSocialLogin($post);
-                } else { // no siteID , break to regsiter function. with 2 main options: email exists (in post) or not.
-                    //no email (e.g Twitter user) - flow to create form to get missing email and resubmit process. (can be moved to FE JS)
-                    if (empty($post['user']['email'])) {
-                        //return email form
-                        $block = $this->getLayout()->createBlock(
-                            'Mage_Core_Block_Template',
-                            'Emailform',
-                            array('template' => 'gigya/form/emailForm.phtml')
-                        );
-                        $form = $block->renderView();
-                        $res = array(
-                            'result' => 'noEmail',
-                            'html' => $form,
-                            'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
-                            'headline' => $this->__('Fill-in missing required info'),
-                        );
-                        $this->getResponse()->setHeader('Content-type', 'application/json');
-                        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-                    } else {
-                        //check if we have the email on the system
-                        $customer = $this->_customerExists($post['user']['email']);
-                        // create customer and
-                        if ($customer === FALSE) {
-                            $this->_createCustomer($email, $firstName, $lastName, $post['user']);
-                            $this->getResponse()->setHeader('Content-type', 'application/json');
-                            //
-                        } else {
-                            //email exists - link accounts
-                            try {
-                                //return login form
-                                $block = $this->getLayout()->createBlock(
-                                    'Mage_Core_Block_Template',
-                                    'Loginform',
-                                    array('template' => 'gigya/form/mini.login.phtml')
-                                );
-                                $form = $block->renderView();
-                                $res = array(
-                                    'result' => 'emailExsists',
-                                    'html' => $form,
-                                    'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
-                                    'headline' => $this->__('Link Accounts'),
-                                );
-                                Mage::getSingleton('customer/session')->setData('gigyaAction', 'linkAccount');
-                                Mage::getSingleton('customer/session')->setData('gigyaUid', $post['UID']);
-                                $this->getResponse()->setHeader('Content-type', 'application/json');
-                                $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-                            } catch (Exception $e) {
-                                //TODO:add error handeling
-                                Mage::log($e . __FILE__ . ' ' . __LINE__);
-                            }
-                        }
-                    }
+                } else { // no siteID.
+                    $this->_doSocialRegistration($post);
                 }
             } else {
                 Mage::log('User sig not valid '. __FILE__ . ' ' . __LINE__);
@@ -290,7 +237,88 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     }
 
     /*
-     * Login gigya social user to magento
+     * Register Gigya user as new site user (Gigya user does not exist in Magento).
+     * 2 options: email exists (in post) or not.
+     * no email (e.g Twitter user) - flow to create form to get missing email and resubmit process -
+     * (can be moved to FE JS)
+     *
+     * @param array $post
+     * $return bool $registered
+     */
+    protected function _doSocialRegistration($post) {
+        if (empty($post['user']['email'])) {
+            $this->_socialEmailForm(); // create email form and return to FE Ajax
+        } else {
+            $customer = $this->_customerExists($post['user']['email']);
+            if ($customer === FALSE) {
+                // create new customer
+                $firstName = $post['user']['firstName'];
+                $lastName = $post['user']['lastName'];
+                $email = $post['user']['email'];
+
+                $this->_createCustomer($email, $firstName, $lastName, $post['user']);
+                $this->getResponse()->setHeader('Content-type', 'application/json');
+            } else {
+                //email exists - link accounts
+                $this->_socialLinkAccounts($post['UID']);
+            }
+        }
+    }
+
+    /*
+     * Create Link accounts form and return to ajax
+     *
+     * @param int $uid
+     */
+    protected function _socialLinkAccounts($uid) {
+        try {
+            //return login form
+            $block = $this->getLayout()->createBlock(
+                'Mage_Core_Block_Template',
+                'Loginform',
+                array('template' => 'gigya/form/mini.login.phtml')
+            );
+            $form = $block->renderView();
+            $res = array(
+                'result' => 'emailExsists',
+                'html' => $form,
+                'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
+                'headline' => $this->__('Link Accounts'),
+            );
+            Mage::getSingleton('customer/session')->setData('gigyaAction', 'linkAccount');
+            Mage::getSingleton('customer/session')->setData('gigyaUid', $uid);
+            $this->getResponse()->setHeader('Content-type', 'application/json');
+            $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
+        } catch (Exception $e) {
+            //TODO:add error handeling
+            Mage::log('Link accounts failed. exception details: ' . $e . __FILE__ . ' ' . __LINE__);
+        }
+    }
+
+    /*
+     * Create missing email form and return to Ajax response
+     */
+    protected function _socialEmailForm() {
+        $block = $this->getLayout()->createBlock(
+            'Mage_Core_Block_Template',
+            'Emailform',
+            array('template' => 'gigya/form/emailForm.phtml')
+        );
+        $form = $block->renderView();
+        $res = array(
+            'result' => 'noEmail',
+            'html' => $form,
+            'id' => Mage::helper('Gigya_Social')->getPluginContainerId('gigya_login/gigya_login_conf'),
+            'headline' => $this->__('Fill-in missing required info'),
+        );
+
+        Mage::log('Gigya user Missing email field, created add email form. ' . __FILE__ . ' ' . __LINE__);
+        $this->getResponse()->setHeader('Content-type', 'application/json');
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
+    }
+
+    /*
+     * Login Gigya social user to magento
      * @param array $post
      * @return login result as Ajax result array
     */
@@ -352,6 +380,13 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
 
     }
 
+    /**
+     * Create Magento customer with Gigya user details (Raas + Social)
+     * @param string $email
+     * @param string $firstName
+     * @param string $lastName
+     * @param obj $gigyaUser
+     */
     protected function _createCustomer($email, $firstName = NULL, $lastName = NULL, $gigyaUser)
     {
         $customer = Mage::getModel('customer/customer')->setId(null);
@@ -371,7 +406,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
         $password = Mage::helper('Gigya_Social')->_getPassword();
         $_POST['password'] = $password;
-        $_POST['confirmation'] = $password;
+        $_POST['confirmation'] = $password; // since Magento 1.9.1.0 field is called passwordConfirmation. this is handled later on.
         if ($this->userMode == 'social') {
             $customer->setData('gigyaUser', $gigyaUser);
         } else if ($this->userMode == 'raas') {
@@ -379,10 +414,10 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             $cust_session->setData('gigyaAccount', $gigyaUser);
             $customer->setData('gigya_uid', $gigyaUser['UID']);
         }
-        Mage::register('current_customer', $customer);
+        Mage::register('current_customer', $customer); // throws core exception
         $this->_forward('createPost', null, null, array('gigyaData' => $gigyaUser));
         // forward is magento way to call createPost function.
-        // createPost created the actual registration by posting to magento.
+        // createPost creates the actual registration by posting to magento and reloading.
     }
 
     private function buildDob(&$info)

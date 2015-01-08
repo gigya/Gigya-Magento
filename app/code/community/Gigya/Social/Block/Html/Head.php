@@ -36,20 +36,20 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
 
       $userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
       // check store base url / base secure url addresses
-//      $isSecure = Mage::app()->getStore()->isCurrentlySecure();
-//      if ($isSecure) {
-//        $baseUrl = Mage::getUrl('', array('_secure'=>true));
-//      } else {
-//        $baseUrl =  Mage::getBaseUrl();
-//      }
-//      $baseUrl =  Mage::getBaseUrl();
+   //   $isSecure = Mage::app()->getStore()->isCurrentlySecure();
+      $isSecure = $_SERVER['HTTPS'];
+      if ($isSecure) {
+        $baseUrl = Mage::getUrl('', array('_secure'=>true));
+      } else {
+        $baseUrl =  Mage::getBaseUrl();
+      }
       // Set JS base url
       $this->_data['items']['js/baseUrl'] = array(
         'type' => 'inline_js',
         'name' => 'baseUrl',
         'if' => '',
         'cond' => '',
-        'params' => 'var baseUrl = "' . Mage::getBaseUrl() . '",
+        'params' => 'var baseUrl = "' . $baseUrl . '",
           gigyaSettings = gigyaSettings || {};
           gigyaSettings.userMode = "' . $userMode . '";'
       );
