@@ -6,7 +6,7 @@ var gigyaFunctions = gigyaFunctions || {};
 var gigyaCache = {};
 //baseUrl = 'https://mage1.local/';
 /**
- * create ajax request to loginController/login action
+ * create ajax request to loginController.login action
  */
 gigyaFunctions.login = function (response) {
     gigyaCache.uInfo = response;
@@ -35,6 +35,10 @@ gigyaFunctions.login = function (response) {
                     case 'moreInfo':
                         gigyaFunctions.showMoreInfoForm(trans.responseJSON.html);
                         //gigyaFunctions.moreInfoSubmit();
+                        break;
+                    case 'loginFailed':
+                        gigya.socialize.logout();
+                    //    console.log(trans.responseJSON.message);
                         break;
                 }
             }
@@ -190,6 +194,7 @@ gigyaFunctions.RaaS.checkLoggedIn = function (response) {
 }
 
 gigyaFunctions.logout = function (evData) {
+    console.log('logout!');
     if (typeof evData.source !== 'undefined' && evData.source == "showCommentsUI") {
         new Ajax.Request(baseUrl + 'gigyalogin/login/logout', {
             method: 'get',

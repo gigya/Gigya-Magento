@@ -2,7 +2,7 @@
 
 /**
  * Class Gigya_Social_Modle_Customer_Observer
- * @author
+ * Event Observers registered in config.xml
  */
 class Gigya_Social_Model_Customer_Observer
 {
@@ -75,6 +75,11 @@ class Gigya_Social_Model_Customer_Observer
         }
     }
 
+    /*
+     * Observer func for Magento customer_logout event
+     * Handles log out from gigya when magento customer logs out
+     * @param $observer
+     */
     public function notify_logout($observer)
     {
         if ($this->userMod == 'social') {

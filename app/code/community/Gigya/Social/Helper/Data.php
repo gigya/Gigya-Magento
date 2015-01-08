@@ -79,10 +79,15 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    /*
+     * Logout user from Gigya
+     * called by notify_logout customer observer
+     * @param int $siteUid
+     */
     public function notifyLogout($siteUid)
     {
         $params = array(
-            'siteUID' => $siteUid,
+            'UID' => $siteUid,
         );
         try {
             $this->_gigya_api('logout', $params);
