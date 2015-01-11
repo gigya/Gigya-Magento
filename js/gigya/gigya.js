@@ -417,7 +417,9 @@ gigyaFunctions.postReview = function (eventObj) {
         nickname: eventObj.user.firstName,
         title: eventObj.commentTitle,
         detail: eventObj.commentText,
-        ratings: ratings
+        ratings: ratings,
+        user: eventObj.user.UID,
+        categoryID: eventObj.categoryID
     };
     var reviewsUrl = baseUrl + 'gigyareviews/reviews/post',
         id = '',
@@ -428,10 +430,16 @@ gigyaFunctions.postReview = function (eventObj) {
     if (category = gigyaFunctions.getUrlParam('category')) {
         reviewsUrl += '/category/' + category;
     }
+
     new Ajax.Request(reviewsUrl, {
             parameters: {json: JSON.stringify(toPost)},
             onSuccess: function (trans) {
                 //TODO: add success/error handeling
+                if( trans.status == 200 ) {
+                    // success
+                } else {
+                    console.log('review failed to submit.' );
+                }
             }
         }
     );
@@ -467,7 +475,8 @@ gigyaFunctions.RnR = function (settings) {
         scope: settings.scope,
         privacy: settings.privacy,
         onCommentSubmitted: gigyaFunctions.postReview,
-        userAction: ua
+        userAction: ua,
+        version : settings.version
     };
     gigya.comments.showRatingUI(settings);
     gigya.comments.showCommentsUI(reviews);
@@ -566,6 +575,7 @@ document.observe("dom:loaded", function () {
                     gigyaFunctions.ratings(plugin.value);
                     break;
                 case 'RnR':
+                    console.log('rnr');
                     gigyaFunctions.RnR(plugin.value);
                     break;
                 case 'logout':
