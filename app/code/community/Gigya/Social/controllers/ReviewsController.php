@@ -32,7 +32,6 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
             $data = Mage::helper('core')->jsonDecode($data['json']);
             $rating = array_filter($data['ratings']);
         }
-        $cat_info = $this->_verifiedPurchaser($data['categoryID']);
 
         if (($product = $this->_initProduct()) && !empty($data)) {
             $session    = Mage::getSingleton('core/session');
@@ -43,6 +42,22 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
             $res = array();
             $validate = $review->validate();
             if ($validate === true) {
+                // if verified purchaser badge exists,
+                //   check if customer is a purchaser.
+                //     if it is add badge to review
+                $cat_badge = $this->_catVerifiedBadge($data['categoryID']);
+                if ($cat_badge) {
+                    $verified_purchaser = $this->_is_verified_purchaser($data['user'], $product->getId());
+                    if ($verified_purchaser) {
+                        $badge_added = $this->_addVerifiedPurchaserBadge();
+                        if (!$badge_added) {
+                            // verified purchaser badge is on and customer is a purchaser,
+                            // but badge adding failed - generate log error
+                        }
+                    }
+                }
+
+
                 try {
                     $review->setEntityId($review->getEntityIdByCode(Mage_Review_Model_Review::ENTITY_PRODUCT_CODE))
                         ->setEntityPkValue($product->getId())
@@ -101,7 +116,7 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
    * @param int @catID
    * return bool $badge_cat_exists
    */
-  protected function _verifiedPurchaser($catID) {
+  protected function _catVerifiedBadge($catID) {
      $badge_cat_exists = false;
      $cat_info = Mage::helper('Gigya_Social')->utils->getCommentsCategoryInfo($catID);
 
@@ -110,6 +125,7 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
          foreach ( $arr_highlightGroups as $array ) {
              if ($array['name'] === "Verified-Purchaser" ) {
                  $badge_cat_exists = true;
+                 // check if badge is enabled
                  continue;
              }
          }
@@ -124,6 +140,44 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
 
      return $badge_cat_exists;
   }
+
+  /*
+   * check if reviewing customer has purchased that product
+   *  get all user orders
+   *  in each order get all item id's
+   *  compare item id with current review item id
+   *
+   * @param int UID
+   * @param int $productId
+   * @return bool $verified
+   */
+    protected function _is_verified_purchaser($uid, $productId) {
+        $purchaser = false;
+        $user_orders = Mage::getResourceModel('sales/order_collection')
+            ->addFieldToSelect('*')
+            ->addFieldToFilter('customer_id', $uid);
+        foreach ($user_orders as $order ) {
+            $items = $order->getAllVisibleItems();
+            foreach ( $items as $item) {
+                $prodId = $item->getProductId();
+                if ($prodId == $productId) {
+                    $purchaser = true;
+                    continue;
+                }
+            }
+        }
+        return $purchaser;
+    }
+
+    /*
+     * add verified purchaser badge to comment
+     *
+     * @param bool $badge_added
+     */
+    protected function _addVerifiedPurchaserBadge() {
+        $badge_added = false;
+        return $badge_added;
+    }
 }
 
 
