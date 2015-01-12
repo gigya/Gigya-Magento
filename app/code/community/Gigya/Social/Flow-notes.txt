@@ -54,8 +54,15 @@ Registration:
         customer does not exist in magento - register user and login
         customer exists in magento - link accounts process
 
+##################################
+Reviews flow:
+-------------
+On Dom load gigya.js observer loops through gigySettings object.
+if it finds plugin.key = RnR it calls gigyaFunctions.RnR
+gigyaFunctions.RnR builds plugin settings and creates the ui
+It also registers gigyaFunctions.postReview to onCommentSubmitted event
 
+On load of product page (with Reviews)
+comments.phtml is loaded
 
-
-
-
+On Rating submission

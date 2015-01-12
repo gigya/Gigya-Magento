@@ -700,6 +700,15 @@ class GigyaCMS {
         return $this->use_user_key;
     }
 
+	public function getCommentsCategoryInfo($catID)
+	{
+		$params = array(
+			"categoryID" => $catID,
+			"includeConfigSections" => "highlightSettings"
+		);
+		$catInfo = $this->call('comments.getCategoryInfo', $params);
 
+		return $catInfo;
+	}
 
 }

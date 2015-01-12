@@ -88,6 +88,10 @@ class Gigya_Social_Model_Customer_Observer
             $this->helper->notifyLogout($id);
         } else if ($this->userMod == 'raas') {
             $id = $observer->getEvent()->getCustomer()->getData('gigya_uid');
+            // gigya_uid does not get passed in in observer. options:
+                // add gigya_uid to observer
+                // make sure gigya_uid is saved to magento customer data, and pull it from magento customer
+                // make the logout  happen from browser side
             $params = array('UID' => $id);
             $this->helper->utils->call('accounts.logout', $params);
         }

@@ -2,8 +2,12 @@
 /**
  * Class Gigya_Social_ReviewsController
  * @author  Yaniv Aran-Shamir
+ * Accept review data by ajax call from: gigya.js - gigyaFunctions.postReview
+ *
  */
+include_once __DIR__ . '/../sdk/GSSDK.php';
 require_once ('Mage/Review/controllers/ProductController.php');
+
 class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
 {
 
@@ -28,6 +32,8 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
             $data = Mage::helper('core')->jsonDecode($data['json']);
             $rating = array_filter($data['ratings']);
         }
+        $cat_info = $this->_verifiedPurchaser($data['categoryID']);
+
         if (($product = $this->_initProduct()) && !empty($data)) {
             $session    = Mage::getSingleton('core/session');
             /* @var $session Mage_Core_Model_Session */
@@ -89,6 +95,35 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
         $this->getResponse()->setHeader('Content-type', 'application/json');
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
     }
+
+  /*
+   * Check with Gigya if the ratings category has a verified purchaser badge set (highlightSettings)
+   * @param int @catID
+   * return bool $badge_cat_exists
+   */
+  protected function _verifiedPurchaser($catID) {
+     $badge_cat_exists = false;
+     $cat_info = Mage::helper('Gigya_Social')->utils->getCommentsCategoryInfo($catID);
+
+     if (is_array($cat_info)) {
+         $arr_highlightGroups = $cat_info['category']['highlightSettings']['groups'];
+         foreach ( $arr_highlightGroups as $array ) {
+             if ($array['name'] === "Verified-Purchaser" ) {
+                 $badge_cat_exists = true;
+                 continue;
+             }
+         }
+     } elseif (is_numeric($cat_info)) {
+         // an error returned, meaning category info could not be retrieved
+         // we will log it and continue without marking verified user.
+         Mage::log('Could not retrieve category info. error code:'. $cat_info['errorCode'] . __FILE__ . __LINE__);
+         return false;
+     } else {
+         Mage::log('Could not retrieve category info.' .  __FILE__ . __LINE__);
+     }
+
+     return $badge_cat_exists;
+  }
 }
 
 

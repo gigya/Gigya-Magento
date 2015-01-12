@@ -37,7 +37,7 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
       $userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
       // check store base url / base secure url addresses
    //   $isSecure = Mage::app()->getStore()->isCurrentlySecure();
-      $isSecure = $_SERVER['HTTPS'];
+      $isSecure = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : NULL;
       if ($isSecure) {
         $baseUrl = Mage::getUrl('', array('_secure'=>true));
       } else {

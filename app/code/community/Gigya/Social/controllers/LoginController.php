@@ -88,7 +88,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     }
 
     /*
-     * handle Raas login process:
+     * Handle Raas login process:
      * at any stage if an error occurs and login/registration fails, create js response message and skip to func end
      * test UID sig. validation
      * validate user authenticity
