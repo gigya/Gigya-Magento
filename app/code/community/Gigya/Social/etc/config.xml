@@ -253,12 +253,12 @@
         <showEditLink>1</showEditLink>
       </gigya_link_accounts>
 			<gigya_raas_conf>
-				<WebScreen>Login-web</WebScreen>
-				<MobileScreen>Mobile-login</MobileScreen>
+				<WebScreen>Default-RegistrationLogin</WebScreen>
+				<MobileScreen>DefaultMobile-RegistrationLogin</MobileScreen>
 				<LoginScreen>gigya-login-screen</LoginScreen>
 				<RegisterScreen>gigya-register-screen</RegisterScreen>
-				<ProfileWebScreen>Profile-web</ProfileWebScreen>
-				<ProfileMobileScreen>Mobile-profile</ProfileMobileScreen>
+				<ProfileWebScreen>Default-ProfileUpdate</ProfileWebScreen>
+				<ProfileMobileScreen>DefaultMobile-ProfileUpdate</ProfileMobileScreen>
 				<override_links>1</override_links>
 			</gigya_raas_conf>
     </gigya_login>
