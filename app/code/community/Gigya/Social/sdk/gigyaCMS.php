@@ -711,4 +711,25 @@ class GigyaCMS {
 		return $catInfo;
 	}
 
+	/*
+	 * contact gigya to add verified purchaser badge to comment
+	 *
+	 * @param string $categoryID
+	 * @param string $streamID
+	 * @param string $commentID
+	 *
+	 * @return bool $badge_added [statusCode,errorCode,statusReason,callId]
+	 */
+	public function addCommentCategoryHighlight( $categoryID, $streamID, $commentID )
+	{
+		$params = array(
+			"categoryID" => $categoryID,
+			"streamID" => $streamID,
+			"commentID" => $commentID,
+			"addHighlightGroups" => '["Verified-Purchaser"]' // this exact format only works. no error returned if this is wrong (5.2.2)
+		);
+		$response = $this->call('comments.updateComment', $params);
+		return $response;
+	}
+
 }

@@ -49,14 +49,13 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
                 if ($cat_badge) {
                     $verified_purchaser = $this->_is_verified_purchaser($data['user'], $product->getId());
                     if ($verified_purchaser) {
-                        $badge_added = $this->_addVerifiedPurchaserBadge();
+                        $badge_added = $this->_addCategoryrBadge($data['categoryID'], $data['streamID'], $data['commentID'], "Verified-Purchaser" );
                         if (!$badge_added) {
                             // verified purchaser badge is on and customer is a purchaser,
                             // but badge adding failed - generate log error
                         }
                     }
                 }
-
 
                 try {
                     $review->setEntityId($review->getEntityIdByCode(Mage_Review_Model_Review::ENTITY_PRODUCT_CODE))
@@ -126,7 +125,7 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
              if ($array['name'] === "Verified-Purchaser" ) {
                  $badge_cat_exists = true;
                  // check if badge is enabled
-                 continue;
+                 break;
              }
          }
      } elseif (is_numeric($cat_info)) {
@@ -162,7 +161,7 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
                 $prodId = $item->getProductId();
                 if ($prodId == $productId) {
                     $purchaser = true;
-                    continue;
+                    break 2;
                 }
             }
         }
@@ -170,12 +169,17 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
     }
 
     /*
-     * add verified purchaser badge to comment
+     * add category badge to comment.
+     * badges are located in Gigya js object (5.2.2) - gigya.comments.plugins.comments2.instances[i].commentInstances.data.highlightGroups
      *
-     * @param bool $badge_added
+     * @params strings $categoryID, $streamID, $commentID, $badgeGroup
+     * @param array $badge_added - returned from api call [statusCode,errorCode,statusReason,callId]
+     * @return bool $badge_added
      */
-    protected function _addVerifiedPurchaserBadge() {
+    protected function _addCategoryrBadge( $categoryID, $streamID, $commentID, $badgeGroup ) {
         $badge_added = false;
+        $badge_added = Mage::helper('Gigya_Social')->utils->addCommentCategoryHighlight( $categoryID, $streamID, $commentID, $badgeGroup );
+
         return $badge_added;
     }
 }

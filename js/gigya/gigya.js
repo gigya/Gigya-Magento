@@ -404,7 +404,9 @@ gigyaFunctions.goToReviews = function (eventObj) {
         document.location = eventObj.context.reviewUrl;
     }
 };
-
+/*
+ * Update Magento after review submitted
+ */
 gigyaFunctions.postReview = function (eventObj) {
     var ratings = [],
         r = eventObj.ratings._overall;
@@ -419,7 +421,9 @@ gigyaFunctions.postReview = function (eventObj) {
         detail: eventObj.commentText,
         ratings: ratings,
         user: eventObj.user.UID,
-        categoryID: eventObj.categoryID
+        categoryID: eventObj.categoryID,
+        streamID: eventObj.streamID,
+        commentID: eventObj.comment.ID
     };
     var reviewsUrl = baseUrl + 'gigyareviews/reviews/post',
         id = '',
@@ -446,6 +450,7 @@ gigyaFunctions.postReview = function (eventObj) {
 
 
 };
+
 /*
  * magento pulls native reviews, if gigya reviews is enabled then gigya substitutes magento reviews, but gigya keeps updating magento native reviews.
  *
