@@ -22,9 +22,9 @@ class Gigya_Social_Block_Share extends Mage_Core_Block_Text_Tag_Js
         ));
 
         $js = '
-        var gigyaSettings = gigyaSettings || {};
-        gigyaSettings.shareAction = ' . $config . ';
-        gigyaSettings.shareAction.ua = ' . $ua .';
+        var gigyaMageSettings = gigyaMageSettings || {};
+        gigyaMageSettings.shareAction = ' . $config . ';
+        gigyaMageSettings.shareAction.ua = ' . $ua .';
         ';
         $this->setContents($js);
         Mage::getSingleton('checkout/session')->unsetData('gigyaShare');

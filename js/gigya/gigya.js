@@ -95,7 +95,7 @@ gigyaFunctions.RaaS.profileEdit = function (data) {
 }
 
 gigyaFunctions.RaaS.loginScreens = function (event) {
-    var params = gigyaSettings.RaaS;
+    var params = gigyaMageSettings.RaaS;
     if (!params.raas_login_div_id.length === 0) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet": "' + params.WebScreen + '", "containerID": "' + params.raas_login_div_id + '" , "mobileScreenSet":"' + params.MobileScreen + '", "startScreen":"' + params.LoginScreen + '"}'));
     } else {
@@ -105,7 +105,7 @@ gigyaFunctions.RaaS.loginScreens = function (event) {
 }
 
 gigyaFunctions.RaaS.registerScreens = function (event) {
-    var params = gigyaSettings.RaaS;
+    var params = gigyaMageSettings.RaaS;
     if (!params.raas_register_div_id === 0) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.RegisterScreen + '"}'));
     } else {
@@ -116,7 +116,7 @@ gigyaFunctions.RaaS.registerScreens = function (event) {
 
 gigyaFunctions.RaaS.profileScreens = function (event) {
     if (gigyaFunctions.RaaS.loggedIn){
-        var params = gigyaSettings.RaaS;
+        var params = gigyaMageSettings.RaaS;
         var jsonParams = {};
         if (!params.raas_profile_div_id === 0) {
             jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "containerID":"' + params.raas_profile_div_id + '", "mobileScreenSet:"' + params.ProfileMobileScreen + '", "startScreen": "' + params.ProfileWebScreen + '"}');
@@ -136,7 +136,7 @@ gigyaFunctions.RaaS.profileScreens = function (event) {
 }
 
 gigyaFunctions.RaaS.resetPass = function () {
-    var params = gigyaSettings.RaaS;
+    var params = gigyaMageSettings.RaaS;
     var jsonParams = {};
     jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '", "startScreen": "gigya-change-password-screen"}');
     gigya.accounts.showScreenSet(jsonParams);
@@ -146,7 +146,7 @@ gigyaFunctions.RaaS.resetPass = function () {
 
 gigyaFunctions.RaaS.accountEmbed = function () {
     if ( typeof  $$('body.customer-account-edit')[0] != 'undefined') {
-        var params = gigyaSettings.RaaS;
+        var params = gigyaMageSettings.RaaS;
         var jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '", "containerID": "form-validate"}');
         gigya.accounts.showScreenSet(jsonParams);
     }
@@ -523,12 +523,12 @@ gigyaFunctions.getUrlParam = function (param) {
  */
 function gigyaRegister() {
     if (typeof gigya !== 'undefined') {
-        if (gigyaSettings.userMode === 'raas') {
+        if (gigyaMageSettings.userMode === 'raas') {
             gigya.socialize.addEventHandlers({
                 onLogin: gigyaFunctions.RaaS.login,
                 onLogout: gigyaFunctions.logout
             });
-        } else if (gigyaSettings.userMode === 'social') {
+        } else if (gigyaMageSettings.userMode === 'social') {
         gigya.socialize.addEventHandlers({
             onLogin: gigyaFunctions.login,
             onLogout: gigyaFunctions.logout
@@ -540,12 +540,12 @@ function gigyaRegister() {
 gigyaRegister();
 
 /*
-   * On document load, loop through gigyaSettings object, and fire gigya functions accordingly
+   * On document load, loop through gigyaMageSettings object, and fire gigya functions accordingly
    *
  */
 document.observe("dom:loaded", function () {
-    if (typeof gigyaSettings !== 'undefined') {
-        $H(gigyaSettings).each(function (plugin) {
+    if (typeof gigyaMageSettings !== 'undefined') {
+        $H(gigyaMageSettings).each(function (plugin) {
             delete plugin.value.enable;
             //var a = JSON.parse(plugin.value);
             switch (plugin.key) {

@@ -10,14 +10,14 @@
 var gigyaOnepage = gigyaOnepage || {};
 
 gigyaOnepage.embedGigyaLogin = function () {
-    var params = gigyaSettings.RaaS;
+    var params = gigyaMageSettings.RaaS;
     params.raas_login_div_id = 'login-form';
     gigya.accounts.showScreenSet(JSON.parse('{"screenSet": "' + params.WebScreen + '", "containerID": "' + params.raas_login_div_id + '" , "mobileScreenSet":"' + params.MobileScreen + '", "startScreen":"' + params.LoginScreen + '"}'));
     $('onepage-guest-register-button').enable();
 }
 
 gigyaOnepage.embedGigyaRe = function () {
-    var params = gigyaSettings.RaaS;
+    var params = gigyaMageSettings.RaaS;
     params.raas_register_div_id = 'login-form';
     gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.RegisterScreen + '"}'));
     $('onepage-guest-register-button').disable();

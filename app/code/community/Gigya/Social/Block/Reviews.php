@@ -22,8 +22,8 @@ class Gigya_Social_Block_Reviews extends Mage_Catalog_Block_Product_View
       $parms['streamID'] = $product->getSku();
       $parms['ua'] = $ua;
       $js = '<script type="text/javascript">//<![CDATA[
-        var gigyaSettings = gigyaSettings || {};
-      gigyaSettings.RnR = ' . Mage::helper('core')->jsonEncode($parms) . '
+        var gigyaMageSettings = gigyaMageSettings || {};
+      gigyaMageSettings.RnR = ' . Mage::helper('core')->jsonEncode($parms) . '
         //]]>
       </script>';
 return $js;

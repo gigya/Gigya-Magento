@@ -3,7 +3,7 @@ $userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes'
 ?>
 <?php if ($userMode === 'social') : ?>
     <script type="text/javascript">//<![CDATA[
-        gigyaSettings.login =
+        gigyaMageSettings.login =
         <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_login_conf')  ?>
         //]]>
     </script>
@@ -12,7 +12,7 @@ $userMode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes'
 <?php endif ?>
 <?php if ($userMode === 'raas') : ?>
 <script type="text/javascript">//<![CDATA[
-    gigyaSettings.RaaS =
+    gigyaMageSettings.RaaS =
     <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf'); ?>
     //]]>
 </script>

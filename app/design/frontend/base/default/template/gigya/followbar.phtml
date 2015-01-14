@@ -2,8 +2,8 @@
 /**
  * Retrieve the sharebar settings set in admin
  * parse settings to json object
- * add the parameters to gigyaSettings js object.
- * print the gigyaSettings.sharebar settings object to front end.
+ * add the parameters to gigyaMageSettings js object.
+ * print the gigyaMageSettings.sharebar settings object to front end.
  *
  */
 // set advanced config json
@@ -19,8 +19,8 @@ if (Mage::helper('Gigya_Social')->isPluginEnabled($plugin_conf)) :
 
   ?>
   <script type="text/javascript">//<![CDATA[
-    var gigyaSettings = gigyaSettings || {};
-    gigyaSettings.followbar = <?php echo $params ?>;
+    var gigyaMageSettings = gigyaMageSettings || {};
+    gigyaMageSettings.followbar = <?php echo $params ?>;
     //]]>
   </script>
   <div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId($plugin_conf); ?>" class="gigya-followbar" style="margin-bottom: 10px;"></div>

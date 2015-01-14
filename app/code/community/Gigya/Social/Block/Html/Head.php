@@ -50,11 +50,11 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
         'if' => '',
         'cond' => '',
         'params' => 'var baseUrl = "' . $baseUrl . '",
-          gigyaSettings = gigyaSettings || {};
-          gigyaSettings.userMode = "' . $userMode . '";'
+          gigyaMageSettings = gigyaMageSettings || {};
+          gigyaMageSettings.userMode = "' . $userMode . '";'
       );
         if ($userMode == "raas") { // in raas mode add extra params to js base url
-            $this->_data['items']['js/baseUrl']['params'] .=  'gigyaSettings.RaaS = ' . Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf') . ';';
+            $this->_data['items']['js/baseUrl']['params'] .=  'gigyaMageSettings.RaaS = ' . Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf') . ';';
         }
     } else {
         parent::_construct();

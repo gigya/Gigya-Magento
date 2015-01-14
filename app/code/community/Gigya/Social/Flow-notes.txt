@@ -2,7 +2,7 @@ Login process:
 --------------
 app/design/frontend/base/default/template/gigya/login/social_login.phtml
 use helper/data.php methods to query system config for the selected user mode (disabled,social,RAAS).
-Retrieves the configuration for the selected mode, and sets the gigyaSettings object accordingly.
+Retrieves the configuration for the selected mode, and sets the gigyaMageSettings object accordingly.
 (in social mode it also prints the lgin div)
 
 js/gigya.js

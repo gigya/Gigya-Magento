@@ -1,8 +1,8 @@
 <?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_gamification/gigya_gamification_conf') && $this->helper('customer')->isLoggedIn()) : ?>
 <script type="text/javascript">//<![CDATA[
-  var gigyaSettings = gigyaSettings || {};
-  gigyaSettings.gm = gigyaSettings.gm || {};
-  gigyaSettings.gm.plugins = <?php echo $this->getJs()  ?>
+  var gigyaMageSettings = gigyaMageSettings || {};
+  gigyaMageSettings.gm = gigyaMageSettings.gm || {};
+  gigyaMageSettings.gm.plugins = <?php echo $this->getJs()  ?>
   //]]>
 </script>
 <div class="gigya-gm">

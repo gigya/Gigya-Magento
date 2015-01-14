@@ -20,9 +20,9 @@ class Gigya_Social_Block_Ordersharebar extends Mage_Core_Block_Template
         ));
 
         $js = '
-        var gigyaSettings = gigyaSettings || {};
-        gigyaSettings.sharebar = ' . $config . ';
-        gigyaSettings.sharebar.ua = ' . $ua .';
+        var gigyaMageSettings = gigyaMageSettings || {};
+        gigyaMageSettings.sharebar = ' . $config . ';
+        gigyaMageSettings.sharebar.ua = ' . $ua .';
         ';
         $this->setContents($js);
         Mage::getSingleton('checkout/session')->unsetData('gigyaShareOrder');

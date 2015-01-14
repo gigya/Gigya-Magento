@@ -15,9 +15,9 @@
   $settings['barID'] = $product->getSku();
   ?>
   <script type="text/javascript">//<![CDATA[
-    var gigyaSettings = gigyaSettings || {};
-    gigyaSettings.reactions = <?php echo  Mage::helper('core')->jsonEncode($settings) ?>;
-    gigyaSettings.reactions.ua = <?php echo $ua ?>
+    var gigyaMageSettings = gigyaMageSettings || {};
+    gigyaMageSettings.reactions = <?php echo  Mage::helper('core')->jsonEncode($settings) ?>;
+    gigyaMageSettings.reactions.ua = <?php echo $ua ?>
     //]]>
   </script>
   <div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_reactions/gigya_reactions_conf') ?>" class="gigya-reactions"></div>

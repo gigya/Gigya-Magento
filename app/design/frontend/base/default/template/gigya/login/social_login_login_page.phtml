@@ -1,7 +1,7 @@
 <?php if (Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes') == 'social'): ?>
 <script type="text/javascript">//<![CDATA[
-  var gigyaSettings = gigyaSettings || {};
-  gigyaSettings.login = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_login_conf')  ?>
+  var gigyaMageSettings = gigyaMageSettings || {};
+  gigyaMageSettings.login = <?php echo Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_login_conf')  ?>
   //]]>
 </script>
 <div class="col-1 account-login gigya-login">

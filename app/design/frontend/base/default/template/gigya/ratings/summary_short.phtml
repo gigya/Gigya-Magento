@@ -7,9 +7,9 @@
    $parms['containerID'] = $parms['containerID'] . '-' . $product->getId();
 ?>
       <script type="text/javascript">//<![CDATA[
-        var gigyaSettings = gigyaSettings || {};
-        gigyaSettings.ratings = gigyaSettings.ratings || [];
-        gigyaSettings.ratings.push(<?php echo Mage::helper('core')->jsonEncode($parms) ?>);
+        var gigyaMageSettings = gigyaMageSettings || {};
+        gigyaMageSettings.ratings = gigyaMageSettings.ratings || [];
+        gigyaMageSettings.ratings.push(<?php echo Mage::helper('core')->jsonEncode($parms) ?>);
         //]]>
       </script>
     <div id="<?php echo $parms['containerID'] ?>" class="ratings-short">

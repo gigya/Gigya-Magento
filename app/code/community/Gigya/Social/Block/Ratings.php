@@ -14,9 +14,9 @@ class Gigya_Social_Block_Ratings extends Mage_Catalog_Block_Product_View
       $parms['streamID'] = $product->getSku();
       $parms['context']['reviewUrl'] = $this->getReviewsUrl();
       $js = '<script type="text/javascript">//<![CDATA[
-        var gigyaSettings = gigyaSettings || {};
-      gigyaSettings.ratings = gigyaSettings.ratings || [];
-      gigyaSettings.ratings.push(' . Mage::helper('core')->jsonEncode($parms) . ');
+        var gigyaMageSettings = gigyaMageSettings || {};
+      gigyaMageSettings.ratings = gigyaMageSettings.ratings || [];
+      gigyaMageSettings.ratings.push(' . Mage::helper('core')->jsonEncode($parms) . ');
         //]]>
       </script>';
 return $js;

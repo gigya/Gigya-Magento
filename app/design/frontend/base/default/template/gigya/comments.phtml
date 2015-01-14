@@ -2,7 +2,7 @@
 /*
  * Create the comments/reviews block on product page
  * Gather settings parameters
- * add comments with settings to gigyaSettings obj
+ * add comments with settings to gigyaMageSettings obj
  * create container div for comments
  *
  */
@@ -15,8 +15,8 @@ $conf['streamID'] = $product->getSku();
 $parms = Mage::helper('core')->jsonEncode($conf);
 ?>
 <script type="text/javascript">//<![CDATA[
-  var gigyaSettings = gigyaSettings || {};
-  gigyaSettings.comments = <?php echo $parms  ?>;
+  var gigyaMageSettings = gigyaMageSettings || {};
+  gigyaMageSettings.comments = <?php echo $parms  ?>;
   //]]>
 </script>
 <div id="<?php echo Mage::helper('Gigya_Social')->getPluginContainerId('gigya_comments/gigya_comments_conf') ?>" class="gigya-comments"></div>

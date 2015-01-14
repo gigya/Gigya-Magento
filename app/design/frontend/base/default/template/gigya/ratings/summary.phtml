@@ -7,9 +7,9 @@
 ?>
 <?php if (Mage::helper('Gigya_Social')->isPluginEnabled('gigya_r_and_r/gigya_r_and_r_conf')) : ?>
       <script type="text/javascript">//<![CDATA[
-        var gigyaSettings = gigyaSettings || {};
-        gigyaSettings.ratings = gigyaSettings.ratings || [];
-        gigyaSettings.ratings.push(<?php echo Mage::helper('core')->jsonEncode($parms) ?>);
+        var gigyaMageSettings = gigyaMageSettings || {};
+        gigyaMageSettings.ratings = gigyaMageSettings.ratings || [];
+        gigyaMageSettings.ratings.push(<?php echo Mage::helper('core')->jsonEncode($parms) ?>);
         //]]>
       </script>
       <?php endif ?>
