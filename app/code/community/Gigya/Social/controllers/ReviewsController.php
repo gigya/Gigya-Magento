@@ -42,17 +42,16 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
             $res = array();
             $validate = $review->validate();
             if ($validate === true) {
-                // if verified purchaser badge exists,
-                //   check if customer is a purchaser.
-                //     if it is add badge to review
+                // if verified purchaser badge exists, check if customer is a purchaser.
+                //   if it is add badge to review
                 $cat_badge = $this->_catVerifiedBadge($data['categoryID']);
                 if ($cat_badge) {
                     $verified_purchaser = $this->_is_verified_purchaser($data['user'], $product->getId());
                     if ($verified_purchaser) {
                         $badge_added = $this->_addCategoryrBadge($data['categoryID'], $data['streamID'], $data['commentID'], "Verified-Purchaser" );
                         if (!$badge_added) {
-                            // verified purchaser badge is on and customer is a purchaser,
-                            // but badge adding failed - generate log error
+                            // verified purchaser badge is on and customer is a purchaser, but badge adding failed.
+                            Mage::log('Verified-Purchaser badge exists and enabled but failed to add '.__FILE__ . ' ' . __LINE__ );
                         }
                     }
                 }
@@ -123,8 +122,9 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
          $arr_highlightGroups = $cat_info['category']['highlightSettings']['groups'];
          foreach ( $arr_highlightGroups as $array ) {
              if ($array['name'] === "Verified-Purchaser" ) {
-                 $badge_cat_exists = true;
-                 // check if badge is enabled
+                 if ( $array['enabled'] ) {
+                     $badge_cat_exists = true;
+                 }
                  break;
              }
          }
@@ -174,7 +174,7 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
      *
      * @params strings $categoryID, $streamID, $commentID, $badgeGroup
      * @param array $badge_added - returned from api call [statusCode,errorCode,statusReason,callId]
-     * @return bool $badge_added
+     * @return arr $badge_added
      */
     protected function _addCategoryrBadge( $categoryID, $streamID, $commentID, $badgeGroup ) {
         $badge_added = false;
