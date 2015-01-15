@@ -25,7 +25,6 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
             }
             if (empty($userSecret)){
                 Mage::throwException(Mage::helper('adminhtml')->__("Gigya user secret is required."));
-
             }
             $helper->utils->setUserKey($userKey);
             $helper->utils->setUserSecret($userSecret);
@@ -36,7 +35,7 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
 
 	    // validate that data center is chosen/filled before setting
 	    if (empty($dataCenter)) {
-		    Mage::throwException(Mage::helper('adminhtml')->__("Gigya data center not selected. when chosing 'other' you should fill in the Data center code provided by Gigya manually."));
+		    Mage::throwException(Mage::helper('adminhtml')->__("Gigya data center not selected. when choosing 'other' you should fill in the Data center code provided by Gigya."));
 	    }
 
 	    $helper->utils->setApiDomain($dataCenter);

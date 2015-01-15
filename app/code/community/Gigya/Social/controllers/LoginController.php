@@ -394,6 +394,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         $customer->setFirstname($firstName);
         $customer->setLastname($lastName);
         $customer->setEmail($email);
+
+        // Social: info from extra fields set as required. add them to user.
         if (!empty($gigyaUser['missInfo'])) {
             $missing_info = $gigyaUser['missInfo'];
             if (array_key_exists('dob', $missing_info)) {
