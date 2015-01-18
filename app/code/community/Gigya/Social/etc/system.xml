@@ -484,6 +484,7 @@
                             <label>Map field: </label>
                             <frontend_type>select</frontend_type>
                             <frontend_model>Gigya_Social_Block_Adminhtml_MapFields</frontend_model>
+                            <backend_model>Gigya_Social_Model_Config_Backend_FieldMap</backend_model>
                             <sort_order>10</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
