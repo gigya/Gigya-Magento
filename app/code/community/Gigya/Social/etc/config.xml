@@ -158,6 +158,17 @@
           </Gigya_Social_read>
       </resources>
   </global>
+  <admin>
+      <routers>
+          <mapfields>
+              <use>admin</use>
+              <args>
+                  <module>Gigya_Social</module>
+                  <frontName>mapfields</frontName>
+              </args>
+          </mapfields>
+      </routers>
+  </admin>
   <adminhtml>
     <events>
       <customer_delete_after>

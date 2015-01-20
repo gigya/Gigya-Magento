@@ -1,7 +1,9 @@
 <?php
 /*
  * Create Map fields UI for admin-Gigya User management
- *
+ * Gather Gigya and Maqento fields for mapping
+ * form is outputed via template file adminhtml/.../mapFields.phtml
+ * Added fields updates are sent via Ajax to MappingFieldsController
  */
 include_once __DIR__ . '/../sdk/gigyaCMS.php';
 
@@ -10,40 +12,26 @@ class Gigya_Social_Block_Adminhtml_MapFields extends Mage_Adminhtml_Block_System
   protected $gigyaSchema;
   protected $mageCustomerFields;
   protected $mode;
-
+  public  $AjaxUrl;
 
   public function __construct() {
-      $this->mode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes') ;
-      $this->getGigyaSchema();
-      $this->getMageCustomerFields();
+    parent::_construct();
+
+    $this->mode = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes') ;
+    $this->getAjaxMapUrl();
+    $this->getGigyaSchema();
+    $this->getMageCustomerFields();
+    $this->setTemplate('gigya/mapFields.phtml');
   }
 
   protected function _getElementHtml(Varien_Data_Form_Element_Abstract $element)
   {
-    $table = "<table class='field-mapping-table'>
-                <tr>
-                 <td>Source</td>
-                 <td>Target</td>
-                 <td>Remove</td>
-                </tr>
-                <tr>
-                 <td>
-                     <select id='gigya-map-source' class='gigya-map-source' name='gigya-map-source'>
-                        <option selected='selected'> - Select - </option>
-                        {$this->gigyaSchema}
-                     </select>
-                 </td>
-                 <td>
-                    <select id='gigya-map-target' class='gigya-map-target' name='gigya-map-target'>
-                          <option selected='selected'> - Select - </option>
-                          {$this->mageCustomerFields}
-                     </select>
-                 </td>
-                 <td><button id='gigya-add-map-field'>Add</button></td>
-                </tr>
-              </table>";
+      return $this->_toHtml();
+  }
 
-    return $table;
+  public function getAjaxMapUrl() {
+    $baseUrl = Mage::helper('adminhtml')->getUrl('adminhtml/adminhtml_gigyasocial/Addfields');
+    $this->AjaxUrl = $baseUrl ;
   }
 
   /*

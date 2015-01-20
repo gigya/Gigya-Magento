@@ -76,9 +76,11 @@ gigyaAdmin.showSection = function (section) {
 gigyaAdmin.hideOtherDataCenter = function () {
     $('row_gigya_global_gigya_global_conf_dataCenterOther').hide();
 }
+
 gigyaAdmin.showOtherDataCenter = function () {
     $('row_gigya_global_gigya_global_conf_dataCenterOther').show();
 }
+
 gigyaAdmin.JsonExampleWindow = function(event) {
     var w = window.open( "about:blank", "jsonExample", "width=440,height=330" );
     var json_example = '{ &#013;' +
@@ -90,16 +92,20 @@ gigyaAdmin.JsonExampleWindow = function(event) {
     w.document.write( '<p>JSON Example:</p><textarea  rows="8" cols="45">' + json_example + '</textarea><br><small>Tips for valid JSON:<ol><li>{curly brackets} are for objects (key:value).</li><li>[square brackets] are for arrays (value).</li><li>Both keys and values must have double quote ("").</li><li>No trailing commas.</li></ol></small>' );
 }
 
-/*
-// Validate advanced config json:
-// added jsonlint to js/gigya/json
-try to activate following - http://blog.kyp.fr/how-to-validate-magento-configuration-values-format/
-Validation.addAllThese([
-   ['validate-advanced-json','the text you have entered is not a valid JSON format.', function(v) {
-       return Validation.get('IsEmpty').test(v) || /^[a-zA-Z]{3}$/i.test(v)
-   }]
-]);
-*/
+gigyaAdmin.mapFields = function (event) {
+    new Ajax.Request( gigyaAdmin.mapAjaxUrl, {
+        parameters: { test: 'example' } ,
+        onSuccess: function(transport){
+            if (transport.responseText){
+                alert('Field sent with response')
+            } else {
+                alert('Response failure')
+                // update failed error message
+            }
+        }
+    });
+    return false;
+}
 
 // On document load :
 document.observe("dom:loaded", function () {
@@ -142,6 +148,11 @@ document.observe("dom:loaded", function () {
         elem.observe('click', function (event) {
             gigyaAdmin.JsonExampleWindow(event);
         });
+    });
+
+    // listen to add fields button (user management)
+    $('gigya-add-map-field').observe('click', function(event)  {
+       gigyaAdmin.mapFields(event);
     });
 
 });

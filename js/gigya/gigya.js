@@ -4,7 +4,7 @@
  */
 var gigyaFunctions = gigyaFunctions || {};
 var gigyaCache = {};
-//baseUrl = 'https://mage1.local/';
+//baseUrl set in head.php
 /**
  * create ajax request to loginController.login action
  */
