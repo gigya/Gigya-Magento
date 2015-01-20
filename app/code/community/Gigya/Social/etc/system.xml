@@ -1152,7 +1152,7 @@
                             <show_in_store>1</show_in_store>
                         </enable>
                         <containerID translate="label,comment">
-                            <label>Div ID</label>
+                            <label>Gigya Follow Bar container id</label>
                             <frontend_type>text</frontend_type>
                             <comment><![CDATA[An ID of a &lt;DIV&gt; element on the page in which you want to display the plugin.]]></comment>
                             <sort_order>2</sort_order>
@@ -1182,14 +1182,14 @@
                         <buttons translate="label,comment">
                             <label>Follow buttons</label>
                             <frontend_type>textarea</frontend_type>
-                            <comment><![CDATA[Please enter a list of <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#FollowButton_Object" target="blank">FollowButton</a> Objects that should appear on the Follow Bar.]</div>]]></comment>
+                            <comment><![CDATA[Please enter a list of <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#FollowButton_Object" target="blank">FollowButton</a> Objects that should appear on the Follow Bar.</div>]]></comment>
                             <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>0</show_in_store>
                         </buttons>
                         <advancedConfig translate="label,comment">
-                            <label>Advanced showFollowBarUI Configuration</label>
+                            <label>Advanced Configuration</label>
                             <frontend_type>textarea</frontend_type>
                             <validate>validate-json</validate>
                             <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span><p/><p> See list of available: <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#Method_Parameters" target="blank">Parameters</a></p> ]]></comment>
