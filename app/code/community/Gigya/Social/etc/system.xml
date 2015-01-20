@@ -1082,7 +1082,7 @@
                         </enable>
                         <containerID translate="label,comment">
                             <label>Div ID</label>
-                            <frontend_type>text</frontend_type>
+                            <frontend_type>label</frontend_type>
                             <comment><![CDATA[The ratings container div ID]]></comment>
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
