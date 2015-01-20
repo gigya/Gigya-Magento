@@ -239,7 +239,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     /*
      * Register Gigya user as new site user (Gigya user does not exist in Magento).
      * 2 options: email exists (in post) or not.
-     * no email (e.g Twitter user) - flow to create form to get missing email and resubmit process -
+     *   no email (e.g Twitter user) - flow to create form to get missing email and resubmit process -
      * (can be moved to FE JS)
      *
      * @param array $post
@@ -407,6 +407,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         $password = Mage::helper('Gigya_Social')->_getPassword();
         $_POST['password'] = $password;
         $_POST['confirmation'] = $password; // since Magento 1.9.1.0 field is called passwordConfirmation. this is handled later on.
+        $_POST['passwordConfirmation'] = $password;
         if ($this->userMode == 'social') {
             $customer->setData('gigyaUser', $gigyaUser);
         } else if ($this->userMode == 'raas') {
