@@ -152,6 +152,12 @@ class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
    */
     protected function _is_verified_purchaser($uid, $productId) {
         $purchaser = false;
+        // in raas the passed uid from gigya is not the magento uid, so get the Mage uid from session
+        if (Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes') == 'raas') {
+          $uid = Mage::getSingleton('customer/session')->getId();
+          // can test here if Gigya uid corresponds mage uid
+        }
+
         $user_orders = Mage::getResourceModel('sales/order_collection')
             ->addFieldToSelect('*')
             ->addFieldToFilter('customer_id', $uid);
