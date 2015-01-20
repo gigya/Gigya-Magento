@@ -1,0 +1,34 @@
+<?php
+/**
+ *
+ */
+$url = Mage::helper("adminhtml")->getUrl("gigyasocial/mapfields/index/"); // missing admin folder
+?>
+<table class='field-mapping-table'>
+    <tr>
+        <td>Source</td>
+        <td>Target</td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>
+            <select id='gigya-map-source' class='gigya-map-source' name='gigya-map-source'>
+                <option selected='selected'> - Select - </option>
+                <?php echo $this->gigyaSchema ?>
+            </select>
+        </td>
+        <td>
+            <select id='gigya-map-target' class='gigya-map-target' name='gigya-map-target'>
+                <option selected='selected'> - Select - </option>
+                <?php echo $this->mageCustomerFields ?>
+            </select>
+        </td>
+        <td><span id='gigya-add-map-field'>Add</span></td>
+    </tr>
+</table>
+<?php
+//$url = Mage::getMode('adminhtml/url')->getUrl('gigyasocial/gigyamapfields');
+?>
+<script type="text/javascript">//<![CDATA[
+    gigyaAdmin.mapAjaxUrl = "<?php echo $url; ?>"
+//]]> </script>
