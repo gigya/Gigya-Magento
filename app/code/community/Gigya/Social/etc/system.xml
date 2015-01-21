@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
-<!-- Guide: http://www.ecomdev.org/2010/10/27/custom-configuration-fields-in-magento.html -->
+<!-- Guide: http://www.ecomdev.org/2010/10/27/custom-configuration-fields-in-magento.html
+            http://alanstorm.com/custom_magento_system_configuration
+ -->
 <config>
     <tabs>
         <gigya translate="label">
@@ -992,6 +994,7 @@
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
                     <show_in_store>0</show_in_store>
+                    <expanded>1</expanded>
                     <fields>
                         <enable translate="label">
                             <label>Enable Gigya Gamification</label>
@@ -1044,7 +1047,7 @@
                             <label>Advanced configuration</label>
                             <frontend_type>Textarea</frontend_type>
                             <validate>validate-json</validate>
-                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/040_GMI">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
+                            <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/020_Client_API/040_GM">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1082,7 +1085,7 @@
                         </enable>
                         <containerID translate="label,comment">
                             <label>Div ID</label>
-                            <frontend_type>label</frontend_type>
+                            <frontend_type>l</frontend_type>
                             <comment><![CDATA[The ratings container div ID]]></comment>
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
