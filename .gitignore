@@ -93,6 +93,7 @@ skin/frontend/default/german/
 skin/frontend/default/iphone/
 skin/frontend/default/modern/
 skin/install/
+!skin/adminhtml/default/default/gigya/social/*
 var/
 pear
 get.php

@@ -1,0 +1,15 @@
+.valid-json-example {
+    text-decoration: underline;
+}
+.valid-json-example:hover {
+    text-decoration: none;
+    cursor: pointer;
+}
+#gigya_global_gigya_global_conf_dataCenterOther {
+    width:12%;
+}
+.dc-gigya-domain {
+    position: relative;
+    top:-1.5em;
+    left:4em;
+}

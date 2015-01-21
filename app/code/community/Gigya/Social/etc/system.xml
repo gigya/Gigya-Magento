@@ -115,11 +115,14 @@
                         </dataCenter>
                         <dataCenterOther translate="label">
                             <frontend_type>text</frontend_type>
-                            <comment><![CDATA[<span class="gigyaDomain">.gigya.com</span>Please specify the Gigya data center in which your site is defined. For example: 'EU1'. To verify your site location contact your Gigya implementation manager."]]></comment>
+                            <comment><![CDATA[<span class="dc-gigya-domain">.gigya.com</span><div>Please specify the Gigya data center in which your site is defined. For example: 'EU1'. To verify your site location contact your Gigya implementation manager.</div>]]></comment>
                             <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
+                            <depends>
+                                <dataCenter></dataCenter>
+                            </depends>
                         </dataCenterOther>
                         <laguages translate="label">
                             <label>Interface language</label>
