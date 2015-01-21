@@ -59,7 +59,7 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
     } else {
         parent::_construct();
     }
-
+//    $user = Mage::getSingleton('customer/session')->getId();
   }
 
   protected function _separateOtherHtmlHeadElements(&$lines, $itemIf, $itemType, $itemParams, $itemName, $itemThe) {

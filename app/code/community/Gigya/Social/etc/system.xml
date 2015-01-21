@@ -301,6 +301,7 @@
                         <WebScreen translate="label">
                             <label>Web Screen Set ID</label>
                             <frontend_type>text</frontend_type>
+                            <backend_model>Gigya_Social_Model_Config_Backend_RaasScreens</backend_model>
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -309,6 +310,7 @@
                         <MobileScreen translate="label">
                             <label>Mobile Screen Set ID</label>
                             <frontend_type>text</frontend_type>
+                            <backend_model>Gigya_Social_Model_Config_Backend_RaasScreens</backend_model>
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -317,6 +319,7 @@
                         <LoginScreen translate="label">
                             <label>Login Screen ID</label>
                             <frontend_type>text</frontend_type>
+                            <backend_model>Gigya_Social_Model_Config_Backend_RaasScreens</backend_model>
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -325,6 +328,7 @@
                         <RegisterScreen translate="label">
                             <label>Register Screen ID</label>
                             <frontend_type>text</frontend_type>
+                            <backend_model>Gigya_Social_Model_Config_Backend_RaasScreens</backend_model>
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -342,6 +346,7 @@
                         <ProfileWebScreen translate="label">
                             <label>Profile Screen Set ID</label>
                             <frontend_type>text</frontend_type>
+                            <backend_model>Gigya_Social_Model_Config_Backend_RaasScreens</backend_model>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -350,6 +355,7 @@
                         <ProfileMobileScreen translate="label">
                             <label>Mobile Screen Set ID</label>
                             <frontend_type>text</frontend_type>
+                            <backend_model>Gigya_Social_Model_Config_Backend_RaasScreens</backend_model>
                             <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
