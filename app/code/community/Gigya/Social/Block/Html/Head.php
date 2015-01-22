@@ -17,6 +17,15 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
         'sessionExpiration' => (int) Mage::getStoreConfig('web/cookie/cookie_lifetime'),
         'connectWithoutLoginBehavior' => Mage::getStoreConfig('gigya_global/gigya_global_conf/loginBehavior'),
       );
+      // add advanced configuration
+      $advanced_config = Mage::getStoreConfig('gigya_global/gigya_global_conf/advancedConfig');
+      if($advanced_config !== '') {
+        $advanced_config_arr = Mage::helper('Gigya_Social')->getGigGlobalAdvancedConfig($advanced_config);
+        foreach ($advanced_config_arr as $key => $val) {
+          $jsParams[$key] = $val;
+        }
+      }
+      ////
       $this->_data['items']['js/gigya'] = array( // set template data parameters for script tag
         'type' => 'external_js',
         'name' => $name,

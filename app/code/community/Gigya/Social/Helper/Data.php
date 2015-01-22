@@ -285,5 +285,9 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     public function  getUtils() {
         return $this->utils;
     }
+    public function getGigGlobalAdvancedConfig($advanced_config) {
+      $array = json_decode($advanced_config);
+      return $array;
+    }
 
 }
