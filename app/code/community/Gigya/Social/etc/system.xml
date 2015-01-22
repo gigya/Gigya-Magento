@@ -25,7 +25,7 @@
                     <sort_order>99</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <enable translate="label">
                             <label>Enable</label>
@@ -53,7 +53,7 @@
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </apikey>
                         <secretkey translate="label">
                             <label>Gigya Secret key</label>
@@ -73,7 +73,7 @@
                             <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </userKey>
                         <userSecret translate="label">
                             <label>Gigya User Secret</label>
@@ -82,7 +82,7 @@
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </userSecret>
                         <useUserKey translate="label">
                             <label>Use user key &amp; User secret key</label>
@@ -102,7 +102,7 @@
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </providers>
                         <dataCenter translate="label">
                             <label>Data Center Region</label>
@@ -111,7 +111,7 @@
                             <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
+                            <show_in_store>0</show_in_store>
                         </dataCenter>
                         <dataCenterOther translate="label">
                             <frontend_type>text</frontend_type>
@@ -119,7 +119,7 @@
                             <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
+                            <show_in_store>0</show_in_store>
                             <depends>
                                 <dataCenter></dataCenter>
                             </depends>

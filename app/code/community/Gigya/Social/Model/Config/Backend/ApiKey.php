@@ -1,50 +1,71 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Yaniv Aran-Shamir
- * Date: 6/19/14
- * Time: 4:04 PM
+ * Backend module for API key validation
+ * When API key is submitted, validate with Gigya the api key by running a test method (socialize.shortenURL)
+ * All required global parameters are tested with the API test
  */
 
 class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Data {
+  /*
+   * Retrieve the submitted api data and validate it with Gigya
+   * If a field was not submitted, take it from default config
+   */
     protected function _beforeSave()
     {
-        $value = $this->getValue(); // the newly submitted values in _data
-        $helper = Mage::helper('Gigya_Social'); // get the existing settings data
-        $helper->utils->setApiKey($value); // set the api key to the submitted key
-        $data = $this->getData();
-        $secret = $data['fieldset_data']['secretkey']; // submitted secret
-        $userKey = $data['fieldset_data']['userKey']; // submitted api key
-        $userSecret = $data['fieldset_data']['userSecret'];
-        $useUserKey = $data['fieldset_data']['useUserKey'];
-	    $dataCenter = $this->_setDataCenter($data['fieldset_data']); // submitted DC
+	  $default_config = Mage::getStoreConfig('gigya_global/gigya_global_conf'); // default store config
+	  $value = $this->getValue(); // the newly submitted values in _data
+	  $helper = Mage::helper('Gigya_Social');
+	  $helper->utils->setApiKey($value); // set the api key to the submitted key
+	  $data = $this->getData();
+	  // test if other fields were submitted, or use default values
+	  // secret
+	  if($data['fieldset_data']['secretkey']) {
+		$secret = $data['fieldset_data']['secretkey'];
+	  } else {
+		$secret = $default_config['secretkey'];
+	  }
+	  // userkey
+	  if($data['fieldset_data']['userKey'])  {
+		$userKey = $data['fieldset_data']['userKey'];
+	  } else {
+		$userKey = $default_config['userKey'];
+	  }
+	  // userSecret
+	  if($data['fieldset_data']['userSecret']) {
+		$userSecret = $data['fieldset_data']['userSecret'];
+	  } else {
+		$userSecret = $default_config['userSecret'];
+	  }
+	  $useUserKey = $data['fieldset_data']['useUserKey'] ? $data['fieldset_data']['useUserKey'] : $default_config['useUserKey'];
 
-        if ($useUserKey) {
-            if(empty($useUserKey)){
-                Mage::throwException(Mage::helper('adminhtml')->__("Gigya user key is required."));
-            }
-            if (empty($userSecret)){
-                Mage::throwException(Mage::helper('adminhtml')->__("Gigya user secret is required."));
+	  $dataCenter = $this->_setDataCenter($data['fieldset_data'], $default_config['dataCenter']);
 
-            }
-            $helper->utils->setUserKey($userKey);
-            $helper->utils->setUserSecret($userSecret);
-            $helper->utils->setUseUserKey($useUserKey);
-        } else {
-            $helper->utils->setApiSecret($secret);
-        }
+	  if ($useUserKey) {
+		  if(empty($useUserKey)){
+			  Mage::throwException(Mage::helper('adminhtml')->__("Gigya user key is required."));
+		  }
+		  if (empty($userSecret)){
+			  Mage::throwException(Mage::helper('adminhtml')->__("Gigya user secret is required."));
 
-	    // validate that data center is chosen/filled before setting
-	    if (empty($dataCenter)) {
-		    Mage::throwException(Mage::helper('adminhtml')->__("Gigya data center not selected. when chosing 'other' you should fill in the Data center code provided by Gigya manually."));
-	    }
+		  }
+		  $helper->utils->setUserKey($userKey);
+		  $helper->utils->setUserSecret($userSecret);
+		  $helper->utils->setUseUserKey($useUserKey);
+	  } else {
+		  $helper->utils->setApiSecret($secret);
+	  }
 
-	    $helper->utils->setApiDomain($dataCenter);
+	  // validate that data center is chosen/filled before setting
+	  if (empty($dataCenter)) {
+		  Mage::throwException(Mage::helper('adminhtml')->__("Gigya data center not selected. when choosing 'other' you should fill in the Data center code provided by Gigya manually."));
+	  }
 
-        if ($apiError = $helper->utils->testApiconfig()) {
-			$_connectError = $this->_APIerrorHandler($apiError, $dataCenter);
-            Mage::throwException(Mage::helper('adminhtml')->__($_connectError));
-        }
+	  $helper->utils->setApiDomain($dataCenter);
+
+	  if ($apiError = $helper->utils->testApiconfig()) {
+		  $_connectError = $this->_APIerrorHandler($apiError, $dataCenter);
+		  Mage::throwException(Mage::helper('adminhtml')->__($_connectError));
+	  }
 
     }
 
@@ -53,7 +74,7 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
 	 * @param $fieldset
 	 * @return string
 	 */
-	protected function _setDataCenter($fieldset)
+	protected function _setDataCenter($fieldset, $default_dc)
 	{
 		$dataCenter = '';
 
@@ -61,7 +82,10 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
 			$dataCenter = $fieldset['dataCenter'];
 		} elseif ($fieldset['dataCenterOther']) {
 			$dataCenter = $fieldset['dataCenterOther'] . '.gigya.com';
+		} else {
+		  $dataCenter = $default_dc;
 		}
+
 		return $dataCenter;
 	}
 
