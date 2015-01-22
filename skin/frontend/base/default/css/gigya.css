@@ -57,3 +57,6 @@ div.ratings-short .gig-rating div.gig-rating-star-empty {
     height: 32px;
     background: transparent url("http://cdn.gigya.com/gs/i/progress_ani.gif") no-repeat;
 }
+body .gigya-login-providers-container .gigya-login-provider img {
+    display: inline;
+}
