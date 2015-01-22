@@ -115,7 +115,7 @@
                         </dataCenter>
                         <dataCenterOther translate="label">
                             <frontend_type>text</frontend_type>
-                            <comment><![CDATA[<span class="dc-gigya-domain">.gigya.com</span><div>Please specify the Gigya data center in which your site is defined. For example: 'EU1'. To verify your site location contact your Gigya implementation manager.</div>]]></comment>
+                            <comment><![CDATA[<span class="dc-gigya-domain">.gigya.com</span><div>Please specify the Gigya data center in which your site is defined. For example: 'eu1'. To verify your site location contact your Gigya implementation manager.</div>]]></comment>
                             <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1094,7 +1094,7 @@
                         </enable>
                         <containerID translate="label,comment">
                             <label>Div ID</label>
-                            <frontend_type>l</frontend_type>
+                            <frontend_type>label</frontend_type>
                             <comment><![CDATA[The ratings container div ID]]></comment>
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
@@ -1194,6 +1194,7 @@
                         <buttons translate="label,comment">
                             <label>Follow buttons</label>
                             <frontend_type>textarea</frontend_type>
+                            <validate>validate-json</validate>
                             <comment><![CDATA[Please enter a list of <a href="http://developers.gigya.com/020_Client_API/010_Socialize/socialize.showFollowBarUI#FollowButton_Object" target="blank">FollowButton</a> Objects that should appear on the Follow Bar.</div>]]></comment>
                             <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>

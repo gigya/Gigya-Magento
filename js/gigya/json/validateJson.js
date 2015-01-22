@@ -12,7 +12,7 @@ Validation.add('validate-json', 'JSON is not valid', function (v) {
 });
 
 function validateJson(v) {
-    if (v.charAt(0) === '{') { // v is a json string
+    if (v.charAt(0) === '{' || v.charAt(0) === '[') { // v is a json string
         try {
             jsonTest = jsonlint.parse(v);
             if (jsonTest) {
