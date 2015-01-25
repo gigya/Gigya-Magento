@@ -1,7 +1,12 @@
 <?php
 
 include_once __DIR__ . '/../sdk/GSSDK.php';
-include_once __DIR__ . '/../sdk/gigyaCMS.php';
+if (defined('COMPILER_INCLUDE_PATH')) {
+  include_once 'Gigya_Social_sdk_gigyaCMS.php';
+} else {
+  include_once __DIR__ . '/../sdk/gigyaCMS.php';
+}
+
 
 class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
 {
