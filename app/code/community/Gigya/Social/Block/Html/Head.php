@@ -21,6 +21,9 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
       $advanced_config = Mage::getStoreConfig('gigya_global/gigya_global_conf/advancedConfig');
       if($advanced_config !== '') {
         $advanced_config_arr = Mage::helper('Gigya_Social')->getGigGlobalAdvancedConfig($advanced_config);
+        if(!$advanced_config_arr) {
+          $advanced_config_arr = Mage::helper('Gigya_Social')->_confStringToArry($advanced_config);
+        }
         foreach ($advanced_config_arr as $key => $val) {
           $jsParams[$key] = $val;
         }
