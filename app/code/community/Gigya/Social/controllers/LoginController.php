@@ -152,8 +152,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                     $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res)); // js will create the redirect after login
                 } else {
                     // create a user in magento
-                    $firstName = $accountInfo['profile']['firstName'];
-                    $lastName = $accountInfo['profile']['lastName'];
+                    $firstName = $accountInfo['profile']['firstName'] ? $accountInfo['profile']['firstName'] : $accountInfo['profile']['nickname'];
+                    $lastName = $accountInfo['profile']['lastName'] ? $accountInfo['profile']['lastName'] : $accountInfo['profile']['nickname'] ;
                     $this->_createCustomer($email, $firstName, $lastName, $accountInfo);
                 }
             }
@@ -258,8 +258,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             if ($customer === FALSE) {
                 // create new customer
                 // first and last name should be set to required by Gigya. if they are still missing, create placeholder for them
-                $firstName = $post['user']['firstName'] ? $post['user']['firstName'] : $post['user'];
-                $lastName = $post['user']['lastName'] ? $post['user']['lastName'] : $post['user'];
+                $firstName = $post['user']['firstName'];
+                $lastName = $post['user']['lastName'];
                 $email = $post['user']['email'];
 
                 $this->_createCustomer($email, $firstName, $lastName, $post['user']);
