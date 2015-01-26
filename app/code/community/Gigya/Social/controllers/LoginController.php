@@ -252,8 +252,9 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             $customer = $this->_customerExists($post['user']['email']);
             if ($customer === FALSE) {
                 // create new customer
-                $firstName = $post['user']['firstName'];
-                $lastName = $post['user']['lastName'];
+                // first and last name should be set to required by Gigya. if they are still missing, create placeholder for them
+                $firstName = $post['user']['firstName'] ? $post['user']['firstName'] : $post['user'];
+                $lastName = $post['user']['lastName'] ? $post['user']['lastName'] : $post['user'];
                 $email = $post['user']['email'];
 
                 $this->_createCustomer($email, $firstName, $lastName, $post['user']);
