@@ -1,9 +1,11 @@
 <?php
 
-include_once __DIR__ . '/../sdk/GSSDK.php';
+
 if (defined('COMPILER_INCLUDE_PATH')) {
+  include_once 'Gigya_Social_sdk_GSSDK.php';
   include_once 'Gigya_Social_sdk_gigyaCMS.php';
 } else {
+  include_once __DIR__ . '/../sdk/GSSDK.php';
   include_once __DIR__ . '/../sdk/gigyaCMS.php';
 }
 

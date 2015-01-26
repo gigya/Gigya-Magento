@@ -1,5 +1,10 @@
 <?php
-include_once __DIR__ . '/../sdk/GSSDK.php';
+if (defined('COMPILER_INCLUDE_PATH')) {
+    include_once 'Gigya_Social_sdk_GSSDK.php';
+} else {
+    include_once __DIR__ . '/../sdk/GSSDK.php';
+}
+
 require_once('Mage/Customer/controllers/AccountController.php');
 
 /**

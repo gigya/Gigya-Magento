@@ -5,7 +5,12 @@
  * Accept review data by ajax call from: gigya.js - gigyaFunctions.postReview
  *
  */
-include_once __DIR__ . '/../sdk/GSSDK.php';
+if (defined('COMPILER_INCLUDE_PATH')) {
+  include_once 'Gigya_Social_sdk_GSSDK.php';
+} else {
+  include_once __DIR__ . '/../sdk/GSSDK.php';
+}
+
 require_once ('Mage/Review/controllers/ProductController.php');
 
 class Gigya_Social_ReviewsController  extends Mage_Review_ProductController
