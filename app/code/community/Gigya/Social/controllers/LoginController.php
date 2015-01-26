@@ -90,9 +90,9 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     /*
      * Handle Raas login process:
      * at any stage if an error occurs and login/registration fails, create js response message and skip to func end
-     * test UID sig. validation
+     * test UID sig validation
      * validate user authenticity
-     * try to get account info from gigya
+     * get account info from gigya
      * check if account exists in magento
      *  if not create account, create login and reload
      *  if yes create login and reload
@@ -406,8 +406,8 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
         $password = Mage::helper('Gigya_Social')->_getPassword();
         $_POST['password'] = $password;
-        $_POST['confirmation'] = $password; // since Magento 1.9.1.0 field is called passwordConfirmation. this is handled later on.
-        $_POST['passwordConfirmation'] = $password;
+        $_POST['confirmation'] = $password;
+        $_POST['passwordConfirmation'] = $password; // since Magento 1.9.1.0 field is called passwordConfirmation.
         if ($this->userMode == 'social') {
             $customer->setData('gigyaUser', $gigyaUser);
         } else if ($this->userMode == 'raas') {
@@ -428,7 +428,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     }
 
     /*
-     * dif with original magento action
+     * Copied magento action
      */
     public function createPostAction()
     {

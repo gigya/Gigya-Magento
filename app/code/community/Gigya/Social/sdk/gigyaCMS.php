@@ -41,7 +41,6 @@ class GigyaCMS {
 	 */
 	public function call( $method, $params, $trys = 0, $retrys = 0) {
 
-
 		// Initialize new request.
         if ($this->useUserKey) {
             $request   = new GSRequest( $this->api_key, $this->user_secret, $method, null, false, $this->user_key );
@@ -712,7 +711,7 @@ class GigyaCMS {
 	}
 
 	/*
-	 * contact gigya to add verified purchaser badge to comment
+	 * contact gigya to add verified purchaser badge to comment (Magento)
 	 *
 	 * @param string $categoryID
 	 * @param string $streamID
