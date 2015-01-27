@@ -226,7 +226,6 @@
       <gigya_global_conf>
         <enable>1</enable>
         <dataCenter>us1.gigya.com</dataCenter>
-        <version>3.1.0</version>
         <providers>*</providers>
         <laguages>en</laguages>
         <loginBehavior>loginExistingUser</loginBehavior>
