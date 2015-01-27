@@ -39,7 +39,7 @@
                         <version translate="label">
                             <label>Version number</label>
                             <frontend_type>label</frontend_type>
-                            <!--<frontend_model>Gigya_Social_Block_Adminhtml_Version</frontend_model>-->
+                            <frontend_model>Gigya_Social_Block_Adminhtml_Version</frontend_model>
                             <sort_order>9</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -107,7 +107,7 @@
                         <dataCenter translate="label">
                             <label>Data Center Region</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_datacenter</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Datacenter</source_model>
                             <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -127,7 +127,7 @@
                         <laguages translate="label">
                             <label>Interface language</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_languages</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Languages</source_model>
                             <sort_order>19</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -136,7 +136,7 @@
                         <loginBehavior translate="label">
                             <label>Login behavior</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_loginb</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Loginb</source_model>
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -207,7 +207,7 @@
                             <label>Gigya User Management</label>
                             <frontend_type>select</frontend_type>
                             <backend_model>Gigya_Social_Model_Config_Backend_UserMode</backend_model>
-                            <source_model>Gigya_Social_Model_config_source_loginModes</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_LoginModes</source_model>
                             <comment><![CDATA[<span style="display: none;" class="raas-comment">Selecting this option overrides Magento's user management system. This requires additional administration steps. Learn more <a href="http://developers.gigya.com/015_Partners/030_CMS_and_Ecommerce_Platforms/050_Magento">here</a></span>]]></comment>
                             <sort_order>9</sort_order>
                             <show_in_default>1</show_in_default>
@@ -227,7 +227,7 @@
                         <buttonsStyle translate="label">
                             <label>Button style</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_buttons</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Buttons</source_model>
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -540,7 +540,7 @@
                         <layout translate="label">
                             <label>Share Bar layout</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_layout</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Layout</source_model>
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -549,7 +549,7 @@
                         <showCounts translate="label">
                             <label>Show counts</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_counts</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Counts</source_model>
                             <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -558,7 +558,7 @@
                         <imageBehavior translate="label">
                             <label>Image</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_imageb</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Imageb</source_model>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -626,7 +626,7 @@
                         <showAlwaysShare translate="label">
                             <label>Show Always Share</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_allwaysShare</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_AllwaysShare</source_model>
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -664,7 +664,7 @@
                         <scope translate="label">
                             <label>Scope for publishing to Activity Feed</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_scope</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Scope</source_model>
                             <comment>
                                 <![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
                             <sort_order>14</sort_order>
@@ -743,7 +743,7 @@
                         <layout translate="label">
                             <label>Reactions Bar layout</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_layout</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Layout</source_model>
                             <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -752,7 +752,7 @@
                         <showCounts translate="label">
                             <label>Show counts</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_counts</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Counts</source_model>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -761,7 +761,7 @@
                         <countType translate="label">
                             <label>Count type</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_countType</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_CountType</source_model>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -781,7 +781,7 @@
                         <scope translate="label">
                             <label>Scope for publishing to Activity Feed</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_scope</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Scope</source_model>
                             <comment>
                                 <![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
                             <sort_order>17</sort_order>
@@ -792,7 +792,7 @@
                         <imageBehavior translate="label">
                             <label>Image</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_imageb</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Imageb</source_model>
                             <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -871,7 +871,7 @@
                         <scope translate="label">
                             <label>Scope for publishing to Activity Feed</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_scope</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Scope</source_model>
                             <comment>
                                 <![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
                             <sort_order>13</sort_order>
@@ -951,7 +951,7 @@
                         <privacy translate="label">
                             <label>Privacy</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_privacy</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Privacy</source_model>
                             <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1027,7 +1027,7 @@
                         <period translate="label">
                             <label>Leaderboard Time Period</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_leaderboard</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Leaderboard</source_model>
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
@@ -1113,7 +1113,7 @@
                         <scope translate="label">
                             <label>Scope for publishing to Activity Feed</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_scope</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Scope</source_model>
                             <comment>
                                 <![CDATA[When publishing feed items, by default the feed items are published to social networks only and will not appear on the site's Activity Feed plugin. To change this behavior, you must change the publish scope to "Both"]]></comment>
                             <sort_order>13</sort_order>
@@ -1175,7 +1175,7 @@
                         <layout translate="label,comment">
                             <label>Follow Bar layout</label>
                             <frontend_type>select</frontend_type>
-                            <source_model>Gigya_Social_Model_config_source_layout</source_model>
+                            <source_model>Gigya_Social_Model_Config_Source_Layout</source_model>
                             <sort_order>3</sort_order>
                             <comment>Sets the arrangement of buttons in the bar.</comment>
                             <show_in_default>1</show_in_default>
