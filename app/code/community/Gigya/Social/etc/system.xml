@@ -39,7 +39,7 @@
                         <version translate="label">
                             <label>Version number</label>
                             <frontend_type>label</frontend_type>
-                            <frontend_model>Gigya_Social_Block_Adminhtml_Version</frontend_model>
+                            <!--<frontend_model>Gigya_Social_Block_Adminhtml_Version</frontend_model>-->
                             <sort_order>9</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
