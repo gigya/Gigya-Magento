@@ -21,8 +21,8 @@
             </action>
         </reference>
         <reference name="before_body_end">
-            <block type="Gigya_Social_Block_Gamification_notifications" name="gigya.gm.notifications"/>
-            <block type="Gigya_Social_Block_share" name="gigya.share.action"/>
+            <block type="Gigya_Social_Block_Gamification_Notifications" name="gigya.gm.notifications"/>
+            <block type="Gigya_Social_Block_Share" name="gigya.share.action"/>
 
         </reference>
         <reference name="right">
@@ -67,7 +67,7 @@
             <block type="core/template" name="gigya.hp.login" before="-" template="gigya/login/social_login.phtml"/>
         </reference>
         <reference name="content">
-            <block type="Gigya_Social_Block_Gamification_plugins" after="-" name="left.gigya.gm.blocks"
+            <block type="Gigya_Social_Block_Gamification_Plugins" after="-" name="left.gigya.gm.blocks"
                    template="gigya/gamification.phtml">
                 <action method="setData">
                     <name>layout</name>
@@ -83,7 +83,7 @@
     </cms_index_index>
     <customer_account_logoutsuccess>
         <reference name="head">
-            <block type="Gigya_Social_Block_logout" name="gigya.logout.action"/>
+            <block type="Gigya_Social_Block_Logout" name="gigya.logout.action"/>
         </reference>
     </customer_account_logoutsuccess>
     <customer_account_login>
@@ -191,7 +191,7 @@
     </review_product_view>
     <review_product_list>
         <reference name="content">
-            <block type="Gigya_Social_Block_reviews" name="gigya.ratings" after="-"/>
+            <block type="Gigya_Social_Block_Reviews" name="gigya.ratings" after="-"/>
         </reference>
     </review_product_list>
 </layout>

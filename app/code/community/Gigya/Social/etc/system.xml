@@ -997,7 +997,7 @@
             <show_in_store>0</show_in_store>
             <groups>
                 <gigya_gamification_conf translate="label">
-                    <label>Gigya Gamification configuration</label>
+                    <label>Gigya Gamification Configuration</label>
                     <frontend_type>text</frontend_type>
                     <sort_order>102</sort_order>
                     <show_in_default>1</show_in_default>
