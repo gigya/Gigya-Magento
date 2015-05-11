@@ -93,10 +93,14 @@ gigyaFunctions.RaaS.profileEdit = function (data) {
         }
     });
 }
-
+/**
+ * call Gigya screensets with the selected parameters
+ * If container ID is set, Gigya will embed the screensets inside that div
+ * @param event
+ */
 gigyaFunctions.RaaS.loginScreens = function (event) {
     var params = gigyaMageSettings.RaaS;
-    if (!params.raas_login_div_id.length === 0) {
+    if (!(params.raas_login_div_id.length === 0)) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet": "' + params.WebScreen + '", "containerID": "' + params.raas_login_div_id + '" , "mobileScreenSet":"' + params.MobileScreen + '", "startScreen":"' + params.LoginScreen + '"}'));
     } else {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
@@ -151,7 +155,11 @@ gigyaFunctions.RaaS.accountEmbed = function () {
         gigya.accounts.showScreenSet(jsonParams);
     }
 }
-
+/**
+ * Add observers to open screen sets on Magento account links clicks.
+ * Or when embedding the screen sets in a chosen div ID
+ * @param params
+ */
 gigyaFunctions.RaaS.init = function (params) {
     gigyaFunctions.RaaS.isLoggedIn();
     if (params.override_links) {
@@ -168,7 +176,8 @@ gigyaFunctions.RaaS.init = function (params) {
             element.observe('click', gigyaFunctions.RaaS.resetPass);
         });
     } else {
-        if (!params.raas_login_div_id.length === 0) {
+        if (!(params.raas_login_div_id.length === 0)) {
+            // if override links is not selected, and an ID's has been entered,
             gigyaFunctions.RaaS.loginScreens();
         }
     }
