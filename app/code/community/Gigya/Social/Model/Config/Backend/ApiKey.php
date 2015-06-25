@@ -24,23 +24,25 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
 	  } else {
 		$secret = $default_config['secretkey'];
 	  }
-	  // userkey
-	  if($data['fieldset_data']['userKey'])  {
-		$userKey = $data['fieldset_data']['userKey'];
-	  } else {
-		$userKey = $default_config['userKey'];
-	  }
-	  // userSecret
-	  if($data['fieldset_data']['userSecret']) {
-		$userSecret = $data['fieldset_data']['userSecret'];
-	  } else {
-		$userSecret = $default_config['userSecret'];
-	  }
+
 	  $useUserKey = $data['fieldset_data']['useUserKey'] ? $data['fieldset_data']['useUserKey'] : $default_config['useUserKey'];
 
 	  $dataCenter = $this->_setDataCenter($data['fieldset_data'], $default_config['dataCenter']);
 
 	  if ($useUserKey) {
+        // userkey
+        if($data['fieldset_data']['userKey'])  {
+          $userKey = $data['fieldset_data']['userKey'];
+        } else {
+          $userKey = $default_config['userKey'];
+        }
+        // userSecret
+        if($data['fieldset_data']['userSecret']) {
+          $userSecret = $data['fieldset_data']['userSecret'];
+        } else {
+          $userSecret = $default_config['userSecret'];
+        }
+
 		  if(empty($useUserKey)){
 			  Mage::throwException(Mage::helper('adminhtml')->__("Gigya user key is required."));
 		  }
