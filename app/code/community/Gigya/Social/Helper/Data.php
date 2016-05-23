@@ -29,15 +29,27 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function __construct() {
         $this->apiKey = Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey');
-        $this->apiSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
+        $this->apiSecret = $this->fetchGigyaSecretKey("siteSecret");
         $this->apiDomain = Mage::getStoreConfig('gigya_global/gigya_global_conf/dataCenter');
         $this->userKey = Mage::getStoreConfig('gigya_global/gigya_global_conf/userKey');
-        $this->userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
+        $this->userSecret = $this->fetchGigyaSecretKey("userSecret");
         $use_user_key = (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/useUserKey');
         $debug = Mage::getStoreConfig('gigya_global/gigya_global_conf/debug_log');
         $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret, $this->userKey, $use_user_key, $debug);
         $this->userMod = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
     }
+
+    protected function fetchGigyaSecretKey($type)
+    {
+        $encryptor = Mage::getModel("core/Encryption");
+        if ("userSecret" == $type) {
+            $key = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
+        } else {
+            $key = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
+        }
+        return $encryptor->decrypt($key);
+    }
+
     public function _getPassword($length = 8)
     {
         $chars = self::CHARS_PASSWORD_LOWERS

@@ -229,6 +229,7 @@
                 <providers>*</providers>
                 <laguages>en</laguages>
                 <useUserKey>1</useUserKey>
+                <encryptKeys>1</encryptKeys>
                 <loginBehavior>loginExistingUser</loginBehavior>
                 <google_sa>0</google_sa>
                 <debug_log>0</debug_log>

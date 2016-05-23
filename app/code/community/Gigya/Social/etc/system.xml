@@ -31,7 +31,7 @@
                             <label>Enable</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>8</sort_order>
+                            <sort_order>7</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -40,7 +40,7 @@
                             <label>Version number</label>
                             <frontend_type>label</frontend_type>
                             <frontend_model>Gigya_Social_Block_Adminhtml_Version</frontend_model>
-                            <sort_order>9</sort_order>
+                            <sort_order>8</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -50,11 +50,20 @@
                             <frontend_type>text</frontend_type>
                             <backend_model>Gigya_Social_Model_Config_Backend_ApiKey</backend_model>
                             <comment><![CDATA[Specify the Gigya API key for this domain]]></comment>
-                            <sort_order>10</sort_order>
+                            <sort_order>9</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </apikey>
+                        <encryptKeys translate="label">
+                            <label>Encrypt application/site secret</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </encryptKeys>
                         <useUserKey translate="label">
                             <label>Use user key &amp; User secret key</label>
                             <frontend_type>select</frontend_type>
@@ -87,7 +96,9 @@
                         </userKey>
                         <userSecret translate="label">
                             <label>Gigya User Secret</label>
-                            <frontend_type>text</frontend_type>
+                            <frontend_type>obscure</frontend_type>
+                            <frontend_model>Gigya_Social_Block_Adminhtml_UserSecret</frontend_model>
+                            <backend_model>Gigya_Social_Model_Config_Backend_Secret</backend_model>
                             <comment><![CDATA[Specify your User Secret key. Both User Key & User Secret key are mandatory. Learn more in <a href="http://developers.gigya.com/010_Developer_Guide/83_Roles_and_Permissions#Obtaining_and_Using_the_User_Key">Obtaining and Using the User Key</a>"]]></comment>
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
