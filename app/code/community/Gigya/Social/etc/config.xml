@@ -118,7 +118,7 @@
             </Gigya_Social>
             <page>
                 <rewrite>
-                    <html_head>Gigya_Social_Block_Html_Head</html_head>
+<!--                    <html_head>Gigya_Social_Block_Html_Head</html_head>-->
                     <template_links>Gigya_Social_Block_Template_Links</template_links>
                 </rewrite>
             </page>

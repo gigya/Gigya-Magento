@@ -21,12 +21,12 @@ gigyaFunctions.login = function (response) {
                         break;
                     case 'noEmail':
                         gigyaFunctions.hideLogin(trans.responseJSON.id);
-                        gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline)
+                        gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline);
                         $(trans.responseJSON.id).style.height = '';
                         $(trans.responseJSON.id).update(trans.responseJSON.html);
                         break;
                     case 'emailExsists':
-                        gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline)
+                        gigyaFunctions.updateHeadline(trans.responseJSON.id, trans.responseJSON.headline);
                         gigyaFunctions.hideLogin(trans.responseJSON.id);
                         $(trans.responseJSON.id).update(trans.responseJSON.html);
                         $(trans.responseJSON.id).style.height = '';
@@ -38,7 +38,7 @@ gigyaFunctions.login = function (response) {
                         break;
                     case 'loginFailed':
                         gigya.socialize.logout();
-                    //    console.log(trans.responseJSON.message);
+                        //    console.log(trans.responseJSON.message);
                         break;
                 }
             }
@@ -115,7 +115,7 @@ gigyaFunctions.RaaS.registerScreens = function (event) {
 }
 
 gigyaFunctions.RaaS.profileScreens = function (event) {
-    if (gigyaFunctions.RaaS.loggedIn){
+    if (gigyaFunctions.RaaS.loggedIn) {
         var params = gigyaMageSettings.RaaS;
         var jsonParams = {};
         if (!params.raas_profile_div_id === 0) {
@@ -145,7 +145,7 @@ gigyaFunctions.RaaS.resetPass = function () {
 }
 
 gigyaFunctions.RaaS.accountEmbed = function () {
-    if ( typeof  $$('body.customer-account-edit')[0] != 'undefined') {
+    if (typeof  $$('body.customer-account-edit')[0] != 'undefined') {
         var params = gigyaMageSettings.RaaS;
         var jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '", "containerID": "form-validate"}');
         gigya.accounts.showScreenSet(jsonParams);
@@ -175,19 +175,21 @@ gigyaFunctions.RaaS.init = function (params) {
     gigyaFunctions.RaaS.accountEmbed();
 }
 
-gigyaFunctions.RaaS.isLoggedIn = function() {
-    gigya.accounts.getAccountInfo({"callback": function (response) {
-        if(response.errorCode !== 0) {
-            gigyaFunctions.RaaS.loggedIn = false;
-        } else {
-            gigyaFunctions.RaaS.loggedIn = true;
-        }
+gigyaFunctions.RaaS.isLoggedIn = function () {
+    gigya.accounts.getAccountInfo({
+        "callback": function (response) {
+            if (response.errorCode !== 0) {
+                gigyaFunctions.RaaS.loggedIn = false;
+            } else {
+                gigyaFunctions.RaaS.loggedIn = true;
+            }
 
-    }});
+        }
+    });
 }
 
 gigyaFunctions.RaaS.checkLoggedIn = function (response) {
-    if(response.errorCode !== 0) {
+    if (response.errorCode !== 0) {
         return false;
     }
     return true
@@ -229,7 +231,6 @@ gigyaFunctions.updateHeadline = function (id, text) {
     }
 
 };
-
 
 gigyaFunctions.linkAccounts = function () {
     var email = $$('#gigya-mini-login')[0].value,
@@ -352,7 +353,6 @@ gigyaFunctions.shareAction = function (settings) {
     gigya.socialize.showShareUI(settings);
 };
 
-
 gigyaFunctions.reactions = function (settings) {
     settings.userAction = gigyaFunctions.createUserAction(settings);
     delete settings.ua;
@@ -385,7 +385,8 @@ gigyaFunctions.gm = function (settings) {
                 case 'Leaderboard':
                     gigya.gm.showLeaderboardUI(parms);
                     break;
-            }6536931
+            }
+            6536931
         })
 
     }
@@ -439,15 +440,14 @@ gigyaFunctions.postReview = function (eventObj) {
             parameters: {json: JSON.stringify(toPost)},
             onSuccess: function (trans) {
                 //TODO: add success/error handeling
-                if( trans.status == 200 ) {
+                if (trans.status == 200) {
                     // success
                 } else {
-                    console.log('review failed to submit.' );
+                    console.log('review failed to submit.');
                 }
             }
         }
     );
-
 
 };
 
@@ -481,7 +481,7 @@ gigyaFunctions.RnR = function (settings) {
         privacy: settings.privacy,
         onCommentSubmitted: gigyaFunctions.postReview,
         userAction: ua,
-        version : settings.version
+        version: settings.version
     };
     gigya.comments.showRatingUI(settings);
     gigya.comments.showCommentsUI(reviews);
@@ -492,7 +492,7 @@ gigyaFunctions.showMoreInfoForm = function (html) {
 };
 
 gigyaFunctions.showModalWindow = function (title, html) {
-    gigyaModal = new Window({title: title, height: 300, width: 300, minimizable: false, maximizable: false });
+    gigyaModal = new Window({title: title, height: 300, width: 300, minimizable: false, maximizable: false});
     gigyaModal.setHTMLContent(html);
     gigyaModal.setZIndex(1000);
     gigyaModal.showCenter(true);
@@ -529,10 +529,10 @@ function gigyaRegister() {
                 onLogout: gigyaFunctions.logout
             });
         } else if (gigyaMageSettings.userMode === 'social') {
-        gigya.socialize.addEventHandlers({
-            onLogin: gigyaFunctions.login,
-            onLogout: gigyaFunctions.logout
-        });
+            gigya.socialize.addEventHandlers({
+                onLogin: gigyaFunctions.login,
+                onLogout: gigyaFunctions.logout
+            });
         }
     }
 }
@@ -540,10 +540,10 @@ function gigyaRegister() {
 gigyaRegister();
 
 /*
-   * On document load, loop through gigyaMageSettings object, and fire gigya functions accordingly
-   *
+ * On document load, loop through gigyaMageSettings object, and fire gigya functions accordingly
+ *
  */
-document.observe("dom:loaded", function () {
+function onGigyaServiceReady(serviceName) {
     if (typeof gigyaMageSettings !== 'undefined') {
         $H(gigyaMageSettings).each(function (plugin) {
             delete plugin.value.enable;
@@ -594,4 +594,4 @@ document.observe("dom:loaded", function () {
             }
         });
     }
-});
+}

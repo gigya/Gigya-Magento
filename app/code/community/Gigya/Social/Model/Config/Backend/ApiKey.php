@@ -25,25 +25,10 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
             $helper->utils->setApiKey($value); // set the api key to the submitted key
             // test if other fields were submitted, or use default values
             // secret
-/*            if ($data['fieldset_data']['secretkey']) {
-                $secret = $data['fieldset_data']['secretkey'];
-            } else {
-                $secret = $this->beforeChange['secretkey'];
-            }*/
             $secret = $this->getSecret("secretkey");
             // userkey
-/*            if ($data['fieldset_data']['userKey']) {
-                $userKey = $data['fieldset_data']['userKey'];
-            } else {
-                $userKey = $this->beforeChange['userKey'];
-            }*/
             $userKey = empty($this->getFieldsetDataValue("userKey")) ? $this->beforeChange['userKey'] : $this->getFieldsetDataValue("userKey");
             // userSecret
-/*            if ($data['fieldset_data']['userSecret']) {
-                $userSecret = $data['fieldset_data']['userSecret'];
-            } else {
-                $userSecret = $this->beforeChange['userSecret'];
-            }*/
             $userSecret = $this->getSecret("userSecret");
 
             $dataCenter = $this->_setDataCenter($data['fieldset_data'], $this->beforeChange['dataCenter']);

@@ -2,7 +2,7 @@
 /**
  * Class Gigya_Social_ReviewsController
  * @author  Yaniv Aran-Shamir
- * Accept review data by ajax call from: gigya.js - gigyaFunctions.postReview
+ * Accept review data by ajax call from: gigyaMagento.js - gigyaFunctions.postReview
  *
  */
 if (defined('COMPILER_INCLUDE_PATH')) {

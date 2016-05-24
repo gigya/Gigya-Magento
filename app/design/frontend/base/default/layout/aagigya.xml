@@ -3,7 +3,7 @@
     <default>
         <reference name="head">
             <action method="addJs">
-                <file>gigya/gigya.js</file>
+                <file>gigya/gigyaMagento.js</file>
             </action>
             <action method="addCss">
                 <stylesheet>css/gigya.css</stylesheet>
@@ -19,6 +19,7 @@
                 <type>js_css</type>
                 <name>prototype/windows/themes/lighting.css</name>
             </action>
+            <block type="Gigya_Social_Block_MainScript" name="gigya.main" />
         </reference>
         <reference name="before_body_end">
             <block type="Gigya_Social_Block_Gamification_Notifications" name="gigya.gm.notifications"/>
