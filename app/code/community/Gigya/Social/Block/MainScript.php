@@ -28,6 +28,10 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
 
             $this->gigyaApiKey = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey')); // get api key from store
             $this->lang        = Mage::getStoreConfig('gigya_global/gigya_global_conf/laguages');
+            if ("auto" == $this->lang) {
+                $locale = Mage::app()->getLocale()->getLocaleCode();
+                $this->lang = $this->magentoLocaleToGigyaLang($locale);
+            }
             $this->globalConf  = array( // set config basic params (enabledProviders, lang, sessionExpiration, connectWithoutLoginBehavior)
                 'enabledProviders'            => (Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') !== '') ? Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') : '*',
                 'lang'                        => $this->lang,
@@ -71,6 +75,21 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
             $this->setContents($js);
         }
         return  parent::_toHtml();
+    }
+
+    protected function magentoLocaleToGigyaLang($locale, $default = "en")
+    {
+        $gigyaLangs = array();
+        foreach (Gigya_Social_Helper_Data::GIGYA_LANGUAGES as $l) {
+            $gigyaLangs[$l] = $l;
+        }
+        $lang = null;
+        $lang = $gigyaLangs[$locale];
+        if (null == $lang) {
+            $lang = $gigyaLangs[substr($locale, 0, 2)];
+        }
+        return empty($lang) ? $default : $lang;
+
     }
 
 }

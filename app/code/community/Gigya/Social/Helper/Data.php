@@ -24,6 +24,13 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     const CHARS_PASSWORD_UPPERS = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
     const CHARS_PASSWORD_DIGITS = '23456789';
     const CHARS_PASSWORD_SPECIALS = '!$*-.=?@_';
+    const GIGYA_LANGUAGES = array(
+        'en', 'ar', 'br', 'ca', 'zh-cn', 'zh-hk', 'zh-tw', 'hr', 'cs', 'da', 'nl', 'nl-inf', 'fi', 'fr', 'fr-inf', 'de',
+        'de-inf', 'el', 'he', 'hu', 'id', 'it', 'ja', 'ko', 'ms', 'no', 'fa', 'pl', 'pt', 'pt-br', 'ro', 'ru', 'sr',
+        'sk', 'sl', 'es', 'es-inf', 'es-mx', 'sv', 'tl', 'th', 'tr', 'uk', 'zh-hk', 'zh-tw', 'hr', 'cs', 'da', 'nl',
+        'nl-inf', 'fi', 'fr', 'fr-inf', 'de', 'de-inf', 'el', 'he', 'hu', 'id', 'it', 'ja', 'ko', 'ms', 'no', 'fa',
+        'pl', 'pt', 'pt-br', 'ro', 'ru', 'sr', 'sk', 'sl', 'es', 'es-inf', 'es-mx', 'sv', 'tl', 'th', 'tr', 'uk', 'vi'
+    );
 
 
 

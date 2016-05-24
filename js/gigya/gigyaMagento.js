@@ -69,7 +69,7 @@ gigyaFunctions.RaaS.login = function (response) {
             }
         }
     });
-}
+};
 
 gigyaFunctions.RaaS.profileEdit = function (data) {
     new Ajax.Request(baseUrl + 'gigyaAccount/account/editPost', {
@@ -92,7 +92,7 @@ gigyaFunctions.RaaS.profileEdit = function (data) {
             }
         }
     });
-}
+};
 
 gigyaFunctions.RaaS.loginScreens = function (event) {
     var params = gigyaMageSettings.RaaS;
@@ -102,7 +102,7 @@ gigyaFunctions.RaaS.loginScreens = function (event) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
         Event.stop(event);
     }
-}
+};
 
 gigyaFunctions.RaaS.registerScreens = function (event) {
     var params = gigyaMageSettings.RaaS;
@@ -112,7 +112,7 @@ gigyaFunctions.RaaS.registerScreens = function (event) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '","startScreen": "' + params.RegisterScreen + '"}'));
         Event.stop(event);
     }
-}
+};
 
 gigyaFunctions.RaaS.profileScreens = function (event) {
     if (gigyaFunctions.RaaS.loggedIn) {
@@ -133,7 +133,7 @@ gigyaFunctions.RaaS.profileScreens = function (event) {
         gigyaFunctions.RaaS.loginScreens();
 
     }
-}
+};
 
 gigyaFunctions.RaaS.resetPass = function () {
     var params = gigyaMageSettings.RaaS;
@@ -142,7 +142,7 @@ gigyaFunctions.RaaS.resetPass = function () {
     gigya.accounts.showScreenSet(jsonParams);
     Event.stop(event);
 
-}
+};
 
 gigyaFunctions.RaaS.accountEmbed = function () {
     if (typeof  $$('body.customer-account-edit')[0] != 'undefined') {
@@ -150,7 +150,7 @@ gigyaFunctions.RaaS.accountEmbed = function () {
         var jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '", "containerID": "form-validate"}');
         gigya.accounts.showScreenSet(jsonParams);
     }
-}
+};
 
 gigyaFunctions.RaaS.init = function (params) {
     gigyaFunctions.RaaS.isLoggedIn();
@@ -173,27 +173,21 @@ gigyaFunctions.RaaS.init = function (params) {
         }
     }
     gigyaFunctions.RaaS.accountEmbed();
-}
+};
 
 gigyaFunctions.RaaS.isLoggedIn = function () {
     gigya.accounts.getAccountInfo({
         "callback": function (response) {
-            if (response.errorCode !== 0) {
-                gigyaFunctions.RaaS.loggedIn = false;
-            } else {
-                gigyaFunctions.RaaS.loggedIn = true;
-            }
+            gigyaFunctions.RaaS.loggedIn = response.errorCode === 0;
 
         }
     });
-}
+};
 
 gigyaFunctions.RaaS.checkLoggedIn = function (response) {
-    if (response.errorCode !== 0) {
-        return false;
-    }
-    return true
-}
+    return response.errorCode === 0;
+
+};
 
 gigyaFunctions.logout = function (evData) {
     console.log('logout!');
@@ -386,7 +380,6 @@ gigyaFunctions.gm = function (settings) {
                     gigya.gm.showLeaderboardUI(parms);
                     break;
             }
-            6536931
         })
 
     }
