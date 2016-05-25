@@ -106,6 +106,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
      */
     protected function _raasLoginRegister($session, $post)
     {
+        $valid = false;
         if (isset($post['UIDSignature'])) {
             $valid = $this->_validateUserSig($post);
         } else {
@@ -165,6 +166,12 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                     $this->_createCustomer($email, $firstName, $lastName, $accountInfo);
                 }
             }
+        } else {
+            $res = array(
+                'result'   => 'error',
+                "errorMessage" => "User not valid"
+            );
+            $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res)); // js will create the redirect after login
         }
     }
 
@@ -202,14 +209,16 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     protected function _validateUserSig($post)
     {
         $valid  = false;
-        $secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
+        $secret = $this->helper->fetchGigyaSecretKey("secretkey");
+        //$secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
         if ( ! empty($secret)) {
             $valid = SigUtils::validateUserSignature($post['UID'], $post['signatureTimestamp'], $secret,
                 $post['UIDSignature']);
         } else {
-            $userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
+            $userSecret = $this->helper->fetchGigyaSecretKey("userSecret");
+            //$userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
             $newVals    = Mage::helper('Gigya_Social')->utils->exchangeUidSignature($post['UID'],
-                $post['UIDSignature'], $post['signatureTimestamp']);
+                $post['UIDSignature'], $post['signatureTimestamp'], $this->userMode);
             if (is_numeric($newVals)) {
                 return false;
             }
@@ -220,7 +229,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
             return $valid;
         } else {
             Mage::log('User signature not valid ' . __FILE__ . ' ' . __LINE__);
-
             return false;
         }
     }

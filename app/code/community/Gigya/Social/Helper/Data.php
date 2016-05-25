@@ -46,7 +46,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         $this->userMod = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
     }
 
-    protected function fetchGigyaSecretKey($type)
+    public function fetchGigyaSecretKey($type)
     {
         $encryptor = Mage::getModel("core/Encryption");
         if ("userSecret" == $type) {

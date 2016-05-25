@@ -14,6 +14,8 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
     protected $globalConf;
     protected $userMode;
     protected $raasConf = null;
+    protected $magentoLoggedIn;
+    protected $baseUrl;
 
     /**
      * Preparing global layout
@@ -51,6 +53,13 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
                 $this->raasConf = Mage::helper('Gigya_Social')->getPluginConfig('gigya_login/gigya_raas_conf');
 
             }
+            $this->magentoLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn() ? "true" : "false";
+            $isSecure = isset($_SERVER['HTTPS']) ? $_SERVER['HTTPS'] : NULL;
+            if ($isSecure) {
+                $this->baseUrl = Mage::getUrl('', array('_secure'=>true));
+            } else {
+                $this->baseUrl =  Mage::getBaseUrl();
+            }
         }
 
         return $this;
@@ -68,7 +77,9 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
                 $this->gigyaApiKey . "&lang=" . $this->lang . "';
             document.getElementsByTagName('head')[0].appendChild(gig);
             var gigyaMageSettings = gigyaMageSettings || {};
-            gigyaMageSettings.userMode = '" . $this->userMode . "';";
+            gigyaMageSettings.userMode = '" . $this->userMode . "';
+            gigyaMageSettings.magentoStatus = '" . $this->magentoLoggedIn . "';
+            var baseUrl = '" . $this->baseUrl . "';";
             if (null != $this->raasConf) {
                 $js = $js . "gigyaMageSettings.RaaS = " . $this->raasConf;
             }

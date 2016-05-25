@@ -454,15 +454,16 @@ class GigyaCMS
         $this->call("accounts.setAccountInfo", $params);
     }
 
-    public function exchangeUidSignature($uid, $uidSignature, $signatureTimestamp)
+    public function exchangeUidSignature($uid, $uidSignature, $signatureTimestamp, $mode)
     {
         $params = array(
             "UID"                => $uid,
             "UIDSignature"       => $uidSignature,
             "signatureTimestamp" => $signatureTimestamp,
-            "userKey"            => $this->user_key
         );
-
+        if ("raas" == $mode) {
+            return $this->call("accounts.exchangeUIDSignature", $params);
+        }
         return $this->call("socialize.exchangeUIDSignature", $params);
     }
 

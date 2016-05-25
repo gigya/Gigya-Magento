@@ -64,10 +64,13 @@ gigyaFunctions.RaaS.login = function (response) {
                         var html = trans.responseJSON.message;
                         gigyaFunctions.showModalWindow('Error', html);
                     }
-                    gigya.accounts.logout();
+                    //gigya.accounts.logout();
                 }
             }
         }
+/*        onFailure: function () {
+            console.log("Raas AJAX error");
+        }*/
     });
 };
 
@@ -87,7 +90,7 @@ gigyaFunctions.RaaS.profileEdit = function (data) {
                         var html = trans.responseJSON.message;
                         gigyaFunctions.showModalWindow('Error', html);
                     }
-                    gigya.accounts.logout();
+                    //gigya.accounts.logout();
                 }
             }
         }
@@ -490,7 +493,7 @@ gigyaFunctions.showModalWindow = function (title, html) {
     gigyaModal.setZIndex(1000);
     gigyaModal.showCenter(true);
 
-}
+};
 
 gigyaFunctions.modalObserver = {
     onShow: function (eventName, win) {
@@ -507,7 +510,7 @@ gigyaFunctions.getUrlParam = function (param) {
         return urlArray[idx + 1];
     }
     return false;
-}
+};
 
 /*
  * Register events
@@ -530,13 +533,13 @@ function gigyaRegister() {
     }
 }
 
-gigyaRegister();
 
 /*
  * On document load, loop through gigyaMageSettings object, and fire gigya functions accordingly
  *
  */
 function onGigyaServiceReady(serviceName) {
+    gigyaRegister();
     if (typeof gigyaMageSettings !== 'undefined') {
         $H(gigyaMageSettings).each(function (plugin) {
             delete plugin.value.enable;
