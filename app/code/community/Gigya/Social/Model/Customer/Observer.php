@@ -96,5 +96,19 @@ class Gigya_Social_Model_Customer_Observer
             $this->helper->utils->call('accounts.logout', $params);
         }
     }
+
+    /*
+     * @var Varien_Event_Observer
+     */
+    public function syncToGigya($observer)
+    {
+        if ("raas" == $this->userMod) {
+            $customer = $observer->getEvent()->getCustomer();
+            $attributes = $customer->getData();
+            $updater = new Gigya_Social_Helper_FieldMapping_GigyaUpdater($attributes);
+            $updater->updateGigya();
+
+        }
+    }
 }
 

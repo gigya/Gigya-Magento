@@ -46,6 +46,12 @@ gigyaFunctions.login = function (response) {
     });
 };
 
+gigyaFunctions.sessionSync = function () {
+  if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn ) {
+      gigyaFunctions.logout({"source": "sync"});
+  }
+};
+
 gigyaFunctions.RaaS = {};
 
 gigyaFunctions.RaaS.login = function (response) {
@@ -193,8 +199,7 @@ gigyaFunctions.RaaS.checkLoggedIn = function (response) {
 };
 
 gigyaFunctions.logout = function (evData) {
-    console.log('logout!');
-    if (typeof evData.source !== 'undefined' && evData.source == "showCommentsUI") {
+    if (typeof evData.source !== 'undefined' && (evData.source == "showCommentsUI" || evData.source == "sync")) {
         new Ajax.Request(baseUrl + 'gigyalogin/login/logout', {
             method: 'get',
             onSuccess: function (res) {

@@ -1,0 +1,16 @@
+[
+  {
+    "magentoName": "gender",
+    "magentoType": "int",
+    "gigyaName": "profile.gender",
+    "gigyaType": "string",
+    "transFunc": "genderConvert",
+    "direction": "g2cms"
+  },
+  {
+    "magentoName": "custom1",
+    "magentoType": "string",
+    "gigyaName": "data.test",
+    "gigyaType": "string"
+  }
+]

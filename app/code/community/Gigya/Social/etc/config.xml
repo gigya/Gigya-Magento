@@ -168,6 +168,14 @@
                     </gigya_customer_delete>
                 </observers>
             </customer_delete_after>
+            <adminhtml_customer_save_after>
+                <observers>
+                    <update_gigya>
+                        <class>Gigya_Social_Model_Customer_Observer</class>
+                        <method>syncToGigya</method>
+                    </update_gigya>
+                </observers>
+            </adminhtml_customer_save_after>
         </events>
         <acl>
             <resources>
