@@ -105,9 +105,9 @@ class Gigya_Social_Model_Customer_Observer
         if ("raas" == $this->userMod) {
             $customer = $observer->getEvent()->getCustomer();
             $attributes = $customer->getData();
-            $updater = new Gigya_Social_Helper_FieldMapping_GigyaUpdater($attributes);
+            $uid = $attributes['gigya_uid'];
+            $updater = new Gigya_Social_Helper_FieldMapping_GigyaUpdater($attributes, $uid);
             $updater->updateGigya();
-
         }
     }
 }

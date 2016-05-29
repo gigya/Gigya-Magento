@@ -5,7 +5,7 @@
     "gigyaName": "profile.gender",
     "gigyaType": "string",
     "transFunc": "genderConvert",
-    "direction": "g2cms"
+    "direction": "both"
   },
   {
     "magentoName": "custom1",

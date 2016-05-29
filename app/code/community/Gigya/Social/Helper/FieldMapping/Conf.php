@@ -26,16 +26,17 @@ class Gigya_Social_Helper_FieldMapping_Conf
             $mageKey = $confItem['magentoName'];
             $gigyaKey = $confItem['gigyaName'];
             $direction = $confItem['direction'];
+            $conf = new Gigya_Social_Helper_FieldMapping_ConfItem($confItem);
             switch ($direction) {
                 case "g2cms" :
-                    $gigyaKeyedArray[$gigyaKey][] = new Gigya_Social_Helper_FieldMapping_ConfItem($confItem);
+                    $gigyaKeyedArray[$gigyaKey][] = $conf;
                     break;
                 case "cms2g":
-                    $mageKeyedArray[$mageKey][] = new Gigya_Social_Helper_FieldMapping_ConfItem($confItem);
+                    $mageKeyedArray[$mageKey][] = $conf;
                     break;
                 default:
-                    $gigyaKeyedArray[$gigyaKey][] = new Gigya_Social_Helper_FieldMapping_ConfItem($confItem);
-                    $mageKeyedArray[$mageKey][] = new Gigya_Social_Helper_FieldMapping_ConfItem($confItem);
+                    $gigyaKeyedArray[$gigyaKey][] = $conf;
+                    $mageKeyedArray[$mageKey][] = $conf;
                     break;
             }
         }

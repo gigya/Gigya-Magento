@@ -11,14 +11,15 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
 
     private $magMappings;
     private $cmsArray;
-    private $transformer;
+    private $gigyaUid;
 
     /**
      * Gigya_Social_Helper_FieldMapping_GigyaUpdater constructor.
      */
-    public function __construct($cmsValuesArray)
+    public function __construct($cmsValuesArray, $gigyaUid)
     {
         $this->cmsArray = $cmsValuesArray;
+        $this->gigyaUid = $gigyaUid;
 
     }
 
@@ -26,7 +27,7 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
     {
         $this->retrieveFieldMappings();
         $gigyaArray = $this->createGigyaArray();
-
+        $this->callSetAccountInfo($gigyaArray);
     }
 
     protected function retrieveFieldMappings()
@@ -55,10 +56,18 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
                 if (null != $transFunc) {
                     $val = $this->transformValue($val,$transFunc, $conf);
                 }
-                $this->assignArrayByPath($gigyaArray, $conf->getGigyaName(), $val);
+                if (null != $val) {
+                    $this->assignArrayByPath($gigyaArray, $conf->getGigyaName(), $val);
+                }
             }
         }
         return $gigyaArray;
+    }
+
+    protected function callSetAccountInfo($gigyaArray)
+    {
+        $helper = Mage::helper('Gigya_Social');
+        $helper->updateGigyaUser($gigyaArray, $this->gigyaUid);
     }
 
     /**
@@ -71,8 +80,9 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
     private function transformValue($val, $transFunc, $conf)
     {
         if (!empty($transFunc)) {
-            if (method_exists($this->transformer, $transFunc)) {
-                $val = $this->transformer->$transFunc("cms2g", $val, null, $conf);
+            $callable = array('Gigya_Social_Helper_FieldMapping_Transformers', $transFunc);
+            if (is_callable($callable)) {
+                $val = call_user_func($callable, "cms2g", $val, null, $conf);
             }
         }
         return $val;

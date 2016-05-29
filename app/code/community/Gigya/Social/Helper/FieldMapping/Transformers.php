@@ -6,8 +6,10 @@
  * Date: 5/26/16
  * Time: 12:00 PM
  */
-class Gigya_Social_Helper_Transformers
+class Gigya_Social_Helper_FieldMapping_Transformers
 {
+
+
 
     public function genderConvert($direction, $cmsVal, $gigyaVal, $conf = array())
     {

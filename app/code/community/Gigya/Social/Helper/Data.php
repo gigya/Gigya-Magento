@@ -212,6 +212,27 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         return Mage::helper('core')->jsonEncode($config);
     }
 
+    public function updateGigyaUser($gigyaAccountArray, $uid)
+    {
+        $profile = isset($gigyaAccountArray['profile']) ? json_encode($gigyaAccountArray['profile']) : null;
+        $data = isset($gigyaAccountArray['data']) ? json_encode($gigyaAccountArray['data']) : null;
+        $params = array();
+        $params["UID"] = $uid;
+        if (!empty($profile)) {
+            $params["profile"] = $profile;
+        }
+        if (!empty($data)) {
+            $params["data"] = $data;
+        }
+        $res = $this->call("accounts.setAccountInfo", $params);
+        if (is_numeric($res)) {
+            Mage::log("Error updating gigya user with uid: " . $uid);
+        }
+
+    }
+
+
+
     /*
      * Check advanced config format
      * @param string $advancedConfig
