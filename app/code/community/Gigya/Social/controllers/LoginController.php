@@ -194,55 +194,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         }
     }
 
-    /*
-    * Validate user authenticity
-    * @param array $post
-    * @return bool $valid
-    */
-    protected function _validateUserSig($post)
-    {
-        $valid  = false;
-        $secret = $this->helper->fetchGigyaSecretKey("secretkey");
-        //$secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
-        if ( ! empty($secret)) {
-            $valid = SigUtils::validateUserSignature($post['UID'], $post['signatureTimestamp'], $secret,
-                $post['UIDSignature']);
-        } else {
-            $userSecret = $this->helper->fetchGigyaSecretKey("userSecret");
-            //$userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
-            $newVals    = Mage::helper('Gigya_Social')->utils->exchangeUidSignature($post['UID'],
-                $post['UIDSignature'], $post['signatureTimestamp'], $this->userMode);
-            if (is_numeric($newVals)) {
-                return false;
-            }
-            $valid = SigUtils::validateUserSignature($newVals['UID'], $newVals['signatureTimestamp'], $userSecret,
-                $newVals['UIDSignature']);
-        }
-        if ($valid) {
-            return $valid;
-        } else {
-            Mage::log('User signature not valid ' . __FILE__ . ' ' . __LINE__);
-            return false;
-        }
-    }
-
-    /*
-     * Disabled.
-     * Used in older versions before link-accounts was published.
-     */
-    private function _disableGigyaSeconderyAccount($uid, $account)
-    {
-        Mage::helper('Gigya_Social')->utils->disableAccountByGUID($uid);
-        $providers = Mage::helper('Gigya_Social')->utils->getProviders($account);
-        $msg
-                   = sprintf($this->__('We found your email in our system.<br>Please login to your existing account using your <strong>%1$s</strong> identity.'),
-            $providers['primary'], $providers['secondary']);
-        $res       = array(
-            'result'  => 'message',
-            'message' => $msg
-        );
-        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($res));
-    }
 
     protected function _socialLoginRegister($session, $post)
     {
