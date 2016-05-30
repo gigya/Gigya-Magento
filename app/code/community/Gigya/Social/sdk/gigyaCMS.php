@@ -85,7 +85,7 @@ class GigyaCMS
         $err_code = $response->getErrorCode();
         if ($err_code != 0) {
             Mage::log("Error sending " . $method . " to Gigya. error code was " . $err_code . " error message was "
-                . $response->getErrorMessage() . " Gigya callId was " . $response->getString("callId"));
+                . $response->getErrorMessage() . " Gigya callId was " . $response->getString("callId"), Zend_Log::ERR);
             if ($retrys < $trys) {
                 $this->call($method, $params, 1);
             }

@@ -30,6 +30,9 @@ class Gigya_Social_Model_Config_Backend_Secret extends Mage_Core_Model_Config_Da
                 $mask = $mask . $last2;
                 Mage::getConfig()->saveConfig("gigya_global/" . $filedKey . "_masked", $mask);
                 $this->setValue($encVal);
+                $keyName = $filedKey == "secretkey" ? "Gigya site secret" : "Gigya application secret";
+                $adminUser = Mage::getSingleton('admin/session')->getUser()->getEmail();
+                Mage::log($keyName . " was updated by " . $adminUser, Zend_Log::INFO);
             }
         }
     }

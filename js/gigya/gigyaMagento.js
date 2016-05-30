@@ -81,22 +81,14 @@ gigyaFunctions.RaaS.login = function (response) {
 };
 
 gigyaFunctions.RaaS.profileEdit = function (data) {
+    var gigyaData = {"UID": data.response.UID, "UIDSignature": data.response.UIDSignature, "signatureTimestamp": data.response.signatureTimestamp};
     new Ajax.Request(baseUrl + 'gigyaAccount/account/editPost', {
-        parameters: {json: JSON.stringify(data)},
+        parameters: {json: JSON.stringify(gigyaData)},
         onSuccess: function (trans) {
             if (typeof trans.responseJSON.result !== 'undefined') {
-                if (trans.responseJSON.result == 'newUser' || trans.responseJSON.result == 'login') {
-                    if (typeof trans.responseJSON.url != 'undefined') {
-                        window.location.replace(trans.responseJSON.url);
-                    } else {
-                        window.location.reload();
-                    }
-                } else {
-                    if (trans.responseJSON.result == 'message') {
-                        var html = trans.responseJSON.message;
-                        gigyaFunctions.showModalWindow('Error', html);
-                    }
-                    //gigya.accounts.logout();
+                if (trans.responseJSON.result == 'message') {
+                    var html = trans.responseJSON.message;
+                    gigyaFunctions.showModalWindow('Error', html);
                 }
             }
         }

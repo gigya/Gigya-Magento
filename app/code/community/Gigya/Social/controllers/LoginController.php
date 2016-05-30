@@ -108,7 +108,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     {
         $valid = false;
         if (isset($post['UIDSignature'])) {
-            $valid = $this->_validateUserSig($post);
+            $valid = Mage::helper('Gigya_Social')->validateGigyaUid($post['UID'], $post['UIDSignature'], $post['signatureTimestamp']);
         } else {
             Mage::log('Gigya UIDSignature missing ' . __FILE__ . ' ' . __LINE__);
         }
@@ -247,8 +247,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
     protected function _socialLoginRegister($session, $post)
     {
         // validate user signature authenticity
-        $valid = $this->_validateUserSig($post);
-
+        $valid = Mage::helper('Gigya_Social')->validateGigyaUid($post['UID'], $post['UIDSignature'], $post['signatureTimestamp']);
         if ($valid == true) {
             // check if user exists in magento
             // social is using 'UID' as common id with magento (while raas is using email)

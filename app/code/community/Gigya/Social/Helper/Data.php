@@ -69,6 +69,32 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         return $this->debug;
     }
     
+    public function validateGigyaUid($uid, $sig, $timestamp)
+    {
+        $valid  = false;
+        $secret = $this->fetchGigyaSecretKey("secretkey");
+        //$secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
+        if ( ! empty($secret)) {
+            $valid = SigUtils::validateUserSignature($uid, $timestamp, $secret, $sig);
+        } else {
+            $userSecret = $this->fetchGigyaSecretKey("userSecret");
+            //$userSecret = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
+            $newVals    = $this->utils->exchangeUidSignature($uid, $sig, $timestamp, $this->userMod);
+            if (is_numeric($newVals)) {
+                return false;
+            }
+            $valid = SigUtils::validateUserSignature($newVals['UID'], $newVals['signatureTimestamp'], $userSecret,
+                $newVals['UIDSignature']);
+        }
+        if ($valid) {
+            return $valid;
+        } else {
+            Mage::log('User signature not valid ' . __FILE__ . ' ' . __LINE__);
+            return false;
+        }
+        
+    }
+    
     public function _getPassword($length = 8)
     {
         $chars = self::CHARS_PASSWORD_LOWERS
