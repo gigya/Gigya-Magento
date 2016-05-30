@@ -115,17 +115,6 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
         ////
         if ($valid) {
             $accountInfo = $this->_raasAccountInfo($post['UID']); // account info from gigya
-            //  deprecated - select social primary account, cancelled after link accounts feature released
-            // loginIDs is empty so this is the "secondary" user in Gigya
-            /*
-            $email = reset($accountInfo['loginIDs']['emails']);
-            if (empty($email)) {
-                // delete user in gigya etc...
-                $this->_disableGigyaSeconderyAccount($post['UID'], $accountInfo);
-                return;
-            }
-            */
-            ////////
             if ($accountInfo) { // if $accountInfo is false skip this and continue with response to ajax
                 $this->gigyaData = $accountInfo;
                 $cust_session    = Mage::getSingleton('customer/session');
@@ -142,6 +131,10 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                     $cust->firstname = $accountInfo['profile']['firstName'];
                     $cust->lastname  = $accountInfo['profile']['lastName'];
                     $cust->save();  // save customer details in magento
+                    $updater = new Gigya_Social_Helper_FieldMapping_MagentoUpdater($this->gigyaData);
+                    if ($updater->isMapped()) {
+                        $updater->updateMagentoAccount($cust);
+                    }
                     $cust_session->setCustomerAsLoggedIn($cust);
                     Mage::dispatchEvent('gigya_raas_post_login', array(
                         'customer_session' => $cust_session,
@@ -593,6 +586,10 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController
                         'gigya_data' => $params['gigyaData']
                     ));
                     $customer->save();
+                    $updater = new Gigya_Social_Helper_FieldMapping_MagentoUpdater($params['gigyaData']);
+                    if ($updater->isMapped()) {
+                        $updater->updateMagentoAccount($customer);
+                    }
                     Mage::dispatchEvent('customer_register_success',
                         array('account_controller' => $this, 'customer' => $customer)
                     );

@@ -12,6 +12,8 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
     private $magMappings;
     private $cmsArray;
     private $gigyaUid;
+    private $mapped;
+    private $path;
 
     /**
      * Gigya_Social_Helper_FieldMapping_GigyaUpdater constructor.
@@ -20,6 +22,8 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
     {
         $this->cmsArray = $cmsValuesArray;
         $this->gigyaUid = $gigyaUid;
+        $this->path     = (string) Mage::getConfig()->getNode("global/gigya/mapping_file");
+        $this->mapped   = ! empty($this->path);
 
     }
 
@@ -29,6 +33,19 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
         $gigyaArray = $this->createGigyaArray();
         $this->callSetAccountInfo($gigyaArray);
     }
+
+    /**
+     * @return boolean
+     */
+    public function isMapped()
+    {
+        if (Mage::helper('Gigya_Social')->isDebug()) {
+            Mage::log("Field mapping is not enabled", Zend_Log::DEBUG, "gigya_debug_log");
+        }
+        return $this->mapped;
+    }
+
+
 
     protected function retrieveFieldMappings()
     {
@@ -51,16 +68,18 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
             /** @var Gigya_Social_Helper_FieldMapping_ConfItem $conf */
             $confs = $this->magMappings[$key];
             foreach ($confs as $conf) {
-                $val = $this->castVal($value, $conf);
+                $val       = $this->castVal($value, $conf);
                 $transFunc = $conf->getTransFunc();
                 if (null != $transFunc) {
-                    $val = $this->transformValue($val,$transFunc, $conf);
+                    $val = Gigya_Social_Helper_FieldMapping_Transformers::transformValue($val, $transFunc, $conf,
+                        "cms2g");
                 }
                 if (null != $val) {
                     $this->assignArrayByPath($gigyaArray, $conf->getGigyaName(), $val);
                 }
             }
         }
+
         return $gigyaArray;
     }
 
@@ -71,25 +90,26 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
     }
 
     /**
-     * @param mixed $val
-     * @param string $transFunc
+     * @param mixed                                     $val
+     * @param string                                    $transFunc
      * @param Gigya_Social_Helper_FieldMapping_ConfItem $conf
      *
      * @return mixed $val
      */
     private function transformValue($val, $transFunc, $conf)
     {
-        if (!empty($transFunc)) {
+        if ( ! empty($transFunc)) {
             $callable = array('Gigya_Social_Helper_FieldMapping_Transformers', $transFunc);
             if (is_callable($callable)) {
                 $val = call_user_func($callable, "cms2g", $val, null, $conf);
             }
         }
+
         return $val;
     }
 
     /**
-     * @param mixed $val
+     * @param mixed                                     $val
      * @param Gigya_Social_Helper_FieldMapping_ConfItem $conf
      *
      * @return mixed $val;
@@ -105,8 +125,8 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
                 return (int) $val;
                 break;
             default:
-               return $val;
-              break;
+                return $val;
+                break;
         }
     }
 

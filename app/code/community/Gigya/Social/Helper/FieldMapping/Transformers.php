@@ -27,4 +27,23 @@ class Gigya_Social_Helper_FieldMapping_Transformers
         }
         return null;
     }
+
+
+    /**
+     * @param mixed $val
+     * @param string $transFunc
+     * @param Gigya_Social_Helper_FieldMapping_ConfItem $conf
+     *
+     * @return mixed $val
+     */
+    public static function transformValue($val, $transFunc, $conf, $direction)
+    {
+        if (!empty($transFunc)) {
+            $callable = array(__CLASS__, $transFunc);
+            if (is_callable($callable)) {
+                $val = call_user_func($callable, $direction, $val, null, $conf);
+            }
+        }
+        return $val;
+    }
 }

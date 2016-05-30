@@ -78,22 +78,14 @@ class GigyaCMS
 
         // Make the request.
         ini_set('arg_separator.output', '&');
-        if ($this->debug) {
-            $this->_gigya_debug_log($request);
-        }
         $response = $request->send();
-        if ($this->debug) {
-            $this->_gigya_debug_log($response->getLog());
-        }
         ini_restore('arg_separator.output');
 
         // Check for errors
         $err_code = $response->getErrorCode();
         if ($err_code != 0) {
-            if (function_exists('_gigya_error_log')) {
-                $log = explode("\r\n", $response->getLog());
-                _gigya_error_log($log);
-            }
+            Mage::log("Error sending " . $method . " to Gigya. error code was " . $err_code . " error message was "
+                . $response->getErrorMessage() . " Gigya callId was " . $response->getString("callId"));
             if ($retrys < $trys) {
                 $this->call($method, $params, 1);
             }
