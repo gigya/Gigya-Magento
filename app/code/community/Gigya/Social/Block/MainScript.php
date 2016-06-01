@@ -11,6 +11,7 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
 
     protected $gigyaApiKey;
     protected $lang;
+    protected $fallbackLang;
     protected $globalConf;
     protected $userMode;
     protected $raasConf = null;
@@ -30,9 +31,10 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
 
             $this->gigyaApiKey = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey')); // get api key from store
             $this->lang        = Mage::getStoreConfig('gigya_global/gigya_global_conf/laguages');
+            $this->fallbackLang        = Mage::getStoreConfig('gigya_global/gigya_global_conf/fallback_lang');
             if ("auto" == $this->lang) {
                 $locale = Mage::app()->getLocale()->getLocaleCode();
-                $this->lang = $this->magentoLocaleToGigyaLang($locale);
+                $this->lang = $this->magentoLocaleToGigyaLang($locale, $this->fallbackLang);
             }
             $this->globalConf  = array( // set config basic params (enabledProviders, lang, sessionExpiration, connectWithoutLoginBehavior)
                 'enabledProviders'            => (Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') !== '') ? Mage::getStoreConfig('gigya_global/gigya_global_conf/providers') : '*',
