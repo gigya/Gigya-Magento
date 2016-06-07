@@ -11,7 +11,7 @@ class Gigya_Social_Helper_FieldMapping_Transformers
 
 
 
-    public function genderConvert($direction, $cmsVal, $gigyaVal, $conf = array())
+    public static function genderConvert($direction, $cmsVal, $gigyaVal, $conf = array())
     {
         $mapping = array(
             "m" => 1,
@@ -41,7 +41,12 @@ class Gigya_Social_Helper_FieldMapping_Transformers
         if (!empty($transFunc)) {
             $callable = array(__CLASS__, $transFunc);
             if (is_callable($callable)) {
-                $val = call_user_func($callable, $direction, $val, null, $conf);
+                if ("g2cms" == $direction) {
+                    $val = call_user_func($callable, $direction, null, $val, $conf);
+                } else {
+                    $val = call_user_func($callable, $direction, $val, null, $conf);
+                    
+                }
             }
         }
         return $val;

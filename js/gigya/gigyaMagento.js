@@ -49,6 +49,8 @@ gigyaFunctions.login = function (response) {
 gigyaFunctions.sessionSync = function () {
   if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn ) {
       gigyaFunctions.logout({"source": "sync"});
+  } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
+      gigya.accounts.getAccountInfo({callback: gigyaFunctions.RaaS.login});
   }
 };
 
@@ -67,16 +69,22 @@ gigyaFunctions.RaaS.login = function (response) {
                     }
                 } else {
                     if (trans.responseJSON.result == 'message') {
-                        var html = trans.responseJSON.message;
-                        gigyaFunctions.showModalWindow('Error', html);
+                        if (tryNum >= gigyaMageSettings.numOfRetries) {
+                            var html = trans.responseJSON.message;
+                            gigyaFunctions.showModalWindow('Error', html);
+                        } else {
+                            gigyaFunctions.RaaS.login(response, tryNum++)
+                        }
                     }
-                    //gigya.accounts.logout();
                 }
             }
+        },
+        onFailure: function () {
+            if (tryNum >= gigyaMageSettings.numOfRetries) {
+                gigyaFunctions.RaaS.login(response, tryNum++)
+            }
+            
         }
-/*        onFailure: function () {
-            console.log("Raas AJAX error");
-        }*/
     });
 };
 
@@ -508,6 +516,7 @@ gigyaFunctions.getUrlParam = function (param) {
     }
     return false;
 };
+
 
 /*
  * Register events

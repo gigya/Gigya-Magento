@@ -1,0 +1,93 @@
+{
+  "UID": "9b792cd0d4df4c9d938402ea793f33e6",
+  "isRegistered": true,
+  "isActive": true,
+  "isLockedOut": false,
+  "isVerified": true,
+  "iRank": 0,
+  "loginIDs": {
+    "emails": [
+      "pj00002he@btinternet.com"
+    ],
+    "unverifiedEmails": []
+  },
+  "emails": {
+    "verified": [
+      "pj00002he@btinternet.com"
+    ],
+    "unverified": []
+  },
+  "socialProviders": "site",
+  "profile": {
+    "work": {
+      "company": "ibm"
+    },
+    "firstName": "Test",
+    "lastName": "Testme",
+    "birthYear": 1981,
+    "birthMonth": 10,
+    "birthDay": 17,
+    "city": "NYC",
+    "zip": "12356",
+    "gender": "m",
+    "age": 33,
+    "email": "pj00002he@btinternet.com"
+  },
+  "identities": [
+    {
+      "provider": "site",
+      "providerUID": "9b792cd0d4df4c9d938402ea793f33e6",
+      "isLoginIdentity": false,
+      "firstName": "Test",
+      "lastName": "Testme",
+      "gender": "m",
+      "age": "33",
+      "birthDay": "17",
+      "birthMonth": "10",
+      "birthYear": "1981",
+      "email": "pj00002he@btinternet.com",
+      "city": "NYC",
+      "zip": "12356",
+      "allowsLogin": false,
+      "isExpiredSession": false,
+      "work": {
+        "company": "ibm"
+      },
+      "lastUpdated": "2015-01-21T01:43:48.106Z",
+      "lastUpdatedTimestamp": 1421804628106,
+      "oldestDataUpdated": "2014-10-21T13:47:17.251Z",
+      "oldestDataUpdatedTimestamp": 1413899237251
+    }
+  ],
+  "data": {
+    "TSN": {
+      "myTsnEmailEnabled": "true"
+    },
+    "test": "test string",
+    "staging": "true",
+    "subscribe": "true",
+    "float": "12.4",
+    "deep": {"deep": {"deep": {"very": {"very":{"deep":{"value": "very very deep"}}}}}}
+  },
+  "password": {},
+  "created": "2014-03-25T18:08:52.829Z",
+  "createdTimestamp": 1395770932829,
+  "lastUpdated": "2015-01-21T01:43:48.106Z",
+  "lastUpdatedTimestamp": 1421804628106,
+  "oldestDataUpdated": "2014-10-21T13:47:17.251Z",
+  "oldestDataUpdatedTimestamp": 1413899237251,
+  "registered": "2014-09-07T13:46:13.2041889Z",
+  "registeredTimestamp": 1410097573204,
+  "verified": "2014-12-03T15:03:23.636Z",
+  "verifiedTimestamp": 1417619003636,
+  "regSource": "",
+  "lastLoginLocation": {
+    "city": "Moorestown",
+    "state": "NJ",
+    "country": "US",
+    "coordinates": {
+      "lat": 39.97569274902344,
+      "lon": -74.94390106201172
+    }
+  }
+}

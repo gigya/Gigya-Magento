@@ -51,7 +51,7 @@ class GigyaCMS
      * @return array
      *   The Gigya response.
      */
-    public function call($method, $params, $trys = 0, $retrys = 0)
+    public function call($method, $params = array(), $trys = 0, $retrys = 0)
     {
 
         // Initialize new request.
@@ -61,6 +61,12 @@ class GigyaCMS
             $request = new GSRequest($this->api_key, $this->api_secret, $method, null, true);
         }
         $user_info = null;
+        $envParams = array(
+            "name"          => "magento",
+            "cms_version"   => Mage::getVersion(),
+            "gigya_version" => Mage::helper('Gigya_Social')->getExtensionVersion()
+        );
+        $params['environment'] = json_encode($envParams);
         if ( ! empty($params)) {
             foreach ($params as $param => $val) {
                 $request->setParam($param, $val);
@@ -87,7 +93,7 @@ class GigyaCMS
             Mage::log("Error sending " . $method . " to Gigya. error code was " . $err_code . " error message was "
                 . $response->getErrorMessage() . " Gigya callId was " . $response->getString("callId"), Zend_Log::ERR);
             if ($retrys < $trys) {
-                $this->call($method, $params, 1);
+                $this->call($method, $params, $trys++);
             }
 
             return $err_code;
@@ -172,6 +178,7 @@ class GigyaCMS
             $params = array(
                 'uid' => $guid,
             );
+
             return $this->call('socialize.logout', $params);
         }
 
@@ -456,6 +463,7 @@ class GigyaCMS
         if ("raas" == $mode) {
             return $this->call("accounts.exchangeUIDSignature", $params);
         }
+
         return $this->call("socialize.exchangeUIDSignature", $params);
     }
 

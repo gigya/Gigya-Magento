@@ -17,6 +17,7 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
     protected $raasConf = null;
     protected $magentoLoggedIn;
     protected $baseUrl;
+    protected $numOfRetries;
 
     /**
      * Preparing global layout
@@ -62,6 +63,7 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
             } else {
                 $this->baseUrl =  Mage::getBaseUrl();
             }
+            $this->numOfRetries = Mage::getStoreConfig('gigya_global/gigya_global_conf/login_retries');
         }
 
         return $this;

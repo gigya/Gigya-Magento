@@ -18,7 +18,7 @@ class Gigya_Social_Model_Config_Backend_Secret extends Mage_Core_Model_Config_Da
             
             if ($this->getFieldsetDataValue('encryptKeys')) {
                 $encryptor = Mage::getModel("core/Encryption");
-                $val       = $this->getValue();
+                $val       = trim($this->getValue());
                 $encVal    = $encryptor->encrypt($val);
                 $first2    = substr($val, 0, 2);
                 $last2     = substr($val, -2);

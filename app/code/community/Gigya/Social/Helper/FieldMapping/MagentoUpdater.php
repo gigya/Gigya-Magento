@@ -81,13 +81,13 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater
             $value = $this->getValueFromGigyaAccount($gigyaName);
             foreach ($confs as $conf) {
                 $mageKey   = $conf->getMagentoName();
-                $val       = $this->castValue($value, $conf);
                 $transFunc = $conf->getTransFunc();
                 if (null != $transFunc) {
-                    $val = Gigya_Social_Helper_FieldMapping_Transformers::transformValue($val, $transFunc, $conf,
+                    $value = Gigya_Social_Helper_FieldMapping_Transformers::transformValue($value, $transFunc, $conf,
                         "g2cms");
                 }
-                $account->setData($mageKey, $val);
+                $value       = $this->castValue($value, $conf);
+                $account->setData($mageKey, $value);
             }
         }
     }
@@ -120,6 +120,11 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater
     {
         switch ($conf->getMagentoType()) {
             case "datetime":
+                if ("long" == $conf->getGigyaType()) {
+                    $value = new Zend_Date(floor($value / 1000));
+                } else {
+                    $value = new Zend_Date($value);
+                }
                 $value = Mage::helper('core')->formatDate($value, Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM, false);
                 break;
             case "decimal":
@@ -138,4 +143,23 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater
 
         return $value;
     }
+
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+    
+    
+    
 }

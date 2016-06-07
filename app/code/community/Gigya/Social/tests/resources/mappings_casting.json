@@ -1,0 +1,33 @@
+[
+  {
+    "magentoName": "test_int",
+    "magentoType": "int",
+    "gigyaName": "profile.zip",
+    "gigyaType": "string"
+  },
+  {
+    "magentoName": "test_string",
+    "magentoType": "text",
+    "gigyaName": "profile.age",
+    "gigyaType": "int"
+  },
+  {
+    "magentoName": "test_datetime_epoch",
+    "magentoType": "datetime",
+    "gigyaName": "createdTimestamp",
+    "gigyaType": "long"
+  },
+  {
+    "magentoName": "test_datetime_string",
+    "magentoType": "datetime",
+    "gigyaName": "created",
+    "gigyaType": "string"
+  },
+  {
+    "magentoName": "test_float",
+    "magentoType": "decimal",
+    "gigyaName": "data.float",
+    "gigyaType": "string"
+  }
+
+]

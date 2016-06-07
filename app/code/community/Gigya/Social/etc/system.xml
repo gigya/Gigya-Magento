@@ -165,11 +165,25 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </loginBehavior>
+                        <login_retries translate="label">
+                            <label>Global login retries</label>
+                            <frontend_type>text</frontend_type>
+                            <comment>
+                                <![CDATA[Maximum number of login retries domain-wide. If the Gigya cookie is active and
+                                the CMS session is expired, the Gigya module will try to log the user into the CMS when
+                                the user reloads the page or loads any other page. This setting limits the number of
+                                login retries globally, regardless of page. Set to 0 to disable retries.]]>
+                            </comment>
+                            <sort_order>22</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </login_retries>
                         <google_sa translate="label">
                             <label>Enable Google Social Analytics</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>22</sort_order>
+                            <sort_order>23</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -181,7 +195,7 @@
                             <source_model>adminhtml/system_config_source_yesno</source_model>
                             <comment>
                                 <![CDATA[Notify Gigya of purchases carried out in the store. The accumulated values will show under Revenue <a href="https://console.gigya.com/Site/partners/Insights.aspx#Revenue%20Activity">Activity</a> section of Customer Insights]]></comment>
-                            <sort_order>23</sort_order>
+                            <sort_order>24</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -190,7 +204,7 @@
                             <label>Enable Gigya debug log</label>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>24</sort_order>
+                            <sort_order>25</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
@@ -200,7 +214,7 @@
                             <frontend_type>Textarea</frontend_type>
                             <validate>validate-json</validate>
                             <comment><![CDATA[<p>Enter <span class="valid-json-example">valid JSON format.</span> See list of available <a target="_blank" href="http://developers.gigya.com/030_API_reference/010_Client_API/010_Objects/Conf_object">parameters</a>.</p>key|value format is supported but deprecated. Support will be removed next version.]]></comment>
-                            <sort_order>25</sort_order>
+                            <sort_order>26</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>

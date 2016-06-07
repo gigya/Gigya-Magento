@@ -20,6 +20,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     private $userSecret = null;
     public  $utils;
     private $userMod;
+    private $encrypt;
     /**
      * @var bool
      */
@@ -39,26 +40,31 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
 
 
     public function __construct() {
-        $this->apiKey = Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey');
+        $this->apiKey = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey'));
         $this->apiSecret = $this->fetchGigyaSecretKey("siteSecret");
-        $this->apiDomain = Mage::getStoreConfig('gigya_global/gigya_global_conf/dataCenter');
-        $this->userKey = Mage::getStoreConfig('gigya_global/gigya_global_conf/userKey');
+        $this->apiDomain = strtolower(trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/dataCenter')));
+        $this->userKey = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/userKey'));
         $this->userSecret = $this->fetchGigyaSecretKey("userSecret");
         $use_user_key = (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/useUserKey');
         $this->debug = (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/debug_log');
         $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret, $this->userKey, $use_user_key, $this->debug);
         $this->userMod = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
+        $this->userMod = Mage::getStoreConfig('gigya_login/gigya_global_conf/encryptKeys');
     }
 
     public function fetchGigyaSecretKey($type)
     {
-        $encryptor = Mage::getModel("core/Encryption");
         if ("userSecret" == $type) {
             $key = Mage::getStoreConfig('gigya_global/gigya_global_conf/userSecret');
         } else {
             $key = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
         }
-        return $encryptor->decrypt($key);
+        if ($this->encrypt) {
+            $encryptor = Mage::getModel("core/Encryption");
+
+            return $encryptor->decrypt($key);
+        }
+        return $key;
     }
 
     /**

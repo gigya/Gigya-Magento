@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://schema.phpunit.de/4.5/phpunit.xsd"
+         bootstrap="bootstrap.php"
+         colors="true"
+         verbose="true">
+    <php>
+        <const name="MAGENTO_ROOT" value="../../../../../../"/>
+    </php>
+    <testsuites>
+        <testsuite name="Admin Tests">
+            <directory>./adminTests</directory>
+        </testsuite>
+    </testsuites>
+</phpunit>

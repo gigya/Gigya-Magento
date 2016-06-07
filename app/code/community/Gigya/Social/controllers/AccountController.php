@@ -19,12 +19,12 @@ class Gigya_Social_AccountController extends Mage_Customer_AccountController
     {
         if ($this->getRequest()->isPost()) {
             $post = json_decode($this->getRequest()->getPost('json'), true);
-            $valid = Mage::helper('Gigya_Social')->validateGigyaUid($post['UID'], $post['UIDSignature'], $post['signatureTimestamp']);
+            $valid = $this->validate($post);
             if ($valid) {
                 /** @var $customer Mage_Customer_Model_Customer */
                 $customer = $this->_getSession()->getCustomer();
                 $guid = $customer->getData("gigya_uid");
-                $gigyaAccount = Mage::helper('Gigya_Social')->utils->getAccount($guid);
+                $gigyaAccount = $this->getGigyaAccount($guid);
                 $fname = $gigyaAccount['profile']['firstName'];
                 $lName = $gigyaAccount['profile']['lastName'];
                 $customer->setData('firstname', $fname);
@@ -37,5 +37,15 @@ class Gigya_Social_AccountController extends Mage_Customer_AccountController
         }
     }
 
+    protected function getGigyaAccount($guid)
+    {
+        return Mage::helper('Gigya_Social')->utils->getAccount($guid);
+    }
+
+    protected function validate($post)
+    {
+        return Mage::helper('Gigya_Social')->validateGigyaUid($post['UID'], $post['UIDSignature'], $post['signatureTimestamp']);
+
+    }
 
 } 
