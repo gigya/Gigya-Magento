@@ -45,12 +45,28 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
         return $this->mapped;
     }
 
+    /**
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+    }
+
+    
 
 
     protected function retrieveFieldMappings()
     {
-        $path        = (string) Mage::getConfig()->getNode("global/gigya/mapping_file");
-        $mappingJson = file_get_contents($path);
+        $mappingJson = file_get_contents($this->path);
         if (false === $mappingJson) {
             $err     = error_get_last();
             $message = "Could not retrieve field mapping configuration file. message was:" . $err['message'];
@@ -68,14 +84,14 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
             /** @var Gigya_Social_Helper_FieldMapping_ConfItem $conf */
             $confs = $this->magMappings[$key];
             foreach ($confs as $conf) {
-                $val       = $this->castVal($value, $conf);
                 $transFunc = $conf->getTransFunc();
                 if (null != $transFunc) {
-                    $val = Gigya_Social_Helper_FieldMapping_Transformers::transformValue($val, $transFunc, $conf,
+                    $value = Gigya_Social_Helper_FieldMapping_Transformers::transformValue($value, $transFunc, $conf,
                         "cms2g");
                 }
-                if (null != $val) {
-                    $this->assignArrayByPath($gigyaArray, $conf->getGigyaName(), $val);
+                $value       = $this->castVal($value, $conf);
+                if (null != $value) {
+                    $this->assignArrayByPath($gigyaArray, $conf->getGigyaName(), $value);
                 }
             }
         }
@@ -121,8 +137,15 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
             case "string":
                 return (string) $val;
                 break;
+            case "long";
             case "int":
                 return (int) $val;
+                break;
+            case "bool":
+                if (is_string($val)) {
+                    $val = strtolower($val);
+                }
+                return filter_var($val, FILTER_VALIDATE_BOOLEAN);
                 break;
             default:
                 return $val;

@@ -1,0 +1,27 @@
+[
+  {
+    "magentoName": "test_string",
+    "magentoType": "int",
+    "gigyaName": "data.string",
+    "gigyaType": "string"
+  },
+  {
+    "magentoName": "test_int",
+    "magentoType": "text",
+    "gigyaName": "data.int",
+    "gigyaType": "int"
+  },
+  {
+    "magentoName": "test_long",
+    "magentoType": "string",
+    "gigyaName": "data.long",
+    "gigyaType": "long"
+  },
+  {
+    "magentoName": "test_bool",
+    "magentoType": "string",
+    "gigyaName": "data.bool",
+    "gigyaType": "bool"
+  }
+
+]
