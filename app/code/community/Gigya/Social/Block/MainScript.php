@@ -99,7 +99,8 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
             $gigyaLangs[$l] = $l;
         }
         $lang = null;
-        $lang = $gigyaLangs[$locale];
+        $glocale = str_replace("_", "-", strtolower($locale));
+        $lang = $gigyaLangs[$glocale];
         if (null == $lang) {
             $lang = $gigyaLangs[substr($locale, 0, 2)];
         }
