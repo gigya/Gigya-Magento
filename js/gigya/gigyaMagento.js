@@ -101,7 +101,7 @@ gigyaFunctions.RaaS.profileEdit = function (data) {
 
 gigyaFunctions.RaaS.loginScreens = function (event) {
     var params = gigyaMageSettings.RaaS;
-    if (!params.raas_login_div_id.length === 0) {
+    if (!(params.raas_login_div_id.length === 0)) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet": "' + params.WebScreen + '", "containerID": "' + params.raas_login_div_id + '" , "mobileScreenSet":"' + params.MobileScreen + '", "startScreen":"' + params.LoginScreen + '"}'));
     } else {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
