@@ -46,14 +46,6 @@ gigyaFunctions.login = function (response) {
     });
 };
 
-gigyaFunctions.sessionSync = function () {
-    if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn) {
-        gigyaFunctions.logout({"source": "sync"});
-    } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
-        gigya.accounts.getAccountInfo({callback: gigyaFunctions.RaaS.login});
-    }
-};
-
 gigyaFunctions.RaaS = {};
 
 gigyaFunctions.RaaS.login = function (response) {
@@ -166,7 +158,6 @@ gigyaFunctions.RaaS.accountEmbed = function () {
 };
 
 gigyaFunctions.RaaS.init = function (params) {
-    gigyaFunctions.RaaS.isLoggedIn();
     if (params.override_links) {
         $$('.gigya-raas-login').each(function (element) {
             element.observe('click', gigyaFunctions.RaaS.loginScreens);
@@ -188,15 +179,14 @@ gigyaFunctions.RaaS.init = function (params) {
     gigyaFunctions.RaaS.accountEmbed();
 };
 
-gigyaFunctions.RaaS.isLoggedIn = function () {
+gigyaFunctions.RaaS.syncSession = function () {
     gigya.accounts.getAccountInfo({
         "callback": function (response) {
             gigyaFunctions.RaaS.loggedIn = response.errorCode === 0;
-
             if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn) {
                 gigyaFunctions.logout({"source": "sync"});
             } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
-                gigya.accounts.getAccountInfo({callback: gigyaFunctions.RaaS.login});
+                gigyaFunctions.RaaS.login(response);
             }
 
         }
@@ -555,7 +545,7 @@ function gigyaRegister() {
 function onGigyaServiceReady(serviceName) {
     gigyaRegister();
     if (typeof gigyaMageSettings !== 'undefined') {
-        gigyaFunctions.RaaS.isLoggedIn();
+        gigyaFunctions.RaaS.syncSession();
         $H(gigyaMageSettings).each(function (plugin) {
             delete plugin.value.enable;
             //var a = JSON.parse(plugin.value);

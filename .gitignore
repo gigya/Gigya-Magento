@@ -109,3 +109,4 @@ php_errors.log
 RELEASE_NOTES.txt
 api.php
 app/.htaccess
+/app/code/community/Gigya/Social/Model/Customer/ExampleObserver.php

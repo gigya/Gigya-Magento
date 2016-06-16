@@ -25,7 +25,7 @@ class Gigya_AutoTests_AccountController extends Mage_Core_Controller_Front_Actio
         $commonAccount['lastName'] = $this->_getData("lastname");
         $commonAccount['email'] = $this->_getData("email");
         $commonAccount['GUID'] = $this->_getData("gigya_uid");
-        $commonAccount['isLoggedIn'] = empty($this->customer->getData("entity_id")) ? false : true;
+        $commonAccount['syncSession'] = empty($this->customer->getData("entity_id")) ? false : true;
 
 
         $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($commonAccount));
