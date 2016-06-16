@@ -7,50 +7,44 @@
  * Time: 4:44 PM
  */
 require_once('Mage/Customer/controllers/AccountController.php');
-class Gigya_AutoTests_AccountController extends Mage_Customer_AccountController
+class Gigya_AutoTests_AccountController extends Mage_Core_Controller_Front_Action
 {
+    private $customer;
 
     public function preDispatch()
     {
-        // a brute-force protection here would be nice
-
         parent::preDispatch();
-
-        if ( ! $this->getRequest()->isDispatched()) {
-            return;
-        }
-
-        $action      = $this->getRequest()->getActionName();
-        $openActions = array(
-            'create',
-            'login',
-            'logout',
-            'loginPost',
-            'logoutsuccess',
-            'forgotpassword',
-            'forgotpasswordpost',
-            'resetpassword',
-            'resetpasswordpost',
-            'confirm',
-            'confirmation',
-            'getaccount'
-        );
-        $pattern     = '/^(' . implode('|', $openActions) . ')/i';
-
-        if ( ! preg_match($pattern, $action)) {
-            if ( ! $this->_getSession()->authenticate($this)) {
-                $this->setFlag('', 'no-dispatch', true);
-            }
-        } else {
-            $this->_getSession()->setNoReferer(true);
-        }
     }
-    public function getaccountAction()
+    
+    public function jsonAction()
     {
         $this->getResponse()->setHeader('Content-type', 'application/json');
-        $customer = $this->_getSession()->getCustomer();
-        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($customer));
+        $commonAccount = array();
+        $this->customer = $this->_getSession()->getCustomer();
+        $commonAccount['firstName'] = $this->_getData("firstname");
+        $commonAccount['lastName'] = $this->_getData("lastname");
+        $commonAccount['email'] = $this->_getData("email");
+        $commonAccount['GUID'] = $this->_getData("gigya_uid");
+        $commonAccount['isLoggedIn'] = empty($this->customer->getData("entity_id")) ? false : true;
+
+
+        $this->getResponse()->setBody(Mage::helper('core')->jsonEncode($commonAccount));
         
+    }
+
+    /**
+     * Retrieve customer session model object
+     *
+     * @return Mage_Customer_Model_Session
+     */
+    protected function _getSession()
+    {
+        return Mage::getSingleton('customer/session');
+    }
+
+    private function _getData($key, $default = null)
+    {
+        return empty($this->customer->getData($key)) ? $default : $this->customer->getData($key);
     }
 
 }

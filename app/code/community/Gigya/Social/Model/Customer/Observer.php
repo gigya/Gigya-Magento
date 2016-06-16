@@ -78,7 +78,7 @@ class Gigya_Social_Model_Customer_Observer
     /*
      * Observer func for Magento customer_logout event
      * Handles log out from gigya when magento customer logs out
-     * @param $observer
+     * @param Varien_Event_Observer $observer
      */
     public function notify_logout($observer)
     {
@@ -106,6 +106,7 @@ class Gigya_Social_Model_Customer_Observer
             $customer = $observer->getEvent()->getCustomer();
             $attributes = $customer->getData();
             $uid = $attributes['gigya_uid'];
+            Mage::dispatchEvent("pre_sync_to_gigya", array("magento_attributes" => $attributes, "customer" => $customer));
             $updater = new Gigya_Social_Helper_FieldMapping_GigyaUpdater($attributes, $uid);
             $updater->updateGigya();
         }

@@ -51,7 +51,7 @@ class GigyaCMS
      * @return array
      *   The Gigya response.
      */
-    public function call($method, $params = array(), $trys = 0, $retrys = 0)
+    public function call($method, $params = array(), $trys = 0, $retrys = 1)
     {
 
         // Initialize new request.

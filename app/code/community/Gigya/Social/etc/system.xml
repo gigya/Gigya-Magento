@@ -122,7 +122,7 @@
                             <sort_order>18</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </dataCenter>
                         <dataCenterOther translate="label">
                             <frontend_type>text</frontend_type>
@@ -165,20 +165,6 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </loginBehavior>
-                        <login_retries translate="label">
-                            <label>Global login retries</label>
-                            <frontend_type>text</frontend_type>
-                            <comment>
-                                <![CDATA[Maximum number of login retries domain-wide. If the Gigya cookie is active and
-                                the CMS session is expired, the Gigya module will try to log the user into the CMS when
-                                the user reloads the page or loads any other page. This setting limits the number of
-                                login retries globally, regardless of page. Set to 0 to disable retries.]]>
-                            </comment>
-                            <sort_order>22</sort_order>
-                            <show_in_default>1</show_in_default>
-                            <show_in_website>1</show_in_website>
-                            <show_in_store>1</show_in_store>
-                        </login_retries>
                         <google_sa translate="label">
                             <label>Enable Google Social Analytics</label>
                             <frontend_type>select</frontend_type>
@@ -238,7 +224,7 @@
                     <sort_order>100</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <login_modes translate="label">
                             <label>Gigya User Management</label>
@@ -259,7 +245,7 @@
                     <sort_order>100</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <buttonsStyle translate="label">
                             <label>Button style</label>
@@ -286,7 +272,7 @@
                             <sort_order>14</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </containerID>
                         <width translate="label">
                             <label>Width</label>
@@ -294,7 +280,7 @@
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </width>
                         <height translate="label">
                             <label>Height</label>
@@ -302,7 +288,7 @@
                             <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </height>
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
@@ -324,7 +310,7 @@
                     <sort_order>101</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <title translate="label">
                             <lable>Registration-as-a-Service</lable>
@@ -342,7 +328,7 @@
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </WebScreen>
                         <MobileScreen translate="label">
                             <label>Mobile Screen Set ID</label>
@@ -351,7 +337,7 @@
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </MobileScreen>
                         <LoginScreen translate="label">
                             <label>Login Screen ID</label>
@@ -360,7 +346,7 @@
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </LoginScreen>
                         <RegisterScreen translate="label">
                             <label>Register Screen ID</label>
@@ -369,7 +355,7 @@
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </RegisterScreen>
                         <profile_title translate="label">
                             <lable>Registration-as-a-Service</lable>
@@ -387,7 +373,7 @@
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </ProfileWebScreen>
                         <ProfileMobileScreen translate="label">
                             <label>Mobile Screen Set ID</label>
@@ -396,7 +382,7 @@
                             <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </ProfileMobileScreen>
                         <override_links>
                             <label>Override Magento links</label>
@@ -407,7 +393,7 @@
                             <sort_order>17</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </override_links>
                         <div_ids_title translate="label">
                             <lable>Registration-as-a-Service</lable>
@@ -426,7 +412,7 @@
                             <sort_order>19</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </raas_login_div_id>
                         <raas_register_div_id translate="label">
                             <label>Register</label>
@@ -434,7 +420,7 @@
                             <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </raas_register_div_id>
                         <raas_profile_div_id translate="label">
                             <label>Profile</label>
@@ -442,7 +428,7 @@
                             <sort_order>21</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </raas_profile_div_id>
                     </fields>
                 </gigya_raas_conf>
@@ -452,7 +438,7 @@
                     <sort_order>101</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <enable translate="label">
                             <label>Enable Gigya add connections</label>
@@ -478,7 +464,7 @@
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </width>
                         <height translate="label">
                             <label>Height</label>
@@ -486,7 +472,7 @@
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </height>
                         <showTermsLink translate="label">
                             <label>Show terms link</label>
@@ -535,7 +521,7 @@
                     <sort_order>101</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <enable_cart translate="label">
                             <label>Enable Gigya Share Bar on product pages</label>
@@ -562,7 +548,7 @@
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </containerID>
                         <shareButtons translate="label">
                             <label>Providers</label>
@@ -572,7 +558,7 @@
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </shareButtons>
                         <layout translate="label">
                             <label>Share Bar layout</label>
@@ -608,7 +594,7 @@
                             <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                             <depends>
                                 <imageBehavior>url</imageBehavior>
                             </depends>
@@ -631,7 +617,7 @@
                     <sort_order>102</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <enable translate="label">
                             <label>Enable Gigya Share Action</label>
@@ -686,7 +672,7 @@
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </enabledProviders>
                         <moreEnabledProviders translate="label">
                             <label>more screen providers</label>
@@ -696,7 +682,7 @@
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </moreEnabledProviders>
                         <scope translate="label">
                             <label>Scope for publishing to Activity Feed</label>
@@ -730,7 +716,7 @@
             <sort_order>102</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
+            <show_in_store>1</show_in_store>
             <groups>
                 <gigya_reactions_conf translate="label">
                     <label>Gigya Reactions configuration</label>
@@ -738,7 +724,7 @@
                     <sort_order>102</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <enable translate="label">
                             <label>Enable Gigya reactions</label>
@@ -756,7 +742,7 @@
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </containerID>
                         <reactions translate="label">
                             <label>Reactions</label>
@@ -775,7 +761,7 @@
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </enabledProviders>
                         <layout translate="label">
                             <label>Reactions Bar layout</label>
@@ -842,7 +828,7 @@
                             <sort_order>19</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                             <depends>
                                 <imageBehavior>url</imageBehavior>
                             </depends>
@@ -868,7 +854,7 @@
             <sort_order>102</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
+            <show_in_store>1</show_in_store>
             <groups>
                 <gigya_comments_conf translate="label">
                     <label>Gigya Comments configuration</label>
@@ -876,7 +862,7 @@
                     <sort_order>102</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <enable translate="label">
                             <label>Enable Gigya Comments</label>
@@ -894,7 +880,7 @@
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </containerID>
                         <categoryID translate="label">
                             <label>Gigya Comments Category id</label>
@@ -903,7 +889,7 @@
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </categoryID>
                         <scope translate="label">
                             <label>Scope for publishing to Activity Feed</label>
@@ -937,7 +923,7 @@
             <sort_order>102</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
+            <show_in_store>1</show_in_store>
             <groups>
                 <gigya_activityfeed_conf translate="label">
                     <label>Gigya Activity Feed configuration</label>
@@ -945,7 +931,7 @@
                     <sort_order>102</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <enable translate="label">
                             <label>Enable Gigya Activity Feed</label>
@@ -963,7 +949,7 @@
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </containerID>
                         <siteName translate="label">
                             <label>Site name</label>
@@ -973,7 +959,7 @@
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </siteName>
                         <tabOrder translate="label">
                             <label>Tabs and order</label>
@@ -983,7 +969,7 @@
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </tabOrder>
                         <privacy translate="label">
                             <label>Privacy</label>
@@ -1000,7 +986,7 @@
                             <sort_order>15</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </width>
                         <height translate="label">
                             <label>Height</label>
@@ -1008,7 +994,7 @@
                             <sort_order>16</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </height>
                         <advancedConfig translate="label">
                             <label>Advanced configuration</label>
@@ -1031,7 +1017,7 @@
             <sort_order>102</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
+            <show_in_store>1</show_in_store>
             <groups>
                 <gigya_gamification_conf translate="label">
                     <label>Gigya Gamification Configuration</label>
@@ -1039,7 +1025,7 @@
                     <sort_order>102</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <expanded>1</expanded>
                     <fields>
                         <enable translate="label">
@@ -1078,7 +1064,7 @@
                             <sort_order>13</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </totalCount>
                         <purchaseAction translate="label">
                             <label>Enable purchase notifications to Gamification</label>
@@ -1110,7 +1096,7 @@
             <sort_order>106</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
-            <show_in_store>0</show_in_store>
+            <show_in_store>1</show_in_store>
             <groups>
                 <gigya_r_and_r_conf translate="label">
                     <label>Gigya Rating &amp; Reviews configuration</label>
@@ -1118,7 +1104,7 @@
                     <sort_order>102</sort_order>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <fields>
                         <enable translate="label">
                             <label>Enable Gigya Rating &amp; Reviews</label>
@@ -1136,7 +1122,7 @@
                             <sort_order>11</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </containerID>
                         <categoryID translate="label,comment">
                             <label>The identifier of the Comments Category</label>
@@ -1145,7 +1131,7 @@
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </categoryID>
                         <scope translate="label">
                             <label>Scope for publishing to Activity Feed</label>
@@ -1188,7 +1174,7 @@
                     <frontend_type>text</frontend_type>
                     <show_in_default>1</show_in_default>
                     <show_in_website>1</show_in_website>
-                    <show_in_store>0</show_in_store>
+                    <show_in_store>1</show_in_store>
                     <expanded>1</expanded>
                     <fields>
                         <enable translate="label">
@@ -1207,7 +1193,7 @@
                             <sort_order>2</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </containerID>
                         <layout translate="label,comment">
                             <label>Follow Bar layout</label>
@@ -1217,7 +1203,7 @@
                             <comment>Sets the arrangement of buttons in the bar.</comment>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </layout>
                         <iconSize translate="label,comment">
                             <label>Icon size</label>
@@ -1226,7 +1212,7 @@
                             <sort_order>4</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </iconSize>
                         <buttons translate="label,comment">
                             <label>Follow buttons</label>
@@ -1236,7 +1222,7 @@
                             <sort_order>5</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </buttons>
                         <advancedConfig translate="label,comment">
                             <label>Advanced Configuration</label>
@@ -1246,7 +1232,7 @@
                             <sort_order>6</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </advancedConfig>
                     </fields>
                 </gigya_followbar_conf>

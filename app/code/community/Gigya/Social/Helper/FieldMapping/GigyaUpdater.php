@@ -105,24 +105,6 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
         $helper->updateGigyaUser($gigyaArray, $this->gigyaUid);
     }
 
-    /**
-     * @param mixed                                     $val
-     * @param string                                    $transFunc
-     * @param Gigya_Social_Helper_FieldMapping_ConfItem $conf
-     *
-     * @return mixed $val
-     */
-    private function transformValue($val, $transFunc, $conf)
-    {
-        if ( ! empty($transFunc)) {
-            $callable = array('Gigya_Social_Helper_FieldMapping_Transformers', $transFunc);
-            if (is_callable($callable)) {
-                $val = call_user_func($callable, "cms2g", $val, null, $conf);
-            }
-        }
-
-        return $val;
-    }
 
     /**
      * @param mixed                                     $val

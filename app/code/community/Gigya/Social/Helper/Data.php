@@ -270,7 +270,8 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         }
         $res = $this->call("accounts.setAccountInfo", $params);
         if (is_numeric($res)) {
-            Mage::log("Error updating gigya user with uid: " . $uid);
+            Mage::log("Error updating gigya user with uid: " . $uid . " error code was " . $res);
+            Mage::throwException("Error updating gigya user");
         }
 
     }

@@ -47,11 +47,11 @@ gigyaFunctions.login = function (response) {
 };
 
 gigyaFunctions.sessionSync = function () {
-  if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn ) {
-      gigyaFunctions.logout({"source": "sync"});
-  } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
-      gigya.accounts.getAccountInfo({callback: gigyaFunctions.RaaS.login});
-  }
+    if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn) {
+        gigyaFunctions.logout({"source": "sync"});
+    } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
+        gigya.accounts.getAccountInfo({callback: gigyaFunctions.RaaS.login});
+    }
 };
 
 gigyaFunctions.RaaS = {};
@@ -83,13 +83,17 @@ gigyaFunctions.RaaS.login = function (response) {
             if (tryNum >= gigyaMageSettings.numOfRetries) {
                 gigyaFunctions.RaaS.login(response, tryNum++)
             }
-            
+
         }
     });
 };
 
 gigyaFunctions.RaaS.profileEdit = function (data) {
-    var gigyaData = {"UID": data.response.UID, "UIDSignature": data.response.UIDSignature, "signatureTimestamp": data.response.signatureTimestamp};
+    var gigyaData = {
+        "UID": data.response.UID,
+        "UIDSignature": data.response.UIDSignature,
+        "signatureTimestamp": data.response.signatureTimestamp
+    };
     new Ajax.Request(baseUrl + 'gigyaAccount/account/editPost', {
         parameters: {json: JSON.stringify(gigyaData)},
         onSuccess: function (trans) {
@@ -188,6 +192,12 @@ gigyaFunctions.RaaS.isLoggedIn = function () {
     gigya.accounts.getAccountInfo({
         "callback": function (response) {
             gigyaFunctions.RaaS.loggedIn = response.errorCode === 0;
+
+            if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn) {
+                gigyaFunctions.logout({"source": "sync"});
+            } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
+                gigya.accounts.getAccountInfo({callback: gigyaFunctions.RaaS.login});
+            }
 
         }
     });
@@ -517,7 +527,6 @@ gigyaFunctions.getUrlParam = function (param) {
     return false;
 };
 
-
 /*
  * Register events
  * Listen to onbLogin / onLogout events returned from Gigya
@@ -539,7 +548,6 @@ function gigyaRegister() {
     }
 }
 
-
 /*
  * On document load, loop through gigyaMageSettings object, and fire gigya functions accordingly
  *
@@ -547,6 +555,7 @@ function gigyaRegister() {
 function onGigyaServiceReady(serviceName) {
     gigyaRegister();
     if (typeof gigyaMageSettings !== 'undefined') {
+        gigyaFunctions.RaaS.isLoggedIn();
         $H(gigyaMageSettings).each(function (plugin) {
             delete plugin.value.enable;
             //var a = JSON.parse(plugin.value);
