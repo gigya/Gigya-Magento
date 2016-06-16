@@ -38,7 +38,7 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater
     {
         try {
             $this->retrieveFieldMappings();
-            Mage::dispatchEvent("gigya_pre_filed_mapping", array("gigyaAccount" => $this->gigyaAccount));
+            Mage::dispatchEvent("gigya_pre_filed_mapping", array("updater" => $this));
             $this->setAccountValues($magentoAccount);
             $magentoAccount->save();
         } catch (Exception $e) {
@@ -81,11 +81,6 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater
             $value = $this->getValueFromGigyaAccount($gigyaName);
             foreach ($confs as $conf) {
                 $mageKey   = $conf->getMagentoName();
-                $transFunc = $conf->getTransFunc();
-                if (null != $transFunc) {
-                    $value = Gigya_Social_Helper_FieldMapping_Transformers::transformValue($value, $transFunc, $conf,
-                        "g2cms");
-                }
                 $value       = $this->castValue($value, $conf);
                 $account->setData($mageKey, $value);
             }
@@ -158,6 +153,38 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater
     public function setPath($path)
     {
         $this->path = $path;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGigyaAccount()
+    {
+        return $this->gigyaAccount;
+    }
+
+    /**
+     * @param array $gigyaAccount
+     */
+    public function setGigyaAccount($gigyaAccount)
+    {
+        $this->gigyaAccount = $gigyaAccount;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGigyaMapping()
+    {
+        return $this->gigyaMapping;
+    }
+
+    /**
+     * @param mixed $gigyaMapping
+     */
+    public function setGigyaMapping($gigyaMapping)
+    {
+        $this->gigyaMapping = $gigyaMapping;
     }
     
     

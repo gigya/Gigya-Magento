@@ -14,6 +14,7 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
     private $gigyaUid;
     private $mapped;
     private $path;
+    private $gigyaArray;
 
     /**
      * Gigya_Social_Helper_FieldMapping_GigyaUpdater constructor.
@@ -30,8 +31,9 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
     public function updateGigya()
     {
         $this->retrieveFieldMappings();
-        $gigyaArray = $this->createGigyaArray();
-        $this->callSetAccountInfo($gigyaArray);
+        Mage::dispatchEvent("pre_sync_to_gigya", array("updater" => $this));
+        $this->gigyaArray = $this->createGigyaArray();
+        $this->callSetAccountInfo();
     }
 
     /**
@@ -61,6 +63,38 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
         $this->path = $path;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCmsArray()
+    {
+        return $this->cmsArray;
+    }
+
+    /**
+     * @param mixed $cmsArray
+     */
+    public function setCmsArray($cmsArray)
+    {
+        $this->cmsArray = $cmsArray;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGigyaArray()
+    {
+        return $this->gigyaArray;
+    }
+
+    /**
+     * @param mixed $gigyaArray
+     */
+    public function setGigyaArray($gigyaArray)
+    {
+        $this->gigyaArray = $gigyaArray;
+    }
+
     
 
 
@@ -84,11 +118,6 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
             /** @var Gigya_Social_Helper_FieldMapping_ConfItem $conf */
             $confs = $this->magMappings[$key];
             foreach ($confs as $conf) {
-                $transFunc = $conf->getTransFunc();
-                if (null != $transFunc) {
-                    $value = Gigya_Social_Helper_FieldMapping_Transformers::transformValue($value, $transFunc, $conf,
-                        "cms2g");
-                }
                 $value       = $this->castVal($value, $conf);
                 if (null != $value) {
                     $this->assignArrayByPath($gigyaArray, $conf->getGigyaName(), $value);
@@ -99,10 +128,10 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
         return $gigyaArray;
     }
 
-    protected function callSetAccountInfo($gigyaArray)
+    protected function callSetAccountInfo()
     {
         $helper = Mage::helper('Gigya_Social');
-        $helper->updateGigyaUser($gigyaArray, $this->gigyaUid);
+        $helper->updateGigyaUser($this->gigyaArray, $this->gigyaUid);
     }
 
 

@@ -74,6 +74,15 @@
                     </gigya_reviewRemainder>
                 </observers>
             </checkout_onepage_controller_success_action>
+            <gigya_pre_filed_mapping>
+                <observers>
+                    <gender_convert>
+                        <type>singleton</type>
+                        <class>Gigya_Social_Model_Customer_Observer</class>
+                        <method>convertGenderFromGigya</method>
+                    </gender_convert>
+                </observers>
+            </gigya_pre_filed_mapping>
         </events>
         <routers>
             <gigyalogin>
@@ -176,6 +185,15 @@
                     </update_gigya>
                 </observers>
             </adminhtml_customer_prepare_save>
+            <pre_sync_to_gigya>
+                <observers>
+                    <gender_convert>
+                        <type>singleton</type>
+                        <class>Gigya_Social_Model_Customer_Observer</class>
+                        <method>convertGenderToGigya</method>
+                    </gender_convert>
+                </observers>
+            </pre_sync_to_gigya>
         </events>
         <acl>
             <resources>
