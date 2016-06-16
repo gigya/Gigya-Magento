@@ -62,7 +62,7 @@ class GigyaCMS
         }
         $user_info = null;
         $envParams = array(
-            "name"          => "magento",
+            "cms_name"          => "magento",
             "cms_version"   => Mage::getVersion(),
             "gigya_version" => Mage::helper('Gigya_Social')->getExtensionVersion()
         );
