@@ -4,13 +4,13 @@
     "magentoType": "int",
     "gigyaName": "profile.gender",
     "gigyaType": "string",
-    "transFunc": "genderConvert",
     "direction": "both"
   },
   {
     "magentoName": "custom1",
     "magentoType": "string",
     "gigyaName": "data.test",
-    "gigyaType": "string"
+    "gigyaType": "string",
+    "direction": "g2cms"
   }
 ]

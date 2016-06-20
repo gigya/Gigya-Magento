@@ -76,12 +76,14 @@
                         </useUserKey>
                         <secretkey translate="label">
                             <label>Gigya Secret key</label>
-                            <frontend_type>text</frontend_type>
+                            <frontend_type>obscure</frontend_type>
+                            <frontend_model>Gigya_Social_Block_Adminhtml_SiteSecret</frontend_model>
+                            <backend_model>Gigya_Social_Model_Config_Backend_Secret</backend_model>
                             <comment><![CDATA[Specify the Gigya Secret (Base64 encoded) key for this domain]]></comment>
                             <sort_order>12</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>1</show_in_website>
-                            <show_in_store>0</show_in_store>
+                            <show_in_store>1</show_in_store>
                         </secretkey>
                         <userKey translate="label">
                             <label>Gigya User key</label>

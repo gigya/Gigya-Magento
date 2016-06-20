@@ -9,13 +9,14 @@
 class Gigya_Social_Model_Config_Backend_Secret extends Mage_Core_Model_Config_Data
 {
 
+    private $dataChanged = false;
     protected function _beforeSave()
     {
         parent::_beforeSave();
         $filedKey = end(explode("/", $this->getPath()));
 
         if ($this->shouldRun()) {
-            
+            $this->dataChanged = true;
             if ($this->getFieldsetDataValue('encryptKeys')) {
                 $encryptor = Mage::getModel("core/Encryption");
                 $val       = trim($this->getValue());
@@ -35,17 +36,34 @@ class Gigya_Social_Model_Config_Backend_Secret extends Mage_Core_Model_Config_Da
                 Mage::log($keyName . " was updated by " . $adminUser, Zend_Log::INFO);
             }
         }
+
+    }
+
+    /**
+     * Check if config data value was changed
+     *
+     * @return bool
+     */
+    public function isValueChanged()
+    {
+        return $this->dataChanged;
     }
 
     protected function shouldRun()
     {
         if ("******" == $this->getValue()) {
+            $this->_dataSaveAllowed = false;
             return false;
         } else {
             $inDb = Mage::getStoreConfig($this->getPath());
             $encryptor = Mage::getModel("core/Encryption");
             $dec = $encryptor->decrypt($inDb);
-            return $this->getValue() != $dec;
+            $changed = $this->getValue() != $dec;
+            if ($changed) {
+                return true;
+            }
+            $this->_dataSaveAllowed = false;
+            return false;
         }
     }
 
