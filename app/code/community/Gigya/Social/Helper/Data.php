@@ -29,7 +29,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     const CHARS_PASSWORD_UPPERS = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
     const CHARS_PASSWORD_DIGITS = '23456789';
     const CHARS_PASSWORD_SPECIALS = '!$*-.=?@_';
-    const GIGYA_LANGUAGES = array(
+    private $gigya_languages = array(
         'en', 'ar', 'br', 'ca', 'zh-cn', 'zh-hk', 'zh-tw', 'hr', 'cs', 'da', 'nl', 'nl-inf', 'fi', 'fr', 'fr-inf', 'de',
         'de-inf', 'el', 'he', 'hu', 'id', 'it', 'ja', 'ko', 'ms', 'no', 'fa', 'pl', 'pt', 'pt-br', 'ro', 'ru', 'sr',
         'sk', 'sl', 'es', 'es-inf', 'es-mx', 'sv', 'tl', 'th', 'tr', 'uk', 'zh-hk', 'zh-tw', 'hr', 'cs', 'da', 'nl',
@@ -380,6 +380,14 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     public function getGigGlobalAdvancedConfig($advanced_config) {
       $array = json_decode($advanced_config, true);
       return $array;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGigyaLanguages()
+    {
+        return $this->gigya_languages;
     }
 
 

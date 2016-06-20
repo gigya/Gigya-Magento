@@ -94,8 +94,9 @@ class Gigya_Social_Block_MainScript extends Mage_Core_Block_Text_Tag_Js
 
     protected function magentoLocaleToGigyaLang($locale, $default = "en")
     {
+        
         $gigyaLangs = array();
-        foreach (Gigya_Social_Helper_Data::GIGYA_LANGUAGES as $l) {
+        foreach (Mage::helper('Gigya_Social')->getGigyaLanguages() as $l) {
             $gigyaLangs[$l] = $l;
         }
         $lang = null;
