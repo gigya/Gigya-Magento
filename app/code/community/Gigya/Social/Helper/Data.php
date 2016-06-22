@@ -136,9 +136,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
             $key = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
         }
         if ($this->encrypt) {
-            $encryptor = Mage::getModel("core/Encryption");
-
-            return $encryptor->decrypt($key);
+            return Mage::helper('core')->decrypt($key);
         }
 
         return $key;
@@ -157,7 +155,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         $valid  = false;
         $secret = $this->fetchGigyaSecretKey("secretkey");
         //$secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
-        if ( ! empty($secret)) {
+        if ( !$this->useUserKey) {
             $valid = SigUtils::validateUserSignature($uid, $timestamp, $secret, $sig);
         } else {
             $userSecret = $this->fetchGigyaSecretKey("userSecret");
@@ -485,5 +483,19 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return $this->gigya_languages;
     }
+    
+    public function buildMask($str)
+    {
+        $first2    = substr($str, 0, 2);
+        $last2     = substr($str, -2);
+        $len       = strlen($str) - 4;
+        $mask      = $first2;
+        for ($i = 0; $i <= $len; $i++) {
+            $mask = $mask . "#";
+        }
+        $mask = $mask . $last2;
+        return $mask;
+    }
+        
 
 }

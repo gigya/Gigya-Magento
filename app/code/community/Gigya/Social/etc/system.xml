@@ -77,7 +77,7 @@
                         <secretkey translate="label">
                             <label>Gigya Secret key</label>
                             <frontend_type>obscure</frontend_type>
-                            <frontend_model>Gigya_Social_Block_Adminhtml_SiteSecret</frontend_model>
+                            <frontend_model>Gigya_Social_Block_Adminhtml_Secret</frontend_model>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <comment><![CDATA[Specify the Gigya Secret (Base64 encoded) key for this domain]]></comment>
                             <sort_order>12</sort_order>
@@ -99,7 +99,7 @@
                         <userSecret translate="label">
                             <label>Gigya User Secret</label>
                             <frontend_type>obscure</frontend_type>
-                            <frontend_model>Gigya_Social_Block_Adminhtml_UserSecret</frontend_model>
+                            <frontend_model>Gigya_Social_Block_Adminhtml_Secret</frontend_model>
                             <backend_model>adminhtml/system_config_backend_encrypted</backend_model>
                             <comment><![CDATA[Specify your User Secret key. Both User Key & User Secret key are mandatory. Learn more in <a href="http://developers.gigya.com/010_Developer_Guide/83_Roles_and_Permissions#Obtaining_and_Using_the_User_Key">Obtaining and Using the User Key</a>"]]></comment>
                             <sort_order>15</sort_order>

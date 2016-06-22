@@ -111,7 +111,7 @@ gigyaFunctions.RaaS.loginScreens = function (event) {
 
 gigyaFunctions.RaaS.registerScreens = function (event) {
     var params = gigyaMageSettings.RaaS;
-    if (!params.raas_register_div_id === 0) {
+    if (!(params.raas_register_div_id === 0)) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.RegisterScreen + '"}'));
     } else {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '","startScreen": "' + params.RegisterScreen + '"}'));
@@ -123,7 +123,7 @@ gigyaFunctions.RaaS.profileScreens = function (event) {
     if (gigyaFunctions.RaaS.loggedIn) {
         var params = gigyaMageSettings.RaaS;
         var jsonParams = {};
-        if (!params.raas_profile_div_id === 0) {
+        if (!(params.raas_profile_div_id === 0)) {
             jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "containerID":"' + params.raas_profile_div_id + '", "mobileScreenSet:"' + params.ProfileMobileScreen + '", "startScreen": "' + params.ProfileWebScreen + '"}');
             jsonParams.onAfterSubmit = gigyaFunctions.RaaS.profileEdit;
             gigya.accounts.showScreenSet(jsonParams);
@@ -134,8 +134,10 @@ gigyaFunctions.RaaS.profileScreens = function (event) {
             Event.stop(event);
         }
     } else {
-        Event.stop(event);
-        gigyaFunctions.RaaS.loginScreens();
+        if (event) {
+            Event.stop(event);
+            gigyaFunctions.RaaS.loginScreens();
+        }
 
     }
 };
@@ -172,8 +174,10 @@ gigyaFunctions.RaaS.init = function (params) {
             element.observe('click', gigyaFunctions.RaaS.resetPass);
         });
     } else {
-        if (!params.raas_login_div_id.length === 0) {
+        if (!(params.raas_login_div_id.length === 0)) {
             gigyaFunctions.RaaS.loginScreens();
+            gigyaFunctions.RaaS.registerScreens();
+            gigyaFunctions.RaaS.profileScreens();
         }
     }
     gigyaFunctions.RaaS.accountEmbed();
