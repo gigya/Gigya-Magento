@@ -26,7 +26,7 @@ class GigyaCMS
         $apiDomain,
         $userSecret = null,
         $userKey = null,
-        $useUserKey = false,
+        $useUserKey = true,
         $debug = false
     ) {
 
@@ -35,7 +35,7 @@ class GigyaCMS
         $this->api_domain   = $apiDomain;
         $this->user_key     = $userKey;
         $this->user_secret  = $userSecret;
-        $this->use_user_key = $useUserKey;
+        $this->useUserKey = $useUserKey;
         $this->debug        = $debug;
 
     }
@@ -55,7 +55,7 @@ class GigyaCMS
     {
 
         // Initialize new request.
-        if ($this->use_user_key) {
+        if ($this->useUserKey) {
             $request = new GSRequest($this->api_key, $this->user_secret, $method, null, true, $this->user_key);
         } else {
             $request = new GSRequest($this->api_key, $this->api_secret, $method, null, true);
@@ -348,10 +348,10 @@ class GigyaCMS
 
     public function testApiconfig()
     {
-        if (null != $this->api_secret) {
-            $request = new GSRequest($this->api_key, $this->api_secret, 'shortenURL');
-        } else {
+        if ($this->useUserKey) {
             $request = new GSRequest($this->api_key, $this->user_secret, 'shortenURL', null, false, $this->user_key);
+        } else {
+            $request = new GSRequest($this->api_key, $this->api_secret, 'shortenURL');
         }
         $request->setAPIDomain($this->api_domain);
         $request->setParam('url', 'http://gigya.com');
@@ -748,11 +748,11 @@ class GigyaCMS
     }
 
     /**
-     * @param boolean $use_user_key
+     * @param boolean $useUserKey
      */
-    public function setUseUserKey($use_user_key)
+    public function setUseUserKey($useUserKey)
     {
-        $this->use_user_key = $use_user_key;
+        $this->useUserKey = $useUserKey;
     }
 
     /**
@@ -760,7 +760,7 @@ class GigyaCMS
      */
     public function getUseUserKey()
     {
-        return $this->use_user_key;
+        return $this->useUserKey;
     }
 
     public function getCommentsCategoryInfo($catID)

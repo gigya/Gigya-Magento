@@ -195,6 +195,11 @@
                 </observers>
             </pre_sync_to_gigya>
         </events>
+        <enterprise>
+            <logging>
+                <skip_fields>secretkey,userSecret</skip_fields>
+            </logging>
+        </enterprise>
         <acl>
             <resources>
                 <admin>
