@@ -22,7 +22,7 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
             Mage::throwException(Mage::helper('adminhtml')->__("Gigya apiKey is required"));
         }
         $data           = $this->getData();
-        $useUserKey     = $data['fieldset_data']['useUserKey'] ? $data['fieldset_data']['useUserKey'] : $this->beforeChange['useUserKey'];
+        $useUserKey     = $data['fieldset_data']['useUserKey'];
         if ($this->shouldRun($useUserKey, $this->beforeChange)) {
             $helper = Mage::helper('Gigya_Social');
             $helper->utils->setApiKey($value); // set the api key to the submitted key
@@ -48,6 +48,9 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
                 $helper->utils->setUserSecret($userSecret);
                 $helper->utils->setUseUserKey($useUserKey);
             } else {
+                if (empty($secret)) {
+                    Mage::throwException(Mage::helper('adminhtml')->__("Gigya secret is required."));
+                }
                 $helper->utils->setApiSecret($secret);
             }
 
