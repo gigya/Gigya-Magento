@@ -37,10 +37,10 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
             $dataCenter = strtolower(trim($this->_setDataCenter($data['fieldset_data'])));
 
             if ($useUserKey) {
-                if (empty($userKey)) {
+                if (empty($userKey) && empty($this->beforeChange['userKey'])) {
                     Mage::throwException(Mage::helper('adminhtml')->__("Gigya user key is required."));
                 }
-                if (empty($userSecret)) {
+                if (empty($userSecret) && empty($this->beforeChange['userSecret'])) {
                     Mage::throwException(Mage::helper('adminhtml')->__("Gigya user secret is required."));
 
                 }
@@ -48,7 +48,7 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
                 $helper->utils->setUserSecret($userSecret);
                 $helper->utils->setUseUserKey($useUserKey);
             } else {
-                if (empty($secret)) {
+                if (empty($secret) && empty($this->beforeChange['secretkey'])) {
                     Mage::throwException(Mage::helper('adminhtml')->__("Gigya secret is required."));
                 }
                 $helper->utils->setApiSecret($secret);
@@ -79,15 +79,15 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
     {
         $apiKeyChanged = $this->hasChanged($this->getFieldsetDataValue("apikey"), $current['apikey']);
         $dataCenterChanged = $this->hasChanged($this->getFieldsetDataValue("dataCenter"), $current['dataCenter'] );
-            $apiOrDc = $apiKeyChanged || $dataCenterChanged;
+        $userKeyChanged = $this->hasChanged($this->getFieldsetDataValue("userKey"), $current['userKey']);
+            $apiOrDcOrUserKey = $apiKeyChanged || $dataCenterChanged || $userKeyChanged;
             if ($useUserKey) {
-                $keyAndSecret = $this->hasChanged($this->getFieldsetDataValue("userKey"), $current['userKey']) ||
-                    $this->hasChanged($this->getFieldsetDataValue("userSecret"), $current['userSecret']);
+                $secretChanged = !$this->getFieldsetDataValue('userSecret') == "******";
             } else {
-                $keyAndSecret = $this->hasChanged($this->getFieldsetDataValue("secretkey"), $current['secretkey']);
+                $secretChanged = !$this->getFieldsetDataValue('secretkey') == "******";
             }
 
-            return $apiOrDc || $keyAndSecret;
+            return $apiOrDcOrUserKey || $secretChanged;
 
     }
 
@@ -101,8 +101,7 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
         $formVal = $this->getFieldsetDataValue($key);
         if ("******" == $formVal) {
             $encSecret = $this->beforeChange[$key];
-            $encryptor = Mage::getModel("core/Encryption");
-            $dec = $encryptor->decrypt($encSecret);
+            $dec = Mage::helper('core')->decrypt($encSecret);
             return $dec;
         }
         return $this->getFieldsetDataValue($key);
