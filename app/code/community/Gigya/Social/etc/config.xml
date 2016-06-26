@@ -289,11 +289,9 @@
             </gigya_link_accounts>
             <gigya_raas_conf>
                 <WebScreen>Default-RegistrationLogin</WebScreen>
-                <MobileScreen>DefaultMobile-RegistrationLogin</MobileScreen>
                 <LoginScreen>gigya-login-screen</LoginScreen>
                 <RegisterScreen>gigya-register-screen</RegisterScreen>
                 <ProfileWebScreen>Default-ProfileUpdate</ProfileWebScreen>
-                <ProfileMobileScreen>DefaultMobile-ProfileUpdate</ProfileMobileScreen>
                 <override_links>1</override_links>
             </gigya_raas_conf>
         </gigya_login>
