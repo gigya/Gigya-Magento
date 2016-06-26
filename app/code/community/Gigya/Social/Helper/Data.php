@@ -115,7 +115,6 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function __construct()
     {
-        $this->encrypt    = (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/encryptKeys');
         $this->useUserKey = (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/useUserKey');
         $this->userKey    = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/userKey'));
         $this->apiKey     = trim(Mage::getStoreConfig('gigya_global/gigya_global_conf/apikey'));
@@ -124,7 +123,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         $this->userSecret = $this->fetchGigyaSecretKey("userSecret");
         $this->debug      = (bool) Mage::getStoreConfig('gigya_global/gigya_global_conf/debug_log');
         $this->userMod    = Mage::getStoreConfig('gigya_login/gigya_user_management/login_modes');
-        $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret,
+        $this->utils      = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret,
             $this->userKey, $this->useUserKey, $this->debug);
     }
 
@@ -135,11 +134,8 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         } else {
             $key = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
         }
-        if ($this->encrypt) {
-            return Mage::helper('core')->decrypt($key);
-        }
 
-        return $key;
+        return Mage::helper('core')->decrypt($key);
     }
 
     /**
@@ -155,7 +151,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         $valid  = false;
         $secret = $this->fetchGigyaSecretKey("secretkey");
         //$secret = Mage::getStoreConfig('gigya_global/gigya_global_conf/secretkey');
-        if ( !$this->useUserKey) {
+        if ( ! $this->useUserKey) {
             $valid = SigUtils::validateUserSignature($uid, $timestamp, $secret, $sig);
         } else {
             $userSecret = $this->fetchGigyaSecretKey("userSecret");
@@ -483,19 +479,19 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
     {
         return $this->gigya_languages;
     }
-    
+
     public function buildMask($str)
     {
-        $first2    = substr($str, 0, 2);
-        $last2     = substr($str, -2);
-        $len       = strlen($str) - 4;
-        $mask      = $first2;
+        $first2 = substr($str, 0, 2);
+        $last2  = substr($str, -2);
+        $len    = strlen($str) - 4;
+        $mask   = $first2;
         for ($i = 0; $i <= $len; $i++) {
             $mask = $mask . "#";
         }
         $mask = $mask . $last2;
+
         return $mask;
     }
-        
 
 }
