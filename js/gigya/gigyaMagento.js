@@ -104,8 +104,10 @@ gigyaFunctions.RaaS.loginScreens = function (event) {
     if (!(params.raas_login_div_id.length === 0)) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet": "' + params.WebScreen + '", "containerID": "' + params.raas_login_div_id + '" , "mobileScreenSet":"' + params.MobileScreen + '", "startScreen":"' + params.LoginScreen + '"}'));
     } else {
-        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
-        Event.stop(event);
+        if (event) {
+            gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
+            Event.stop(event);
+        }
     }
 };
 
@@ -114,8 +116,8 @@ gigyaFunctions.RaaS.registerScreens = function (event) {
     if (!(params.raas_register_div_id.length === 0)) {
         gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.RegisterScreen + '"}'));
     } else {
-        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '","startScreen": "' + params.RegisterScreen + '"}'));
         if (event) {
+            gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '","startScreen": "' + params.RegisterScreen + '"}'));
             Event.stop(event);
         }
     }
@@ -124,25 +126,20 @@ gigyaFunctions.RaaS.registerScreens = function (event) {
 gigyaFunctions.RaaS.profileScreens = function (event) {
     if (gigyaFunctions.RaaS.loggedIn) {
         var params = gigyaMageSettings.RaaS;
-        var jsonParams = {};
+        var jsonParams = {"screenSet": params.ProfileWebScreen};
+        jsonParams.onAfterSubmit = gigyaFunctions.RaaS.profileEdit;
+        if (typeof params.ProfileMobileScreen != 'undefined') {
+            jsonParams.mobileScreenSet = params.ProfileMobileScreen;
+        }
         if (!(params.raas_profile_div_id.length === 0)) {
-            jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "containerID":"' + params.raas_profile_div_id + '", "mobileScreenSet:"' + params.ProfileMobileScreen + '", "startScreen": "' + params.ProfileWebScreen + '"}');
-            jsonParams.onAfterSubmit = gigyaFunctions.RaaS.profileEdit;
+            jsonParams.containerID = params.raas_profile_div_id;
             gigya.accounts.showScreenSet(jsonParams);
         } else {
-            jsonParams = JSON.parse('{"screenSet":"' + params.ProfileWebScreen + '", "mobileScreenSet":"' + params.ProfileMobileScreen + '"}');
-            jsonParams.onAfterSubmit = gigyaFunctions.RaaS.profileEdit;
-            gigya.accounts.showScreenSet(jsonParams);
             if (event) {
+                gigya.accounts.showScreenSet(jsonParams);
                 Event.stop(event);
             }
         }
-    } else {
-        if (event) {
-            Event.stop(event);
-            gigyaFunctions.RaaS.loginScreens();
-        }
-
     }
 };
 
@@ -178,11 +175,9 @@ gigyaFunctions.RaaS.init = function (params) {
             element.observe('click', gigyaFunctions.RaaS.resetPass);
         });
     } else {
-        if (!(params.raas_login_div_id.length === 0)) {
-            gigyaFunctions.RaaS.loginScreens();
-            gigyaFunctions.RaaS.registerScreens();
-            gigyaFunctions.RaaS.profileScreens();
-        }
+        gigyaFunctions.RaaS.loginScreens();
+        gigyaFunctions.RaaS.registerScreens();
+        gigyaFunctions.RaaS.profileScreens();
     }
     gigyaFunctions.RaaS.accountEmbed();
 };
@@ -195,6 +190,8 @@ gigyaFunctions.RaaS.syncSession = function () {
                 gigyaFunctions.logout({"source": "sync"});
             } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
                 gigyaFunctions.RaaS.login(response);
+            } else {
+                gigyaFunctions.init();
             }
 
         }
@@ -525,6 +522,58 @@ gigyaFunctions.getUrlParam = function (param) {
     return false;
 };
 
+gigyaFunctions.init = function () {
+    $H(gigyaMageSettings).each(function (plugin) {
+        delete plugin.value.enable;
+        //var a = JSON.parse(plugin.value);
+        switch (plugin.key) {
+            case 'login':
+                delete plugin.value.loginBehavior;
+                gigya.socialize.showLoginUI(plugin.value);
+                break;
+            case 'linkAccount':
+                gigya.socialize.showAddConnectionsUI(plugin.value);
+                break;
+            case 'sharebar':
+                gigyaFunctions.shareBar(plugin.value);
+                break;
+            case 'shareAction':
+                gigyaFunctions.shareAction(plugin.value);
+                break;
+            case 'reactions':
+                gigyaFunctions.reactions(plugin.value);
+                break;
+            case 'comments':
+                plugin.context = {id: "comments"};
+                gigya.comments.showCommentsUI(plugin.value);
+                break;
+            case 'activityFeed':
+                delete plugin.value.privacy;
+                gigya.socialize.showFeedUI(plugin.value);
+                break;
+            case 'gm':
+                gigyaFunctions.gm(plugin.value);
+                break;
+            case 'ratings':
+                gigyaFunctions.ratings(plugin.value);
+                break;
+            case 'RnR':
+                console.log('rnr');
+                gigyaFunctions.RnR(plugin.value);
+                break;
+            case 'logout':
+                gigya.socialize.logout();
+                break;
+            case 'RaaS':
+                gigyaFunctions.RaaS.init(plugin.value);
+                break;
+            case 'followbar':
+                gigya.socialize.showFollowBarUI(plugin.value);
+        }
+    });
+
+};
+
 /*
  * Register events
  * Listen to onbLogin / onLogout events returned from Gigya
@@ -554,53 +603,5 @@ function onGigyaServiceReady(serviceName) {
     gigyaRegister();
     if (typeof gigyaMageSettings !== 'undefined') {
         gigyaFunctions.RaaS.syncSession();
-        $H(gigyaMageSettings).each(function (plugin) {
-            delete plugin.value.enable;
-            //var a = JSON.parse(plugin.value);
-            switch (plugin.key) {
-                case 'login':
-                    delete plugin.value.loginBehavior;
-                    gigya.socialize.showLoginUI(plugin.value);
-                    break;
-                case 'linkAccount':
-                    gigya.socialize.showAddConnectionsUI(plugin.value);
-                    break;
-                case 'sharebar':
-                    gigyaFunctions.shareBar(plugin.value);
-                    break;
-                case 'shareAction':
-                    gigyaFunctions.shareAction(plugin.value);
-                    break;
-                case 'reactions':
-                    gigyaFunctions.reactions(plugin.value);
-                    break;
-                case 'comments':
-                    plugin.context = {id: "comments"};
-                    gigya.comments.showCommentsUI(plugin.value);
-                    break;
-                case 'activityFeed':
-                    delete plugin.value.privacy;
-                    gigya.socialize.showFeedUI(plugin.value);
-                    break;
-                case 'gm':
-                    gigyaFunctions.gm(plugin.value);
-                    break;
-                case 'ratings':
-                    gigyaFunctions.ratings(plugin.value);
-                    break;
-                case 'RnR':
-                    console.log('rnr');
-                    gigyaFunctions.RnR(plugin.value);
-                    break;
-                case 'logout':
-                    gigya.socialize.logout();
-                    break;
-                case 'RaaS':
-                    gigyaFunctions.RaaS.init(plugin.value);
-                    break;
-                case 'followbar':
-                    gigya.socialize.showFollowBarUI(plugin.value);
-            }
-        });
     }
 }
