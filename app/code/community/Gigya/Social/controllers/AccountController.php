@@ -32,6 +32,8 @@ class Gigya_Social_AccountController extends Mage_Customer_AccountController
                 $updater = new Gigya_Social_Helper_FieldMapping_MagentoUpdater($gigyaAccount);
                 if ($updater->isMapped()) {
                     $updater->updateMagentoAccount($customer);
+                } else {
+                    $customer->save();
                 }
             }
         }
