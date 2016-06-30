@@ -33,7 +33,7 @@ class Gigya_Social_Model_Config_Backend_UserMode extends Mage_Core_Model_Config_
     {
         $data = $this->getData();
         $raasConfig = $data['groups']['gigya_raas_conf']['fields'];
-        $required = array('WebScreen', 'MobileScreen', 'LoginScreen', 'RegisterScreen', 'ProfileWebScreen', 'ProfileMobileScreen');
+        $required = array('WebScreen', 'LoginScreen', 'RegisterScreen', 'ProfileWebScreen');
         foreach ($required as $field) {
             if (empty($raasConfig[$field]['value'])) {
                 return false;
