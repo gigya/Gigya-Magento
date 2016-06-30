@@ -542,7 +542,7 @@ gigyaFunctions.init = function () {
                 gigya.socialize.showLoginUI(plugin.value);
                 break;
             case 'linkAccount':
-                if (gigyaMageSettings.userMode == 'raas') {
+                if (gigyaMageSettings.userMode != 'raas') {
                     gigya.socialize.showAddConnectionsUI(plugin.value);
                 }
                 break;
