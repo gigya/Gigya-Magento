@@ -100,12 +100,17 @@ gigyaFunctions.RaaS.profileEdit = function (data) {
 };
 
 gigyaFunctions.RaaS.loginScreens = function (event) {
-    var params = gigyaMageSettings.RaaS;
-    if (!(params.raas_login_div_id.length === 0)) {
-        gigya.accounts.showScreenSet(JSON.parse('{"screenSet": "' + params.WebScreen + '", "containerID": "' + params.raas_login_div_id + '" , "mobileScreenSet":"' + params.MobileScreen + '", "startScreen":"' + params.LoginScreen + '"}'));
+    var params = gigyaMageSettings.RaaS,
+    jsonParams = {"screenSet": params.WebScreen, "startScreen": params.LoginScreen};
+    if (typeof params.mobileScreenSet != 'undefined') {
+        jsonParams.mobileScreenSet = params.MobileScreen;
+    }
+    if ((!params.override_links) && params.raas_login_div_id.length > 0) {
+        jsonParams.containerID = params.raas_login_div_id;
+        gigya.accounts.showScreenSet(jsonParams);
     } else {
         if (event) {
-            gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.LoginScreen + '"}'));
+            gigya.accounts.showScreenSet(jsonParams);
             Event.stop(event);
         }
     }
@@ -113,11 +118,16 @@ gigyaFunctions.RaaS.loginScreens = function (event) {
 
 gigyaFunctions.RaaS.registerScreens = function (event) {
     var params = gigyaMageSettings.RaaS;
-    if (!(params.raas_register_div_id.length === 0)) {
-        gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '", "containerID":"' + params.raas_register_div_id + '", "mobileScreenSet":"' + params.MobileScreen + '", "startScreen": "' + params.RegisterScreen + '"}'));
+    jsonParams = {"screenSet": params.WebScreen, "startScreen": params.RegisterScreen};
+    if (typeof params.mobileScreenSet != 'undefined') {
+        jsonParams.mobileScreenSet = params.MobileScreen;
+    }
+    if ((!params.override_links) && (params.raas_register_div_id.length === 0)) {
+        jsonParams.containerID = params.raas_login_div_id;
+        gigya.accounts.showScreenSet(jsonParams);
     } else {
         if (event) {
-            gigya.accounts.showScreenSet(JSON.parse('{"screenSet":"' + params.WebScreen + '","mobileScreenSet":"' + params.MobileScreen + '","startScreen": "' + params.RegisterScreen + '"}'));
+            gigya.accounts.showScreenSet(jsonParams);
             Event.stop(event);
         }
     }
@@ -532,7 +542,9 @@ gigyaFunctions.init = function () {
                 gigya.socialize.showLoginUI(plugin.value);
                 break;
             case 'linkAccount':
-                gigya.socialize.showAddConnectionsUI(plugin.value);
+                if (gigyaMageSettings.userMode == 'raas') {
+                    gigya.socialize.showAddConnectionsUI(plugin.value);
+                }
                 break;
             case 'sharebar':
                 gigyaFunctions.shareBar(plugin.value);
