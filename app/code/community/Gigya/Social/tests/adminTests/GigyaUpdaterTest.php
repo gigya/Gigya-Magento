@@ -14,7 +14,7 @@ class GigyaUpdaterTest extends PHPUnit_Framework_TestCase
      */
     private $magentoAccount;
 
-    public function testGigyaAccountUpdate()
+/*    public function testGigyaAccountUpdate()
     {
         $expectedArray = array(
             "data" => array("test" => "test string"),
@@ -28,9 +28,11 @@ class GigyaUpdaterTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $gigyaUpdater->setPath(__DIR__ . DS . ".." . DS . "resources" . DS . "mappings.json");
-        $gigyaUpdater->expects($this->once())->method("callSetAccountInfo")->with($expectedArray);
+        $gigyaUpdater->expects($this->once())->method("callSetAccountInfo");
         $gigyaUpdater->updateGigya();
-    }
+        $garray = $gigyaUpdater->getGigyaArray();
+        $this->assertEquals($expectedArray, $garray);
+    }*/
 
     public function testDeepValue()
     {
@@ -44,8 +46,10 @@ class GigyaUpdaterTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $gigyaUpdater->setPath(__DIR__ . DS . ".." . DS . "resources" . DS . "mappings_deep.json");
-        $gigyaUpdater->expects($this->once())->method("callSetAccountInfo")->with($expectedArray);
+        $gigyaUpdater->expects($this->once())->method("callSetAccountInfo");
         $gigyaUpdater->updateGigya();
+        $garray = $gigyaUpdater->getGigyaArray();
+        $this->assertEquals($expectedArray, $garray);
     }
 
     public function testCasting()
@@ -68,8 +72,10 @@ class GigyaUpdaterTest extends PHPUnit_Framework_TestCase
             ->getMock();
 
         $gigyaUpdater->setPath(__DIR__ . DS . ".." . DS . "resources" . DS . "mappings_casting_to_gigya.json");
-        $gigyaUpdater->expects($this->once())->method("callSetAccountInfo")->with($expectedArray);
+        $gigyaUpdater->expects($this->once())->method("callSetAccountInfo");
         $gigyaUpdater->updateGigya();
+        $garray = $gigyaUpdater->getGigyaArray();
+        $this->assertEquals($expectedArray, $garray);
 
         
 

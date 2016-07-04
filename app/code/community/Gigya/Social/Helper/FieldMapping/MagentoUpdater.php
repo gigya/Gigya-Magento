@@ -38,7 +38,7 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater
     {
         try {
             $this->retrieveFieldMappings();
-            Mage::dispatchEvent("gigya_pre_filed_mapping", array("updater" => $this));
+            Mage::dispatchEvent("gigya_pre_field_mapping", array("updater" => $this));
             $this->setAccountValues($magentoAccount);
             $magentoAccount->save();
         } catch (Exception $e) {
