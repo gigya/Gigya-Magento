@@ -614,6 +614,10 @@ function gigyaRegister() {
 function onGigyaServiceReady(serviceName) {
     gigyaRegister();
     if (typeof gigyaMageSettings !== 'undefined') {
-        gigyaFunctions.RaaS.syncSession();
+        if (gigyaMageSettings.userMode === 'raas') {
+            gigyaFunctions.RaaS.syncSession();
+        } else {
+            gigyaFunctions.init();
+        }
     }
 }
