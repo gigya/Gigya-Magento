@@ -262,7 +262,6 @@
                 <fallback_lang>en</fallback_lang>
                 <useUserKey>1</useUserKey>
                 <encryptKeys>1</encryptKeys>
-                <loginBehavior>loginExistingUser</loginBehavior>
                 <login_retries>1</login_retries>
                 <google_sa>0</google_sa>
                 <debug_log>0</debug_log>
