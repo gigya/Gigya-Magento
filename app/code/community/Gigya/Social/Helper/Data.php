@@ -458,10 +458,6 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
             $this->utils = new GigyaCMS($this->apiKey, $this->apiSecret, $this->apiDomain, $this->userSecret,
                 $this->userKey, $this->useUserKey, $this->debug);
         }
-        if (null == $this->utils) {
-
-        }
-
         return $this->utils;
     }
 

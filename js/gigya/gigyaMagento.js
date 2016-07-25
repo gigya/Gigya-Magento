@@ -190,6 +190,13 @@ gigyaFunctions.RaaS.init = function (params) {
         gigyaFunctions.RaaS.profileScreens();
     }
     gigyaFunctions.RaaS.accountEmbed();
+    if (typeof gigyaScreenSets !== 'undefined' && gigyaScreenSets.length > 0) {
+       gigyaScreenSets.forEach(function (params, dx)
+       {
+           gigya.accounts.showScreenSet(params);
+           
+       }) 
+    }
 };
 
 gigyaFunctions.RaaS.syncSession = function () {
