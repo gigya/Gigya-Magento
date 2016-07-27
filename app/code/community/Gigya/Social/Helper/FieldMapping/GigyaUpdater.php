@@ -116,12 +116,16 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater
         $gigyaArray = array();
         foreach ($this->cmsArray as $key => $value) {
             /** @var Gigya_Social_Helper_FieldMapping_ConfItem $conf */
-            $confs = $this->magMappings[$key];
-            foreach ($confs as $conf) {
-                $value       = $this->castVal($value, $conf);
-                if (null != $value) {
-                    $this->assignArrayByPath($gigyaArray, $conf->getGigyaName(), $value);
+            if (isset($this->magMappings[$key])) {
+              $confs = $this->magMappings[$key];
+              foreach ($confs as $conf) {
+                $value = $this->castVal($value, $conf);
+                if (NULL != $value) {
+                  $this->assignArrayByPath(
+                    $gigyaArray, $conf->getGigyaName(), $value
+                  );
                 }
+              }
             }
         }
 

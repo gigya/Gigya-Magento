@@ -25,7 +25,7 @@ class Gigya_Social_Helper_FieldMapping_Conf
         foreach ($array as $confItem) {
             $mageKey = $confItem['magentoName'];
             $gigyaKey = $confItem['gigyaName'];
-            $direction = $confItem['direction'];
+            $direction = empty($confItem['direction']) ? "g2cms" : $confItem['direction'];
             $conf = new Gigya_Social_Helper_FieldMapping_ConfItem($confItem);
             switch ($direction) {
                 case "g2cms" :

@@ -12,5 +12,11 @@
     "gigyaName": "data.test",
     "gigyaType": "string",
     "direction": "g2cms"
+  },
+  {
+    "magentoName": "firstname",
+    "magentoType": "string",
+    "gigyaName": "profile.firstName",
+    "gigyaType": "string"
   }
 ]

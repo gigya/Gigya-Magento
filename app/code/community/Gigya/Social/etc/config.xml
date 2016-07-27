@@ -74,7 +74,7 @@
                     </gigya_reviewRemainder>
                 </observers>
             </checkout_onepage_controller_success_action>
-            <gigya_pre_filed_mapping>
+            <gigya_pre_field_mapping>
                 <observers>
                     <gender_convert>
                         <type>singleton</type>
@@ -82,7 +82,7 @@
                         <method>convertGenderFromGigya</method>
                     </gender_convert>
                 </observers>
-            </gigya_pre_filed_mapping>
+            </gigya_pre_field_mapping>
         </events>
         <routers>
             <gigyalogin>

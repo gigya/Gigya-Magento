@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Gigya_BackOffice>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends></depends>
+        </Gigya_BackOffice>
+    </modules>
+</config>
