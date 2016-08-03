@@ -5,9 +5,9 @@
  * Event Observers registered in config.xml
  */
 class Gigya_Social_Model_Customer_Observer {
+
   protected $userMod;
   protected $helper;
-
 
   function __construct() {
     $this->userMod = Mage::getStoreConfig(
@@ -15,7 +15,6 @@ class Gigya_Social_Model_Customer_Observer {
     );
     $this->helper  = Mage::helper('Gigya_Social');
   }
-
 
   public function notify_registration($observer) {
     if ($this->userMod == 'social') {
@@ -95,14 +94,16 @@ class Gigya_Social_Model_Customer_Observer {
       Mage::getSingleton('core/session')->setData('logout', 'true');
       $this->helper->notifyLogout($id);
     }
-    else if ($this->userMod == 'raas') {
-      $id = $observer->getEvent()->getCustomer()->getData('gigya_uid');
-      // gigya_uid does not get passed in in observer. options:
-      // add gigya_uid to observer
-      // make sure gigya_uid is saved to magento customer data, and pull it from magento customer
-      // make the logout  happen from browser side
-      $params = array('UID' => $id);
-      $this->helper->utils->call('accounts.logout', $params);
+    else {
+      if ($this->userMod == 'raas') {
+        $id = $observer->getEvent()->getCustomer()->getData('gigya_uid');
+        // gigya_uid does not get passed in in observer. options:
+        // add gigya_uid to observer
+        // make sure gigya_uid is saved to magento customer data, and pull it from magento customer
+        // make the logout  happen from browser side
+        $params = array('UID' => $id);
+        $this->helper->utils->call('accounts.logout', $params);
+      }
     }
   }
 
@@ -130,25 +131,12 @@ class Gigya_Social_Model_Customer_Observer {
       $updater      = $observer->getData("updater");
       $gigyaAccount = $updater->getGigyaAccount();
       if (isset($gigyaAccount['profile']['gender'])) {
-        $gen = $this->genderConvert(
+        $gen                               = $this->genderConvert(
           "g2cms", NULL, $gigyaAccount['profile']['gender']
         );
         $gigyaAccount['profile']['gender'] = NULL == $gen ? 0 : $gen;
         $updater->setGigyaAccount($gigyaAccount);
       }
-    }
-  }
-
-  public function convertGenderToGigya($observer) {
-    if ("raas" == $this->userMod) {
-      /** @var Gigya_Social_Helper_FieldMapping_GigyaUpdater $updater */
-      $updater            = $observer->getData("updater");
-      $cmsArray           = $updater->getCmsArray();
-      $gen                = $this->genderConvert(
-        "cms2g", $cmsArray['gender'], NULL
-      );
-      $cmsArray['gender'] = NULL == $gen ? 'u' : $gen;
-      $updater->setCmsArray($cmsArray);
     }
   }
 
@@ -175,6 +163,19 @@ class Gigya_Social_Model_Customer_Observer {
       return isset($fliped[$cmsVal]) ? $fliped[$cmsVal] : NULL;
     }
     return NULL;
+  }
+
+  public function convertGenderToGigya($observer) {
+    if ("raas" == $this->userMod) {
+      /** @var Gigya_Social_Helper_FieldMapping_GigyaUpdater $updater */
+      $updater            = $observer->getData("updater");
+      $cmsArray           = $updater->getCmsArray();
+      $gen                = $this->genderConvert(
+        "cms2g", $cmsArray['gender'], NULL
+      );
+      $cmsArray['gender'] = NULL == $gen ? 'u' : $gen;
+      $updater->setCmsArray($cmsArray);
+    }
   }
 }
 
