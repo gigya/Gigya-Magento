@@ -1,0 +1,24 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Yaniv Aran-Shamir
+ * Date: 7/24/16
+ * Time: 2:06 PM
+ */
+?>
+<?php if ($this->getEmbed()) : ?>
+<script type="text/javascript">//<![CDATA[
+  var gigyaScreenSets = gigyaMageSettings.RaaS.screenSets || [];
+  gigyaScreenSets.push(<?php echo $this->getParams(); ?>);
+  //]]>
+  </script>
+  <?php else : ?>
+  <script type="text/javascript" >//<![CDATA[
+    function showScreens()
+    {
+      gigya.accounts.showScreenSet(<?php echo $this->getParams(); ?>);
+    }
+  //]]>
+    </script>
+  <?php endif; ?>
+  <?php echo $this->getHtml() ?>
