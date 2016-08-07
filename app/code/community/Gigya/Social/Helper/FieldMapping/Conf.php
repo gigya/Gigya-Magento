@@ -13,9 +13,9 @@ class Gigya_Social_Helper_FieldMapping_Conf
     private $gigyaKeyed;
     private $mappingConf;
 
-    public function __construct($json)
+    public function __construct($confArray)
     {
-        $this->mappingConf = json_decode($json, true);
+        $this->mappingConf = $confArray;
     }
 
     protected function buildKeyedArrays($array)
