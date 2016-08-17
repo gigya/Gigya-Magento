@@ -13,7 +13,6 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater extends Gigya_Social_Helper_
     private $cmsArray;
     private $gigyaUid;
     private $mapped;
-    private $path;
     private $gigyaArray;
 
     /**

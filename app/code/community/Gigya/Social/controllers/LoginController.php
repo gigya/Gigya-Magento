@@ -203,7 +203,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController {
        */
       $accountObject = (object) $accountInfo;
       Mage::dispatchEvent("gigya_post_account_fetch", array("gigyaAccount" => $accountObject));
-      return (array) $accountInfo;
+      return (array) $accountObject;
     }
   }
 

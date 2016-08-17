@@ -16,7 +16,6 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater extends Gigya_Social_Helpe
      */
     private $mapped = false;
     /** @var \Mage_Core_Model_Config_Element  */
-    private $path;
 
     /**
      * Gigya_Social_Helper_FieldMapping_MagentoUpdater constructor.

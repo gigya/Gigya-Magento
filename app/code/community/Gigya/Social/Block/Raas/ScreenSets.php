@@ -28,5 +28,4 @@ class Gigya_Social_Block_Raas_ScreenSets extends Mage_Core_Block_Template {
   }
 
 
-
 }

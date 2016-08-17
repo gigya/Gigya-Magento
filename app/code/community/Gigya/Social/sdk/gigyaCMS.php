@@ -20,23 +20,17 @@ class GigyaCMS
     /**
      * Constructs a GigyaApi object.
      */
-    public function __construct(
-        $apiKey,
-        $secret,
-        $apiDomain,
-        $userSecret = null,
-        $userKey = null,
-        $useUserKey = true,
+    public function __construct($apiKey, $secret, $apiDomain, $userSecret = null, $userKey = null, $useUserKey = true,
         $debug = false
-    ) {
-
-        $this->api_key      = $apiKey;
-        $this->api_secret   = $secret;
-        $this->api_domain   = $apiDomain;
-        $this->user_key     = $userKey;
-        $this->user_secret  = $userSecret;
-        $this->useUserKey = $useUserKey;
-        $this->debug        = $debug;
+    )
+    {
+        $this->api_key     = $apiKey;
+        $this->api_secret  = $secret;
+        $this->api_domain  = $apiDomain;
+        $this->user_key    = $userKey;
+        $this->user_secret = $userSecret;
+        $this->useUserKey  = $useUserKey;
+        $this->debug       = $debug;
 
     }
 
@@ -60,14 +54,14 @@ class GigyaCMS
         } else {
             $request = new GSRequest($this->api_key, $this->api_secret, $method, null, true);
         }
-        $user_info = null;
-        $envParams = array(
-            "cms_name"          => "magento",
+        $user_info             = null;
+        $envParams             = array(
+            "cms_name"      => "magento",
             "cms_version"   => Mage::getVersion(),
             "gigya_version" => Mage::helper('Gigya_Social')->getExtensionVersion()
         );
         $params['environment'] = json_encode($envParams);
-        if ( ! empty($params)) {
+        if (!empty($params)) {
             foreach ($params as $param => $val) {
                 $request->setParam($param, $val);
             }
@@ -78,7 +72,7 @@ class GigyaCMS
         // To be define on CMS code (or not).
 
         // Set the request path.
-        $domain = ! empty($this->api_domain) ? $this->api_domain : 'us1.gigya.com';
+        $domain = !empty($this->api_domain) ? $this->api_domain : 'us1.gigya.com';
         $request->setAPIDomain($domain);
         $request->setCAFile(__DIR__ . DIRECTORY_SEPARATOR . "cacert.pem");
 
@@ -90,8 +84,10 @@ class GigyaCMS
         // Check for errors
         $err_code = $response->getErrorCode();
         if ($err_code != 0) {
-            Mage::log("Error sending " . $method . " to Gigya. error code was " . $err_code . " error message was "
-                . $response->getErrorMessage() . " Gigya callId was " . $response->getString("callId"), Zend_Log::ERR);
+            Mage::log(
+                "Error sending " . $method . " to Gigya. error code was " . $err_code . " error message was "
+                . $response->getErrorMessage() . " Gigya callId was " . $response->getString("callId"), Zend_Log::ERR
+            );
             if ($retrys < $trys) {
                 $this->call($method, $params, $trys++);
             }
@@ -145,7 +141,7 @@ class GigyaCMS
     {
         static $user_info = null;
         if ($user_info === null) {
-            if ( ! empty($guid)) {
+            if (!empty($guid)) {
                 $params = array(
                     'uid' => $guid,
                 );
@@ -174,7 +170,7 @@ class GigyaCMS
      */
     public function userLogout($guid)
     {
-        if ( ! empty($guid)) {
+        if (!empty($guid)) {
             $params = array(
                 'uid' => $guid,
             );
@@ -198,7 +194,7 @@ class GigyaCMS
      */
     public function getFriends($guid, $params = array())
     {
-        if ( ! empty($guid)) {
+        if (!empty($guid)) {
             $params += array(
                 'uid' => $guid,
             );
@@ -278,12 +274,12 @@ class GigyaCMS
         $params['siteUID'] = $uid;
 
         // Set a new user flag if true.
-        if ( ! empty($is_new_user)) {
+        if (!empty($is_new_user)) {
             $params['newUser'] = true;
         }
 
         // Add user info.
-        if ( ! empty($user_info)) {
+        if (!empty($user_info)) {
             $params['userInfo'] = json_encode($user_info);
         }
 
@@ -292,8 +288,10 @@ class GigyaCMS
 
         //Set  Gigya cookie.
         try {
-            setcookie($response["cookieName"], $response["cookieValue"], 0, $response["cookiePath"],
-                $response["cookieDomain"]);
+            setcookie(
+                $response["cookieName"], $response["cookieValue"], 0, $response["cookiePath"],
+                $response["cookieDomain"]
+            );
         } catch (Exception $e) {
             error_log(sprintf('error string gigya cookie'));
             error_log(sprintf('error message : @error', array('@error' => $e->getMessage())));
@@ -313,7 +311,7 @@ class GigyaCMS
      */
     public function notifyRegistration($guid, $uid)
     {
-        if ( ! empty($guid) && ! empty($uid)) {
+        if (!empty($guid) && !empty($uid)) {
             $params = array(
                 'uid'     => $guid,
                 'siteUID' => $uid,
@@ -335,7 +333,7 @@ class GigyaCMS
      */
     public function deleteUser($uid)
     {
-        if ( ! empty($uid)) {
+        if (!empty($uid)) {
             $params = array(
                 'uid' => $uid,
             );
@@ -565,7 +563,7 @@ class GigyaCMS
     public static function advancedValuesParser($values)
     {
 
-        if ( ! empty($values)) {
+        if (!empty($values)) {
             $lines  = array();
             $values = explode("\n", $values);
 

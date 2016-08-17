@@ -9,6 +9,7 @@
 abstract class Gigya_Social_Helper_FieldMapping_Updater
 {
 
+    protected $path;
 
     protected function retrieveFieldMappings()
     {
@@ -28,8 +29,10 @@ abstract class Gigya_Social_Helper_FieldMapping_Updater
             } else {
                 $mappingArray = json_decode($this->retrieveFieldMappingsFile(trim((string)$this->path)), true);
             }
-            $conf = new Gigya_Social_Helper_FieldMapping_Conf($mappingArray);
-            $cache->save(serialize($conf), "gigya_field_mapping", array("gigya"), 86400);
+            if (null != $mappingArray) {
+                $conf = new Gigya_Social_Helper_FieldMapping_Conf($mappingArray);
+                $cache->save(serialize($conf), "gigya_field_mapping", array("gigya"), 86400);
+            }
         } else {
             $conf = unserialize($conf);
         }
