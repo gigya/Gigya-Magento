@@ -392,8 +392,11 @@ class GigyaCMS
 
         // Because we can only trust the UID parameter from the origin object,
         // We'll ask Gigya's API for account-info straight from the server.
-        return $this->call('accounts.getAccountInfo', $req_params, 1);
-
+        $gigyaAccount =  $this->call('accounts.getAccountInfo', $req_params, 1);
+        $accountObject = (object) $gigyaAccount;
+        Mage::dispatchEvent("gigya_post_account_fetch", array("gigyaAccount" => $accountObject));
+        $gigyaAccount = (array) $accountObject;
+        return $gigyaAccount;
     }
 
     /**

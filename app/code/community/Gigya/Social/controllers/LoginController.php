@@ -196,15 +196,7 @@ class Gigya_Social_LoginController extends Mage_Customer_AccountController {
 
       return FALSE;
     }
-    else {
-      /** @var stdClass $accountObject
-       * we cast the array to object so it would be passed by reference and data
-       * could be added to it.
-       */
-      $accountObject = (object) $accountInfo;
-      Mage::dispatchEvent("gigya_post_account_fetch", array("gigyaAccount" => $accountObject));
-      return (array) $accountObject;
-    }
+    return $accountInfo;
   }
 
   protected function _socialLoginRegister($session, $post) {

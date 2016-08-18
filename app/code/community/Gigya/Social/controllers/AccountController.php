@@ -25,13 +25,6 @@ class Gigya_Social_AccountController extends Mage_Customer_AccountController
                 $customer = $this->_getSession()->getCustomer();
                 $guid = $customer->getData("gigya_uid");
                 $gigyaAccount = $this->getGigyaAccount($guid);
-                /** @var stdClass $accountObject
-                 * we cast the array to object so it would be passed by reference and data
-                 * could be added to it.
-                 */
-                $accountObject = (object) $gigyaAccount;
-                Mage::dispatchEvent("gigya_post_account_fetch", array("gigyaAccount" => $accountObject));
-                $gigyaAccount = (array) $accountObject;
                 $fname = $gigyaAccount['profile']['firstName'];
                 $lName = $gigyaAccount['profile']['lastName'];
                 $customer->setData('firstname', $fname);
