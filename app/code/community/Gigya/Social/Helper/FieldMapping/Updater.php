@@ -15,7 +15,7 @@ abstract class Gigya_Social_Helper_FieldMapping_Updater
     {
         /** @var Mage_Core_Model_Cache $cache */
         $cache = Mage::app()->getCache();
-        $conf = $cache->load('gigya_field_mapping');
+        $conf = $cache->load($this->getCacheKey());
         if ($conf === false) {
             if ($this->path->hasChildren()) {
                 $files = (array)$this->path->children();
@@ -31,13 +31,15 @@ abstract class Gigya_Social_Helper_FieldMapping_Updater
             }
             if (null != $mappingArray) {
                 $conf = new Gigya_Social_Helper_FieldMapping_Conf($mappingArray);
-                $cache->save(serialize($conf), "gigya_field_mapping", array("gigya"), 86400);
+                $cache->save(serialize($conf), $this->getCacheKey(), array("gigya"), 86400);
             }
         } else {
             $conf = unserialize($conf);
         }
         return $conf;
     }
+
+    abstract protected function getCacheKey();
 
     /**
      * @param string $filePath

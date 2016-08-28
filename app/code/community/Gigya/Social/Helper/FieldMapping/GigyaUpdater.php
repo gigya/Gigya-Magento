@@ -167,4 +167,8 @@ class Gigya_Social_Helper_FieldMapping_GigyaUpdater extends Gigya_Social_Helper_
         $arr = $value;
     }
 
+    protected function getCacheKey()
+    {
+        return get_class() . '_field_mappings';
+    }
 }

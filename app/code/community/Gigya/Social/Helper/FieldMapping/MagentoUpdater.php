@@ -52,7 +52,7 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater extends Gigya_Social_Helpe
      */
     public function isMapped()
     {
-        if (Mage::helper('Gigya_Social')->isDebug()) {
+        if (!$this->mapped && Mage::helper('Gigya_Social')->isDebug()) {
             Mage::log(
                 "Field mapping is not enabled", Zend_Log::DEBUG,
                 "gigya_debug_log"
@@ -187,4 +187,8 @@ class Gigya_Social_Helper_FieldMapping_MagentoUpdater extends Gigya_Social_Helpe
         $this->gigyaMapping = $gigyaMapping;
     }
 
+    protected function getCacheKey()
+    {
+        return get_class() . '_field_mappings';
+    }
 }
