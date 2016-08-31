@@ -6,6 +6,7 @@
  * Date: 8/7/16
  * Time: 2:04 PM
  */
+require_once Mage::getModuleDir('', 'Gigya_Social') . DS . 'sdk' . DS . 'gigyaCMS.php';
 abstract class Gigya_Social_Helper_FieldMapping_Updater
 {
 
@@ -22,12 +23,19 @@ abstract class Gigya_Social_Helper_FieldMapping_Updater
                 /** @var array $mappingArray */
                 $mappingArray = array();
                 foreach ($files as $file) {
-                    $mappingArray = array_merge(
-                        $mappingArray, json_decode($this->retrieveFieldMappingsFile($file), true)
-                    );
+                    $newMappings = GigyaCMS::parseJSON($this->retrieveFieldMappingsFile($file));
+                    if (is_array($newMappings)) {
+                        $mappingArray = array_merge($mappingArray, $newMappings);
+                    } else {
+                        Mage::log('Bad json in file ' . $file . 'error was ' . $newMappings, Zend_Log::ERR);
+                    }
                 }
             } else {
-                $mappingArray = json_decode($this->retrieveFieldMappingsFile(trim((string)$this->path)), true);
+                $mappingArray = GigyaCMS::parseJSON($this->retrieveFieldMappingsFile(trim((string)$this->path)));
+                if (!is_array($mappingArray)) {
+                    Mage::log('Bad json in file ' . (string)$this->path  . 'error was ' . $mappingArray, Zend_Log::ERR);
+                    $mappingArray = null;
+                }
             }
             if (null != $mappingArray) {
                 $conf = new Gigya_Social_Helper_FieldMapping_Conf($mappingArray);
@@ -59,5 +67,4 @@ abstract class Gigya_Social_Helper_FieldMapping_Updater
         }
         return $mappingJson;
     }
-
 }
