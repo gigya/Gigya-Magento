@@ -1,0 +1,30 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Yaniv Aran-Shamir
+ * Date: 7/24/16
+ * Time: 2:06 PM
+ */
+?>
+<div class="col2-set">
+    <?php echo $this->getChildHtml('login_before') ?>
+    <div class="col-1">
+        <?php echo $this->getChildHtml('checkout.onepage.login.extra') ?>
+        <?php if ($this->getEmbed()) : ?>
+            <script type="text/javascript">//<![CDATA[
+                var gigyaScreenSets = gigyaMageSettings.RaaS.screenSets || [];
+                gigyaScreenSets.push(<?php echo $this->getParams(); ?>);
+                //]]>
+            </script>
+        <?php else : ?>
+            <script type="text/javascript">//<![CDATA[
+                function showScreens() {
+                    gigya.accounts.showScreenSet(<?php echo $this->getParams(); ?>);
+                }
+                //]]>
+            </script>
+        <?php endif; ?>
+        <?php echo $this->getHtml() ?>
+        <?php echo $this->getChildHtml('form.additional.info'); ?>
+    </div>
+</div>
