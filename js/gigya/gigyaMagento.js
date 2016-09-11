@@ -123,7 +123,7 @@ gigyaFunctions.RaaS.registerScreens = function (event) {
         jsonParams.mobileScreenSet = params.MobileScreen;
     }
     if ((!params.override_links) && (params.raas_register_div_id.length === 0)) {
-        jsonParams.containerID = params.raas_login_div_id;
+        jsonParams.containerID = params.raas_register_div_id;
         gigya.accounts.showScreenSet(jsonParams);
     } else {
         if (event) {
