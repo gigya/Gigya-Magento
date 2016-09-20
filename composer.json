@@ -17,7 +17,6 @@
       ["skin/adminhtml/default/default/gigya/social/gigya.css", "skin/adminhtml/default/default/gigya/social/gigya.css"],
       ["skin/frontend/base/default/css/gigya.css", "skin/frontend/base/default/css/gigya.css"],
       ["skin/frontend/base/default/images/gigya", "skin/frontend/base/default/images/gigya"]
-    ],
-      "auto-append-gitignore": true
+    ]
   }
 }
