@@ -238,7 +238,7 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
             if (is_array($res) && $res["errorCode"] === 0) {
                 $cookieInfo = $res['sessionInfo'];
                 $sessionExpiration = ($sessionExpiration == null) ? 0 : $sessionExpiration;
-                setcookie($cookieInfo["cookieName"], $cookieInfo["cookieValue"], $sessionExpiration);
+                setcookie($cookieInfo["cookieName"], $cookieInfo["cookieValue"], $_SERVER['REQUEST_TIME'] + $sessionExpiration);
                 return true;
             } else {
                 Mage::log('Error calling accounts.notifyLogin error code was ' . $res['errorCode']);
