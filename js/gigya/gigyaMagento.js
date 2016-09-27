@@ -101,7 +101,7 @@ gigyaFunctions.RaaS.profileEdit = function (data) {
 
 gigyaFunctions.RaaS.loginScreens = function (event) {
     var params = gigyaMageSettings.RaaS,
-    jsonParams = {"screenSet": params.WebScreen, "startScreen": params.LoginScreen};
+        jsonParams = {"screenSet": params.WebScreen, "startScreen": params.LoginScreen};
     if (typeof params.mobileScreenSet != 'undefined') {
         jsonParams.mobileScreenSet = params.MobileScreen;
     }
@@ -191,11 +191,10 @@ gigyaFunctions.RaaS.init = function (params) {
     }
     gigyaFunctions.RaaS.accountEmbed();
     if (typeof gigyaScreenSets !== 'undefined' && gigyaScreenSets.length > 0) {
-       gigyaScreenSets.forEach(function (params, dx)
-       {
-           gigya.accounts.showScreenSet(params);
-           
-       }) 
+        gigyaScreenSets.forEach(function (params, dx) {
+            gigya.accounts.showScreenSet(params);
+
+        })
     }
 };
 
@@ -203,12 +202,20 @@ gigyaFunctions.RaaS.syncSession = function () {
     gigya.accounts.getAccountInfo({
         "callback": function (response) {
             gigyaFunctions.RaaS.loggedIn = response.errorCode === 0;
-            if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn) {
-                gigyaFunctions.logout({"source": "sync"});
-            } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
-                gigyaFunctions.RaaS.login(response);
+            if (gigyaMageSettings.RaaS.session_lead == 'magento') {
+                if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
+                    gigya.accounts.logout();
+                } else {
+                    gigyaFunctions.init();
+                }
             } else {
-                gigyaFunctions.init();
+                if (gigyaMageSettings.magentoStatus === "true" && !gigyaFunctions.RaaS.loggedIn) {
+                    gigyaFunctions.logout({"source": "sync"});
+                } else if (gigyaMageSettings.magentoStatus === "false" && gigyaFunctions.RaaS.loggedIn) {
+                    gigyaFunctions.RaaS.login(response);
+                } else {
+                    gigyaFunctions.init();
+                }
             }
 
         }

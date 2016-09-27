@@ -42,6 +42,15 @@
                     </gigya_logout>
                 </observers>
             </customer_logout>
+            <customer_session_init>
+                <observers>
+                    <gigya_raas_relogin>
+                        <type>singleton</type>
+                        <class>Gigya_Social_Model_Customer_Observer</class>
+                        <method>reLoginToGigya</method>
+                    </gigya_raas_relogin>
+                </observers>
+            </customer_session_init>
             <checkout_cart_product_add_after>
                 <observers>
                     <gigya_share_action>

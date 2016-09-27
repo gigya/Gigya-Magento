@@ -222,6 +222,35 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         }
     }
 
+    public function accountsNotifyLogin($siteUid, $sessionExpiration = null, $cid = null)
+    {
+        $params = array(
+            'siteUID' => $siteUid,
+        );
+        if (null !== $sessionExpiration) {
+            $params['sessionExpiration'] = $sessionExpiration;
+        }
+        if (null !== $cid) {
+            $params['cid'] = $cid;
+        }
+        try {
+            $res = $this->_gigya_api('accounts.notifyLogin', $params);
+            if (is_array($res) && $res["errorCode"] === 0) {
+                $cookieInfo = $res['sessionInfo'];
+                $sessionExpiration = ($sessionExpiration == null) ? 0 : $sessionExpiration;
+                setcookie($cookieInfo["cookieName"], $cookieInfo["cookieValue"], $sessionExpiration);
+                return true;
+            } else {
+                Mage::log('Error calling accounts.notifyLogin error code was ' . $res['errorCode']);
+                return false;
+            }
+        } catch (Exception $e) {
+            Mage::logException($e);
+            return false;
+        }
+
+    }
+
     /*
      * Logout user from Gigya
      * called by notify_logout customer observer
