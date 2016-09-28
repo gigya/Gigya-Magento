@@ -11,7 +11,7 @@ class Gigya_Social_Model_Config_Source_Lead
     public function toOptionArray()
     {
         return array(
-            array('value' => 'gigya', 'label'=>Mage::helper('adminhtml')->__('Gigya')),
+            array('value' => 'gigya', 'label'=>Mage::helper('adminhtml')->__('Gigya (best practice)')),
             array('value' => 'magento', 'label'=>Mage::helper('adminhtml')->__('Magento')),
         );
     }

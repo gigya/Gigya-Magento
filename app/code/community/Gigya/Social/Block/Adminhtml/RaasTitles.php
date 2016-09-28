@@ -20,7 +20,7 @@ class Gigya_Social_Block_Adminhtml_RaasTitles extends Mage_Adminhtml_Block_Syste
 				return (string) '<span style="font-size: 14px;"><b>DIV IDs</b></span>';
 				break;
             case "gigya_login_gigya_raas_conf_session_lead_title":
-                return (string) '<span style="font-size: 14px;"><b>Session Lead</b></span>';
+                return (string) '<span style="font-size: 14px;"><b>Session management - (Applies only to RaaS)</b></span>';
                 break;
 
 		}

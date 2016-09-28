@@ -301,6 +301,7 @@
                 <RegisterScreen>gigya-register-screen</RegisterScreen>
                 <ProfileWebScreen>Default-ProfileUpdate</ProfileWebScreen>
                 <override_links>1</override_links>
+                <session_lead>gigya</session_lead>
             </gigya_raas_conf>
         </gigya_login>
         <gigya_share>

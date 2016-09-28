@@ -77,9 +77,9 @@ class Gigya_Social_Model_Config_Backend_ApiKey extends Mage_Core_Model_Config_Da
 
     protected function shouldRun($useUserKey, $current)
     {
-        $apiKeyChanged = $this->hasChanged($this->getFieldsetDataValue("apikey"), $current['apikey']);
-        $dataCenterChanged = $this->hasChanged($this->getFieldsetDataValue("dataCenter"), $current['dataCenter'] );
-        $userKeyChanged = $this->hasChanged($this->getFieldsetDataValue("userKey"), $current['userKey']);
+        $apiKeyChanged = $this->hasChanged($this->getFieldsetDataValue("apikey"), isset($current['apikey']) ? $current['apikey'] : "");
+        $dataCenterChanged = $this->hasChanged($this->getFieldsetDataValue("dataCenter"), isset($current['dataCenter']) ? $current['dataCenter'] : "" );
+        $userKeyChanged = $this->hasChanged($this->getFieldsetDataValue("userKey"), isset($current['userKey']) ? $current['userKey'] : "");
             $apiOrDcOrUserKey = $apiKeyChanged || $dataCenterChanged || $userKeyChanged;
             if ($useUserKey) {
                 $secretChanged = $this->getFieldsetDataValue('userSecret') != "******";
