@@ -196,6 +196,7 @@ class Gigya_Social_Model_Customer_Observer
                 /** @var Mage_Customer_Model_Customer $customer */
                 $customer = $session->getCustomer();
                 $gigyaUid = $customer->getData('gigya_uid');
+                Mage::log("Re-login to gigya", Zend_Log::INFO);
                 $this->doReLoginToGigya($gigyaUid);
             }
         }
@@ -217,6 +218,7 @@ class Gigya_Social_Model_Customer_Observer
 
     private function getExpirationTime()
     {
+        $sessionExpiration = null;
         $advanced_config = Mage::getStoreConfig('gigya_global/gigya_global_conf/advancedConfig');
         if($advanced_config !== '') {
             $advanced_config_arr = Mage::helper('Gigya_Social')->getGigGlobalAdvancedConfig($advanced_config);
@@ -226,10 +228,11 @@ class Gigya_Social_Model_Customer_Observer
             if(!empty($advanced_config_arr['sessionExpiration'])) {
                 $sessionExpiration = $advanced_config_arr['sessionExpiration'];
             } else {
-                $sessionExpiration = Mage::getStoreConfig(Mage_Core_Model_Cookie::XML_PATH_COOKIE_LIFETIME);
             }
-            return (null == $sessionExpiration) ? 0 : $sessionExpiration;
+        } else {
+            $sessionExpiration = Mage::getStoreConfig(Mage_Core_Model_Cookie::XML_PATH_COOKIE_LIFETIME);
         }
+        return (null == $sessionExpiration) ? 0 : $sessionExpiration;
 
 
     }
