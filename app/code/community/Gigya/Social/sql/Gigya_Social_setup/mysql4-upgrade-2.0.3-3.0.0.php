@@ -7,7 +7,7 @@ $setup = Mage::getModel('customer/entity_setup', 'core_setup');
 $setup->addAttribute('customer', 'gigya_uid', array(
 	'type' => 'varchar',
 	'input' => 'text',
-	'label' => 'Gigya user ID',
+	'label' => 'Gigya User ID',
 	'global' => 1,
 	'visible' => 0,
 	'required' => 0,

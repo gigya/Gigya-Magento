@@ -5,9 +5,11 @@
             <action method="addJs">
                 <file>gigya/gigyaMagento.js</file>
             </action>
+            <!--
             <action method="addCss">
                 <stylesheet>css/gigya.css</stylesheet>
             </action>
+            -->
             <action method="addJs">
                 <script>prototype/window.js</script>
             </action>
