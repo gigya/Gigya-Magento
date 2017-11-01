@@ -1,4 +1,3 @@
-
 <?php
 class Gigya_Social_Model_Config_Source_allwaysShare
 {

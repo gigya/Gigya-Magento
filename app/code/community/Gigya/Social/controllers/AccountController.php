@@ -29,6 +29,10 @@ class Gigya_Social_AccountController extends Mage_Customer_AccountController
                 $lName = $gigyaAccount['profile']['lastName'];
                 $customer->setData('firstname', $fname);
                 $customer->setData('lastname', $lName);
+                $didEmailChanged = Mage::helper('Gigya_Social')->challengeEmailByUID($customer, $gigyaAccount);
+                if($didEmailChanged){
+                    $customer->setEmail($didEmailChanged);
+                }
                 $updater = new Gigya_Social_Helper_FieldMapping_MagentoUpdater($gigyaAccount);
                 if ($updater->isMapped()) {
                     $updater->updateMagentoAccount($customer);

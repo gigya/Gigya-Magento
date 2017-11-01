@@ -519,4 +519,142 @@ class Gigya_Social_Helper_Data extends Mage_Core_Helper_Abstract
         return $mask;
     }
 
+    /**
+     * Checking the type of the RASS sync base
+     * @return bool
+     */
+    public function isGidSyncType()
+    {
+        $type = Mage::getStoreConfig('gigya_login/gigya_raas_conf/gigya_sync_base');
+        return ($type == 'GigyaUID')? true : false;
+    }
+
+    /**
+     * Load customer by Gigya Id
+     * @param $uid
+     * @return mixed
+     */
+    public function loadByUid($uid)
+    {
+        $customer = Mage::getModel('customer/customer')->getCollection()
+                        ->addFieldToFilter('gigya_uid', $uid)
+                        ->getFirstItem();
+        return $customer;
+    }
+
+    /**
+     * Retrieving the correct Email for the account
+     * @param $gigyaData
+     * @return bool
+     */
+    public function getCorrectEmails($gigyaData)
+    {
+        $email = false;
+        if(in_array($gigyaData['profile']['email'], $gigyaData['loginIDs']['emails'])){
+            $customer = $this->emailExists($gigyaData['profile']['email']);;
+            if(is_null($customer->getId())){ return $gigyaData['profile']['email']; }
+        }
+
+        foreach ($gigyaData['loginIDs']['emails'] as $e) {
+            $customer = $this->emailExists($e);
+            if(is_null($customer->getId())){
+                $email = $e;
+                break;
+            }
+        }
+
+        return $email;
+    }
+
+    /**
+     * Processing the emails
+     * @param $gigyaData
+     * @return array
+     */
+    public function processEmails($gigyaData)
+    {
+        if(in_array($gigyaData['profile']['email'], $gigyaData['loginIDs']['emails'])){
+            $customer = $this->emailExists($gigyaData['profile']['email']);
+            if(!is_null($customer->getId())){ return array($customer, $gigyaData['profile']['email']); }
+        }
+
+        foreach ($gigyaData['loginIDs']['emails'] as $e) {
+            $customer = $this->emailExists($e);
+            if(!is_null($customer->getId())){ return array($customer, $e); }
+        }
+
+        $customer = Mage::getModel('customer/customer');
+        $email = $gigyaData['loginIDs']['emails'][0];
+        return array($customer, $email);
+    }
+
+
+    /**
+     * Check if the email exists by loading a user by email
+     * @param $email
+     */
+    public function emailExists($email, $websiteId = null)
+    {
+        $customer = Mage::getModel('customer/customer');
+        $websiteId = ($websiteId)? $websiteId : Mage::app()->getWebsite()->getId();
+        $customer->setWebsiteId($websiteId);
+
+        return $customer->loadByEmail($email);
+    }
+
+    /**
+     * Determine if a user and a correct email can be prepared
+     * @param $gigyaData
+     * @param $post
+     * @return array
+     */
+    public function determineBestLoginType($gigyaData, $post)
+    {
+        // Check the gigya sync base to determine which method to use for checking if the customer exists
+        if($this->isGidSyncType()){
+            $customer = $this->loadByUid($post['UID']);
+            $email = $this->getCorrectEmails($gigyaData);
+        } else {
+            list($customer, $email) = $this->processEmails($gigyaData);
+        }
+
+        return array($customer, $email);
+    }
+
+    /**
+     * Check if email can be secured by UID
+     * @param $customer
+     * @param $gigyaAccount
+     * @return bool|void
+     */
+    public function challengeEmailByUID($customer, $gigyaAccount)
+    {
+        $customerEmail = $customer->getEmail();
+        if($customerEmail == $gigyaAccount['profile']['email']){
+            Mage::log('email profile');
+            return false;
+        }
+
+        if(in_array($gigyaAccount['profile']['email'], $gigyaAccount['loginIDs']['emails'])){
+            Mage::log('email profile in login ids');
+            $customer = $this->emailExists($gigyaAccount['profile']['email']);
+            if(is_null($customer->getId())) { return $gigyaAccount['profile']['email']; }
+        }
+
+        if(in_array($customerEmail, $gigyaAccount['loginIDs']['emails'])){
+            Mage::log('customer email in login ids');
+            return false;
+        }
+
+        foreach ($gigyaAccount['loginIDs']['emails'] as $email) {
+            $customer = $this->emailExists($email);
+            if(is_null($customer->getId())) {
+                Mage::log('customer email in does not exist');
+                return $email;
+            }
+        }
+
+        Mage::throwException("Email already exists");
+        return;
+    }
 }

@@ -15,7 +15,8 @@ class Gigya_Social_AdminController extends Mage_Adminhtml_Controller_Action
         Mage::log(var_export($this, TRUE));
         // "Output" display
         $this->renderLayout();
-    }	
+    }
+
     public function shareAction()
     {
     	// "Fetch" display
@@ -23,12 +24,18 @@ class Gigya_Social_AdminController extends Mage_Adminhtml_Controller_Action
         $this->_setActiveMenu('gigya');
 
         // "Inject" into display
-        // THe below example will not actualy show anything since the core/template is empty
+        // THe below example will not actually show anything since the core/template is empty
         $this->_addContent($this->getLayout()->createBlock('core/template'));
 
-         echo "Hello developer...";
+        // This might not be needed
+        $this->getResponse()->appendBody('Hello developer...');
 
         // "Output" display
         $this->renderLayout();
-    }	
+    }
+
+    public function _isAllowed()
+    {
+        return Mage::getSingleton('admin/session')->isAllowed('system/configuration');
+    }
 }

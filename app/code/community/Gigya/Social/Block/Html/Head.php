@@ -127,7 +127,7 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
         continue;
       }
       if (!empty($if)) {
-          if (strpos($if, "><!-->") == false) {
+          if (strpos($if, "><!-->") === false) {
         $html .= '<!--[if ' . $if . ']>' . "\n";
           }
       }
@@ -152,7 +152,7 @@ class Gigya_Social_Block_Html_Head extends Mage_Page_Block_Html_Head {
 
 
       if (!empty($if)) {
-          if (strpos($if, "><!-->") == false) {
+          if (strpos($if, "><!-->") === false) {
         $html .= '<![endif]-->' . "\n";
           }
       }

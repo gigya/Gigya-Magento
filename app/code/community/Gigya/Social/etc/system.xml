@@ -423,6 +423,13 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </raas_profile_div_id>
+                        <gigya_sync_base translate="label">
+                            <label>Gigya Sync Base</label>
+                            <frontend_type>label</frontend_type>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <comment><![CDATA[The mutual identifier of the user at Gigya and Magento, on the basis of which user data is synced. This can be the Gigya UID, or the user's email.]]></comment>
+                        </gigya_sync_base>
                     </fields>
                 </gigya_raas_conf>
                 <gigya_link_accounts translate="lable">
