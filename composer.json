@@ -1,0 +1,22 @@
+{
+  "name": "gigya/magento",
+  "type": "magento-module",
+  "description": "Gigya Magento integration module",
+  "require": {
+    "magento-hackathon/magento-composer-installer":"*"
+  },
+  "extra":{
+    "map":[
+      ["app/code/community/Gigya/Social", "app/code/community/Gigya/Social"],
+      ["app/code/local/Gigya/AutoTests", "app/code/local/Gigya/AutoTests"],
+      ["app/design/adminhtml/default/default/layout/gigya_admin.xml", "app/design/adminhtml/default/default/layout/gigya_admin.xml"],
+      ["app/design/frontend/base/default/layout/aagigya.xml", "app/design/frontend/base/default/layout/aagigya.xml"],
+      ["app/design/frontend/base/default/template/gigya", "app/design/frontend/base/default/template/gigya"],
+      ["app/etc/modules/Gigya_Social.xml", "app/etc/modules/Gigya_Social.xml"],
+      ["js/gigya", "js/gigya"],
+      ["skin/adminhtml/default/default/gigya/social/gigya.css", "skin/adminhtml/default/default/gigya/social/gigya.css"],
+      ["skin/frontend/base/default/css/gigya.css", "skin/frontend/base/default/css/gigya.css"],
+      ["skin/frontend/base/default/images/gigya", "skin/frontend/base/default/images/gigya"]
+    ]
+  }
+}
